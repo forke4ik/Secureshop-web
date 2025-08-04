@@ -65,7 +65,9 @@ function setupEventListeners() {
     // Обработчики для кнопок "Назад"
     if (backToServicesBtn) backToServicesBtn.addEventListener('click', () => showPage(servicesPage));
     if (backToPlansBtn) backToPlansBtn.addEventListener('click', () => showPage(plansPage));
-    if (backToMainBtn) backToMainBtn.addEventListener('click', goBack);
+    
+    // ИЗМЕНЕНИЕ: Кнопка "Назад" в корзине ведет на главную
+    if (backToMainBtn) backToMainBtn.addEventListener('click', goToHome);
     
     // Обработчик для логотипа
     if (mainLogo) mainLogo.addEventListener('click', goToHome);
