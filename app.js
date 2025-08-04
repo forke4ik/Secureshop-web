@@ -285,17 +285,24 @@ function createOrder(items) {
     let command = "buy_";
     
     // Добавляем информацию о товарах
-    items.forEach((item, index) => {
-        // Добавляем параметры для каждого товара
-        command += `service=${encodeURIComponent(item.service)};`;
-        command += `plan=${encodeURIComponent(item.plan || '')};`;
-        command += `period=${encodeURIComponent(item.period)};`;
+    items.forEach((item) => {
+        // Кодируем только значения
+        const service = encodeURIComponent(item.service);
+        const plan = encodeURIComponent(item.plan || '');
+        const period = encodeURIComponent(item.period);
+        
+        command += `service=${service};`;
+        command += `plan=${plan};`;
+        command += `period=${period};`;
         command += `price=${item.price};`;
     });
     
     // Добавляем общую сумму
     const total = items.reduce((sum, item) => sum + item.price, 0);
     command += `total=${total}`;
+    
+    // ... (остальной код без изменений)
+}
     
     // Формируем читаемое сообщение для пользователя
     let userMessage = "🛒 Ваше замовлення:\n\n";
