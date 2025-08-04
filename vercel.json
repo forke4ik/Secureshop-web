@@ -1,0 +1,12 @@
+{
+  "routes": [
+    {
+      "src": "/product/(.*)",
+      "dest": "/product/[id]",
+      "status": 200
+    }
+  ],
+  "rewrites": [
+    { "source": "/(.*)", "destination": "/" }
+  ]
+}
