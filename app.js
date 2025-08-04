@@ -281,34 +281,36 @@ function checkout() {
 }
 
 function createOrder(items) {
-    // Формируем данные заказа в формате JSON
-    const orderData = {
-        items: items.map(item => ({
-            service: item.service,
-            plan: item.plan || '',
-            period: item.period,
-            price: item.price
-        })),
-        total: items.reduce((sum, item) => sum + item.price, 0)
-    };
+    // Формируем параметры для команды /pay
+    let payCommand = "/pay";
     
-    // Кодируем данные в base64
-    const jsonString = JSON.stringify(orderData);
-    const base64Data = btoa(unescape(encodeURIComponent(jsonString)));
-    
-    // Формируем команду для бота
-    const command = `order_${base64Data}`;
+    items.forEach((item, index) => {
+        // Для первого товара просто добавляем параметры
+        // Для последующих - разделяем символом ' && '
+        const separator = index === 0 ? " " : " && ";
+        
+        payCommand += `${separator}service=${encodeURIComponent(item.service)}`;
+        if (item.plan) {
+            payCommand += ` plan=${encodeURIComponent(item.plan)}`;
+        }
+        payCommand += ` period=${encodeURIComponent(item.period)}`;
+        payCommand += ` price=${item.price}`;
+    });
     
     // Формируем читаемое сообщение для пользователя
     let userMessage = "🛒 Ваше замовлення:\n\n";
+    let total = 0;
+    
     items.forEach(item => {
-        userMessage += `▫️ ${item.service} ${item.plan} (${item.period}) - ${item.price} UAH\n`;
+        userMessage += `▫️ ${item.service} ${item.plan || ''} (${item.period}) - ${item.price} UAH\n`;
+        total += item.price;
     });
-    userMessage += `\n💳 Всього: ${orderData.total} UAH`;
+    
+    userMessage += `\n💳 Всього: ${total} UAH`;
     
     // Формируем ссылку для Telegram
     const botUsername = "secureshopBot"; // Убедитесь, что имя бота правильное!
-    const telegramUrl = `https://t.me/${botUsername}?start=${command}`;
+    const telegramUrl = `https://t.me/${botUsername}?start=${encodeURIComponent(payCommand)}`;
     
     // Показываем подтверждение
     const confirmSend = confirm(`${userMessage}\n\nНатисніть OK, щоб відправити замовлення боту.`);
