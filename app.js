@@ -282,26 +282,20 @@ function checkout() {
 
 function createOrder(items) {
     // Формируем команду для бота
-    let command = "/buy";
+    let command = "buy_";
     
     // Добавляем информацию о товарах
     items.forEach((item, index) => {
-        // Экранируем пробелы в параметрах
-        const service = item.service.replace(/ /g, '_');
-        const plan = item.plan.replace(/ /g, '_');
-        const period = item.period.replace(/ /g, '_');
-        
-        command += ` ${service} ${plan} ${period} ${item.price}`;
-        
-        // Разделяем товары точкой с запятой, кроме последнего
-        if (index < items.length - 1) {
-            command += ";";
-        }
+        // Добавляем параметры для каждого товара
+        command += `service=${encodeURIComponent(item.service)};`;
+        command += `plan=${encodeURIComponent(item.plan || '')};`;
+        command += `period=${encodeURIComponent(item.period)};`;
+        command += `price=${item.price};`;
     });
     
     // Добавляем общую сумму
     const total = items.reduce((sum, item) => sum + item.price, 0);
-    command += `;total=${total}`;
+    command += `total=${total}`;
     
     // Формируем читаемое сообщение для пользователя
     let userMessage = "🛒 Ваше замовлення:\n\n";
@@ -310,12 +304,9 @@ function createOrder(items) {
     });
     userMessage += `\n💳 Всього: ${total} UAH`;
     
-    // Кодируем команду для URL
-    const encodedCommand = encodeURIComponent(command);
-    
     // Формируем ссылку для Telegram
-    const botUsername = "SecureShopBot";
-    const telegramUrl = `https://t.me/${botUsername}?start=${encodedCommand}`;
+    const botUsername = "SecureShopBot"; // Замените на реальное имя бота
+    const telegramUrl = `https://t.me/${botUsername}?start=${command}`;
     
     // Показываем пользователю его заказ перед отправкой
     const confirmSend = confirm(`${userMessage}\n\nНатисніть OK, щоб відправити замовлення боту.`);
