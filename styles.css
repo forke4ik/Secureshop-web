@@ -1,45 +1,683 @@
-body {
-    font-family: Arial, sans-serif;
+/* ===== ОСНОВНЫЕ СТИЛИ И ПЕРЕМЕННЫЕ ===== */
+:root {
+    /* Цветовая палитра */
+    --primary: #6c5ce7;       /* Основной фиолетовый */
+    --secondary: #a29bfe;     /* Светлый фиолетовый */
+    --accent: #fd79a8;        /* Розовый акцент */
+    --dark: #2d3436;          /* Тёмный текст */
+    --light: #f7f7f7;         /* Светлый фон */
+    --success: #00b894;       /* Зелёный для успешных действий */
+    --danger: #ff6b81;        /* Красный для опасных действий */
+    --gray: #636e72;          /* Серый для второстепенного текста */
+    
+    /* Эффекты */
+    --card-shadow: 0 10px 20px rgba(0,0,0,0.1);
+    --hover-shadow: 0 15px 30px rgba(0,0,0,0.15);
+    --transition: all 0.3s ease;
+    
+    /* Скругления */
+    --radius-sm: 8px;
+    --radius-md: 12px;
+    --radius-lg: 16px;
+    --radius-xl: 20px;
+}
+
+/* Сброс стилей и базовые настройки */
+* {
     margin: 0;
-    padding: 20px;
-    background-color: #f5f5f5;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
+body {
+    background: linear-gradient(135deg, #f5f7fa, #e4e7ff);
+    min-height: 100vh;
+    color: var(--dark);
+    padding-bottom: 60px;
+    line-height: 1.6;
+}
+
+/* ===== ШАПКА САЙТА ===== */
 header {
-    text-align: center;
-    margin-bottom: 30px;
-}
-
-.products {
     display: flex;
-    flex-wrap: wrap;
-    gap: 20px;
-    justify-content: center;
-}
-
-.product {
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 5%;
     background: white;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    padding: 20px;
-    width: 250px;
-    text-align: center;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    position: sticky;
+    top: 0;
+    z-index: 100;
 }
 
-.product button {
-    background: #3498db;
+.logo {
+    font-size: 28px;
+    font-weight: 800;
+    background: linear-gradient(45deg, var(--primary), var(--accent));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    letter-spacing: -0.5px;
+}
+
+.logo span {
+    font-weight: 300;
+}
+
+.cart-icon {
+    position: relative;
+    font-size: 24px;
+    color: var(--primary);
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.cart-icon:hover {
+    transform: scale(1.1);
+}
+
+#cart-count {
+    position: absolute;
+    top: -8px;
+    right: -8px;
+    background: var(--accent);
+    color: white;
+    font-size: 12px;
+    font-weight: bold;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* ===== СТРАНИЦЫ И НАВИГАЦИЯ ===== */
+.page {
+    display: none;
+    padding: 20px 5%;
+    max-width: 1200px;
+    margin: 0 auto;
+    animation: fadeIn 0.4s ease-out;
+}
+
+.page.active {
+    display: block;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+h1 {
+    text-align: center;
+    margin: 20px 0 40px;
+    font-size: 32px;
+    color: var(--dark);
+    position: relative;
+}
+
+h1::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 4px;
+    background: linear-gradient(90deg, var(--primary), var(--accent));
+    border-radius: 2px;
+}
+
+.back-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--primary);
+    font-weight: 500;
+    cursor: pointer;
+    margin-bottom: 20px;
+    transition: var(--transition);
+    padding: 8px 16px;
+    border-radius: var(--radius-sm);
+}
+
+.back-button:hover {
+    background: rgba(108, 92, 231, 0.1);
+    color: var(--primary);
+}
+
+/* ===== КАРТОЧКИ СЕРВИСОВ ===== */
+.services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 30px;
+    margin-top: 30px;
+}
+
+.service-card {
+    background: white;
+    border-radius: var(--radius-xl);
+    overflow: hidden;
+    box-shadow: var(--card-shadow);
+    transition: var(--transition);
+    cursor: pointer;
+    text-align: center;
+    padding: 30px 20px;
+    position: relative;
+    z-index: 1;
+}
+
+.service-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 5px;
+    background: linear-gradient(90deg, var(--primary), var(--accent));
+    z-index: -1;
+    opacity: 0;
+    transition: var(--transition);
+}
+
+.service-card:hover {
+    transform: translateY(-10px);
+    box-shadow: var(--hover-shadow);
+}
+
+.service-card:hover::before {
+    opacity: 1;
+}
+
+.service-card img {
+    width: 80px;
+    height: 80px;
+    object-fit: contain;
+    margin-bottom: 20px;
+    transition: var(--transition);
+}
+
+.service-card:hover img {
+    transform: scale(1.1);
+}
+
+.service-card h3 {
+    font-size: 22px;
+    color: var(--dark);
+    font-weight: 700;
+}
+
+/* ===== КАРТОЧКИ ТАРИФОВ И ОПЦИЙ ===== */
+.plans-grid, .options-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 25px;
+    margin-top: 30px;
+}
+
+.plan-card, .option-card {
+    background: white;
+    border-radius: var(--radius-lg);
+    padding: 25px;
+    box-shadow: var(--card-shadow);
+    transition: var(--transition);
+    cursor: pointer;
+    border: 2px solid transparent;
+    position: relative;
+    overflow: hidden;
+}
+
+.plan-card::after, .option-card::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--primary), var(--accent));
+    opacity: 0;
+    transition: var(--transition);
+}
+
+.plan-card:hover, .option-card:hover {
+    border-color: var(--secondary);
+    transform: translateY(-5px);
+}
+
+.plan-card:hover::after, .option-card:hover::after {
+    opacity: 1;
+}
+
+.plan-card h2, .option-card h2 {
+    font-size: 20px;
+    color: var(--primary);
+    margin-bottom: 10px;
+}
+
+.option-card h2 {
+    font-size: 18px;
+}
+
+.plan-card p, .option-card p {
+    color: var(--gray);
+    margin-bottom: 15px;
+    font-size: 15px;
+}
+
+.option-card .price {
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--primary);
+    margin: 15px 0;
+}
+
+.option-card .period {
+    background: var(--secondary);
+    color: white;
+    display: inline-block;
+    padding: 5px 15px;
+    border-radius: 20px;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.add-to-cart {
+    display: block;
+    width: 100%;
+    padding: 12px;
+    background: var(--primary);
     color: white;
     border: none;
-    padding: 10px 20px;
-    border-radius: 5px;
-    cursor: pointer;
+    border-radius: var(--radius-sm);
     font-size: 16px;
-    margin-top: 10px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: var(--transition);
+    margin-top: 15px;
+    position: relative;
+    z-index: 1;
+    overflow: hidden;
 }
 
+.add-to-cart::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0;
+    height: 100%;
+    background: var(--accent);
+    transition: var(--transition);
+    z-index: -1;
+}
+
+.add-to-cart:hover {
+    transform: scale(1.02);
+}
+
+.add-to-cart:hover::before {
+    width: 100%;
+}
+
+/* ===== СТРАНИЦА КОРЗИНЫ ===== */
+.cart-items {
+    margin: 30px 0;
+}
+
+.cart-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px;
+    background: white;
+    border-radius: var(--radius-md);
+    margin-bottom: 15px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+    cursor: pointer;
+    transition: var(--transition);
+    position: relative;
+    padding-right: 40px;
+}
+
+.cart-item:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+}
+
+.cart-item-info h3 {
+    font-size: 18px;
+    margin-bottom: 5px;
+    text-align: left;
+    margin: 0;
+    color: var(--dark);
+}
+
+.cart-item-info h3::after {
+    display: none;
+}
+
+.cart-item-info p {
+    color: var(--gray);
+    font-size: 14px;
+}
+
+.cart-item-price {
+    font-weight: 700;
+    font-size: 18px;
+    color: var(--primary);
+}
+
+.cart-item-arrow {
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #ccc;
+    font-size: 14px;
+}
+
+.empty-cart {
+    text-align: center;
+    padding: 40px;
+    color: var(--gray);
+    font-size: 18px;
+    background: white;
+    border-radius: var(--radius-md);
+    box-shadow: var(--card-shadow);
+}
+
+.cart-total {
+    text-align: right;
+    padding: 20px;
+    background: white;
+    border-radius: var(--radius-md);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+}
+
+.cart-total h3 {
+    text-align: right;
+    margin: 0;
+    font-size: 24px;
+}
+
+.cart-total h3::after {
+    display: none;
+}
+
+#total-price {
+    color: var(--primary);
+}
+
+.checkout-btn {
+    background: var(--primary);
+    color: white;
+    border: none;
+    padding: 15px 30px;
+    border-radius: 30px;
+    font-size: 18px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: var(--transition);
+    margin-top: 20px;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+}
+
+.checkout-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0;
+    height: 100%;
+    background: linear-gradient(45deg, var(--accent), var(--primary));
+    transition: var(--transition);
+    z-index: -1;
+}
+
+.checkout-btn:hover {
+    transform: scale(1.05);
+    box-shadow: 0 10px 20px rgba(108, 92, 231, 0.3);
+}
+
+.checkout-btn:hover::before {
+    width: 100%;
+}
+
+/* ===== МЕНЮ ЗАКАЗА ===== */
+.order-menu {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.7);
+    z-index: 1000;
+    align-items: center;
+    justify-content: center;
+    animation: fadeIn 0.3s ease;
+}
+
+.order-menu.active {
+    display: flex;
+}
+
+.order-content {
+    background: white;
+    border-radius: var(--radius-xl);
+    padding: 30px;
+    width: 90%;
+    max-width: 500px;
+    position: relative;
+    box-shadow: 0 15px 50px rgba(0,0,0,0.3);
+    animation: slideUp 0.4s ease-out;
+}
+
+@keyframes slideUp {
+    from { transform: translateY(50px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}
+
+.close-btn {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: none;
+    border: none;
+    font-size: 24px;
+    color: #777;
+    cursor: pointer;
+    transition: var(--transition);
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+}
+
+.close-btn:hover {
+    background: rgba(0,0,0,0.05);
+    color: var(--accent);
+    transform: rotate(90deg);
+}
+
+.order-details {
+    background: #f9f9ff;
+    border-radius: var(--radius-md);
+    padding: 20px;
+    margin: 20px 0;
+    border-left: 4px solid var(--primary);
+}
+
+.order-details p {
+    margin: 12px 0;
+    font-size: 16px;
+    display: flex;
+}
+
+.order-details strong {
+    width: 100px;
+    display: inline-block;
+    color: var(--dark);
+    font-weight: 600;
+}
+
+.order-actions {
+    display: flex;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.remove-btn, .order-btn {
+    flex: 1;
+    padding: 15px;
+    border-radius: var(--radius-md);
+    font-weight: 600;
+    font-size: 16px;
+    cursor: pointer;
+    transition: var(--transition);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    border: none;
+}
+
+.remove-btn {
+    background: #ffecef;
+    color: var(--danger);
+}
+
+.remove-btn:hover {
+    background: #ffdde2;
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(255, 107, 129, 0.2);
+}
+
+.order-btn {
+    background: linear-gradient(45deg, var(--primary), var(--accent));
+    color: white;
+    box-shadow: 0 5px 15px rgba(108, 92, 231, 0.4);
+}
+
+.order-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(108, 92, 231, 0.6);
+}
+
+/* ===== ПОДВАЛ САЙТА ===== */
 footer {
     text-align: center;
-    margin-top: 40px;
-    color: #777;
+    padding: 30px 5%;
+    margin-top: 50px;
+    color: var(--gray);
+    background: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(5px);
+    border-top: 1px solid rgba(0,0,0,0.05);
+}
+
+.social {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-top: 15px;
+}
+
+.social a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 45px;
+    height: 45px;
+    background: var(--primary);
+    color: white;
+    border-radius: 50%;
+    font-size: 18px;
+    transition: var(--transition);
+    text-decoration: none;
+}
+
+.social a:hover {
+    background: var(--accent);
+    transform: translateY(-5px) scale(1.1);
+    box-shadow: 0 5px 15px rgba(108, 92, 231, 0.4);
+}
+
+/* ===== АДАПТИВНОСТЬ ===== */
+@media (max-width: 768px) {
+    .services-grid, .plans-grid, .options-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    h1 {
+        font-size: 28px;
+    }
+    
+    .cart-item {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+        padding-right: 15px;
+    }
+    
+    .cart-item-price {
+        align-self: flex-end;
+    }
+    
+    .order-actions {
+        flex-direction: column;
+    }
+}
+
+@media (max-width: 480px) {
+    header {
+        padding: 15px;
+    }
+    
+    .logo {
+        font-size: 24px;
+    }
+    
+    h1 {
+        font-size: 24px;
+    }
+    
+    .service-card {
+        padding: 20px 15px;
+    }
+    
+    .service-card h3 {
+        font-size: 20px;
+    }
+    
+    .checkout-btn {
+        width: 100%;
+        padding: 15px;
+    }
+    
+    .social a {
+        width: 40px;
+        height: 40px;
+        font-size: 16px;
+    }
+}
+
+/* ===== АНИМАЦИИ ===== */
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+}
+
+.pulse {
+    animation: pulse 1.5s infinite;
 }
