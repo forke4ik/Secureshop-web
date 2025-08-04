@@ -1,4 +1,3 @@
-// Решение проблемы с двойным объявлением переменных
 const servicesPage = document.getElementById('services-page');
 const plansPage = document.getElementById('plans-page');
 const optionsPage = document.getElementById('options-page');
@@ -64,8 +63,8 @@ function setupEventListeners() {
     if (cartIcon) cartIcon.addEventListener('click', showCart);
     
     // Обработчики для кнопок "Назад"
-    if (backToServicesBtn) backToServicesBtn.addEventListener('click', () => goBackToPage(servicesPage));
-    if (backToPlansBtn) backToPlansBtn.addEventListener('click', () => goBackToPage(plansPage));
+    if (backToServicesBtn) backToServicesBtn.addEventListener('click', () => showPage(servicesPage));
+    if (backToPlansBtn) backToPlansBtn.addEventListener('click', () => showPage(plansPage));
     if (backToMainBtn) backToMainBtn.addEventListener('click', goBack);
     
     // Обработчик для логотипа
@@ -86,10 +85,6 @@ function goToHome() {
     // Очищаем историю и показываем главную страницу
     pageHistory.length = 0;
     showPage(servicesPage);
-}
-
-function goBackToPage(page) {
-    showPage(page);
 }
 
 function selectService(serviceId) {
@@ -284,17 +279,52 @@ function checkout() {
 }
 
 function createOrder(items) {
-    let message = "🛒 Моє замовлення:\n\n";
+    // Формируем команду для бота
+    let command = "/buy";
     
-    items.forEach(item => {
-        message += `▫️ ${item.service} ${item.plan} (${item.period}) - ${item.price} UAH\n`;
+    // Добавляем информацию о товарах
+    items.forEach((item, index) => {
+        // Экранируем пробелы в параметрах
+        const service = item.service.replace(/ /g, '_');
+        const plan = item.plan.replace(/ /g, '_');
+        const period = item.period.replace(/ /g, '_');
+        
+        command += ` ${service} ${plan} ${period} ${item.price}`;
+        
+        // Разделяем товары точкой с запятой, кроме последнего
+        if (index < items.length - 1) {
+            command += ";";
+        }
     });
     
+    // Добавляем общую сумму
     const total = items.reduce((sum, item) => sum + item.price, 0);
-    message += `\n💳 Всього: ${total} UAH`;
+    command += `;total=${total}`;
     
-    const encodedMessage = encodeURIComponent(message);
+    // Формируем читаемое сообщение для пользователя
+    let userMessage = "🛒 Ваше замовлення:\n\n";
+    items.forEach(item => {
+        userMessage += `▫️ ${item.service} ${item.plan} (${item.period}) - ${item.price} UAH\n`;
+    });
+    userMessage += `\n💳 Всього: ${total} UAH`;
+    
+    // Кодируем команду для URL
+    const encodedCommand = encodeURIComponent(command);
+    
+    // Формируем ссылку для Telegram
     const botUsername = "SecureShopBot";
-    const telegramUrl = `https://t.me/${botUsername}?start=${encodedMessage}`;
-    window.open(telegramUrl, '_blank');
+    const telegramUrl = `https://t.me/${botUsername}?start=${encodedCommand}`;
+    
+    // Показываем пользователю его заказ перед отправкой
+    const confirmSend = confirm(`${userMessage}\n\nНатисніть OK, щоб відправити замовлення боту.`);
+    
+    if (confirmSend) {
+        window.open(telegramUrl, '_blank');
+        
+        // Очищаем корзину после отправки
+        cart = [];
+        localStorage.setItem('cart', JSON.stringify(cart));
+        updateCartCount();
+        showPage(servicesPage);
+    }
 }
