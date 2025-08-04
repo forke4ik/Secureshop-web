@@ -1,7 +1,4 @@
-// Загрузка данных о товарах
-import { products, addToCart, cart } from './products.js';
-
-// Элементы страниц
+// Получаем элементы страницы
 const servicesPage = document.getElementById('services-page');
 const plansPage = document.getElementById('plans-page');
 const optionsPage = document.getElementById('options-page');
@@ -10,71 +7,95 @@ const cartCount = document.getElementById('cart-count');
 const cartItems = document.getElementById('cart-items');
 const totalPrice = document.getElementById('total-price');
 
-// Текущий выбор
 let currentService = null;
 let currentPlan = null;
 
-// Обновление счетчика корзины
+// Инициализация при загрузке
+document.addEventListener('DOMContentLoaded', () => {
+    updateCartCount();
+    setupEventListeners();
+});
+
+function setupEventListeners() {
+    // Обработчики для сервисов
+    document.querySelectorAll('.service-card').forEach(card => {
+        card.addEventListener('click', (e) => {
+            const serviceId = e.currentTarget.dataset.service;
+            selectService(serviceId);
+        });
+    });
+    
+    // Обработчик для корзины
+    document.querySelector('.cart-icon').addEventListener('click', showCart);
+    
+    // Обработчики для кнопок "Назад"
+    document.querySelectorAll('.back-button').forEach(button => {
+        button.addEventListener('click', goBack);
+    });
+}
+
 function updateCartCount() {
     cartCount.textContent = cart.length;
 }
 
-// Навигация
 function showPage(page) {
     document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
     page.classList.add('active');
 }
 
-// Выбор сервиса
 function selectService(serviceId) {
     currentService = products[serviceId];
     document.getElementById('service-name').textContent = currentService.name;
     
-    // Очистка контейнера планов
     const plansContainer = document.getElementById('plans-container');
     plansContainer.innerHTML = '';
     
-    // Добавление планов
     currentService.plans.forEach(plan => {
         const planCard = document.createElement('div');
         planCard.className = 'plan-card';
         planCard.innerHTML = `
             <h2>${plan.name}</h2>
             <p>${plan.description}</p>
-            <button class="add-to-cart" onclick="selectPlan('${plan.id}')">Обрати</button>
+            <button class="add-to-cart plan-select">Обрати</button>
         `;
         plansContainer.appendChild(planCard);
+        
+        // Добавляем обработчик для новой кнопки
+        planCard.querySelector('.plan-select').addEventListener('click', () => {
+            selectPlan(plan.id);
+        });
     });
     
     showPage(plansPage);
 }
 
-// Выбор тарифа
 function selectPlan(planId) {
     currentPlan = currentService.plans.find(plan => plan.id === planId);
     document.getElementById('plan-name').textContent = `${currentService.name} ${currentPlan.name}`;
     document.getElementById('plan-description').textContent = currentPlan.description;
     
-    // Очистка контейнера опций
     const optionsContainer = document.getElementById('options-container');
     optionsContainer.innerHTML = '';
     
-    // Добавление опций
     currentPlan.options.forEach(option => {
         const optionCard = document.createElement('div');
         optionCard.className = 'option-card';
         optionCard.innerHTML = `
             <div class="period">${option.period}</div>
             <div class="price">${option.price} UAH</div>
-            <button class="add-to-cart" onclick="addItemToCart('${option.period}', ${option.price})">Додати в корзину</button>
+            <button class="add-to-cart option-select">Додати в корзину</button>
         `;
         optionsContainer.appendChild(optionCard);
+        
+        // Добавляем обработчик для новой кнопки
+        optionCard.querySelector('.option-select').addEventListener('click', () => {
+            addItemToCart(option.period, option.price);
+        });
     });
     
     showPage(optionsPage);
 }
 
-// Добавление в корзину
 function addItemToCart(period, price) {
     const item = {
         service: currentService.name,
@@ -88,45 +109,11 @@ function addItemToCart(period, price) {
     alert('Товар додано до корзини!');
 }
 
-// Показать корзину
 function showCart() {
     updateCartView();
     showPage(cartPage);
 }
 
-// Показать меню заказа
-function showOrderMenu(index) {
-    const item = cart[index];
-    document.getElementById('order-item-title').textContent = `${item.service} ${item.plan}`;
-    document.getElementById('order-service').textContent = item.service;
-    document.getElementById('order-plan').textContent = item.plan;
-    document.getElementById('order-period').textContent = item.period;
-    document.getElementById('order-price').textContent = item.price;
-    
-    // Сохраняем индекс товара
-    document.getElementById('order-menu').dataset.index = index;
-    
-    // Показываем меню
-    document.getElementById('order-menu').classList.add('active');
-}
-
-// Закрыть меню заказа
-function closeOrderMenu() {
-    document.getElementById('order-menu').classList.remove('active');
-}
-
-// Удалить товар из корзины
-function removeFromCart() {
-    const index = document.getElementById('order-menu').dataset.index;
-    if (index !== undefined) {
-        cart.splice(index, 1);
-        updateCart();
-        updateCartView();
-        closeOrderMenu();
-    }
-}
-
-// Обновление вида корзины
 function updateCartView() {
     cartItems.innerHTML = '';
     
@@ -143,7 +130,6 @@ function updateCartView() {
         
         const cartItem = document.createElement('div');
         cartItem.className = 'cart-item';
-        cartItem.onclick = () => showOrderMenu(index);
         cartItem.innerHTML = `
             <div class="cart-item-info">
                 <h3>${item.service} ${item.plan}</h3>
@@ -154,33 +140,66 @@ function updateCartView() {
                 <i class="fas fa-chevron-right"></i>
             </div>
         `;
+        
+        cartItem.addEventListener('click', () => showOrderMenu(index));
         cartItems.appendChild(cartItem);
     });
     
     totalPrice.textContent = total;
+    
+    // Обработчик для кнопки оформления заказа
+    document.querySelector('.checkout-btn').addEventListener('click', checkout);
 }
 
-// Навигация назад
 function goBack() {
     showPage(servicesPage);
 }
 
-function goBackToPlans() {
-    showPage(plansPage);
+function showOrderMenu(index) {
+    const item = cart[index];
+    document.getElementById('order-item-title').textContent = `${item.service} ${item.plan}`;
+    document.getElementById('order-service').textContent = item.service;
+    document.getElementById('order-plan').textContent = item.plan;
+    document.getElementById('order-period').textContent = item.period;
+    document.getElementById('order-price').textContent = item.price;
+    
+    document.getElementById('order-menu').dataset.index = index;
+    document.getElementById('order-menu').classList.add('active');
+    
+    // Обработчики для кнопок в меню
+    document.querySelector('.remove-btn').addEventListener('click', removeFromCart);
+    document.querySelector('.order-btn').addEventListener('click', orderSingleItem);
+    document.querySelector('.close-btn').addEventListener('click', closeOrderMenu);
 }
 
-// Заказать только этот товар
+function closeOrderMenu() {
+    document.getElementById('order-menu').classList.remove('active');
+}
+
+function removeFromCart() {
+    const index = document.getElementById('order-menu').dataset.index;
+    cart.splice(index, 1);
+    localStorage.setItem('cart', JSON.stringify(cart));
+    updateCartCount();
+    updateCartView();
+    closeOrderMenu();
+}
+
 function orderSingleItem() {
     const index = document.getElementById('order-menu').dataset.index;
-    if (index !== undefined) {
-        const item = cart[index];
-        createOrder([item]);
-    }
+    const item = cart[index];
+    createOrder([item]);
 }
 
-// Создание заказа
+function checkout() {
+    if (cart.length === 0) {
+        alert('Корзина порожня!');
+        return;
+    }
+    createOrder(cart);
+}
+
 function createOrder(items) {
-    // Формируем сообщение для Telegram-бота
     let message = "🛒 Моє замовлення:\n\n";
     
     items.forEach(item => {
@@ -190,41 +209,8 @@ function createOrder(items) {
     const total = items.reduce((sum, item) => sum + item.price, 0);
     message += `\n💳 Всього: ${total} UAH`;
     
-    // Кодируем сообщение для URL
     const encodedMessage = encodeURIComponent(message);
-    
-    // Ссылка на Telegram бота с сообщением
-    const botUsername = "SecureShopBot"; // Замените на реальный username бота
+    const botUsername = "SecureShopBot";
     const telegramUrl = `https://t.me/${botUsername}?start=${encodedMessage}`;
-    
-    // Открываем ссылку
     window.open(telegramUrl, '_blank');
 }
-
-// Оформление заказа (все товары)
-function checkout() {
-    if (cart.length === 0) {
-        alert('Корзина порожня!');
-        return;
-    }
-    
-    createOrder(cart);
-}
-
-// Инициализация при загрузке
-document.addEventListener('DOMContentLoaded', () => {
-    updateCartCount();
-    
-    // Добавляем функции в глобальную область видимости
-    window.selectService = selectService;
-    window.selectPlan = selectPlan;
-    window.addItemToCart = addItemToCart;
-    window.showCart = showCart;
-    window.goBack = goBack;
-    window.goBackToPlans = goBackToPlans;
-    window.checkout = checkout;
-    window.showOrderMenu = showOrderMenu;
-    window.closeOrderMenu = closeOrderMenu;
-    window.removeFromCart = removeFromCart;
-    window.orderSingleItem = orderSingleItem;
-});
