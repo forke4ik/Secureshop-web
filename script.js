@@ -1,4 +1,4 @@
-// ========== ЭЛЕМЕНТЫ СТРАНИЦЫ ========== //
+// Получаем элементы страницы
 const servicesPage = document.getElementById('services-page');
 const plansPage = document.getElementById('plans-page');
 const optionsPage = document.getElementById('options-page');
@@ -7,164 +7,48 @@ const cartCount = document.getElementById('cart-count');
 const cartItems = document.getElementById('cart-items');
 const totalPrice = document.getElementById('total-price');
 const cartIcon = document.getElementById('cart-icon');
-const checkoutBtn = document.getElementById('checkout-btn');
-const removeBtn = document.getElementById('remove-btn');
-const orderBtn = document.getElementById('order-btn');
-const closeBtn = document.getElementById('close-btn');
-const backButton1 = document.getElementById('back-button-1');
-const backButton2 = document.getElementById('back-button-2');
-const backButton3 = document.getElementById('back-button-3');
+const mainLogo = document.getElementById('main-logo');
 
-// ========== ГЛОБАЛЬНЫЕ ПЕРЕМЕННЫЕ ========== //
+// Элементы кнопок "Назад"
+const backToServicesBtn = document.getElementById('back-to-services');
+const backToPlansBtn = document.getElementById('back-to-plans');
+const backToMainBtn = document.getElementById('back-to-main');
+
+// Текущий выбор
 let currentService = null;
 let currentPlan = null;
 
-// ========== ДАННЫЕ О ПРОДУКТАХ ========== //
-const products = {
-  chatgpt: {
-    name: "ChatGPT",
-    logo: "./images/chatgpt.webp",
-    plans: [
-      {
-        id: "chatgpt_plus",
-        name: "Plus",
-        description: "Доступ до GPT-4, розширені можливості",
-        options: [
-          { period: "1 місяць", price: 650 },
-          { period: "3 місяці", price: 1800 },
-          { period: "12 місяців", price: 6500 }
-        ]
-      }
-    ]
-  },
-  discord: {
-    name: "Discord",
-    logo: "./images/discord.webp",
-    plans: [
-      {
-        id: "discord_basic",
-        name: "Nitro Basic",
-        description: "Базові можливості Nitro",
-        options: [
-          { period: "1 місяць", price: 100 },
-          { period: "12 місяців", price: 900 }
-        ]
-      },
-      {
-        id: "discord_full",
-        name: "Nitro Full",
-        description: "Повна версія з усіма функціями",
-        options: [
-          { period: "1 місяць", price: 170 },
-          { period: "12 місяців", price: 1700 }
-        ]
-      }
-    ]
-  },
-  duolingo: {
-    name: "Duolingo",
-    logo: "./images/duolingo.webp",
-    plans: [
-      {
-        id: "duolingo_individual",
-        name: "Individual",
-        description: "Преміум для одного користувача",
-        options: [
-          { period: "1 місяць", price: 200 },
-          { period: "12 місяців", price: 1500 }
-        ]
-      },
-      {
-        id: "duolingo_family",
-        name: "Family",
-        description: "Для всієї родини (до 5 осіб)",
-        options: [
-          { period: "12 місяців", price: 380 }
-        ]
-      }
-    ]
-  },
-  picsart: {
-    name: "PicsArt",
-    logo: "./images/picsart.webp",
-    plans: [
-      {
-        id: "picsart_plus",
-        name: "Plus",
-        description: "Розширені інструменти",
-        options: [
-          { period: "1 місяць", price: 130 },
-          { period: "12 місяців", price: 800 }
-        ]
-      },
-      {
-        id: "picsart_pro",
-        name: "Pro",
-        description: "Професійні можливості",
-        options: [
-          { period: "1 місяць", price: 180 },
-          { period: "12 місяців", price: 1000 }
-        ]
-      }
-    ]
-  }
-};
-
-// ========== КОРЗИНА ========== //
+// Корзина
 let cart = JSON.parse(localStorage.getItem('cart')) || [];
 
-// ========== ИНИЦИАЛИЗАЦИЯ ========== //
-document.addEventListener('DOMContentLoaded', initApp);
+// История страниц
+const pageHistory = [];
 
-function initApp() {
+// Инициализация при загрузке
+document.addEventListener('DOMContentLoaded', () => {
     updateCartCount();
     setupEventListeners();
-    checkImages();
-}
+});
 
-function checkImages() {
-    document.querySelectorAll('img').forEach(img => {
-        if (!img.complete || img.naturalHeight === 0) {
-            img.dispatchEvent(new Event('error'));
-        }
-    });
-}
-
-// ========== ФУНКЦИИ КОРЗИНЫ ========== //
 function addToCart(item) {
-    cart.push(item);
-    localStorage.setItem('cart', JSON.stringify(cart));
-    updateCartCount();
-    showToast('Товар додано до корзини!');
+  cart.push(item);
+  localStorage.setItem('cart', JSON.stringify(cart));
+  updateCartCount();
+  alert('Товар додано до корзини!');
 }
 
 function updateCartCount() {
     cartCount.textContent = cart.length;
 }
 
-function showToast(message) {
-    const toast = document.createElement('div');
-    toast.className = 'toast';
-    toast.textContent = message;
-    document.body.appendChild(toast);
-    
-    setTimeout(() => {
-        toast.classList.add('show');
-    }, 10);
-    
-    setTimeout(() => {
-        toast.classList.remove('show');
-        setTimeout(() => {
-            document.body.removeChild(toast);
-        }, 300);
-    }, 3000);
-}
-
-// ========== НАВИГАЦИЯ ========== //
 function showPage(page) {
     document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
     page.classList.add('active');
-    window.scrollTo(0, 0);
+    
+    // Сохраняем историю только для основных страниц
+    if (page !== servicesPage) {
+        pageHistory.push(page);
+    }
 }
 
 function setupEventListeners() {
@@ -180,18 +64,32 @@ function setupEventListeners() {
     cartIcon.addEventListener('click', showCart);
     
     // Обработчики для кнопок "Назад"
-    backButton1.addEventListener('click', () => showPage(servicesPage));
-    backButton2.addEventListener('click', () => showPage(plansPage));
-    backButton3.addEventListener('click', () => showPage(servicesPage));
+    backToServicesBtn.addEventListener('click', () => goBackToPage(servicesPage));
+    backToPlansBtn.addEventListener('click', () => goBackToPage(plansPage));
+    backToMainBtn.addEventListener('click', goBack);
     
-    // Обработчики для меню заказа
-    closeBtn.addEventListener('click', closeOrderMenu);
-    removeBtn.addEventListener('click', removeFromCart);
-    orderBtn.addEventListener('click', orderSingleItem);
-    checkoutBtn.addEventListener('click', checkout);
+    // Обработчик для логотипа
+    mainLogo.addEventListener('click', goToHome);
+    
+    // Обработчик для закрытия меню по клику вне контента
+    document.getElementById('order-menu').addEventListener('click', (e) => {
+        if (e.target === document.getElementById('order-menu')) {
+            closeOrderMenu();
+        }
+    });
 }
 
-// ========== ВЫБОР ТОВАРОВ ========== //
+function goToHome() {
+    // Очищаем историю и показываем главную страницу
+    pageHistory.length = 0;
+    showPage(servicesPage);
+}
+
+// Новая функция для возврата к конкретной странице
+function goBackToPage(page) {
+    showPage(page);
+}
+
 function selectService(serviceId) {
     currentService = products[serviceId];
     document.getElementById('service-name').textContent = currentService.name;
@@ -209,7 +107,7 @@ function selectService(serviceId) {
         `;
         plansContainer.appendChild(planCard);
         
-        // Обработчик для кнопки выбора тарифа
+        // Добавляем обработчик для кнопки
         planCard.querySelector('button').addEventListener('click', () => {
             selectPlan(plan.id);
         });
@@ -236,7 +134,7 @@ function selectPlan(planId) {
         `;
         optionsContainer.appendChild(optionCard);
         
-        // Обработчик для кнопки добавления в корзину
+        // Добавляем обработчик для кнопки
         optionCard.querySelector('button').addEventListener('click', () => {
             addItemToCart(option.period, option.price);
         });
@@ -256,7 +154,6 @@ function addItemToCart(period, price) {
     addToCart(item);
 }
 
-// ========== УПРАВЛЕНИЕ КОРЗИНОЙ ========== //
 function showCart() {
     updateCartView();
     showPage(cartPage);
@@ -294,6 +191,18 @@ function updateCartView() {
     });
     
     totalPrice.textContent = total;
+    
+    // Обработчик для кнопки оформления заказа
+    document.querySelector('.checkout-btn').addEventListener('click', checkout);
+}
+
+function goBack() {
+    if (pageHistory.length > 0) {
+        const prevPage = pageHistory.pop();
+        showPage(prevPage);
+    } else {
+        showPage(servicesPage);
+    }
 }
 
 function showOrderMenu(index) {
@@ -306,6 +215,11 @@ function showOrderMenu(index) {
     
     document.getElementById('order-menu').dataset.index = index;
     document.getElementById('order-menu').classList.add('active');
+    
+    // Обработчики для кнопок в меню
+    document.querySelector('.remove-btn').addEventListener('click', removeFromCart);
+    document.querySelector('.order-btn').addEventListener('click', orderSingleItem);
+    document.querySelector('.close-btn').addEventListener('click', closeOrderMenu);
 }
 
 function closeOrderMenu() {
@@ -319,7 +233,6 @@ function removeFromCart() {
     updateCartCount();
     updateCartView();
     closeOrderMenu();
-    showToast('Товар видалено з корзини');
 }
 
 function orderSingleItem() {
@@ -330,13 +243,12 @@ function orderSingleItem() {
 
 function checkout() {
     if (cart.length === 0) {
-        showToast('Корзина порожня!');
+        alert('Корзина порожня!');
         return;
     }
     createOrder(cart);
 }
 
-// ========== ОФОРМЛЕНИЕ ЗАКАЗА ========== //
 function createOrder(items) {
     let message = "🛒 Моє замовлення:\n\n";
     
