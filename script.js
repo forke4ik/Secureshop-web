@@ -1,4 +1,4 @@
-// Получаем элементы страницы
+// ========== ЭЛЕМЕНТЫ СТРАНИЦЫ ========== //
 const servicesPage = document.getElementById('services-page');
 const plansPage = document.getElementById('plans-page');
 const optionsPage = document.getElementById('options-page');
@@ -11,16 +11,19 @@ const checkoutBtn = document.getElementById('checkout-btn');
 const removeBtn = document.getElementById('remove-btn');
 const orderBtn = document.getElementById('order-btn');
 const closeBtn = document.getElementById('close-btn');
+const backButton1 = document.getElementById('back-button-1');
+const backButton2 = document.getElementById('back-button-2');
+const backButton3 = document.getElementById('back-button-3');
 
-// Текущий выбор
+// ========== ГЛОБАЛЬНЫЕ ПЕРЕМЕННЫЕ ========== //
 let currentService = null;
 let currentPlan = null;
 
-// Данные о товарах
+// ========== ДАННЫЕ О ПРОДУКТАХ ========== //
 const products = {
   chatgpt: {
     name: "ChatGPT",
-    logo: "images/chatgpt.webp",
+    logo: "./images/chatgpt.webp",
     plans: [
       {
         id: "chatgpt_plus",
@@ -36,7 +39,7 @@ const products = {
   },
   discord: {
     name: "Discord",
-    logo: "images/discord.webp",
+    logo: "./images/discord.webp",
     plans: [
       {
         id: "discord_basic",
@@ -60,7 +63,7 @@ const products = {
   },
   duolingo: {
     name: "Duolingo",
-    logo: "images/duolingo.webp",
+    logo: "./images/duolingo.webp",
     plans: [
       {
         id: "duolingo_individual",
@@ -83,7 +86,7 @@ const products = {
   },
   picsart: {
     name: "PicsArt",
-    logo: "images/picsart.webp",
+    logo: "./images/picsart.webp",
     plans: [
       {
         id: "picsart_plus",
@@ -107,29 +110,61 @@ const products = {
   }
 };
 
-// Корзина
+// ========== КОРЗИНА ========== //
 let cart = JSON.parse(localStorage.getItem('cart')) || [];
 
-// Инициализация при загрузке
-document.addEventListener('DOMContentLoaded', () => {
+// ========== ИНИЦИАЛИЗАЦИЯ ========== //
+document.addEventListener('DOMContentLoaded', initApp);
+
+function initApp() {
     updateCartCount();
     setupEventListeners();
-});
+    checkImages();
+}
 
+function checkImages() {
+    document.querySelectorAll('img').forEach(img => {
+        if (!img.complete || img.naturalHeight === 0) {
+            img.dispatchEvent(new Event('error'));
+        }
+    });
+}
+
+// ========== ФУНКЦИИ КОРЗИНЫ ========== //
 function addToCart(item) {
-  cart.push(item);
-  localStorage.setItem('cart', JSON.stringify(cart));
-  updateCartCount();
-  alert('Товар додано до корзини!');
+    cart.push(item);
+    localStorage.setItem('cart', JSON.stringify(cart));
+    updateCartCount();
+    showToast('Товар додано до корзини!');
 }
 
 function updateCartCount() {
     cartCount.textContent = cart.length;
 }
 
+function showToast(message) {
+    const toast = document.createElement('div');
+    toast.className = 'toast';
+    toast.textContent = message;
+    document.body.appendChild(toast);
+    
+    setTimeout(() => {
+        toast.classList.add('show');
+    }, 10);
+    
+    setTimeout(() => {
+        toast.classList.remove('show');
+        setTimeout(() => {
+            document.body.removeChild(toast);
+        }, 300);
+    }, 3000);
+}
+
+// ========== НАВИГАЦИЯ ========== //
 function showPage(page) {
     document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
     page.classList.add('active');
+    window.scrollTo(0, 0);
 }
 
 function setupEventListeners() {
@@ -145,9 +180,9 @@ function setupEventListeners() {
     cartIcon.addEventListener('click', showCart);
     
     // Обработчики для кнопок "Назад"
-    document.querySelectorAll('.back-button').forEach(button => {
-        button.addEventListener('click', goBack);
-    });
+    backButton1.addEventListener('click', () => showPage(servicesPage));
+    backButton2.addEventListener('click', () => showPage(plansPage));
+    backButton3.addEventListener('click', () => showPage(servicesPage));
     
     // Обработчики для меню заказа
     closeBtn.addEventListener('click', closeOrderMenu);
@@ -156,6 +191,7 @@ function setupEventListeners() {
     checkoutBtn.addEventListener('click', checkout);
 }
 
+// ========== ВЫБОР ТОВАРОВ ========== //
 function selectService(serviceId) {
     currentService = products[serviceId];
     document.getElementById('service-name').textContent = currentService.name;
@@ -173,7 +209,7 @@ function selectService(serviceId) {
         `;
         plansContainer.appendChild(planCard);
         
-        // Добавляем обработчик для кнопки
+        // Обработчик для кнопки выбора тарифа
         planCard.querySelector('button').addEventListener('click', () => {
             selectPlan(plan.id);
         });
@@ -200,7 +236,7 @@ function selectPlan(planId) {
         `;
         optionsContainer.appendChild(optionCard);
         
-        // Добавляем обработчик для кнопки
+        // Обработчик для кнопки добавления в корзину
         optionCard.querySelector('button').addEventListener('click', () => {
             addItemToCart(option.period, option.price);
         });
@@ -220,6 +256,7 @@ function addItemToCart(period, price) {
     addToCart(item);
 }
 
+// ========== УПРАВЛЕНИЕ КОРЗИНОЙ ========== //
 function showCart() {
     updateCartView();
     showPage(cartPage);
@@ -259,14 +296,6 @@ function updateCartView() {
     totalPrice.textContent = total;
 }
 
-function goBack() {
-    showPage(servicesPage);
-}
-
-function goBackToPlans() {
-    showPage(plansPage);
-}
-
 function showOrderMenu(index) {
     const item = cart[index];
     document.getElementById('order-item-title').textContent = `${item.service} ${item.plan}`;
@@ -290,6 +319,7 @@ function removeFromCart() {
     updateCartCount();
     updateCartView();
     closeOrderMenu();
+    showToast('Товар видалено з корзини');
 }
 
 function orderSingleItem() {
@@ -300,12 +330,13 @@ function orderSingleItem() {
 
 function checkout() {
     if (cart.length === 0) {
-        alert('Корзина порожня!');
+        showToast('Корзина порожня!');
         return;
     }
     createOrder(cart);
 }
 
+// ========== ОФОРМЛЕНИЕ ЗАКАЗА ========== //
 function createOrder(items) {
     let message = "🛒 Моє замовлення:\n\n";
     
@@ -317,7 +348,7 @@ function createOrder(items) {
     message += `\n💳 Всього: ${total} UAH`;
     
     const encodedMessage = encodeURIComponent(message);
-    const botUsername = "SecureShopBot"; // ЗАМЕНИТЕ НА РЕАЛЬНЫЙ USERNAME БОТА
+    const botUsername = "SecureShopBot";
     const telegramUrl = `https://t.me/${botUsername}?start=${encodedMessage}`;
     window.open(telegramUrl, '_blank');
 }
