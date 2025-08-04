@@ -10,7 +10,7 @@
 <body>
     <header>
         <div class="logo">Secure<span>Shop</span></div>
-        <div class="cart-icon" onclick="showCart()">
+        <div class="cart-icon" id="cart-icon">
             <i class="fas fa-shopping-cart"></i>
             <span id="cart-count">0</span>
         </div>
@@ -21,19 +21,19 @@
         <section id="services-page" class="page active">
             <h1>Оберіть сервіс</h1>
             <div class="services-grid">
-                <div class="service-card" onclick="selectService('chatgpt')">
+                <div class="service-card" data-service="chatgpt">
                     <img src="images/chatgpt.webp" alt="ChatGPT">
                     <h3>ChatGPT</h3>
                 </div>
-                <div class="service-card" onclick="selectService('discord')">
+                <div class="service-card" data-service="discord">
                     <img src="images/discord.webp" alt="Discord">
                     <h3>Discord</h3>
                 </div>
-                <div class="service-card" onclick="selectService('duolingo')">
+                <div class="service-card" data-service="duolingo">
                     <img src="images/duolingo.webp" alt="Duolingo">
                     <h3>Duolingo</h3>
                 </div>
-                <div class="service-card" onclick="selectService('picsart')">
+                <div class="service-card" data-service="picsart">
                     <img src="images/picsart.webp" alt="PicsArt">
                     <h3>PicsArt</h3>
                 </div>
@@ -111,5 +111,6 @@
     <script src="script.js" defer></script>
 </body>
 </html>
+
 
 
