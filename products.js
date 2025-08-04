@@ -87,15 +87,3 @@ const products = {
     ]
   }
 };
-
-let cart = JSON.parse(localStorage.getItem('cart')) || [];
-
-function addToCart(item) {
-  cart.push(item);
-  localStorage.setItem('cart', JSON.stringify(cart));
-}
-
-// Загрузка корзины при старте
-if (localStorage.getItem('cart')) {
-  cart = JSON.parse(localStorage.getItem('cart'));
-}
