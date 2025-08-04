@@ -321,3 +321,4 @@ function createOrder(items) {
         showPage(servicesPage);
     }
 }
+
