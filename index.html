@@ -4,37 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SecureShop - Магазин підписок</title>
-    <link rel="stylesheet" href="./styles.css">
+    <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🛒</text></svg>">
-    <style>
-        /* Базовые стили для заголовков */
-        h1, h2, h3 {
-            margin: 0.5em 0;
-            font-weight: 700;
-        }
-        h1 {
-            font-size: 2.5rem;
-            margin: 20px 0 30px;
-            position: relative;
-            text-align: center;
-        }
-        h1::after {
-            content: '';
-            position: absolute;
-            bottom: -10px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 80px;
-            height: 4px;
-            background: linear-gradient(90deg, #6c5ce7, #fd79a8);
-            border-radius: 2px;
-        }
-    </style>
 </head>
 <body>
     <header>
-        <div class="logo">Secure<span>Shop</span></div>
+        <div class="logo" id="main-logo">Secure<span>Shop</span></div>
         <div class="cart-icon" id="cart-icon">
             <i class="fas fa-shopping-cart"></i>
             <span id="cart-count">0</span>
@@ -47,19 +22,19 @@
             <h1>Оберіть сервіс</h1>
             <div class="services-grid">
                 <div class="service-card" data-service="chatgpt">
-                    <img src="./images/chatgpt.webp" alt="ChatGPT" onerror="this.onerror=null;this.src='https://via.placeholder.com/200/6c5ce7/ffffff?text=ChatGPT'">
+                    <img src="images/chatgpt.webp" alt="ChatGPT">
                     <h3>ChatGPT</h3>
                 </div>
                 <div class="service-card" data-service="discord">
-                    <img src="./images/discord.webp" alt="Discord" onerror="this.onerror=null;this.src='https://via.placeholder.com/200/5865f2/ffffff?text=Discord'">
+                    <img src="images/discord.webp" alt="Discord">
                     <h3>Discord</h3>
                 </div>
                 <div class="service-card" data-service="duolingo">
-                    <img src="./images/duolingo.webp" alt="Duolingo" onerror="this.onerror=null;this.src='https://via.placeholder.com/200/58cc02/ffffff?text=Duolingo'">
+                    <img src="images/duolingo.webp" alt="Duolingo">
                     <h3>Duolingo</h3>
                 </div>
                 <div class="service-card" data-service="picsart">
-                    <img src="./images/picsart.webp" alt="PicsArt" onerror="this.onerror=null;this.src='https://via.placeholder.com/200/2d3436/ffffff?text=PicsArt'">
+                    <img src="images/picsart.webp" alt="PicsArt">
                     <h3>PicsArt</h3>
                 </div>
             </div>
@@ -67,7 +42,7 @@
 
         <!-- Страница выбора тарифов -->
         <section id="plans-page" class="page">
-            <div class="back-button" id="back-button-1">
+            <div class="back-button" id="back-to-services">
                 <i class="fas fa-arrow-left"></i> Назад
             </div>
             <h1 id="service-name"></h1>
@@ -76,7 +51,7 @@
 
         <!-- Страница выбора периода -->
         <section id="options-page" class="page">
-            <div class="back-button" id="back-button-2">
+            <div class="back-button" id="back-to-plans">
                 <i class="fas fa-arrow-left"></i> Назад
             </div>
             <h1 id="plan-name"></h1>
@@ -86,14 +61,14 @@
 
         <!-- Корзина -->
         <section id="cart-page" class="page">
-            <div class="back-button" id="back-button-3">
+            <div class="back-button" id="back-to-main">
                 <i class="fas fa-arrow-left"></i> Назад
             </div>
             <h1>Ваше замовлення</h1>
             <div id="cart-items" class="cart-items"></div>
             <div class="cart-total">
                 <h3>Всього: <span id="total-price">0</span> UAH</h3>
-                <button class="checkout-btn" id="checkout-btn">
+                <button class="checkout-btn">
                     Замовити через Telegram <i class="fab fa-telegram"></i>
                 </button>
             </div>
@@ -110,14 +85,14 @@
                     <p><strong>Ціна:</strong> <span id="order-price"></span> UAH</p>
                 </div>
                 <div class="order-actions">
-                    <button class="remove-btn" id="remove-btn">
+                    <button class="remove-btn">
                         <i class="fas fa-trash"></i> Видалити
                     </button>
-                    <button class="order-btn" id="order-btn">
+                    <button class="order-btn">
                         Замовити <i class="fab fa-telegram"></i>
                     </button>
                 </div>
-                <button class="close-btn" id="close-btn">
+                <button class="close-btn">
                     <i class="fas fa-times"></i>
                 </button>
             </div>
@@ -132,6 +107,7 @@
         </div>
     </footer>
 
-    <script src="./script.js"></script>
+    <script src="products.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>
