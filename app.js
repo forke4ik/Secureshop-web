@@ -286,7 +286,6 @@ function createOrder(items) {
     
     // Добавляем информацию о товарах
     items.forEach((item) => {
-        // Кодируем только значения
         const service = encodeURIComponent(item.service);
         const plan = encodeURIComponent(item.plan || '');
         const period = encodeURIComponent(item.period);
@@ -301,9 +300,6 @@ function createOrder(items) {
     const total = items.reduce((sum, item) => sum + item.price, 0);
     command += `total=${total}`;
     
-    // ... (остальной код без изменений)
-}
-    
     // Формируем читаемое сообщение для пользователя
     let userMessage = "🛒 Ваше замовлення:\n\n";
     items.forEach(item => {
@@ -312,20 +308,19 @@ function createOrder(items) {
     userMessage += `\n💳 Всього: ${total} UAH`;
     
     // Формируем ссылку для Telegram
-    const botUsername = "SecureShopBot"; // Замените на реальное имя бота
+    const botUsername = "SecureShopBot";
     const telegramUrl = `https://t.me/${botUsername}?start=${command}`;
     
-    // Показываем пользователю его заказ перед отправкой
+    // Показываем подтверждение
     const confirmSend = confirm(`${userMessage}\n\nНатисніть OK, щоб відправити замовлення боту.`);
     
     if (confirmSend) {
         window.open(telegramUrl, '_blank');
         
-        // Очищаем корзину после отправки
+        // Очищаем корзину
         cart = [];
         localStorage.setItem('cart', JSON.stringify(cart));
         updateCartCount();
         showPage(servicesPage);
     }
-}
-
+} // <-- Конец функции
