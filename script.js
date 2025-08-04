@@ -7,6 +7,10 @@ const cartCount = document.getElementById('cart-count');
 const cartItems = document.getElementById('cart-items');
 const totalPrice = document.getElementById('total-price');
 const cartIcon = document.getElementById('cart-icon');
+const checkoutBtn = document.getElementById('checkout-btn');
+const removeBtn = document.getElementById('remove-btn');
+const orderBtn = document.getElementById('order-btn');
+const closeBtn = document.getElementById('close-btn');
 
 // Текущий выбор
 let currentService = null;
@@ -144,6 +148,12 @@ function setupEventListeners() {
     document.querySelectorAll('.back-button').forEach(button => {
         button.addEventListener('click', goBack);
     });
+    
+    // Обработчики для меню заказа
+    closeBtn.addEventListener('click', closeOrderMenu);
+    removeBtn.addEventListener('click', removeFromCart);
+    orderBtn.addEventListener('click', orderSingleItem);
+    checkoutBtn.addEventListener('click', checkout);
 }
 
 function selectService(serviceId) {
@@ -247,13 +257,14 @@ function updateCartView() {
     });
     
     totalPrice.textContent = total;
-    
-    // Обработчик для кнопки оформления заказа
-    document.querySelector('.checkout-btn').addEventListener('click', checkout);
 }
 
 function goBack() {
     showPage(servicesPage);
+}
+
+function goBackToPlans() {
+    showPage(plansPage);
 }
 
 function showOrderMenu(index) {
@@ -266,11 +277,6 @@ function showOrderMenu(index) {
     
     document.getElementById('order-menu').dataset.index = index;
     document.getElementById('order-menu').classList.add('active');
-    
-    // Обработчики для кнопок в меню
-    document.querySelector('.remove-btn').addEventListener('click', removeFromCart);
-    document.querySelector('.order-btn').addEventListener('click', orderSingleItem);
-    document.querySelector('.close-btn').addEventListener('click', closeOrderMenu);
 }
 
 function closeOrderMenu() {
@@ -311,7 +317,7 @@ function createOrder(items) {
     message += `\n💳 Всього: ${total} UAH`;
     
     const encodedMessage = encodeURIComponent(message);
-    const botUsername = "SecureShopBot"; // Замените на реальный username
+    const botUsername = "SecureShopBot"; // ЗАМЕНИТЕ НА РЕАЛЬНЫЙ USERNAME БОТА
     const telegramUrl = `https://t.me/${botUsername}?start=${encodedMessage}`;
     window.open(telegramUrl, '_blank');
 }
