@@ -5,31 +5,109 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SecureShop - Магазин підписок</title>
     <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
     <header>
-        <h1>SecureShop</h1>
-        <p>Магазин цифрових підписок</p>
+        <div class="logo">Secure<span>Shop</span></div>
+        <div class="cart-icon" onclick="showCart()">
+            <i class="fas fa-shopping-cart"></i>
+            <span id="cart-count">0</span>
+        </div>
     </header>
-    
-    <section class="products">
-        <div class="product">
-            <h2>ChatGPT Plus</h2>
-            <p>1 місяць - 650 UAH</p>
-            <button>Обрати</button>
-        </div>
+
+    <main>
+        <!-- Главная страница с сервисами -->
+        <section id="services-page" class="page active">
+            <h1>Оберіть сервіс</h1>
+            <div class="services-grid">
+                <div class="service-card" onclick="selectService('chatgpt')">
+                    <img src="images/chatgpt.webp" alt="ChatGPT">
+                    <h3>ChatGPT</h3>
+                </div>
+                <div class="service-card" onclick="selectService('discord')">
+                    <img src="images/discord.webp" alt="Discord">
+                    <h3>Discord</h3>
+                </div>
+                <div class="service-card" onclick="selectService('duolingo')">
+                    <img src="images/duolingo.webp" alt="Duolingo">
+                    <h3>Duolingo</h3>
+                </div>
+                <div class="service-card" onclick="selectService('picsart')">
+                    <img src="images/picsart.webp" alt="PicsArt">
+                    <h3>PicsArt</h3>
+                </div>
+            </div>
+        </section>
+
+        <!-- Страница выбора тарифов -->
+        <section id="plans-page" class="page">
+            <div class="back-button" onclick="goBack()">
+                <i class="fas fa-arrow-left"></i> Назад
+            </div>
+            <h1 id="service-name"></h1>
+            <div id="plans-container" class="plans-grid"></div>
+        </section>
+
+        <!-- Страница выбора периода -->
+        <section id="options-page" class="page">
+            <div class="back-button" onclick="goBackToPlans()">
+                <i class="fas fa-arrow-left"></i> Назад
+            </div>
+            <h1 id="plan-name"></h1>
+            <p id="plan-description"></p>
+            <div id="options-container" class="options-grid"></div>
+        </section>
+
+        <!-- Корзина -->
+        <section id="cart-page" class="page">
+            <div class="back-button" onclick="goBack()">
+                <i class="fas fa-arrow-left"></i> Назад
+            </div>
+            <h1>Ваше замовлення</h1>
+            <div id="cart-items" class="cart-items"></div>
+            <div class="cart-total">
+                <h3>Всього: <span id="total-price">0</span> UAH</h3>
+                <button class="checkout-btn" onclick="checkout()">
+                    Замовити через Telegram <i class="fab fa-telegram"></i>
+                </button>
+            </div>
+        </section>
         
-        <div class="product">
-            <h2>Discord Nitro</h2>
-            <p>1 місяць - 170 UAH</p>
-            <button>Обрати</button>
+        <!-- Меню заказа -->
+        <div id="order-menu" class="order-menu">
+            <div class="order-content">
+                <h2 id="order-item-title"></h2>
+                <div class="order-details">
+                    <p><strong>Сервіс:</strong> <span id="order-service"></span></p>
+                    <p><strong>Тариф:</strong> <span id="order-plan"></span></p>
+                    <p><strong>Період:</strong> <span id="order-period"></span></p>
+                    <p><strong>Ціна:</strong> <span id="order-price"></span> UAH</p>
+                </div>
+                <div class="order-actions">
+                    <button class="remove-btn" onclick="removeFromCart()">
+                        <i class="fas fa-trash"></i> Видалити
+                    </button>
+                    <button class="order-btn" onclick="orderSingleItem()">
+                        Замовити <i class="fab fa-telegram"></i>
+                    </button>
+                </div>
+                <button class="close-btn" onclick="closeOrderMenu()">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
         </div>
-        
-        <!-- Добавьте другие товары позже -->
-    </section>
-    
+    </main>
+
     <footer>
-        <p>Телеграм бот: @SecureShopBot</p>
+        <p>Підтримка: @SecureShopBot</p>
+        <div class="social">
+            <a href="https://t.me/SecureShopUA" target="_blank"><i class="fab fa-telegram"></i></a>
+            <a href="https://www.tiktok.com/@secureshop_official" target="_blank"><i class="fab fa-tiktok"></i></a>
+        </div>
     </footer>
+
+    <script src="products.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>
