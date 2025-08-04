@@ -7,10 +7,9 @@ const products = {
         id: "chatgpt_plus",
         name: "Plus",
         description: "Доступ до GPT-4, розширені можливості",
+        // Оставлена только ежемесячная подписка
         options: [
-          { period: "1 місяць", price: 650 },
-          { period: "3 місяці", price: 1800 },
-          { period: "12 місяців", price: 6500 }
+          { period: "1 місяць", price: 650 }
         ]
       }
     ]
@@ -55,7 +54,8 @@ const products = {
       {
         id: "duolingo_family",
         name: "Family",
-        description: "Для всієї родини (до 5 осіб)",
+        // Обновленное описание подписки
+        description: "Підписка на вас та ще 5 осіб",
         options: [
           { period: "12 місяців", price: 380 }
         ]
