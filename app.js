@@ -1,4 +1,4 @@
-// Получаем элементы страницы
+// Решение проблемы с двойным объявлением переменных
 const servicesPage = document.getElementById('services-page');
 const plansPage = document.getElementById('plans-page');
 const optionsPage = document.getElementById('options-page');
@@ -61,22 +61,25 @@ function setupEventListeners() {
     });
     
     // Обработчик для иконки корзины
-    cartIcon.addEventListener('click', showCart);
+    if (cartIcon) cartIcon.addEventListener('click', showCart);
     
     // Обработчики для кнопок "Назад"
-    backToServicesBtn.addEventListener('click', () => goBackToPage(servicesPage));
-    backToPlansBtn.addEventListener('click', () => goBackToPage(plansPage));
-    backToMainBtn.addEventListener('click', goBack);
+    if (backToServicesBtn) backToServicesBtn.addEventListener('click', () => goBackToPage(servicesPage));
+    if (backToPlansBtn) backToPlansBtn.addEventListener('click', () => goBackToPage(plansPage));
+    if (backToMainBtn) backToMainBtn.addEventListener('click', goBack);
     
     // Обработчик для логотипа
-    mainLogo.addEventListener('click', goToHome);
+    if (mainLogo) mainLogo.addEventListener('click', goToHome);
     
     // Обработчик для закрытия меню по клику вне контента
-    document.getElementById('order-menu').addEventListener('click', (e) => {
-        if (e.target === document.getElementById('order-menu')) {
-            closeOrderMenu();
-        }
-    });
+    const orderMenu = document.getElementById('order-menu');
+    if (orderMenu) {
+        orderMenu.addEventListener('click', (e) => {
+            if (e.target === orderMenu) {
+                closeOrderMenu();
+            }
+        });
+    }
 }
 
 function goToHome() {
@@ -85,7 +88,6 @@ function goToHome() {
     showPage(servicesPage);
 }
 
-// Новая функция для возврата к конкретной странице
 function goBackToPage(page) {
     showPage(page);
 }
@@ -95,55 +97,66 @@ function selectService(serviceId) {
     document.getElementById('service-name').textContent = currentService.name;
     
     const plansContainer = document.getElementById('plans-container');
-    plansContainer.innerHTML = '';
-    
-    currentService.plans.forEach(plan => {
-        const planCard = document.createElement('div');
-        planCard.className = 'plan-card';
-        planCard.innerHTML = `
-            <h2>${plan.name}</h2>
-            <p>${plan.description}</p>
-            <button class="add-to-cart">Обрати</button>
-        `;
-        plansContainer.appendChild(planCard);
+    if (plansContainer) {
+        plansContainer.innerHTML = '';
         
-        // Добавляем обработчик для кнопки
-        planCard.querySelector('button').addEventListener('click', () => {
-            selectPlan(plan.id);
+        currentService.plans.forEach(plan => {
+            const planCard = document.createElement('div');
+            planCard.className = 'plan-card';
+            planCard.innerHTML = `
+                <h2>${plan.name}</h2>
+                <p>${plan.description}</p>
+                <button class="add-to-cart">Обрати</button>
+            `;
+            plansContainer.appendChild(planCard);
+            
+            // Добавляем обработчик для кнопки
+            planCard.querySelector('button').addEventListener('click', () => {
+                selectPlan(plan.id);
+            });
         });
-    });
+    }
     
     showPage(plansPage);
 }
 
 function selectPlan(planId) {
-    currentPlan = currentService.plans.find(plan => plan.id === planId);
+    if (!currentService) return;
+    
+    const plan = currentService.plans.find(p => p.id === planId);
+    if (!plan) return;
+    
+    currentPlan = plan;
     document.getElementById('plan-name').textContent = `${currentService.name} ${currentPlan.name}`;
     document.getElementById('plan-description').textContent = currentPlan.description;
     
     const optionsContainer = document.getElementById('options-container');
-    optionsContainer.innerHTML = '';
-    
-    currentPlan.options.forEach(option => {
-        const optionCard = document.createElement('div');
-        optionCard.className = 'option-card';
-        optionCard.innerHTML = `
-            <div class="period">${option.period}</div>
-            <div class="price">${option.price} UAH</div>
-            <button class="add-to-cart">Додати в корзину</button>
-        `;
-        optionsContainer.appendChild(optionCard);
+    if (optionsContainer) {
+        optionsContainer.innerHTML = '';
         
-        // Добавляем обработчик для кнопки
-        optionCard.querySelector('button').addEventListener('click', () => {
-            addItemToCart(option.period, option.price);
+        currentPlan.options.forEach(option => {
+            const optionCard = document.createElement('div');
+            optionCard.className = 'option-card';
+            optionCard.innerHTML = `
+                <div class="period">${option.period}</div>
+                <div class="price">${option.price} UAH</div>
+                <button class="add-to-cart">Додати в корзину</button>
+            `;
+            optionsContainer.appendChild(optionCard);
+            
+            // Добавляем обработчик для кнопки
+            optionCard.querySelector('button').addEventListener('click', () => {
+                addItemToCart(option.period, option.price);
+            });
         });
-    });
+    }
     
     showPage(optionsPage);
 }
 
 function addItemToCart(period, price) {
+    if (!currentService || !currentPlan) return;
+    
     const item = {
         service: currentService.name,
         plan: currentPlan.name,
@@ -160,6 +173,8 @@ function showCart() {
 }
 
 function updateCartView() {
+    if (!cartItems) return;
+    
     cartItems.innerHTML = '';
     
     if (cart.length === 0) {
@@ -190,10 +205,13 @@ function updateCartView() {
         cartItems.appendChild(cartItem);
     });
     
-    totalPrice.textContent = total;
+    if (totalPrice) totalPrice.textContent = total;
     
     // Обработчик для кнопки оформления заказа
-    document.querySelector('.checkout-btn').addEventListener('click', checkout);
+    const checkoutBtn = document.querySelector('.checkout-btn');
+    if (checkoutBtn) {
+        checkoutBtn.addEventListener('click', checkout);
+    }
 }
 
 function goBack() {
@@ -206,6 +224,8 @@ function goBack() {
 }
 
 function showOrderMenu(index) {
+    if (index >= cart.length) return;
+    
     const item = cart[index];
     document.getElementById('order-item-title').textContent = `${item.service} ${item.plan}`;
     document.getElementById('order-service').textContent = item.service;
@@ -213,32 +233,46 @@ function showOrderMenu(index) {
     document.getElementById('order-period').textContent = item.period;
     document.getElementById('order-price').textContent = item.price;
     
-    document.getElementById('order-menu').dataset.index = index;
-    document.getElementById('order-menu').classList.add('active');
-    
-    // Обработчики для кнопок в меню
-    document.querySelector('.remove-btn').addEventListener('click', removeFromCart);
-    document.querySelector('.order-btn').addEventListener('click', orderSingleItem);
-    document.querySelector('.close-btn').addEventListener('click', closeOrderMenu);
+    const orderMenu = document.getElementById('order-menu');
+    if (orderMenu) {
+        orderMenu.dataset.index = index;
+        orderMenu.classList.add('active');
+        
+        // Обработчики для кнопок в меню
+        document.querySelector('.remove-btn')?.addEventListener('click', removeFromCart);
+        document.querySelector('.order-btn')?.addEventListener('click', orderSingleItem);
+        document.querySelector('.close-btn')?.addEventListener('click', closeOrderMenu);
+    }
 }
 
 function closeOrderMenu() {
-    document.getElementById('order-menu').classList.remove('active');
+    const orderMenu = document.getElementById('order-menu');
+    if (orderMenu) orderMenu.classList.remove('active');
 }
 
 function removeFromCart() {
-    const index = document.getElementById('order-menu').dataset.index;
-    cart.splice(index, 1);
-    localStorage.setItem('cart', JSON.stringify(cart));
-    updateCartCount();
-    updateCartView();
-    closeOrderMenu();
+    const orderMenu = document.getElementById('order-menu');
+    if (!orderMenu) return;
+    
+    const index = orderMenu.dataset.index;
+    if (index >= 0 && index < cart.length) {
+        cart.splice(index, 1);
+        localStorage.setItem('cart', JSON.stringify(cart));
+        updateCartCount();
+        updateCartView();
+        closeOrderMenu();
+    }
 }
 
 function orderSingleItem() {
-    const index = document.getElementById('order-menu').dataset.index;
-    const item = cart[index];
-    createOrder([item]);
+    const orderMenu = document.getElementById('order-menu');
+    if (!orderMenu) return;
+    
+    const index = orderMenu.dataset.index;
+    if (index >= 0 && index < cart.length) {
+        const item = cart[index];
+        createOrder([item]);
+    }
 }
 
 function checkout() {
