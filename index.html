@@ -8,14 +8,27 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🛒</text></svg>">
     <style>
-        /* Временные стили для заголовков */
+        /* Базовые стили для заголовков */
         h1, h2, h3 {
             margin: 0.5em 0;
-            font-size: clamp(1.5rem, 5vw, 2.5rem);
+            font-weight: 700;
         }
         h1 {
-            margin: 20px 0 40px;
-            font-size: clamp(2rem, 6vw, 3rem);
+            font-size: 2.5rem;
+            margin: 20px 0 30px;
+            position: relative;
+            text-align: center;
+        }
+        h1::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(90deg, #6c5ce7, #fd79a8);
+            border-radius: 2px;
         }
     </style>
 </head>
@@ -34,19 +47,19 @@
             <h1>Оберіть сервіс</h1>
             <div class="services-grid">
                 <div class="service-card" data-service="chatgpt">
-                    <img src="./images/chatgpt.webp" alt="ChatGPT" onerror="this.src='https://via.placeholder.com/200?text=ChatGPT'">
+                    <img src="./images/chatgpt.webp" alt="ChatGPT" onerror="this.onerror=null;this.src='https://via.placeholder.com/200/6c5ce7/ffffff?text=ChatGPT'">
                     <h3>ChatGPT</h3>
                 </div>
                 <div class="service-card" data-service="discord">
-                    <img src="./images/discord.webp" alt="Discord" onerror="this.src='https://via.placeholder.com/200?text=Discord'">
+                    <img src="./images/discord.webp" alt="Discord" onerror="this.onerror=null;this.src='https://via.placeholder.com/200/5865f2/ffffff?text=Discord'">
                     <h3>Discord</h3>
                 </div>
                 <div class="service-card" data-service="duolingo">
-                    <img src="./images/duolingo.webp" alt="Duolingo" onerror="this.src='https://via.placeholder.com/200?text=Duolingo'">
+                    <img src="./images/duolingo.webp" alt="Duolingo" onerror="this.onerror=null;this.src='https://via.placeholder.com/200/58cc02/ffffff?text=Duolingo'">
                     <h3>Duolingo</h3>
                 </div>
                 <div class="service-card" data-service="picsart">
-                    <img src="./images/picsart.webp" alt="PicsArt" onerror="this.src='https://via.placeholder.com/200?text=PicsArt'">
+                    <img src="./images/picsart.webp" alt="PicsArt" onerror="this.onerror=null;this.src='https://via.placeholder.com/200/2d3436/ffffff?text=PicsArt'">
                     <h3>PicsArt</h3>
                 </div>
             </div>
