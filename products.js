@@ -88,14 +88,10 @@ const products = {
   }
 };
 
-let cart = [];
+let cart = JSON.parse(localStorage.getItem('cart')) || [];
 
 function addToCart(item) {
   cart.push(item);
-  updateCart();
-}
-
-function updateCart() {
   localStorage.setItem('cart', JSON.stringify(cart));
 }
 
