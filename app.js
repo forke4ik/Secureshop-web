@@ -281,34 +281,33 @@ function checkout() {
 }
 
 function createOrder(items) {
+    // Формируем данные заказа в формате JSON
+    const orderData = {
+        items: items.map(item => ({
+            service: item.service,
+            plan: item.plan || '',
+            period: item.period,
+            price: item.price
+        })),
+        total: items.reduce((sum, item) => sum + item.price, 0)
+    };
+    
+    // Кодируем данные в base64
+    const jsonString = JSON.stringify(orderData);
+    const base64Data = btoa(unescape(encodeURIComponent(jsonString)));
+    
     // Формируем команду для бота
-    let command = "buy_";
-    
-    // Добавляем информацию о товарах
-    items.forEach((item) => {
-        const service = encodeURIComponent(item.service);
-        const plan = encodeURIComponent(item.plan || '');
-        const period = encodeURIComponent(item.period);
-        
-        command += `service=${service};`;
-        command += `plan=${plan};`;
-        command += `period=${period};`;
-        command += `price=${item.price};`;
-    });
-    
-    // Добавляем общую сумму
-    const total = items.reduce((sum, item) => sum + item.price, 0);
-    command += `total=${total}`;
+    const command = `order_${base64Data}`;
     
     // Формируем читаемое сообщение для пользователя
     let userMessage = "🛒 Ваше замовлення:\n\n";
     items.forEach(item => {
         userMessage += `▫️ ${item.service} ${item.plan} (${item.period}) - ${item.price} UAH\n`;
     });
-    userMessage += `\n💳 Всього: ${total} UAH`;
+    userMessage += `\n💳 Всього: ${orderData.total} UAH`;
     
     // Формируем ссылку для Telegram
-    const botUsername = "SecureShopBot";
+    const botUsername = "secureshopBot"; // Убедитесь, что имя бота правильное!
     const telegramUrl = `https://t.me/${botUsername}?start=${command}`;
     
     // Показываем подтверждение
@@ -321,6 +320,7 @@ function createOrder(items) {
         cart = [];
         localStorage.setItem('cart', JSON.stringify(cart));
         updateCartCount();
+        updateCartView();
         showPage(servicesPage);
     }
-} // <-- Конец функции
+}
