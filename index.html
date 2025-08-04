@@ -4,8 +4,20 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SecureShop - Магазин підписок</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="./styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🛒</text></svg>">
+    <style>
+        /* Временные стили для заголовков */
+        h1, h2, h3 {
+            margin: 0.5em 0;
+            font-size: clamp(1.5rem, 5vw, 2.5rem);
+        }
+        h1 {
+            margin: 20px 0 40px;
+            font-size: clamp(2rem, 6vw, 3rem);
+        }
+    </style>
 </head>
 <body>
     <header>
@@ -22,19 +34,19 @@
             <h1>Оберіть сервіс</h1>
             <div class="services-grid">
                 <div class="service-card" data-service="chatgpt">
-                    <img src="images/chatgpt.webp" alt="ChatGPT">
+                    <img src="./images/chatgpt.webp" alt="ChatGPT" onerror="this.src='https://via.placeholder.com/200?text=ChatGPT'">
                     <h3>ChatGPT</h3>
                 </div>
                 <div class="service-card" data-service="discord">
-                    <img src="images/discord.webp" alt="Discord">
+                    <img src="./images/discord.webp" alt="Discord" onerror="this.src='https://via.placeholder.com/200?text=Discord'">
                     <h3>Discord</h3>
                 </div>
                 <div class="service-card" data-service="duolingo">
-                    <img src="images/duolingo.webp" alt="Duolingo">
+                    <img src="./images/duolingo.webp" alt="Duolingo" onerror="this.src='https://via.placeholder.com/200?text=Duolingo'">
                     <h3>Duolingo</h3>
                 </div>
                 <div class="service-card" data-service="picsart">
-                    <img src="images/picsart.webp" alt="PicsArt">
+                    <img src="./images/picsart.webp" alt="PicsArt" onerror="this.src='https://via.placeholder.com/200?text=PicsArt'">
                     <h3>PicsArt</h3>
                 </div>
             </div>
@@ -42,7 +54,7 @@
 
         <!-- Страница выбора тарифов -->
         <section id="plans-page" class="page">
-            <div class="back-button" onclick="goBack()">
+            <div class="back-button" id="back-button-1">
                 <i class="fas fa-arrow-left"></i> Назад
             </div>
             <h1 id="service-name"></h1>
@@ -51,7 +63,7 @@
 
         <!-- Страница выбора периода -->
         <section id="options-page" class="page">
-            <div class="back-button" onclick="goBackToPlans()">
+            <div class="back-button" id="back-button-2">
                 <i class="fas fa-arrow-left"></i> Назад
             </div>
             <h1 id="plan-name"></h1>
@@ -61,7 +73,7 @@
 
         <!-- Корзина -->
         <section id="cart-page" class="page">
-            <div class="back-button" onclick="goBack()">
+            <div class="back-button" id="back-button-3">
                 <i class="fas fa-arrow-left"></i> Назад
             </div>
             <h1>Ваше замовлення</h1>
@@ -107,6 +119,6 @@
         </div>
     </footer>
 
-    <script src="script.js"></script>
+    <script src="./script.js"></script>
 </body>
 </html>
