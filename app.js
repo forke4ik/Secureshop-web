@@ -289,6 +289,7 @@ async function checkout() {
 
 async function sendOrderToBot(orderData) {
     try {
+        console.log("Отправка заказа:", orderData);
         const response = await fetch('https://secureshop-3obw.onrender.com/api/order', {
             method: 'POST',
             headers: {
@@ -297,21 +298,30 @@ async function sendOrderToBot(orderData) {
             body: JSON.stringify(orderData)
         });
         
+        console.log("Статус ответа:", response.status);
+        
+        if (!response.ok) {
+            const errorText = await response.text();
+            throw new Error(`HTTP error! status: ${response.status}, text: ${errorText}`);
+        }
+        
         const result = await response.json();
+        console.log("Ответ сервера:", result);
         
         if (result.success) {
             alert('✅ Замовлення оформлено! Очікуйте на повідомлення в Telegram.');
+            // Очищаем корзину
             cart = [];
             localStorage.setItem('cart', JSON.stringify(cart));
             updateCartCount();
             updateCartView();
             showPage(servicesPage);
         } else {
-            alert('❌ Помилка оформлення: ' + result.error);
+            throw new Error(result.error || 'Невідома помилка');
         }
     } catch (error) {
         console.error('Помилка відправки замовлення:', error);
-        alert('❌ Сталася помилка при оформленні замовлення.');
+        alert(`❌ Помилка оформлення: ${error.message || 'Спробуйте ще раз пізніше'}`);
     }
 }
 
