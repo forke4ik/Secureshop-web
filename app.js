@@ -1,3 +1,4 @@
+// app.js
 const servicesPage = document.getElementById('services-page');
 const plansPage = document.getElementById('plans-page');
 const optionsPage = document.getElementById('options-page');
@@ -25,11 +26,13 @@ const pageHistory = [];
 
 // Инициализация при загрузке
 document.addEventListener('DOMContentLoaded', () => {
+    console.log("🔄 DOM загружен, инициализация приложения");
     updateCartCount();
     setupEventListeners();
 });
 
 function addToCart(item) {
+  console.log("➕ Добавление товара в корзину:", item);
   cart.push(item);
   localStorage.setItem('cart', JSON.stringify(cart));
   updateCartCount();
@@ -38,11 +41,14 @@ function addToCart(item) {
 
 function updateCartCount() {
     cartCount.textContent = cart.length;
+    console.log(`🛒 Обновлено количество товаров в корзине: ${cart.length}`);
 }
 
 function showPage(page) {
     document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
     page.classList.add('active');
+    
+    console.log(`📄 Показана страница: ${page.id}`);
     
     // Сохраняем историю только для основных страниц
     if (page !== servicesPage) {
@@ -51,32 +57,61 @@ function showPage(page) {
 }
 
 function setupEventListeners() {
+    console.log("🔧 Настройка обработчиков событий");
+    
     // Обработчики для сервисов
     document.querySelectorAll('.service-card').forEach(card => {
         card.addEventListener('click', () => {
             const serviceId = card.dataset.service;
+            console.log(`🖱️ Выбран сервис: ${serviceId}`);
             selectService(serviceId);
         });
     });
     
     // Обработчик для иконки корзины
-    if (cartIcon) cartIcon.addEventListener('click', showCart);
+    if (cartIcon) {
+        cartIcon.addEventListener('click', () => {
+            console.log("🛒 Клик по иконке корзины");
+            showCart();
+        });
+    }
     
     // Обработчики для кнопок "Назад"
-    if (backToServicesBtn) backToServicesBtn.addEventListener('click', () => showPage(servicesPage));
-    if (backToPlansBtn) backToPlansBtn.addEventListener('click', () => showPage(plansPage));
+    if (backToServicesBtn) {
+        backToServicesBtn.addEventListener('click', () => {
+            console.log("🔙 Назад к сервисам");
+            showPage(servicesPage);
+        });
+    }
+    if (backToPlansBtn) {
+        backToPlansBtn.addEventListener('click', () => {
+            console.log("🔙 Назад к тарифам");
+            showPage(plansPage);
+        });
+    }
     
     // Кнопка "Назад" в корзине ведет на главную
-    if (backToMainBtn) backToMainBtn.addEventListener('click', goToHome);
+    if (backToMainBtn) {
+        backToMainBtn.addEventListener('click', () => {
+            console.log("🏠 На главную");
+            goToHome();
+        });
+    }
     
     // Обработчик для логотипа
-    if (mainLogo) mainLogo.addEventListener('click', goToHome);
+    if (mainLogo) {
+        mainLogo.addEventListener('click', () => {
+            console.log("🏠 Клик по логотипу");
+            goToHome();
+        });
+    }
     
     // Обработчик для закрытия меню по клику вне контента
     const orderMenu = document.getElementById('order-menu');
     if (orderMenu) {
         orderMenu.addEventListener('click', (e) => {
             if (e.target === orderMenu) {
+                console.log("❌ Закрытие меню заказа (клик вне области)");
                 closeOrderMenu();
             }
         });
@@ -84,12 +119,14 @@ function setupEventListeners() {
 }
 
 function goToHome() {
+    console.log("🏠 Переход на главную страницу");
     // Очищаем историю и показываем главную страницу
     pageHistory.length = 0;
     showPage(servicesPage);
 }
 
 function selectService(serviceId) {
+    console.log(`🔍 Выбор сервиса: ${serviceId}`);
     currentService = products[serviceId];
     document.getElementById('service-name').textContent = currentService.name;
     
@@ -109,6 +146,7 @@ function selectService(serviceId) {
             
             // Добавляем обработчик для кнопки
             planCard.querySelector('button').addEventListener('click', () => {
+                console.log(`📝 Выбран тариф: ${plan.id}`);
                 selectPlan(plan.id);
             });
         });
@@ -118,6 +156,7 @@ function selectService(serviceId) {
 }
 
 function selectPlan(planId) {
+    console.log(`📋 Выбор тарифа: ${planId}`);
     if (!currentService) return;
     
     const plan = currentService.plans.find(p => p.id === planId);
@@ -143,6 +182,7 @@ function selectPlan(planId) {
             
             // Добавляем обработчик для кнопки
             optionCard.querySelector('button').addEventListener('click', () => {
+                console.log(`➕ Добавление в корзину: ${currentService.name} ${currentPlan.name} (${option.period})`);
                 addItemToCart(option.period, option.price);
             });
         });
@@ -161,25 +201,30 @@ function addItemToCart(period, price) {
         price
     };
     
+    console.log("🛍️ Товар для добавления:", item);
     addToCart(item);
 }
 
 function showCart() {
+    console.log("📦 Отображение корзины");
     updateCartView();
     showPage(cartPage);
 }
 
 function updateCartView() {
+    console.log("🔄 Обновление вида корзины");
     if (!cartItems) return;
     
     cartItems.innerHTML = '';
     
     if (cart.length === 0) {
+        console.log("🛒 Корзина пуста");
         cartItems.innerHTML = '<p class="empty-cart">Ваша корзина порожня</p>';
         totalPrice.textContent = '0';
         return;
     }
     
+    console.log(`🛒 Товаров в корзине: ${cart.length}`);
     let total = 0;
     
     cart.forEach((item, index) => {
@@ -198,20 +243,28 @@ function updateCartView() {
             </div>
         `;
         
-        cartItem.addEventListener('click', () => showOrderMenu(index));
+        cartItem.addEventListener('click', () => {
+            console.log(`ℹ️ Просмотр товара: ${item.service} ${item.plan} (${item.period})`);
+            showOrderMenu(index);
+        });
         cartItems.appendChild(cartItem);
     });
     
     if (totalPrice) totalPrice.textContent = total;
+    console.log(`💰 Итоговая сумма: ${total} UAH`);
     
     // Обработчик для кнопки оформления заказа
     const checkoutBtn = document.querySelector('.checkout-btn');
     if (checkoutBtn) {
-        checkoutBtn.addEventListener('click', checkout);
+        checkoutBtn.addEventListener('click', () => {
+            console.log("🚀 Оформление заказа");
+            checkout();
+        });
     }
 }
 
 function goBack() {
+    console.log("🔙 Назад");
     if (pageHistory.length > 0) {
         const prevPage = pageHistory.pop();
         showPage(prevPage);
@@ -221,6 +274,7 @@ function goBack() {
 }
 
 function showOrderMenu(index) {
+    console.log(`📋 Показать меню заказа для позиции ${index}`);
     if (index >= cart.length) return;
     
     const item = cart[index];
@@ -243,16 +297,20 @@ function showOrderMenu(index) {
 }
 
 function closeOrderMenu() {
+    console.log("❌ Закрыть меню заказа");
     const orderMenu = document.getElementById('order-menu');
     if (orderMenu) orderMenu.classList.remove('active');
 }
 
 function removeFromCart() {
+    console.log("🗑️ Удалить из корзины");
     const orderMenu = document.getElementById('order-menu');
     if (!orderMenu) return;
     
     const index = orderMenu.dataset.index;
     if (index >= 0 && index < cart.length) {
+        const item = cart[index];
+        console.log(`Удаление: ${item.service} ${item.plan} (${item.period})`);
         cart.splice(index, 1);
         localStorage.setItem('cart', JSON.stringify(cart));
         updateCartCount();
@@ -262,22 +320,30 @@ function removeFromCart() {
 }
 
 function orderSingleItem() {
+    console.log("🚀 Оформить отдельный товар");
     const orderMenu = document.getElementById('order-menu');
     if (!orderMenu) return;
     
     const index = orderMenu.dataset.index;
     if (index >= 0 && index < cart.length) {
         const item = cart[index];
+        console.log("Оформление товара:", item);
         createOrder([item]);
     }
 }
 
-// НОВАЯ ФУНКЦИЯ: оформление заказа через Telegram deep link
+// Функция оформления заказа через Telegram deep link
 function checkout() {
+    console.group("🚀 Процесс оформления заказа");
+    
     if (cart.length === 0) {
+        console.error("❌ Ошибка: корзина пуста");
         alert('Корзина порожня!');
+        console.groupEnd();
         return;
     }
+    
+    console.log("🛒 Содержимое корзины:", cart);
     
     // Формируем параметры для команды /pay
     let payCommand = "pay";
@@ -295,6 +361,8 @@ function checkout() {
         payCommand += `:price=${item.price}`;
     });
     
+    console.log("📦 Сформированная команда:", payCommand);
+    
     // Формируем читаемое сообщение для пользователя
     let userMessage = "🛒 Ваше замовлення:\n\n";
     let total = 0;
@@ -304,16 +372,25 @@ function checkout() {
         total += item.price;
     });
     
-    userMessage += `\n💳 Всього: ${total} UAH`;
+    if (cart.length > 1) {
+        userMessage += `\n💳 Всього: ${total} UAH`;
+    }
+    
+    console.log("💬 Сообщение для пользователя:", userMessage);
     
     // Формируем ссылку для Telegram
     const botUsername = "secureshopBot"; // Замените на реальное имя бота
     const telegramUrl = `https://t.me/${botUsername}?start=${payCommand}`;
     
+    console.log("🔗 Ссылка для Telegram:", telegramUrl);
+    
     // Показываем подтверждение
     const confirmSend = confirm(`${userMessage}\n\nНатисніть OK, щоб відправити замовлення боту.`);
     
     if (confirmSend) {
+        console.log("✅ Пользователь подтвердил отправку");
+        
+        // Открываем Telegram
         window.open(telegramUrl, '_blank');
         
         // Очищаем корзину
@@ -322,19 +399,25 @@ function checkout() {
         updateCartCount();
         updateCartView();
         showPage(servicesPage);
+        
+        console.log("🛒 Корзина очищена");
+    } else {
+        console.log("❌ Пользователь отменил отправку");
     }
+    
+    console.groupEnd();
 }
 
-// НОВАЯ ФУНКЦИЯ: создание заказа для одного товара
+// Функция создания заказа для одного товара
 function createOrder(items) {
+    console.group("🚀 Создание заказа для одного товара");
+    console.log("🛍️ Товары для заказа:", items);
+    
     // Формируем параметры для команды /pay
     let payCommand = "pay";
     
     items.forEach((item, index) => {
-        // Для первого товара просто добавляем параметры
-        // Для последующих - разделяем символом '_'
         const separator = index > 0 ? "_" : "";
-        
         payCommand += `${separator}service=${encodeURIComponent(item.service)}`;
         if (item.plan) {
             payCommand += `:plan=${encodeURIComponent(item.plan)}`;
@@ -342,6 +425,8 @@ function createOrder(items) {
         payCommand += `:period=${encodeURIComponent(item.period)}`;
         payCommand += `:price=${item.price}`;
     });
+    
+    console.log("📦 Сформированная команда:", payCommand);
     
     // Формируем читаемое сообщение для пользователя
     let userMessage = "🛒 Ваше замовлення:\n\n";
@@ -356,14 +441,21 @@ function createOrder(items) {
         userMessage += `\n💳 Всього: ${total} UAH`;
     }
     
+    console.log("💬 Сообщение для пользователя:", userMessage);
+    
     // Формируем ссылку для Telegram
     const botUsername = "secureshopBot"; // Замените на реальное имя бота
     const telegramUrl = `https://t.me/${botUsername}?start=${payCommand}`;
+    
+    console.log("🔗 Ссылка для Telegram:", telegramUrl);
     
     // Показываем подтверждение
     const confirmSend = confirm(`${userMessage}\n\nНатисніть OK, щоб відправити замовлення боту.`);
     
     if (confirmSend) {
+        console.log("✅ Пользователь подтвердил отправку");
+        
+        // Открываем Telegram
         window.open(telegramUrl, '_blank');
         
         // Удаляем товар из корзины
@@ -371,6 +463,7 @@ function createOrder(items) {
         if (orderMenu) {
             const index = orderMenu.dataset.index;
             if (index >= 0 && index < cart.length) {
+                console.log(`🗑️ Удаление товара из корзины: ${cart[index].service}`);
                 cart.splice(index, 1);
                 localStorage.setItem('cart', JSON.stringify(cart));
                 updateCartCount();
@@ -379,5 +472,9 @@ function createOrder(items) {
         }
         
         closeOrderMenu();
+    } else {
+        console.log("❌ Пользователь отменил отправку");
     }
+    
+    console.groupEnd();
 }
