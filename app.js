@@ -301,8 +301,17 @@ async function sendOrderToBot(orderData) {
         console.log("Статус ответа:", response.status);
         
         if (!response.ok) {
-            const errorText = await response.text();
-            throw new Error(`HTTP error! status: ${response.status}, text: ${errorText}`);
+            // Попробуем получить текст ошибки
+            let errorText = 'Network response was not ok';
+            try {
+                const errorData = await response.json();
+                errorText = errorData.error || errorText;
+            } catch (e) {
+                // Не удалось распарсить JSON
+                const text = await response.text();
+                errorText = text || errorText;
+            }
+            throw new Error(errorText);
         }
         
         const result = await response.json();
@@ -321,7 +330,16 @@ async function sendOrderToBot(orderData) {
         }
     } catch (error) {
         console.error('Помилка відправки замовлення:', error);
-        alert(`❌ Помилка оформлення: ${error.message || 'Спробуйте ще раз пізніше'}`);
+        
+        // Улучшенное сообщение об ошибке
+        let errorMessage = 'Помилка оформлення';
+        if (error.message.includes('Failed to fetch')) {
+            errorMessage = 'Помилка з\'єднання з сервером';
+        } else if (error.message) {
+            errorMessage = error.message;
+        }
+        
+        alert(`❌ ${errorMessage}. Спробуйте ще раз або зверніться до підтримки.`);
     }
 }
 
