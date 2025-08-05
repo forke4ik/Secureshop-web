@@ -333,7 +333,12 @@ function orderSingleItem() {
 }
 
 // Функция оформления заказа через Telegram deep link
-function checkout() {
+// app.js
+
+// ... (остальной код)
+
+// Функция оформления заказа через Telegram deep link
+async function checkout() {
     console.group("🚀 Процесс оформления заказа");
     
     if (cart.length === 0) {
@@ -345,21 +350,63 @@ function checkout() {
     
     console.log("🛒 Содержимое корзины:", cart);
     
-    // Формируем параметры для команды /pay
-    let payCommand = "pay";
+    // Рассчитываем общую сумму
+    let total = 0;
+    cart.forEach(item => total += item.price);
     
-    cart.forEach((item, index) => {
-        // Для первого товара просто добавляем параметры
-        // Для последующих - разделяем символом '_'
-        const separator = index > 0 ? "_" : "";
+    try {
+        // Отправляем заказ на сервер
+        const response = await fetch('/api/create-order', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                items: cart,
+                total: total
+            })
+        });
         
-        payCommand += `${separator}service=${encodeURIComponent(item.service)}`;
-        if (item.plan) {
-            payCommand += `:plan=${encodeURIComponent(item.plan)}`;
+        const result = await response.json();
+        
+        if (result.success) {
+            console.log("✅ Заказ сохранен, ID:", result.order_id);
+            
+            // Формируем ссылку для Telegram
+            const botUsername = "secureshopBot"; // Замените на реальное имя бота
+            const telegramUrl = `https://t.me/${botUsername}?start=order_id=${result.order_id}`;
+            
+            console.log("🔗 Ссылка для Telegram:", telegramUrl);
+            
+            // Показываем подтверждение
+            const confirmSend = confirm("Ваше замовлення збережено! Натисніть OK, щоб відкрити Telegram та завершити оплату.");
+            
+            if (confirmSend) {
+                console.log("✅ Пользователь подтвердил отправку");
+                window.open(telegramUrl, '_blank');
+                
+                // Очищаем корзину
+                cart = [];
+                localStorage.setItem('cart', JSON.stringify(cart));
+                updateCartCount();
+                updateCartView();
+                showPage(servicesPage);
+            } else {
+                console.log("❌ Пользователь отменил отправку");
+            }
+        } else {
+            console.error("❌ Ошибка сохранения заказа:", result.error);
+            alert("Помилка збереження замовлення. Спробуйте ще раз.");
         }
-        payCommand += `:period=${encodeURIComponent(item.period)}`;
-        payCommand += `:price=${item.price}`;
-    });
+    } catch (error) {
+        console.error("🔥 Ошибка при отправке заказа:", error);
+        alert("Сталася помилка. Спробуйте пізніше.");
+    }
+    
+    console.groupEnd();
+}
+
+// ... (остальной код)
     
     console.log("📦 Сформированная команда:", payCommand);
     
