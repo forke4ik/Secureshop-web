@@ -284,10 +284,6 @@ async function checkout() {
         total: cart.reduce((sum, item) => sum + item.price, 0)
     };
     
-    await sendOrderToBot(orderData);
-}
-
-async function sendOrderToBot(orderData) {
     try {
         console.log("Отправка заказа:", orderData);
         const response = await fetch('https://secureshop-3obw.onrender.com/api/order', {
@@ -324,12 +320,17 @@ async function sendOrderToBot(orderData) {
             localStorage.setItem('cart', JSON.stringify(cart));
             updateCartCount();
             updateCartView();
+            // Перенаправляем в Telegram
+            const botUsername = "secureshopBot"; // Убедитесь в правильности имени
+            const startPayload = `pay_${encodeURIComponent(JSON.stringify(orderData))}`;
+            const telegramUrl = `https://t.me/${botUsername}?start=${startPayload}`;
+            window.open(telegramUrl, '_blank');
             showPage(servicesPage);
         } else {
             throw new Error(result.error || 'Невідома помилка');
         }
     } catch (error) {
-        console.error('Помилка відправки замовлення:', error);
+        console.error('Помилка оформлення:', error);
         
         // Улучшенное сообщение об ошибке
         let errorMessage = 'Помилка оформлення';
@@ -345,20 +346,20 @@ async function sendOrderToBot(orderData) {
 
 function createOrder(items) {
     // Формируем параметры для команды /pay
-    let payCommand = "/pay";
+    let payCommand = "pay";
     
-    items.forEach((item, index) => {
-        // Для первого товара просто добавляем параметры
-        // Для последующих - разделяем символом ' && '
-        const separator = index === 0 ? " " : " && ";
-        
-        payCommand += `${separator}service=${encodeURIComponent(item.service)}`;
+    // Формируем строку параметров
+    const params = [];
+    items.forEach(item => {
+        params.push(`service=${encodeURIComponent(item.service)}`);
         if (item.plan) {
-            payCommand += ` plan=${encodeURIComponent(item.plan)}`;
+            params.push(`plan=${encodeURIComponent(item.plan)}`);
         }
-        payCommand += ` period=${encodeURIComponent(item.period)}`;
-        payCommand += ` price=${item.price}`;
+        params.push(`period=${encodeURIComponent(item.period)}`);
+        params.push(`price=${item.price}`);
     });
+    
+    payCommand += ' ' + params.join(' ');
     
     // Формируем читаемое сообщение для пользователя
     let userMessage = "🛒 Ваше замовлення:\n\n";
