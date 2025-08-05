@@ -58,6 +58,364 @@ function setupEventListeners() {
             selectService(serviceId);
         });
     });
+
+    import logging
+import os
+import asyncio
+import threading
+import time
+import json
+import re
+from datetime import datetime
+from telegram import Update, InlineKeyboardButton, InlineKeyboardMarkup, User, BotCommandScopeChat
+from telegram.ext import Application, CommandHandler, MessageHandler, CallbackQueryHandler, filters, ContextTypes
+from telegram.error import Conflict
+from flask import Flask, request, jsonify
+from flask_cors import CORS
+import psycopg
+from psycopg.rows import dict_row
+import io
+from urllib.parse import unquote
+
+# Настройка логирования
+logging.basicConfig(
+    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
+    level=logging.INFO
+)
+logger = logging.getLogger(__name__)
+
+# Глобальные переменные состояния
+bot_running = False
+bot_lock = threading.Lock()
+
+# Конфигурация
+BOT_TOKEN = os.getenv('BOT_TOKEN', '8181378677:AAFullvwrNhPJMi_HxgC75qSEKWdKOtCpbw')
+OWNER_ID_1 = 7106925462  # @HiGki2pYYY
+OWNER_ID_2 = 6279578957  # @oc33t
+PORT = int(os.getenv('PORT', 8443))
+WEBHOOK_URL = os.getenv('WEBHOOK_URL', 'https://secureshop-3obw.onrender.com')
+PING_INTERVAL = int(os.getenv('PING_INTERVAL', 840))  # 14 минут
+USE_POLLING = os.getenv('USE_POLLING', 'true').lower() == 'true'
+DATABASE_URL = os.getenv('DATABASE_URL', 'postgresql://neondb_owner:npg_1E2GxznybVCR@ep-super-pond-a2ce35gl-pooler.eu-central-1.aws.neon.tech/neondb?sslmode=require&channel_binding=require')
+
+# Путь к файлу с данными
+STATS_FILE = "bot_stats.json"
+
+# Оптимизация: буферизация запросов к БД
+BUFFER_FLUSH_INTERVAL = 300  # 5 минут
+BUFFER_MAX_SIZE = 50
+message_buffer = []
+active_conv_buffer = []
+user_cache = set()
+
+# Оптимизация: кэш для истории сообщений
+history_cache = {}
+
+def flush_message_buffer():
+    # ... (без изменений) ...
+
+def flush_active_conv_buffer():
+    # ... (без изменений) ...
+
+def buffer_flush_thread():
+    # ... (без изменений) ...
+
+# Функции для работы с базой данных
+def init_db():
+    # ... (без изменений) ...
+
+def ensure_user_exists(user):
+    # ... (без изменений) ...
+
+def save_message(user_id, message_text, is_from_user):
+    # ... (без изменений) ...
+
+def save_active_conversation(user_id, conversation_type, assigned_owner, last_message):
+    # ... (без изменений) ...
+
+def delete_active_conversation(user_id):
+    # ... (без изменений) ...
+
+def get_conversation_history(user_id, limit=50):
+    # ... (без изменений) ...
+
+def get_all_users():
+    # ... (без изменений) ...
+
+def get_total_users_count():
+    # ... (без изменений) ...
+
+# Инициализируем базу данных при старте
+init_db()
+
+# Запускаем поток для сброса буферов
+threading.Thread(target=buffer_flush_thread, daemon=True).start()
+
+# Функции для работы с данными
+def load_stats():
+    # ... (без изменений) ...
+
+def default_stats():
+    # ... (без изменений) ...
+
+def save_stats():
+    # ... (без изменений) ...
+
+# Загружаем статистику
+bot_statistics = load_stats()
+
+# Словари для хранения данных
+active_conversations = {}
+owner_client_map = {}
+
+# Глобальные переменные для приложения
+telegram_app = None
+flask_app = Flask(__name__)
+CORS(flask_app)  # Разрешаем CORS для всех доменов
+
+class TelegramBot:
+    # ... (остальные методы без изменений) ...
+
+    async def start(self, update: Update, context: ContextTypes.DEFAULT_TYPE):
+        """Обработчик команды /start с поддержкой deep linking с сайта"""
+        user = update.effective_user
+        
+        # Гарантируем наличие пользователя в БД
+        ensure_user_exists(user)
+        
+        # ПРОВЕРКА: Если команда /start была вызвана с параметрами (с сайту)
+        if context.args:
+            # Склеиваем аргументы в одну строку
+            args_str = " ".join(context.args)
+            
+            # Расширенное логирование параметров
+            logger.info(f"🔄 Получены параметры deep link от {user.id} ({user.first_name}):")
+            logger.info(f"   Тип: {type(args_str)}")
+            logger.info(f"   Длина: {len(args_str)} символов")
+            logger.info(f"   Содержимое: '{args_str}'")
+            
+            # Если команда начинается с "pay", обрабатываем её
+            if args_str.startswith("pay"):
+                logger.info("🔎 Обнаружена команда pay в deep link, передаем в обработчик")
+                # Имитируем вызов команды /pay
+                context.args = [args_str]
+                await self.pay_command(update, context)
+                return
+            
+            logger.info(f"ℹ️ Параметры deep link не содержат команду pay")
+        
+        # ---- Обычный запуск /start без параметров ----
+        # ... (остальной код без изменений) ...
+
+    async def pay_command(self, update: Update, context: ContextTypes.DEFAULT_TYPE):
+        """Обработчик команды /pay для создания заказа"""
+        user = update.effective_user
+        user_id = user.id
+        logger.info(f"🚀 Начало обработки команды /pay для пользователя {user_id} ({user.first_name})")
+        
+        # Гарантируем наличие пользователя в БД
+        ensure_user_exists(user)
+        
+        # Парсим параметры команды
+        try:
+            if not context.args:
+                logger.warning("⚠️ Команда /pay вызвана без аргументов")
+                await update.message.reply_text(
+                    "ℹ️ Для оплаты используйте команду в формате:\n"
+                    "/pay service=<название> plan=<тариф> period=<период> price=<цена>\n\n"
+                    "Например: /pay service=ChatGPT plan=Plus period=1 месяц price=650"
+                )
+                return
+            
+            # Собираем все аргументы в одну строку
+            args_str = " ".join(context.args)
+            
+            # Логирование полученных аргументов
+            logger.info(f"📩 Получены аргументы команды /pay:")
+            logger.info(f"   Тип: {type(args_str)}")
+            logger.info(f"   Длина: {len(args_str)} символов")
+            logger.info(f"   Содержимое: '{args_str}'")
+            
+            # Если команда пришла из deep link (начинается с "pay")
+            if args_str.startswith("pay"):
+                args_str = args_str[3:].strip()
+                logger.info(f"🔧 Обрезан префикс 'pay': '{args_str}'")
+            
+            # Декодируем URL-кодирование
+            original_args = args_str
+            args_str = unquote(args_str)
+            logger.info(f"🔧 После декодирования URL: '{args_str}'")
+            
+            # Разбиваем на отдельные заказы
+            orders = []
+            if '_' in args_str:
+                # Несколько товаров в заказе
+                order_parts = args_str.split('_')
+                logger.info(f"🔍 Найдено {len(order_parts)} частей заказа")
+                
+                for part in order_parts:
+                    if 'service=' in part:
+                        orders.append(part)
+                        logger.info(f"   - Добавлен заказ: '{part}'")
+            else:
+                # Один товар в заказе
+                logger.info("🔍 Найден один заказ")
+                orders.append(args_str)
+            
+            logger.info(f"📦 Всего заказов для обработки: {len(orders)}")
+            
+            # Обрабатываем каждый заказ
+            order_texts = []
+            total_price = 0
+            
+            for i, order_str in enumerate(orders, 1):
+                logger.info(f"🔧 Обработка заказа #{i}: '{order_str}'")
+                
+                # Парсим параметры с помощью регулярных выражений
+                params = {}
+                pattern = r'(\w+)=([^=:]+)'
+                matches = re.findall(pattern, order_str)
+                
+                logger.info(f"   🔍 Найдено параметров: {len(matches)}")
+                for key, value in matches:
+                    params[key.lower()] = value.strip()
+                    logger.info(f"      - {key} = {value.strip()}")
+                
+                # Проверяем обязательные параметры
+                required = ['service', 'period', 'price']
+                for param in required:
+                    if param not in params:
+                        error_msg = f"❌ Отсутствует обязательный параметр: {param}"
+                        logger.warning(error_msg)
+                        await update.message.reply_text(
+                            f"{error_msg}\n\n"
+                            "Пожалуйста, укажите все необходимые параметры."
+                        )
+                        return
+                
+                # Формируем текст заказа
+                service = params.get('service', 'Неизвестный сервис')
+                plan = params.get('plan', '')
+                period = params.get('period', '')
+                price = params.get('price', 0)
+                
+                try:
+                    price_val = int(price)
+                    total_price += price_val
+                    logger.info(f"   💵 Цена успешно преобразована: {price_val} UAH")
+                except ValueError:
+                    error_msg = "❌ Неверный формат цены. Цена должна быть числом."
+                    logger.error(error_msg)
+                    await update.message.reply_text(error_msg)
+                    return
+                
+                order_text = f"▫️ {service}"
+                if plan:
+                    order_text += f" {plan}"
+                order_text += f" ({period}) - {price} UAH"
+                order_texts.append(order_text)
+                logger.info(f"   ✅ Сформирован текст заказа: '{order_text}'")
+            
+            # Формируем полный текст заказа
+            full_order_text = "🛍️ Замовлення:\n\n" + "\n".join(order_texts)
+            if len(orders) > 1:
+                full_order_text += f"\n\n💳 Всього: {total_price} UAH"
+            
+            logger.info(f"📝 Полный текст заказа:\n{full_order_text}")
+            
+            # Создаем запись о заказе
+            active_conversations[user_id] = {
+                'type': 'order',
+                'user_info': user,
+                'assigned_owner': None,
+                'order_details': full_order_text,
+                'last_message': full_order_text,
+                'from_website': True
+            }
+            
+            logger.info("💾 Заказ сохранен в активных диалогах")
+            
+            # Сохраняем в БД
+            save_active_conversation(user_id, 'order', None, full_order_text)
+            logger.info("💾 Заказ сохранен в базе данных")
+            
+            # Обновляем статистику
+            bot_statistics['total_orders'] += len(orders)
+            save_stats()
+            logger.info(f"📊 Статистика обновлена: total_orders = {bot_statistics['total_orders']}")
+            
+            # Пересылаем заказ обоим владельцам
+            logger.info("📤 Пересылаем заказ владельцам...")
+            await self.forward_order_to_owners(
+                context, 
+                user_id, 
+                user, 
+                full_order_text
+            )
+            
+            logger.info("✅ Заказ успешно обработан")
+            await update.message.reply_text(
+                "✅ Ваше замовлення прийнято! Засновник магазину зв'яжеться з вами найближчим часом.\n\n"
+                "Ви можете продовжити з іншим запитанням або замовленням."
+            )
+            
+        except Exception as e:
+            logger.error(f"🔥 Помилка обробки команди /pay: {e}", exc_info=True)
+            logger.error(f"⚠️ Исходные аргументы: '{original_args}'")
+            logger.error(f"⚠️ Декодированные аргументы: '{args_str}'")
+            await update.message.reply_text(
+                "❌ Сталася помилка при обробці вашого замовлення. Будь ласка, спробуйте ще раз."
+            )
+    
+    # ... (остальные методы без изменений) ...
+
+    async def forward_order_to_owners(self, context, client_id, client_info, order_text):
+        """Пересылает заказ обоим владельцам"""
+        logger.info(f"📨 Пересылаем заказ владельцам для клиента {client_id}")
+        
+        # Сохраняем последнее сообщение
+        active_conversations[client_id]['last_message'] = order_text
+        
+        # Сохраняем в БД
+        save_active_conversation(client_id, 'order', None, order_text)
+        
+        # Добавляем пометку о сайте, если заказ оттуда
+        source = "з сайту" if active_conversations[client_id].get('from_website', False) else ""
+        
+        forward_message = f"""
+🛒 НОВЕ ЗАМОВЛЕННЯ {source}!
+
+👤 Клієнт: {client_info.first_name}
+📱 Username: @{client_info.username if client_info.username else 'не вказано'}
+🆔 ID: {client_info.id}
+🌐 Язык: {client_info.language_code or 'не указан'}
+
+📋 Деталі замовлення:
+{order_text}
+
+---
+Нажмите "✅ Взять", чтобы обработать этот заказ.
+        """
+        
+        keyboard = [
+            [InlineKeyboardButton("✅ Взять", callback_data=f'take_order_{client_id}')]
+        ]
+        reply_markup = InlineKeyboardMarkup(keyboard)
+        
+        # Отправляем обоим основателям
+        for owner_id in [OWNER_ID_1, OWNER_ID_2]:
+            try:
+                logger.info(f"   📤 Отправляем заказ владельцу {owner_id}")
+                await context.bot.send_message(
+                    chat_id=owner_id,
+                    text=forward_message.strip(),
+                    reply_markup=reply_markup
+                )
+                logger.info(f"   ✅ Уведомление о заказе отправлено владельцу {owner_id}")
+            except Exception as e:
+                logger.error(f"❌ Ошибка отправки заказа основателю {owner_id}: {e}")
+
+# ... (остальной код Flask и запуска без изменений) ...
     
     // Обработчик для иконки корзины
     if (cartIcon) cartIcon.addEventListener('click', showCart);
