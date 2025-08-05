@@ -66,7 +66,7 @@ function setupEventListeners() {
     if (backToServicesBtn) backToServicesBtn.addEventListener('click', () => showPage(servicesPage));
     if (backToPlansBtn) backToPlansBtn.addEventListener('click', () => showPage(plansPage));
     
-    // ИЗМЕНЕНИЕ: Кнопка "Назад" в корзине ведет на главную
+    // Кнопка "Назад" в корзине ведет на главную
     if (backToMainBtn) backToMainBtn.addEventListener('click', goToHome);
     
     // Обработчик для логотипа
@@ -272,100 +272,34 @@ function orderSingleItem() {
     }
 }
 
-// app.js
-async function checkout() {
+// НОВАЯ ФУНКЦИЯ: оформление заказа через Telegram deep link
+function checkout() {
     if (cart.length === 0) {
         alert('Корзина порожня!');
         return;
     }
     
-    const orderData = {
-        items: cart,
-        total: cart.reduce((sum, item) => sum + item.price, 0)
-    };
-    
-    try {
-        console.log("Отправка заказа:", orderData);
-        const response = await fetch('https://secureshop-3obw.onrender.com/api/order', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(orderData)
-        });
-        
-        console.log("Статус ответа:", response.status);
-        
-        if (!response.ok) {
-            // Попробуем получить текст ошибки
-            let errorText = 'Network response was not ok';
-            try {
-                const errorData = await response.json();
-                errorText = errorData.error || errorText;
-            } catch (e) {
-                // Не удалось распарсить JSON
-                const text = await response.text();
-                errorText = text || errorText;
-            }
-            throw new Error(errorText);
-        }
-        
-        const result = await response.json();
-        console.log("Ответ сервера:", result);
-        
-        if (result.success) {
-            alert('✅ Замовлення оформлено! Очікуйте на повідомлення в Telegram.');
-            // Очищаем корзину
-            cart = [];
-            localStorage.setItem('cart', JSON.stringify(cart));
-            updateCartCount();
-            updateCartView();
-            // Перенаправляем в Telegram
-            const botUsername = "secureshopBot"; // Убедитесь в правильности имени
-            const startPayload = `pay_${encodeURIComponent(JSON.stringify(orderData))}`;
-            const telegramUrl = `https://t.me/${botUsername}?start=${startPayload}`;
-            window.open(telegramUrl, '_blank');
-            showPage(servicesPage);
-        } else {
-            throw new Error(result.error || 'Невідома помилка');
-        }
-    } catch (error) {
-        console.error('Помилка оформлення:', error);
-        
-        // Улучшенное сообщение об ошибке
-        let errorMessage = 'Помилка оформлення';
-        if (error.message.includes('Failed to fetch')) {
-            errorMessage = 'Помилка з\'єднання з сервером';
-        } else if (error.message) {
-            errorMessage = error.message;
-        }
-        
-        alert(`❌ ${errorMessage}. Спробуйте ще раз або зверніться до підтримки.`);
-    }
-}
-
-function createOrder(items) {
     // Формируем параметры для команды /pay
     let payCommand = "pay";
     
-    // Формируем строку параметров
-    const params = [];
-    items.forEach(item => {
-        params.push(`service=${encodeURIComponent(item.service)}`);
+    cart.forEach((item, index) => {
+        // Для первого товара просто добавляем параметры
+        // Для последующих - разделяем символом '_'
+        const separator = index > 0 ? "_" : "";
+        
+        payCommand += `${separator}service=${encodeURIComponent(item.service)}`;
         if (item.plan) {
-            params.push(`plan=${encodeURIComponent(item.plan)}`);
+            payCommand += `:plan=${encodeURIComponent(item.plan)}`;
         }
-        params.push(`period=${encodeURIComponent(item.period)}`);
-        params.push(`price=${item.price}`);
+        payCommand += `:period=${encodeURIComponent(item.period)}`;
+        payCommand += `:price=${item.price}`;
     });
-    
-    payCommand += ' ' + params.join(' ');
     
     // Формируем читаемое сообщение для пользователя
     let userMessage = "🛒 Ваше замовлення:\n\n";
     let total = 0;
     
-    items.forEach(item => {
+    cart.forEach(item => {
         userMessage += `▫️ ${item.service} ${item.plan || ''} (${item.period}) - ${item.price} UAH\n`;
         total += item.price;
     });
@@ -373,8 +307,8 @@ function createOrder(items) {
     userMessage += `\n💳 Всього: ${total} UAH`;
     
     // Формируем ссылку для Telegram
-    const botUsername = "secureshopBot"; // Убедитесь, что имя бота правильное!
-    const telegramUrl = `https://t.me/${botUsername}?start=${encodeURIComponent(payCommand)}`;
+    const botUsername = "secureshopBot"; // Замените на реальное имя бота
+    const telegramUrl = `https://t.me/${botUsername}?start=${payCommand}`;
     
     // Показываем подтверждение
     const confirmSend = confirm(`${userMessage}\n\nНатисніть OK, щоб відправити замовлення боту.`);
@@ -388,5 +322,62 @@ function createOrder(items) {
         updateCartCount();
         updateCartView();
         showPage(servicesPage);
+    }
+}
+
+// НОВАЯ ФУНКЦИЯ: создание заказа для одного товара
+function createOrder(items) {
+    // Формируем параметры для команды /pay
+    let payCommand = "pay";
+    
+    items.forEach((item, index) => {
+        // Для первого товара просто добавляем параметры
+        // Для последующих - разделяем символом '_'
+        const separator = index > 0 ? "_" : "";
+        
+        payCommand += `${separator}service=${encodeURIComponent(item.service)}`;
+        if (item.plan) {
+            payCommand += `:plan=${encodeURIComponent(item.plan)}`;
+        }
+        payCommand += `:period=${encodeURIComponent(item.period)}`;
+        payCommand += `:price=${item.price}`;
+    });
+    
+    // Формируем читаемое сообщение для пользователя
+    let userMessage = "🛒 Ваше замовлення:\n\n";
+    let total = 0;
+    
+    items.forEach(item => {
+        userMessage += `▫️ ${item.service} ${item.plan || ''} (${item.period}) - ${item.price} UAH\n`;
+        total += item.price;
+    });
+    
+    if (items.length > 1) {
+        userMessage += `\n💳 Всього: ${total} UAH`;
+    }
+    
+    // Формируем ссылку для Telegram
+    const botUsername = "secureshopBot"; // Замените на реальное имя бота
+    const telegramUrl = `https://t.me/${botUsername}?start=${payCommand}`;
+    
+    // Показываем подтверждение
+    const confirmSend = confirm(`${userMessage}\n\nНатисніть OK, щоб відправити замовлення боту.`);
+    
+    if (confirmSend) {
+        window.open(telegramUrl, '_blank');
+        
+        // Удаляем товар из корзины
+        const orderMenu = document.getElementById('order-menu');
+        if (orderMenu) {
+            const index = orderMenu.dataset.index;
+            if (index >= 0 && index < cart.length) {
+                cart.splice(index, 1);
+                localStorage.setItem('cart', JSON.stringify(cart));
+                updateCartCount();
+                updateCartView();
+            }
+        }
+        
+        closeOrderMenu();
     }
 }
