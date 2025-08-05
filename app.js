@@ -272,12 +272,47 @@ function orderSingleItem() {
     }
 }
 
-function checkout() {
+// app.js
+async function checkout() {
     if (cart.length === 0) {
         alert('Корзина порожня!');
         return;
     }
-    createOrder(cart);
+    
+    const orderData = {
+        items: cart,
+        total: cart.reduce((sum, item) => sum + item.price, 0)
+    };
+    
+    await sendOrderToBot(orderData);
+}
+
+async function sendOrderToBot(orderData) {
+    try {
+        const response = await fetch('https://secureshop-3obw.onrender.com/api/order', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(orderData)
+        });
+        
+        const result = await response.json();
+        
+        if (result.success) {
+            alert('✅ Замовлення оформлено! Очікуйте на повідомлення в Telegram.');
+            cart = [];
+            localStorage.setItem('cart', JSON.stringify(cart));
+            updateCartCount();
+            updateCartView();
+            showPage(servicesPage);
+        } else {
+            alert('❌ Помилка оформлення: ' + result.error);
+        }
+    } catch (error) {
+        console.error('Помилка відправки замовлення:', error);
+        alert('❌ Сталася помилка при оформленні замовлення.');
+    }
 }
 
 function createOrder(items) {
