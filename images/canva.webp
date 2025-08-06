@@ -1,0 +1,781 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name='robots' content='max-image-preview:large' />
+	<style>img:is([sizes="auto" i], [sizes^="auto," i]) { contain-intrinsic-size: 3000px 1500px }</style>
+	 
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-5BZ6L8B');</script>
+<!-- End Google Tag Manager -->
+<title>Canva | CAES Office of Information Technology</title>
+<link rel='dns-prefetch' href='//oit.caes.uga.edu' />
+<link rel="alternate" type="application/rss+xml" title="CAES Office of Information Technology &raquo; Feed" href="https://oit.caes.uga.edu/feed/" />
+<link rel="alternate" type="application/rss+xml" title="CAES Office of Information Technology &raquo; Comments Feed" href="https://oit.caes.uga.edu/comments/feed/" />
+<meta property="og:title" content="Canva | CAES Office of Information Technology" />
+<meta property="twitter:title" content="Canva | CAES Office of Information Technology" />
+<meta property="og:url" content="https://oit.caes.uga.edu/canva-graphic-design-made-simple/" />
+<link rel="alternate" type="application/rss+xml" title="CAES Office of Information Technology &raquo; Canva Category Feed" href="https://oit.caes.uga.edu/category/help-articles/digital-delivery/canva/feed/" />
+<link rel='stylesheet' id='uga-caes-caes-fac-preheader-brand-style-css' href='https://oit.caes.uga.edu/wp-content/themes/caes-faculty-2023/blocks/build/preheader-brand/style-index.css?ver=1.0.0' media='all' />
+<style id='wp-block-group-inline-css'>
+.wp-block-group{box-sizing:border-box}:where(.wp-block-group.wp-block-group-is-layout-constrained){position:relative}
+</style>
+<style id='wp-block-site-logo-inline-css'>
+.wp-block-site-logo{box-sizing:border-box;line-height:0}.wp-block-site-logo a{display:inline-block;line-height:0}.wp-block-site-logo.is-default-size img{height:auto;width:120px}.wp-block-site-logo img{height:auto;max-width:100%}.wp-block-site-logo a,.wp-block-site-logo img{border-radius:inherit}.wp-block-site-logo.aligncenter{margin-left:auto;margin-right:auto;text-align:center}:root :where(.wp-block-site-logo.is-style-rounded){border-radius:9999px}
+</style>
+<style id='wp-block-site-title-inline-css'>
+.wp-block-site-title{box-sizing:border-box}.wp-block-site-title :where(a){color:inherit;font-family:inherit;font-size:inherit;font-style:inherit;font-weight:inherit;letter-spacing:inherit;line-height:inherit;text-decoration:inherit}
+</style>
+<style id='wp-block-site-tagline-inline-css'>
+.wp-block-site-tagline{box-sizing:border-box}
+</style>
+<style id='wp-block-navigation-link-inline-css'>
+.wp-block-navigation .wp-block-navigation-item__label{overflow-wrap:break-word}.wp-block-navigation .wp-block-navigation-item__description{display:none}.link-ui-tools{border-top:1px solid #f0f0f0;padding:8px}.link-ui-block-inserter{padding-top:8px}.link-ui-block-inserter__back{margin-left:8px;text-transform:uppercase}
+</style>
+<link rel='stylesheet' id='wp-block-navigation-css' href='https://oit.caes.uga.edu/wp-includes/blocks/navigation/style.min.css?ver=6.8.2' media='all' />
+<style id='wp-block-query-title-inline-css'>
+.wp-block-query-title{box-sizing:border-box}
+</style>
+<style id='wp-block-term-description-inline-css'>
+:where(.wp-block-term-description){box-sizing:border-box;margin-bottom:var(--wp--style--block-gap);margin-top:var(--wp--style--block-gap)}.wp-block-term-description p{margin-bottom:0;margin-top:0}
+</style>
+<style id='wp-block-post-title-inline-css'>
+.wp-block-post-title{box-sizing:border-box;word-break:break-word}.wp-block-post-title :where(a){display:inline-block;font-family:inherit;font-size:inherit;font-style:inherit;font-weight:inherit;letter-spacing:inherit;line-height:inherit;text-decoration:inherit}
+</style>
+<style id='wp-block-post-author-inline-css'>
+.wp-block-post-author{box-sizing:border-box;display:flex;flex-wrap:wrap}.wp-block-post-author__byline{font-size:.5em;margin-bottom:0;margin-top:0;width:100%}.wp-block-post-author__avatar{margin-right:1em}.wp-block-post-author__bio{font-size:.7em;margin-bottom:.7em}.wp-block-post-author__content{flex-basis:0;flex-grow:1}.wp-block-post-author__name{margin:0}
+</style>
+<style id='wp-block-post-date-inline-css'>
+.wp-block-post-date{box-sizing:border-box}
+</style>
+<style id='wp-block-spacer-inline-css'>
+.wp-block-spacer{clear:both}
+</style>
+<style id='wp-block-post-featured-image-inline-css'>
+.wp-block-post-featured-image{margin-left:0;margin-right:0}.wp-block-post-featured-image a{display:block;height:100%}.wp-block-post-featured-image :where(img){box-sizing:border-box;height:auto;max-width:100%;vertical-align:bottom;width:100%}.wp-block-post-featured-image.alignfull img,.wp-block-post-featured-image.alignwide img{width:100%}.wp-block-post-featured-image .wp-block-post-featured-image__overlay.has-background-dim{background-color:#000;inset:0;position:absolute}.wp-block-post-featured-image{position:relative}.wp-block-post-featured-image .wp-block-post-featured-image__overlay.has-background-gradient{background-color:initial}.wp-block-post-featured-image .wp-block-post-featured-image__overlay.has-background-dim-0{opacity:0}.wp-block-post-featured-image .wp-block-post-featured-image__overlay.has-background-dim-10{opacity:.1}.wp-block-post-featured-image .wp-block-post-featured-image__overlay.has-background-dim-20{opacity:.2}.wp-block-post-featured-image .wp-block-post-featured-image__overlay.has-background-dim-30{opacity:.3}.wp-block-post-featured-image .wp-block-post-featured-image__overlay.has-background-dim-40{opacity:.4}.wp-block-post-featured-image .wp-block-post-featured-image__overlay.has-background-dim-50{opacity:.5}.wp-block-post-featured-image .wp-block-post-featured-image__overlay.has-background-dim-60{opacity:.6}.wp-block-post-featured-image .wp-block-post-featured-image__overlay.has-background-dim-70{opacity:.7}.wp-block-post-featured-image .wp-block-post-featured-image__overlay.has-background-dim-80{opacity:.8}.wp-block-post-featured-image .wp-block-post-featured-image__overlay.has-background-dim-90{opacity:.9}.wp-block-post-featured-image .wp-block-post-featured-image__overlay.has-background-dim-100{opacity:1}.wp-block-post-featured-image:where(.alignleft,.alignright){width:100%}
+</style>
+<style id='wp-block-post-excerpt-inline-css'>
+:where(.wp-block-post-excerpt){box-sizing:border-box;margin-bottom:var(--wp--style--block-gap);margin-top:var(--wp--style--block-gap)}.wp-block-post-excerpt__excerpt{margin-bottom:0;margin-top:0}.wp-block-post-excerpt__more-text{margin-bottom:0;margin-top:var(--wp--style--block-gap)}.wp-block-post-excerpt__more-link{display:inline-block}
+</style>
+<style id='wp-block-post-terms-inline-css'>
+.wp-block-post-terms{box-sizing:border-box}.wp-block-post-terms .wp-block-post-terms__separator{white-space:pre-wrap}
+</style>
+<style id='wp-block-paragraph-inline-css'>
+.is-small-text{font-size:.875em}.is-regular-text{font-size:1em}.is-large-text{font-size:2.25em}.is-larger-text{font-size:3em}.has-drop-cap:not(:focus):first-letter{float:left;font-size:8.4em;font-style:normal;font-weight:100;line-height:.68;margin:.05em .1em 0 0;text-transform:uppercase}body.rtl .has-drop-cap:not(:focus):first-letter{float:none;margin-left:.1em}p.has-drop-cap.has-background{overflow:hidden}:root :where(p.has-background){padding:1.25em 2.375em}:where(p.has-text-color:not(.has-link-color)) a{color:inherit}p.has-text-align-left[style*="writing-mode:vertical-lr"],p.has-text-align-right[style*="writing-mode:vertical-rl"]{rotate:180deg}
+</style>
+<style id='wp-block-heading-inline-css'>
+h1.has-background,h2.has-background,h3.has-background,h4.has-background,h5.has-background,h6.has-background{padding:1.25em 2.375em}h1.has-text-align-left[style*=writing-mode]:where([style*=vertical-lr]),h1.has-text-align-right[style*=writing-mode]:where([style*=vertical-rl]),h2.has-text-align-left[style*=writing-mode]:where([style*=vertical-lr]),h2.has-text-align-right[style*=writing-mode]:where([style*=vertical-rl]),h3.has-text-align-left[style*=writing-mode]:where([style*=vertical-lr]),h3.has-text-align-right[style*=writing-mode]:where([style*=vertical-rl]),h4.has-text-align-left[style*=writing-mode]:where([style*=vertical-lr]),h4.has-text-align-right[style*=writing-mode]:where([style*=vertical-rl]),h5.has-text-align-left[style*=writing-mode]:where([style*=vertical-lr]),h5.has-text-align-right[style*=writing-mode]:where([style*=vertical-rl]),h6.has-text-align-left[style*=writing-mode]:where([style*=vertical-lr]),h6.has-text-align-right[style*=writing-mode]:where([style*=vertical-rl]){rotate:180deg}
+</style>
+<style id='wp-block-post-template-inline-css'>
+.wp-block-post-template{box-sizing:border-box;list-style:none;margin-bottom:0;margin-top:0;max-width:100%;padding:0}.wp-block-post-template.is-flex-container{display:flex;flex-direction:row;flex-wrap:wrap;gap:1.25em}.wp-block-post-template.is-flex-container>li{margin:0;width:100%}@media (min-width:600px){.wp-block-post-template.is-flex-container.is-flex-container.columns-2>li{width:calc(50% - .625em)}.wp-block-post-template.is-flex-container.is-flex-container.columns-3>li{width:calc(33.33333% - .83333em)}.wp-block-post-template.is-flex-container.is-flex-container.columns-4>li{width:calc(25% - .9375em)}.wp-block-post-template.is-flex-container.is-flex-container.columns-5>li{width:calc(20% - 1em)}.wp-block-post-template.is-flex-container.is-flex-container.columns-6>li{width:calc(16.66667% - 1.04167em)}}@media (max-width:600px){.wp-block-post-template-is-layout-grid.wp-block-post-template-is-layout-grid.wp-block-post-template-is-layout-grid.wp-block-post-template-is-layout-grid{grid-template-columns:1fr}}.wp-block-post-template-is-layout-constrained>li>.alignright,.wp-block-post-template-is-layout-flow>li>.alignright{float:right;margin-inline-end:0;margin-inline-start:2em}.wp-block-post-template-is-layout-constrained>li>.alignleft,.wp-block-post-template-is-layout-flow>li>.alignleft{float:left;margin-inline-end:2em;margin-inline-start:0}.wp-block-post-template-is-layout-constrained>li>.aligncenter,.wp-block-post-template-is-layout-flow>li>.aligncenter{margin-inline-end:auto;margin-inline-start:auto}
+</style>
+<style id='wp-block-query-pagination-inline-css'>
+.wp-block-query-pagination.is-content-justification-space-between>.wp-block-query-pagination-next:last-of-type{margin-inline-start:auto}.wp-block-query-pagination.is-content-justification-space-between>.wp-block-query-pagination-previous:first-child{margin-inline-end:auto}.wp-block-query-pagination .wp-block-query-pagination-previous-arrow{display:inline-block;margin-right:1ch}.wp-block-query-pagination .wp-block-query-pagination-previous-arrow:not(.is-arrow-chevron){transform:scaleX(1)}.wp-block-query-pagination .wp-block-query-pagination-next-arrow{display:inline-block;margin-left:1ch}.wp-block-query-pagination .wp-block-query-pagination-next-arrow:not(.is-arrow-chevron){transform:scaleX(1)}.wp-block-query-pagination.aligncenter{justify-content:center}
+</style>
+<link rel='stylesheet' id='wp-block-search-css' href='https://oit.caes.uga.edu/wp-includes/blocks/search/style.min.css?ver=6.8.2' media='all' />
+<style id='wp-block-button-inline-css'>
+.wp-block-button__link{align-content:center;box-sizing:border-box;cursor:pointer;display:inline-block;height:100%;text-align:center;word-break:break-word}.wp-block-button__link.aligncenter{text-align:center}.wp-block-button__link.alignright{text-align:right}:where(.wp-block-button__link){border-radius:9999px;box-shadow:none;padding:calc(.667em + 2px) calc(1.333em + 2px);text-decoration:none}.wp-block-button[style*=text-decoration] .wp-block-button__link{text-decoration:inherit}.wp-block-buttons>.wp-block-button.has-custom-width{max-width:none}.wp-block-buttons>.wp-block-button.has-custom-width .wp-block-button__link{width:100%}.wp-block-buttons>.wp-block-button.has-custom-font-size .wp-block-button__link{font-size:inherit}.wp-block-buttons>.wp-block-button.wp-block-button__width-25{width:calc(25% - var(--wp--style--block-gap, .5em)*.75)}.wp-block-buttons>.wp-block-button.wp-block-button__width-50{width:calc(50% - var(--wp--style--block-gap, .5em)*.5)}.wp-block-buttons>.wp-block-button.wp-block-button__width-75{width:calc(75% - var(--wp--style--block-gap, .5em)*.25)}.wp-block-buttons>.wp-block-button.wp-block-button__width-100{flex-basis:100%;width:100%}.wp-block-buttons.is-vertical>.wp-block-button.wp-block-button__width-25{width:25%}.wp-block-buttons.is-vertical>.wp-block-button.wp-block-button__width-50{width:50%}.wp-block-buttons.is-vertical>.wp-block-button.wp-block-button__width-75{width:75%}.wp-block-button.is-style-squared,.wp-block-button__link.wp-block-button.is-style-squared{border-radius:0}.wp-block-button.no-border-radius,.wp-block-button__link.no-border-radius{border-radius:0!important}:root :where(.wp-block-button .wp-block-button__link.is-style-outline),:root :where(.wp-block-button.is-style-outline>.wp-block-button__link){border:2px solid;padding:.667em 1.333em}:root :where(.wp-block-button .wp-block-button__link.is-style-outline:not(.has-text-color)),:root :where(.wp-block-button.is-style-outline>.wp-block-button__link:not(.has-text-color)){color:currentColor}:root :where(.wp-block-button .wp-block-button__link.is-style-outline:not(.has-background)),:root :where(.wp-block-button.is-style-outline>.wp-block-button__link:not(.has-background)){background-color:initial;background-image:none}
+</style>
+<style id='wp-block-buttons-inline-css'>
+.wp-block-buttons{box-sizing:border-box}.wp-block-buttons.is-vertical{flex-direction:column}.wp-block-buttons.is-vertical>.wp-block-button:last-child{margin-bottom:0}.wp-block-buttons>.wp-block-button{display:inline-block;margin:0}.wp-block-buttons.is-content-justification-left{justify-content:flex-start}.wp-block-buttons.is-content-justification-left.is-vertical{align-items:flex-start}.wp-block-buttons.is-content-justification-center{justify-content:center}.wp-block-buttons.is-content-justification-center.is-vertical{align-items:center}.wp-block-buttons.is-content-justification-right{justify-content:flex-end}.wp-block-buttons.is-content-justification-right.is-vertical{align-items:flex-end}.wp-block-buttons.is-content-justification-space-between{justify-content:space-between}.wp-block-buttons.aligncenter{text-align:center}.wp-block-buttons:not(.is-content-justification-space-between,.is-content-justification-right,.is-content-justification-left,.is-content-justification-center) .wp-block-button.aligncenter{margin-left:auto;margin-right:auto;width:100%}.wp-block-buttons[style*=text-decoration] .wp-block-button,.wp-block-buttons[style*=text-decoration] .wp-block-button__link{text-decoration:inherit}.wp-block-buttons.has-custom-font-size .wp-block-button__link{font-size:inherit}.wp-block-buttons .wp-block-button__link{width:100%}.wp-block-button.aligncenter{text-align:center}
+</style>
+<style id='wp-block-latest-posts-inline-css'>
+.wp-block-latest-posts{box-sizing:border-box}.wp-block-latest-posts.alignleft{margin-right:2em}.wp-block-latest-posts.alignright{margin-left:2em}.wp-block-latest-posts.wp-block-latest-posts__list{list-style:none}.wp-block-latest-posts.wp-block-latest-posts__list li{clear:both;overflow-wrap:break-word}.wp-block-latest-posts.is-grid{display:flex;flex-wrap:wrap}.wp-block-latest-posts.is-grid li{margin:0 1.25em 1.25em 0;width:100%}@media (min-width:600px){.wp-block-latest-posts.columns-2 li{width:calc(50% - .625em)}.wp-block-latest-posts.columns-2 li:nth-child(2n){margin-right:0}.wp-block-latest-posts.columns-3 li{width:calc(33.33333% - .83333em)}.wp-block-latest-posts.columns-3 li:nth-child(3n){margin-right:0}.wp-block-latest-posts.columns-4 li{width:calc(25% - .9375em)}.wp-block-latest-posts.columns-4 li:nth-child(4n){margin-right:0}.wp-block-latest-posts.columns-5 li{width:calc(20% - 1em)}.wp-block-latest-posts.columns-5 li:nth-child(5n){margin-right:0}.wp-block-latest-posts.columns-6 li{width:calc(16.66667% - 1.04167em)}.wp-block-latest-posts.columns-6 li:nth-child(6n){margin-right:0}}:root :where(.wp-block-latest-posts.is-grid){padding:0}:root :where(.wp-block-latest-posts.wp-block-latest-posts__list){padding-left:0}.wp-block-latest-posts__post-author,.wp-block-latest-posts__post-date{display:block;font-size:.8125em}.wp-block-latest-posts__post-excerpt,.wp-block-latest-posts__post-full-content{margin-bottom:1em;margin-top:.5em}.wp-block-latest-posts__featured-image a{display:inline-block}.wp-block-latest-posts__featured-image img{height:auto;max-width:100%;width:auto}.wp-block-latest-posts__featured-image.alignleft{float:left;margin-right:1em}.wp-block-latest-posts__featured-image.alignright{float:right;margin-left:1em}.wp-block-latest-posts__featured-image.aligncenter{margin-bottom:1em;text-align:center}
+</style>
+<style id='wp-block-categories-inline-css'>
+.wp-block-categories{box-sizing:border-box}.wp-block-categories.alignleft{margin-right:2em}.wp-block-categories.alignright{margin-left:2em}.wp-block-categories.wp-block-categories-dropdown.aligncenter{text-align:center}.wp-block-categories .wp-block-categories__label{display:block;width:100%}
+</style>
+<style id='wp-block-columns-inline-css'>
+.wp-block-columns{align-items:normal!important;box-sizing:border-box;display:flex;flex-wrap:wrap!important}@media (min-width:782px){.wp-block-columns{flex-wrap:nowrap!important}}.wp-block-columns.are-vertically-aligned-top{align-items:flex-start}.wp-block-columns.are-vertically-aligned-center{align-items:center}.wp-block-columns.are-vertically-aligned-bottom{align-items:flex-end}@media (max-width:781px){.wp-block-columns:not(.is-not-stacked-on-mobile)>.wp-block-column{flex-basis:100%!important}}@media (min-width:782px){.wp-block-columns:not(.is-not-stacked-on-mobile)>.wp-block-column{flex-basis:0;flex-grow:1}.wp-block-columns:not(.is-not-stacked-on-mobile)>.wp-block-column[style*=flex-basis]{flex-grow:0}}.wp-block-columns.is-not-stacked-on-mobile{flex-wrap:nowrap!important}.wp-block-columns.is-not-stacked-on-mobile>.wp-block-column{flex-basis:0;flex-grow:1}.wp-block-columns.is-not-stacked-on-mobile>.wp-block-column[style*=flex-basis]{flex-grow:0}:where(.wp-block-columns){margin-bottom:1.75em}:where(.wp-block-columns.has-background){padding:1.25em 2.375em}.wp-block-column{flex-grow:1;min-width:0;overflow-wrap:break-word;word-break:break-word}.wp-block-column.is-vertically-aligned-top{align-self:flex-start}.wp-block-column.is-vertically-aligned-center{align-self:center}.wp-block-column.is-vertically-aligned-bottom{align-self:flex-end}.wp-block-column.is-vertically-aligned-stretch{align-self:stretch}.wp-block-column.is-vertically-aligned-bottom,.wp-block-column.is-vertically-aligned-center,.wp-block-column.is-vertically-aligned-top{width:100%}
+</style>
+<style id='uga-caes-caes-fac-footer-brand-style-inline-css'>
+/*!****************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[4].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[4].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[4].use[3]!./src/footer-brand/style.scss ***!
+  \****************************************************************************************************************************************************************************************************************************************************/
+.wp-block-uga-caes-caes-fac-footer-brand .wp-block-image.aligncenter{display:flex;justify-content:center}.wp-block-uga-caes-caes-fac-footer-brand .wp-block-image.aligncenter img{height:auto;max-width:300px;width:100%}.wp-block-uga-caes-caes-fac-footer-brand .social-link-list{display:flex;flex-wrap:wrap;gap:.8rem;justify-content:center;list-style:none;margin-bottom:0;padding:0}.wp-block-uga-caes-caes-fac-footer-brand .social-link-list .social-link-utem a{display:block}.wp-block-uga-caes-caes-fac-footer-brand .social-link-list .social-link-item a,.wp-block-uga-caes-caes-fac-footer-brand .social-link-list .social-link-item a svg{fill:var(--wp--preset--color--contrast-2);color:var(--wp--preset--color--contrast-2);height:1.8rem;width:1.8rem}@media print{.wp-block-uga-caes-caes-fac-footer-brand .social-link-list{display:none}.wp-block-uga-caes-caes-fac-footer-brand .wp-block-image.aligncenter{justify-content:flex-start!important}}
+
+/*# sourceMappingURL=style-index.css.map*/
+</style>
+<style id='uga-caes-caes-fac-footer-copyright-style-inline-css'>
+/*!********************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[4].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[4].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[4].use[3]!./src/footer-copyright/style.scss ***!
+  \********************************************************************************************************************************************************************************************************************************************************/
+.wp-block-uga-caes-caes-fac-footer-copyright p{margin:0}
+
+/*# sourceMappingURL=style-index.css.map*/
+</style>
+<link rel='stylesheet' id='wp-block-library-css' href='https://oit.caes.uga.edu/wp-includes/css/dist/block-library/common.min.css?ver=6.8.2' media='all' />
+<style id='global-styles-inline-css'>
+:root{--wp--preset--aspect-ratio--square: 1;--wp--preset--aspect-ratio--4-3: 4/3;--wp--preset--aspect-ratio--3-4: 3/4;--wp--preset--aspect-ratio--3-2: 3/2;--wp--preset--aspect-ratio--2-3: 2/3;--wp--preset--aspect-ratio--16-9: 16/9;--wp--preset--aspect-ratio--9-16: 9/16;--wp--preset--color--black: #000000;--wp--preset--color--cyan-bluish-gray: #abb8c3;--wp--preset--color--white: #ffffff;--wp--preset--color--pale-pink: #f78da7;--wp--preset--color--vivid-red: #cf2e2e;--wp--preset--color--luminous-vivid-orange: #ff6900;--wp--preset--color--luminous-vivid-amber: #fcb900;--wp--preset--color--light-green-cyan: #7bdcb5;--wp--preset--color--vivid-green-cyan: #00d084;--wp--preset--color--pale-cyan-blue: #8ed1fc;--wp--preset--color--vivid-cyan-blue: #0693e3;--wp--preset--color--vivid-purple: #9b51e0;--wp--preset--color--primary: #ba0c2f;--wp--preset--color--secondary: #00838F;--wp--preset--color--tertiary: #c8d8eb;--wp--preset--color--base: #ffffff;--wp--preset--color--base-two: #eaeaea;--wp--preset--color--contrast: #000000;--wp--preset--color--contrast-two: #333333;--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple: linear-gradient(135deg,rgba(6,147,227,1) 0%,rgb(155,81,224) 100%);--wp--preset--gradient--light-green-cyan-to-vivid-green-cyan: linear-gradient(135deg,rgb(122,220,180) 0%,rgb(0,208,130) 100%);--wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange: linear-gradient(135deg,rgba(252,185,0,1) 0%,rgba(255,105,0,1) 100%);--wp--preset--gradient--luminous-vivid-orange-to-vivid-red: linear-gradient(135deg,rgba(255,105,0,1) 0%,rgb(207,46,46) 100%);--wp--preset--gradient--very-light-gray-to-cyan-bluish-gray: linear-gradient(135deg,rgb(238,238,238) 0%,rgb(169,184,195) 100%);--wp--preset--gradient--cool-to-warm-spectrum: linear-gradient(135deg,rgb(74,234,220) 0%,rgb(151,120,209) 20%,rgb(207,42,186) 40%,rgb(238,44,130) 60%,rgb(251,105,98) 80%,rgb(254,248,76) 100%);--wp--preset--gradient--blush-light-purple: linear-gradient(135deg,rgb(255,206,236) 0%,rgb(152,150,240) 100%);--wp--preset--gradient--blush-bordeaux: linear-gradient(135deg,rgb(254,205,165) 0%,rgb(254,45,45) 50%,rgb(107,0,62) 100%);--wp--preset--gradient--luminous-dusk: linear-gradient(135deg,rgb(255,203,112) 0%,rgb(199,81,192) 50%,rgb(65,88,208) 100%);--wp--preset--gradient--pale-ocean: linear-gradient(135deg,rgb(255,245,203) 0%,rgb(182,227,212) 50%,rgb(51,167,181) 100%);--wp--preset--gradient--electric-grass: linear-gradient(135deg,rgb(202,248,128) 0%,rgb(113,206,126) 100%);--wp--preset--gradient--midnight: linear-gradient(135deg,rgb(2,3,129) 0%,rgb(40,116,252) 100%);--wp--preset--font-size--small: clamp(0.85rem, 0.85rem + ((1vw - 0.2rem) * 1), 0.85rem);--wp--preset--font-size--medium: clamp(1.13rem, 1.13rem + ((1vw - 0.2rem) * 0.144), 1.2rem);--wp--preset--font-size--large: clamp(1.27rem, 1.27rem + ((1vw - 0.2rem) * 0.349), 1.44rem);--wp--preset--font-size--x-large: clamp(1.42rem, 1.42rem + ((1vw - 0.2rem) * 0.636), 1.73rem);--wp--preset--font-size--tiny: clamp(0.75rem, 0.75rem + ((1vw - 0.2rem) * 1), 0.75rem);--wp--preset--font-size--normal: clamp(1rem, 1rem + ((1vw - 0.2rem) * 1), 1rem);--wp--preset--font-size--huge: clamp(1.6rem, 1.6rem + ((1vw - 0.2rem) * 0.964), 2.07rem);--wp--preset--font-size--gigantic: clamp(1.8rem, 1.8rem + ((1vw - 0.2rem) * 1.415), 2.49rem);--wp--preset--font-family--merriweather-sans: "Merriweather Sans",Georgia,Helvetica, Arial, Sans-Serif;--wp--preset--font-family--oswald: Oswald, sans-serif;--wp--preset--spacing--20: 0.44rem;--wp--preset--spacing--30: 0.67rem;--wp--preset--spacing--40: 1rem;--wp--preset--spacing--50: 1.5rem;--wp--preset--spacing--60: 2.25rem;--wp--preset--spacing--70: 3.38rem;--wp--preset--spacing--80: 5.06rem;--wp--preset--shadow--natural: 6px 6px 9px rgba(0, 0, 0, 0.2);--wp--preset--shadow--deep: 12px 12px 50px rgba(0, 0, 0, 0.4);--wp--preset--shadow--sharp: 6px 6px 0px rgba(0, 0, 0, 0.2);--wp--preset--shadow--outlined: 6px 6px 0px -3px rgba(255, 255, 255, 1), 6px 6px rgba(0, 0, 0, 1);--wp--preset--shadow--crisp: 6px 6px 0px rgba(0, 0, 0, 1);--wp--preset--shadow--caes-shadow: 0 0 15px rgb(0 0 0 / 25%);--wp--preset--shadow--caes-shadow-2: 0 0 15px rgb(0 0 0 / 40%);--wp--preset--shadow--caes-shadow-3: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;--wp--preset--shadow--caes-shadow-4: rgba(0, 0, 0, 0.5) 0px 2px 4px;--wp--custom--shadow--hover-small: 0 0 3px rgb(0 0 0 / 30%);--wp--custom--shadow--hover-large: 0 0 10px rgb(0 0 0 / 30%);--wp--custom--transition--box-hover: box-shadow 200ms ease;--wp--custom--radius--small-round: 3px;}:root { --wp--style--global--content-size: 960px;--wp--style--global--wide-size: 1100px; }:where(body) { margin: 0; }.wp-site-blocks { padding-top: var(--wp--style--root--padding-top); padding-bottom: var(--wp--style--root--padding-bottom); }.has-global-padding { padding-right: var(--wp--style--root--padding-right); padding-left: var(--wp--style--root--padding-left); }.has-global-padding > .alignfull { margin-right: calc(var(--wp--style--root--padding-right) * -1); margin-left: calc(var(--wp--style--root--padding-left) * -1); }.has-global-padding :where(:not(.alignfull.is-layout-flow) > .has-global-padding:not(.wp-block-block, .alignfull)) { padding-right: 0; padding-left: 0; }.has-global-padding :where(:not(.alignfull.is-layout-flow) > .has-global-padding:not(.wp-block-block, .alignfull)) > .alignfull { margin-left: 0; margin-right: 0; }.wp-site-blocks > .alignleft { float: left; margin-right: 2em; }.wp-site-blocks > .alignright { float: right; margin-left: 2em; }.wp-site-blocks > .aligncenter { justify-content: center; margin-left: auto; margin-right: auto; }:where(.wp-site-blocks) > * { margin-block-start: var(--wp--preset--spacing--60); margin-block-end: 0; }:where(.wp-site-blocks) > :first-child { margin-block-start: 0; }:where(.wp-site-blocks) > :last-child { margin-block-end: 0; }:root { --wp--style--block-gap: var(--wp--preset--spacing--60); }:root :where(.is-layout-flow) > :first-child{margin-block-start: 0;}:root :where(.is-layout-flow) > :last-child{margin-block-end: 0;}:root :where(.is-layout-flow) > *{margin-block-start: var(--wp--preset--spacing--60);margin-block-end: 0;}:root :where(.is-layout-constrained) > :first-child{margin-block-start: 0;}:root :where(.is-layout-constrained) > :last-child{margin-block-end: 0;}:root :where(.is-layout-constrained) > *{margin-block-start: var(--wp--preset--spacing--60);margin-block-end: 0;}:root :where(.is-layout-flex){gap: var(--wp--preset--spacing--60);}:root :where(.is-layout-grid){gap: var(--wp--preset--spacing--60);}.is-layout-flow > .alignleft{float: left;margin-inline-start: 0;margin-inline-end: 2em;}.is-layout-flow > .alignright{float: right;margin-inline-start: 2em;margin-inline-end: 0;}.is-layout-flow > .aligncenter{margin-left: auto !important;margin-right: auto !important;}.is-layout-constrained > .alignleft{float: left;margin-inline-start: 0;margin-inline-end: 2em;}.is-layout-constrained > .alignright{float: right;margin-inline-start: 2em;margin-inline-end: 0;}.is-layout-constrained > .aligncenter{margin-left: auto !important;margin-right: auto !important;}.is-layout-constrained > :where(:not(.alignleft):not(.alignright):not(.alignfull)){max-width: var(--wp--style--global--content-size);margin-left: auto !important;margin-right: auto !important;}.is-layout-constrained > .alignwide{max-width: var(--wp--style--global--wide-size);}body .is-layout-flex{display: flex;}.is-layout-flex{flex-wrap: wrap;align-items: center;}.is-layout-flex > :is(*, div){margin: 0;}body .is-layout-grid{display: grid;}.is-layout-grid > :is(*, div){margin: 0;}body{color: var(--wp--preset--color--contrast-two);font-family: var(--wp--preset--font-family--merriweather-sans);font-size: var(--wp--preset--font-size--normal);font-style: normal;font-weight: normal;line-height: 1.75;--wp--style--root--padding-top: 0;--wp--style--root--padding-right: var(--wp--preset--spacing--40);--wp--style--root--padding-bottom: 0;--wp--style--root--padding-left: var(--wp--preset--spacing--40);}a:where(:not(.wp-element-button)){color: var(--wp--preset--color--primary);text-decoration: underline;}h1, h2, h3, h4, h5, h6{font-family: var(--wp--preset--font-family--oswald);}h1{font-family: var(--wp--preset--font-family--oswald);font-size: var(--wp--preset--font-size--gigantic);font-weight: 400;line-height: 1.2;}h2{font-family: var(--wp--preset--font-family--oswald);font-size: var(--wp--preset--font-size--huge);font-weight: 400;line-height: 1.2;}h3{font-family: var(--wp--preset--font-family--oswald);font-size: var(--wp--preset--font-size--x-large);font-weight: 400;line-height: 1.2;}h4{font-family: var(--wp--preset--font-family--oswald);font-size: var(--wp--preset--font-size--large);font-weight: 400;line-height: 1.2;}h5{font-family: var(--wp--preset--font-family--oswald);font-size: var(--wp--preset--font-size--medium);font-weight: 400;line-height: 1.2;}h6{font-family: var(--wp--preset--font-family--oswald);font-size: var(--wp--preset--font-size--normal);font-weight: 400;line-height: 1.2;}:root :where(.wp-element-button, .wp-block-button__link){background-color: #32373c;border-width: 0;color: #fff;font-family: inherit;font-size: inherit;line-height: inherit;padding: calc(0.667em + 2px) calc(1.333em + 2px);text-decoration: none;}:root :where(.wp-element-button:hover, .wp-block-button__link:hover){box-shadow: var(--wp--custom--shadow--hover-large);}.has-black-color{color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-color{color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-color{color: var(--wp--preset--color--white) !important;}.has-pale-pink-color{color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-color{color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-color{color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-color{color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-color{color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-color{color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-color{color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-color{color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-color{color: var(--wp--preset--color--vivid-purple) !important;}.has-primary-color{color: var(--wp--preset--color--primary) !important;}.has-secondary-color{color: var(--wp--preset--color--secondary) !important;}.has-tertiary-color{color: var(--wp--preset--color--tertiary) !important;}.has-base-color{color: var(--wp--preset--color--base) !important;}.has-base-two-color{color: var(--wp--preset--color--base-two) !important;}.has-contrast-color{color: var(--wp--preset--color--contrast) !important;}.has-contrast-two-color{color: var(--wp--preset--color--contrast-two) !important;}.has-black-background-color{background-color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-background-color{background-color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-background-color{background-color: var(--wp--preset--color--white) !important;}.has-pale-pink-background-color{background-color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-background-color{background-color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-background-color{background-color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-background-color{background-color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-background-color{background-color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-background-color{background-color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-background-color{background-color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-background-color{background-color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-background-color{background-color: var(--wp--preset--color--vivid-purple) !important;}.has-primary-background-color{background-color: var(--wp--preset--color--primary) !important;}.has-secondary-background-color{background-color: var(--wp--preset--color--secondary) !important;}.has-tertiary-background-color{background-color: var(--wp--preset--color--tertiary) !important;}.has-base-background-color{background-color: var(--wp--preset--color--base) !important;}.has-base-two-background-color{background-color: var(--wp--preset--color--base-two) !important;}.has-contrast-background-color{background-color: var(--wp--preset--color--contrast) !important;}.has-contrast-two-background-color{background-color: var(--wp--preset--color--contrast-two) !important;}.has-black-border-color{border-color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-border-color{border-color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-border-color{border-color: var(--wp--preset--color--white) !important;}.has-pale-pink-border-color{border-color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-border-color{border-color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-border-color{border-color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-border-color{border-color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-border-color{border-color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-border-color{border-color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-border-color{border-color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-border-color{border-color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-border-color{border-color: var(--wp--preset--color--vivid-purple) !important;}.has-primary-border-color{border-color: var(--wp--preset--color--primary) !important;}.has-secondary-border-color{border-color: var(--wp--preset--color--secondary) !important;}.has-tertiary-border-color{border-color: var(--wp--preset--color--tertiary) !important;}.has-base-border-color{border-color: var(--wp--preset--color--base) !important;}.has-base-two-border-color{border-color: var(--wp--preset--color--base-two) !important;}.has-contrast-border-color{border-color: var(--wp--preset--color--contrast) !important;}.has-contrast-two-border-color{border-color: var(--wp--preset--color--contrast-two) !important;}.has-vivid-cyan-blue-to-vivid-purple-gradient-background{background: var(--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple) !important;}.has-light-green-cyan-to-vivid-green-cyan-gradient-background{background: var(--wp--preset--gradient--light-green-cyan-to-vivid-green-cyan) !important;}.has-luminous-vivid-amber-to-luminous-vivid-orange-gradient-background{background: var(--wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange) !important;}.has-luminous-vivid-orange-to-vivid-red-gradient-background{background: var(--wp--preset--gradient--luminous-vivid-orange-to-vivid-red) !important;}.has-very-light-gray-to-cyan-bluish-gray-gradient-background{background: var(--wp--preset--gradient--very-light-gray-to-cyan-bluish-gray) !important;}.has-cool-to-warm-spectrum-gradient-background{background: var(--wp--preset--gradient--cool-to-warm-spectrum) !important;}.has-blush-light-purple-gradient-background{background: var(--wp--preset--gradient--blush-light-purple) !important;}.has-blush-bordeaux-gradient-background{background: var(--wp--preset--gradient--blush-bordeaux) !important;}.has-luminous-dusk-gradient-background{background: var(--wp--preset--gradient--luminous-dusk) !important;}.has-pale-ocean-gradient-background{background: var(--wp--preset--gradient--pale-ocean) !important;}.has-electric-grass-gradient-background{background: var(--wp--preset--gradient--electric-grass) !important;}.has-midnight-gradient-background{background: var(--wp--preset--gradient--midnight) !important;}.has-small-font-size{font-size: var(--wp--preset--font-size--small) !important;}.has-medium-font-size{font-size: var(--wp--preset--font-size--medium) !important;}.has-large-font-size{font-size: var(--wp--preset--font-size--large) !important;}.has-x-large-font-size{font-size: var(--wp--preset--font-size--x-large) !important;}.has-tiny-font-size{font-size: var(--wp--preset--font-size--tiny) !important;}.has-normal-font-size{font-size: var(--wp--preset--font-size--normal) !important;}.has-huge-font-size{font-size: var(--wp--preset--font-size--huge) !important;}.has-gigantic-font-size{font-size: var(--wp--preset--font-size--gigantic) !important;}.has-merriweather-sans-font-family{font-family: var(--wp--preset--font-family--merriweather-sans) !important;}.has-oswald-font-family{font-family: var(--wp--preset--font-family--oswald) !important;}
+:root :where(.wp-block-button .wp-block-button__link){background-color: var(--wp--preset--color--primary);border-radius: var(--wp--custom--radius--small-round);padding-top: var(--wp--preset--spacing--30);padding-right: var(--wp--preset--spacing--40);padding-bottom: var(--wp--preset--spacing--30);padding-left: var(--wp--preset--spacing--40);}
+:root :where(.wp-block-buttons-is-layout-flow) > :first-child{margin-block-start: 0;}:root :where(.wp-block-buttons-is-layout-flow) > :last-child{margin-block-end: 0;}:root :where(.wp-block-buttons-is-layout-flow) > *{margin-block-start: var(--wp--preset--spacing--30);margin-block-end: 0;}:root :where(.wp-block-buttons-is-layout-constrained) > :first-child{margin-block-start: 0;}:root :where(.wp-block-buttons-is-layout-constrained) > :last-child{margin-block-end: 0;}:root :where(.wp-block-buttons-is-layout-constrained) > *{margin-block-start: var(--wp--preset--spacing--30);margin-block-end: 0;}:root :where(.wp-block-buttons-is-layout-flex){gap: var(--wp--preset--spacing--30);}:root :where(.wp-block-buttons-is-layout-grid){gap: var(--wp--preset--spacing--30);}
+:root :where(.wp-block-site-title){font-family: var(--wp--preset--font-family--oswald);font-size: var(--wp--preset--font-size--x-large);font-weight: 400;}
+:root :where(.wp-block-site-title a:where(:not(.wp-element-button))){text-decoration: none;}
+:root :where(.wp-block-query-pagination a:where(:not(.wp-element-button))){background-color: var(--wp--preset--color--base-two);border-radius: var(--wp--custom--radius--small-round);margin-right: var(--wp--preset--spacing--30);margin-left: var(--wp--preset--spacing--30);padding-top: var(--wp--preset--spacing--30);padding-right: var(--wp--preset--spacing--30);padding-bottom: var(--wp--preset--spacing--30);padding-left: var(--wp--preset--spacing--30);}
+:root :where(.wp-block-post-excerpt a:where(:not(.wp-element-button))){background-color: var(--wp--preset--color--primary);border-radius: var(--wp--custom--radius--small-round);color: var(--wp--preset--color--base);padding-top: var(--wp--preset--spacing--30);padding-right: var(--wp--preset--spacing--30);padding-bottom: var(--wp--preset--spacing--30);padding-left: var(--wp--preset--spacing--30);text-decoration: none;}
+</style>
+<style id='core-block-supports-inline-css'>
+.wp-elements-c46581e091e1326049771ff5aee90428 a:where(:not(.wp-element-button)){color:var(--wp--preset--color--base);}.wp-container-core-group-is-layout-4b827052{gap:0;flex-direction:column;align-items:flex-start;}.wp-container-core-group-is-layout-da267d74{gap:var(--wp--preset--spacing--30);}.wp-container-core-navigation-is-layout-b9f493f8{gap:var(--wp--preset--spacing--50);justify-content:flex-end;}.wp-container-core-group-is-layout-c50b9153{gap:var(--wp--preset--spacing--30);justify-content:space-between;}.wp-container-core-group-is-layout-a666d811 > .alignfull{margin-right:calc(var(--wp--preset--spacing--40) * -1);margin-left:calc(var(--wp--preset--spacing--40) * -1);}.wp-container-core-group-is-layout-a77db08e > *{margin-block-start:0;margin-block-end:0;}.wp-container-core-group-is-layout-a77db08e > * + *{margin-block-start:0;margin-block-end:0;}.wp-container-core-group-is-layout-877c468d{flex-wrap:nowrap;gap:var(--wp--preset--spacing--40);}.wp-container-core-group-is-layout-98bb686d{gap:var(--wp--preset--spacing--20);flex-direction:column;align-items:flex-start;}.wp-container-core-group-is-layout-22223934 > *{margin-block-start:0;margin-block-end:0;}.wp-container-core-group-is-layout-22223934 > * + *{margin-block-start:var(--wp--preset--spacing--20);margin-block-end:0;}.wp-container-core-group-is-layout-4a2fd98a{gap:0px;}.wp-container-core-buttons-is-layout-6e9f73ed{gap:0;justify-content:flex-start;}.wp-container-core-group-is-layout-8773bd91 > .alignfull{margin-right:calc(0px * -1);margin-left:calc(0px * -1);}.wp-container-core-group-is-layout-8773bd91 > *{margin-block-start:0;margin-block-end:0;}.wp-container-core-group-is-layout-8773bd91 > * + *{margin-block-start:var(--wp--preset--spacing--40);margin-block-end:0;}.wp-container-core-group-is-layout-adeeb09d > .alignfull{margin-right:calc(0px * -1);margin-left:calc(0px * -1);}.wp-container-core-group-is-layout-adeeb09d > *{margin-block-start:0;margin-block-end:0;}.wp-container-core-group-is-layout-adeeb09d > * + *{margin-block-start:var(--wp--preset--spacing--40);margin-block-end:0;}.wp-container-core-group-is-layout-f3841f10 > .alignfull{margin-right:calc(0px * -1);margin-left:calc(0px * -1);}.wp-container-core-group-is-layout-f3841f10 > *{margin-block-start:0;margin-block-end:0;}.wp-container-core-group-is-layout-f3841f10 > * + *{margin-block-start:var(--wp--preset--spacing--40);margin-block-end:0;}.wp-container-core-columns-is-layout-c3f03267{flex-wrap:nowrap;gap:3rem;}.wp-container-core-group-is-layout-346627ba > *{margin-block-start:0;margin-block-end:0;}.wp-container-core-group-is-layout-346627ba > * + *{margin-block-start:var(--wp--preset--spacing--40);margin-block-end:0;}.wp-container-core-columns-is-layout-28f84493{flex-wrap:nowrap;}.wp-elements-56a5dfbd6012c9e732100b0440ff6d49 a:where(:not(.wp-element-button)){color:var(--wp--preset--color--base);}.wp-container-core-group-is-layout-9366075c{justify-content:space-between;}
+</style>
+<style id='wp-block-template-skip-link-inline-css'>
+
+		.skip-link.screen-reader-text {
+			border: 0;
+			clip-path: inset(50%);
+			height: 1px;
+			margin: -1px;
+			overflow: hidden;
+			padding: 0;
+			position: absolute !important;
+			width: 1px;
+			word-wrap: normal !important;
+		}
+
+		.skip-link.screen-reader-text:focus {
+			background-color: #eee;
+			clip-path: none;
+			color: #444;
+			display: block;
+			font-size: 1em;
+			height: auto;
+			left: 5px;
+			line-height: normal;
+			padding: 15px 23px 14px;
+			text-decoration: none;
+			top: 5px;
+			width: auto;
+			z-index: 100000;
+		}
+</style>
+<link rel='stylesheet' id='pb-accordion-blocks-style-css' href='https://oit.caes.uga.edu/wp-content/plugins/accordion-blocks/build/index.css?ver=1.5.0' media='all' />
+<link rel='stylesheet' id='uga-caes-fac-2023-style-css' href='https://oit.caes.uga.edu/wp-content/themes/caes-faculty-2023/style.css?ver=1.3.8' media='all' />
+<link rel='stylesheet' id='uga-caes-fac-2023-shared-styles-css' href='https://oit.caes.uga.edu/wp-content/themes/caes-faculty-2023/assets/css/style-shared.min.css?ver=1.3.8' media='all' />
+<link rel='stylesheet' id='wp-pagenavi-css' href='https://oit.caes.uga.edu/wp-content/plugins/wp-pagenavi/pagenavi-css.css?ver=2.70' media='all' />
+<script src="https://oit.caes.uga.edu/wp-content/themes/caes-faculty-2023/blocks/build/preheader-brand/view.js?ver=bf01f9ce3e7154945052" id="uga-caes-caes-fac-preheader-brand-view-script-js" defer data-wp-strategy="defer"></script>
+<script src="https://oit.caes.uga.edu/wp-includes/js/jquery/jquery.min.js?ver=3.7.1" id="jquery-core-js"></script>
+<script src="https://oit.caes.uga.edu/wp-includes/js/jquery/jquery-migrate.min.js?ver=3.4.1" id="jquery-migrate-js"></script>
+<link rel="https://api.w.org/" href="https://oit.caes.uga.edu/wp-json/" /><link rel="alternate" title="JSON" type="application/json" href="https://oit.caes.uga.edu/wp-json/wp/v2/categories/154" /><link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://oit.caes.uga.edu/xmlrpc.php?rsd" />
+<meta name="generator" content="WordPress 6.8.2" />
+<link rel="icon" type="image/x-icon" href="https://oit.caes.uga.edu/wp-content/themes/caes-faculty-2023/favicon.ico" /><link rel="shortcut icon" type="image/x-icon" href="https://oit.caes.uga.edu/wp-content/themes/caes-faculty-2023/favicon.ico" /><script type="importmap" id="wp-importmap">
+{"imports":{"@wordpress\/interactivity":"https:\/\/oit.caes.uga.edu\/wp-includes\/js\/dist\/script-modules\/interactivity\/index.min.js?ver=55aebb6e0a16726baffb"}}
+</script>
+<script type="module" src="https://oit.caes.uga.edu/wp-includes/js/dist/script-modules/block-library/navigation/view.min.js?ver=61572d447d60c0aa5240" id="@wordpress/block-library/navigation/view-js-module"></script>
+<link rel="modulepreload" href="https://oit.caes.uga.edu/wp-includes/js/dist/script-modules/interactivity/index.min.js?ver=55aebb6e0a16726baffb" id="@wordpress/interactivity-js-modulepreload"><style class='wp-fonts-local'>
+@font-face{font-family:"Merriweather Sans";font-style:normal;font-weight:400;font-display:fallback;src:url('https://oit.caes.uga.edu/wp-content/themes/caes-faculty-2023/assets/fonts/merriweather-sans-v22-latin-regular.woff2') format('woff2');font-stretch:normal;}
+@font-face{font-family:"Merriweather Sans";font-style:bold;font-weight:700;font-display:fallback;src:url('https://oit.caes.uga.edu/wp-content/themes/caes-faculty-2023/assets/fonts/merriweather-sans-v22-latin-700.woff2') format('woff2');font-stretch:normal;}
+@font-face{font-family:"Merriweather Sans";font-style:italic;font-weight:400;font-display:fallback;src:url('https://oit.caes.uga.edu/wp-content/themes/caes-faculty-2023/assets/fonts/merriweather-sans-v22-latin-italic.woff2') format('woff2');font-stretch:normal;}
+@font-face{font-family:"Merriweather Sans";font-style:italic;font-weight:700;font-display:fallback;src:url('https://oit.caes.uga.edu/wp-content/themes/caes-faculty-2023/assets/fonts/merriweather-sans-v22-latin-700italic.woff2') format('woff2');font-stretch:normal;}
+@font-face{font-family:Oswald;font-style:normal;font-weight:400;font-display:fallback;src:url('https://oit.caes.uga.edu/wp-content/themes/caes-faculty-2023/assets/fonts/oswald-v49-latin-regular.woff2') format('woff2');font-stretch:normal;}
+</style>
+</head>
+
+<body class="archive category category-canva category-154 wp-embed-responsive wp-theme-caes-faculty-2023">
+
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5BZ6L8B"
+height="0" width="0" style="display:none;visibility:hidden" aria-hidden="true"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+
+<div class="wp-site-blocks"><header class="wp-block-template-part">
+<div class="wp-block-group alignfull is-layout-flow wp-container-core-group-is-layout-a77db08e wp-block-group-is-layout-flow">
+<div class="wp-block-group alignfull has-base-color has-text-color caes-fac-preheader has-contrast-background-color has-background has-global-padding is-layout-constrained wp-block-group-is-layout-constrained"><div class="wp-block-uga-caes-caes-fac-preheader-brand">
+                <div class="caes-fac-preheader-brand">
+                <a href="https://www.uga.edu" class="caes-fac-preheader-uga"><span>University of Georgia</span></a>
+            </div>
+            <div class="caes-fac-preheader-right">
+                <p>A website from the <a href="https://www.caes.uga.edu">College of Agricultural and Environmental Sciences</a></p>
+                                <button aria-controls="preheaderSearchContainer" aria-expanded="false" aria-label="Reveal search bar" id="preheaderSearchToggle"><span aria-hidden="true">Search
+                    </span>
+                    <svg width="800px" height="800px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd" clip-rule="evenodd" d="M10 5C7.23858 5 5 7.23858 5 10C5 12.7614 7.23858 15 10 15C11.381 15 12.6296 14.4415 13.5355 13.5355C14.4415 12.6296 15 11.381 15 10C15 7.23858 12.7614 5 10 5ZM3 10C3 6.13401 6.13401 3 10 3C13.866 3 17 6.13401 17 10C17 11.5719 16.481 13.0239 15.6063 14.1921L20.7071 19.2929C21.0976 19.6834 21.0976 20.3166 20.7071 20.7071C20.3166 21.0976 19.6834 21.0976 19.2929 20.7071L14.1921 15.6063C13.0239 16.481 11.5719 17 10 17C6.13401 17 3 13.866 3 10Z" />
+                </button>
+                <div class="search-container" id="preheaderSearchContainer" aria-hidden="true">
+                    <form role="search" method="get" class="search-form" action="https://oit.caes.uga.edu/">
+				<label>
+					<span class="screen-reader-text">Search for:</span>
+					<input type="search" class="search-field" placeholder="Search &hellip;" value="" name="s" />
+				</label>
+				<input type="submit" class="search-submit" value="Search" />
+			</form>                </div>
+            </div>
+        </div></div>
+
+
+
+<div class="wp-block-group alignfull has-base-color has-text-color caes-fac-header has-primary-background-color has-background has-global-padding is-layout-constrained wp-container-core-group-is-layout-a666d811 wp-block-group-is-layout-constrained" style="padding-top:var(--wp--preset--spacing--40);padding-right:var(--wp--preset--spacing--40);padding-bottom:var(--wp--preset--spacing--40);padding-left:var(--wp--preset--spacing--40)">
+<div class="wp-block-group is-content-justification-space-between is-layout-flex wp-container-core-group-is-layout-c50b9153 wp-block-group-is-layout-flex">
+<div class="wp-block-group is-layout-flex wp-container-core-group-is-layout-da267d74 wp-block-group-is-layout-flex">
+
+
+<div class="wp-block-group is-vertical is-layout-flex wp-container-core-group-is-layout-4b827052 wp-block-group-is-layout-flex"><p class="has-link-color caes-fac-site-title wp-elements-c46581e091e1326049771ff5aee90428 wp-block-site-title has-text-color has-background-color has-x-large-font-size"><a href="https://oit.caes.uga.edu" target="_self" rel="home">CAES Office of Information Technology</a></p>
+
+</div>
+</div>
+
+
+<nav class="is-responsive items-justified-right caes-fac-navigation-one wp-block-navigation is-content-justification-right is-layout-flex wp-container-core-navigation-is-layout-b9f493f8 wp-block-navigation-is-layout-flex" aria-label="Header navigation" 
+		 data-wp-interactive="core/navigation" data-wp-context='{"overlayOpenedBy":{"click":false,"hover":false,"focus":false},"type":"overlay","roleAttribute":"","ariaLabel":"Menu"}'><button aria-haspopup="dialog" aria-label="Open menu" class="wp-block-navigation__responsive-container-open" 
+				data-wp-on-async--click="actions.openMenuOnClick"
+				data-wp-on--keydown="actions.handleMenuKeydown"
+			><svg width="24" height="24" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M5 5v1.5h14V5H5zm0 7.8h14v-1.5H5v1.5zM5 19h14v-1.5H5V19z" /></svg></button>
+				<div class="wp-block-navigation__responsive-container"  id="modal-1" 
+				data-wp-class--has-modal-open="state.isMenuOpen"
+				data-wp-class--is-menu-open="state.isMenuOpen"
+				data-wp-watch="callbacks.initMenu"
+				data-wp-on--keydown="actions.handleMenuKeydown"
+				data-wp-on-async--focusout="actions.handleMenuFocusout"
+				tabindex="-1"
+			>
+					<div class="wp-block-navigation__responsive-close" tabindex="-1">
+						<div class="wp-block-navigation__responsive-dialog" 
+				data-wp-bind--aria-modal="state.ariaModal"
+				data-wp-bind--aria-label="state.ariaLabel"
+				data-wp-bind--role="state.roleAttribute"
+			>
+							<button aria-label="Close menu" class="wp-block-navigation__responsive-container-close" 
+				data-wp-on-async--click="actions.closeMenuOnClick"
+			><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" focusable="false"><path d="m13.06 12 6.47-6.47-1.06-1.06L12 10.94 5.53 4.47 4.47 5.53 10.94 12l-6.47 6.47 1.06 1.06L12 13.06l6.47 6.47 1.06-1.06L13.06 12Z"></path></svg></button>
+							<div class="wp-block-navigation__responsive-container-content" 
+				data-wp-watch="callbacks.focusFirstElement"
+			 id="modal-1-content">
+								<ul class="wp-block-navigation__container is-responsive items-justified-right caes-fac-navigation-one wp-block-navigation"><li data-wp-context="{ &quot;submenuOpenedBy&quot;: { &quot;click&quot;: false, &quot;hover&quot;: false, &quot;focus&quot;: false }, &quot;type&quot;: &quot;submenu&quot;, &quot;modal&quot;: null }" data-wp-interactive="core/navigation" data-wp-on--focusout="actions.handleMenuFocusout" data-wp-on--keydown="actions.handleMenuKeydown" data-wp-on-async--mouseenter="actions.openMenuOnHover" data-wp-on-async--mouseleave="actions.closeMenuOnHover" data-wp-watch="callbacks.initMenu" tabindex="-1" class="wp-block-navigation-item has-child open-on-hover-click wp-block-navigation-submenu"><a class="wp-block-navigation-item__content" href="https://oit.caes.uga.edu/"><span class="wp-block-navigation-item__label">Service Teams</span></a><button data-wp-bind--aria-expanded="state.isMenuOpen" data-wp-on-async--click="actions.toggleMenuOnClick" aria-label="Service Teams submenu" class="wp-block-navigation__submenu-icon wp-block-navigation-submenu__toggle" ><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true" focusable="false"><path d="M1.50002 4L6.00002 8L10.5 4" stroke-width="1.5"></path></svg></button><ul data-wp-on-async--focus="actions.openMenuOnFocus" class="wp-block-navigation__submenu-container wp-block-navigation-submenu"><li class=" wp-block-navigation-item wp-block-navigation-link"><a class="wp-block-navigation-item__content"  href="https://oit.caes.uga.edu/athens-service-desk/"><span class="wp-block-navigation-item__label">Athens Service Desk</span></a></li><li class=" wp-block-navigation-item wp-block-navigation-link"><a class="wp-block-navigation-item__content"  href="https://oit.caes.uga.edu/griffin-service-desk/"><span class="wp-block-navigation-item__label">Griffin Service Desk</span></a></li><li class=" wp-block-navigation-item wp-block-navigation-link"><a class="wp-block-navigation-item__content"  href="https://oit.caes.uga.edu/tifton-service-desk/"><span class="wp-block-navigation-item__label">Tifton Service Desk</span></a></li><li class=" wp-block-navigation-item wp-block-navigation-link"><a class="wp-block-navigation-item__content"  href="https://oit.caes.uga.edu/county-field-support/"><span class="wp-block-navigation-item__label">County Field Support</span></a></li><li class=" wp-block-navigation-item wp-block-navigation-link"><a class="wp-block-navigation-item__content"  href="https://oit.caes.uga.edu/caes-web-team/"><span class="wp-block-navigation-item__label">CAES Web Team</span></a></li></ul></li><li data-wp-context="{ &quot;submenuOpenedBy&quot;: { &quot;click&quot;: false, &quot;hover&quot;: false, &quot;focus&quot;: false }, &quot;type&quot;: &quot;submenu&quot;, &quot;modal&quot;: null }" data-wp-interactive="core/navigation" data-wp-on--focusout="actions.handleMenuFocusout" data-wp-on--keydown="actions.handleMenuKeydown" data-wp-on-async--mouseenter="actions.openMenuOnHover" data-wp-on-async--mouseleave="actions.closeMenuOnHover" data-wp-watch="callbacks.initMenu" tabindex="-1" class="wp-block-navigation-item has-child open-on-hover-click wp-block-navigation-submenu current-menu-ancestor"><a class="wp-block-navigation-item__content" href="https://oit.caes.uga.edu/category/help-articles/"><span class="wp-block-navigation-item__label">Help Articles</span></a><button data-wp-bind--aria-expanded="state.isMenuOpen" data-wp-on-async--click="actions.toggleMenuOnClick" aria-label="Help Articles submenu" class="wp-block-navigation__submenu-icon wp-block-navigation-submenu__toggle" ><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true" focusable="false"><path d="M1.50002 4L6.00002 8L10.5 4" stroke-width="1.5"></path></svg></button><ul data-wp-on-async--focus="actions.openMenuOnFocus" class="wp-block-navigation__submenu-container wp-block-navigation-submenu"><li data-wp-context="{ &quot;submenuOpenedBy&quot;: { &quot;click&quot;: false, &quot;hover&quot;: false, &quot;focus&quot;: false }, &quot;type&quot;: &quot;submenu&quot;, &quot;modal&quot;: null }" data-wp-interactive="core/navigation" data-wp-on--focusout="actions.handleMenuFocusout" data-wp-on--keydown="actions.handleMenuKeydown" data-wp-on-async--mouseenter="actions.openMenuOnHover" data-wp-on-async--mouseleave="actions.closeMenuOnHover" data-wp-watch="callbacks.initMenu" tabindex="-1" class="wp-block-navigation-item has-child open-on-hover-click wp-block-navigation-submenu current-menu-ancestor"><a class="wp-block-navigation-item__content" href="https://oit.caes.uga.edu/category/digital-delivery/"><span class="wp-block-navigation-item__label">Digital Delivery</span></a><button data-wp-bind--aria-expanded="state.isMenuOpen" data-wp-on-async--click="actions.toggleMenuOnClick" aria-label="Digital Delivery submenu" class="wp-block-navigation__submenu-icon wp-block-navigation-submenu__toggle" ><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true" focusable="false"><path d="M1.50002 4L6.00002 8L10.5 4" stroke-width="1.5"></path></svg></button><ul data-wp-on-async--focus="actions.openMenuOnFocus" class="wp-block-navigation__submenu-container wp-block-navigation-submenu"><li class=" wp-block-navigation-item current-menu-item wp-block-navigation-link"><a class="wp-block-navigation-item__content"  href="https://oit.caes.uga.edu/category/digital-delivery/canva/" aria-current="page"><span class="wp-block-navigation-item__label">Canva</span></a></li><li class=" wp-block-navigation-item wp-block-navigation-link"><a class="wp-block-navigation-item__content"  href="https://oit.caes.uga.edu/category/digital-delivery/canvas-lms/"><span class="wp-block-navigation-item__label">Canvas LMS</span></a></li><li class=" wp-block-navigation-item wp-block-navigation-link"><a class="wp-block-navigation-item__content"  href="https://oit.caes.uga.edu/category/digital-delivery/email-newsletters/"><span class="wp-block-navigation-item__label">Mailchimp</span></a></li><li class=" wp-block-navigation-item wp-block-navigation-link"><a class="wp-block-navigation-item__content"  href="https://oit.caes.uga.edu/category/digital-delivery/wevideo/"><span class="wp-block-navigation-item__label">WeVideo</span></a></li><li class=" wp-block-navigation-item wp-block-navigation-link"><a class="wp-block-navigation-item__content"  href="https://oit.caes.uga.edu/category/digital-delivery/youtube/"><span class="wp-block-navigation-item__label">YouTube</span></a></li><li class=" wp-block-navigation-item wp-block-navigation-link"><a class="wp-block-navigation-item__content"  href="https://oit.caes.uga.edu/category/digital-delivery/zoom/"><span class="wp-block-navigation-item__label">Zoom</span></a></li></ul></li><li data-wp-context="{ &quot;submenuOpenedBy&quot;: { &quot;click&quot;: false, &quot;hover&quot;: false, &quot;focus&quot;: false }, &quot;type&quot;: &quot;submenu&quot;, &quot;modal&quot;: null }" data-wp-interactive="core/navigation" data-wp-on--focusout="actions.handleMenuFocusout" data-wp-on--keydown="actions.handleMenuKeydown" data-wp-on-async--mouseenter="actions.openMenuOnHover" data-wp-on-async--mouseleave="actions.closeMenuOnHover" data-wp-watch="callbacks.initMenu" tabindex="-1" class="wp-block-navigation-item has-child open-on-hover-click wp-block-navigation-submenu"><a class="wp-block-navigation-item__content" href="https://oit.caes.uga.edu/category/productivity-software/"><span class="wp-block-navigation-item__label">Productivity Software</span></a><button data-wp-bind--aria-expanded="state.isMenuOpen" data-wp-on-async--click="actions.toggleMenuOnClick" aria-label="Productivity Software submenu" class="wp-block-navigation__submenu-icon wp-block-navigation-submenu__toggle" ><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true" focusable="false"><path d="M1.50002 4L6.00002 8L10.5 4" stroke-width="1.5"></path></svg></button><ul data-wp-on-async--focus="actions.openMenuOnFocus" class="wp-block-navigation__submenu-container wp-block-navigation-submenu"><li class=" wp-block-navigation-item wp-block-navigation-link"><a class="wp-block-navigation-item__content"  href="https://oit.caes.uga.edu/category/productivity-software/outlook/"><span class="wp-block-navigation-item__label">Email &amp; Outlook</span></a></li><li class=" wp-block-navigation-item wp-block-navigation-link"><a class="wp-block-navigation-item__content"  href="https://oit.caes.uga.edu/category/productivity-software/excel/"><span class="wp-block-navigation-item__label">Excel</span></a></li><li class=" wp-block-navigation-item wp-block-navigation-link"><a class="wp-block-navigation-item__content"  href="http://oit.caes.uga.edu/category/productivity-software/foxit-pro/"><span class="wp-block-navigation-item__label">Foxit Pro</span></a></li><li class=" wp-block-navigation-item wp-block-navigation-link"><a class="wp-block-navigation-item__content"  href="https://oit.caes.uga.edu/category/productivity-software/word/"><span class="wp-block-navigation-item__label">Microsoft Word</span></a></li><li class=" wp-block-navigation-item wp-block-navigation-link"><a class="wp-block-navigation-item__content"  href="https://oit.caes.uga.edu/category/productivity-software/powerpoint/"><span class="wp-block-navigation-item__label">PowerPoint</span></a></li></ul></li><li data-wp-context="{ &quot;submenuOpenedBy&quot;: { &quot;click&quot;: false, &quot;hover&quot;: false, &quot;focus&quot;: false }, &quot;type&quot;: &quot;submenu&quot;, &quot;modal&quot;: null }" data-wp-interactive="core/navigation" data-wp-on--focusout="actions.handleMenuFocusout" data-wp-on--keydown="actions.handleMenuKeydown" data-wp-on-async--mouseenter="actions.openMenuOnHover" data-wp-on-async--mouseleave="actions.closeMenuOnHover" data-wp-watch="callbacks.initMenu" tabindex="-1" class="wp-block-navigation-item has-child open-on-hover-click wp-block-navigation-submenu"><a class="wp-block-navigation-item__content" href="https://oit.caes.uga.edu/category/help-articles/web-development/"><span class="wp-block-navigation-item__label">Web Content Management</span></a><button data-wp-bind--aria-expanded="state.isMenuOpen" data-wp-on-async--click="actions.toggleMenuOnClick" aria-label="Web Content Management submenu" class="wp-block-navigation__submenu-icon wp-block-navigation-submenu__toggle" ><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true" focusable="false"><path d="M1.50002 4L6.00002 8L10.5 4" stroke-width="1.5"></path></svg></button><ul data-wp-on-async--focus="actions.openMenuOnFocus" class="wp-block-navigation__submenu-container wp-block-navigation-submenu"><li class=" wp-block-navigation-item wp-block-navigation-link"><a class="wp-block-navigation-item__content"  href="https://oit.caes.uga.edu/category/help-articles/web-development/accessibility/"><span class="wp-block-navigation-item__label">Accessibility &amp; Section 508</span></a></li><li class=" wp-block-navigation-item wp-block-navigation-link"><a class="wp-block-navigation-item__content"  href="https://oit.caes.uga.edu/category/help-articles/web-development/adobe-experience-manager/"><span class="wp-block-navigation-item__label">Adobe Experience Manager</span></a></li><li class=" wp-block-navigation-item wp-block-navigation-link"><a class="wp-block-navigation-item__content"  href="https://oit.caes.uga.edu/category/help-articles/web-development/best-practices/"><span class="wp-block-navigation-item__label">Best Practices</span></a></li><li class=" wp-block-navigation-item wp-block-navigation-link"><a class="wp-block-navigation-item__content"  href="https://oit.caes.uga.edu/category/help-articles/web-development/seo//"><span class="wp-block-navigation-item__label">SEO &amp; Quality Web Content</span></a></li><li class=" wp-block-navigation-item wp-block-navigation-link"><a class="wp-block-navigation-item__content"  href="https://oit.caes.uga.edu/category/help-articles/web-development/wordpress/"><span class="wp-block-navigation-item__label">WordPress</span></a></li></ul></li></ul></li><li data-wp-context="{ &quot;submenuOpenedBy&quot;: { &quot;click&quot;: false, &quot;hover&quot;: false, &quot;focus&quot;: false }, &quot;type&quot;: &quot;submenu&quot;, &quot;modal&quot;: null }" data-wp-interactive="core/navigation" data-wp-on--focusout="actions.handleMenuFocusout" data-wp-on--keydown="actions.handleMenuKeydown" data-wp-on-async--mouseenter="actions.openMenuOnHover" data-wp-on-async--mouseleave="actions.closeMenuOnHover" data-wp-watch="callbacks.initMenu" tabindex="-1" class="wp-block-navigation-item has-child open-on-hover-click wp-block-navigation-submenu"><a class="wp-block-navigation-item__content" href="https://oit.caes.uga.edu/handbooks/"><span class="wp-block-navigation-item__label">Handbooks</span></a><button data-wp-bind--aria-expanded="state.isMenuOpen" data-wp-on-async--click="actions.toggleMenuOnClick" aria-label="Handbooks submenu" class="wp-block-navigation__submenu-icon wp-block-navigation-submenu__toggle" ><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true" focusable="false"><path d="M1.50002 4L6.00002 8L10.5 4" stroke-width="1.5"></path></svg></button><ul data-wp-on-async--focus="actions.openMenuOnFocus" class="wp-block-navigation__submenu-container wp-block-navigation-submenu"><li class=" wp-block-navigation-item wp-block-navigation-link"><a class="wp-block-navigation-item__content"  href="https://oit.caes.uga.edu/content-management/"><span class="wp-block-navigation-item__label">Content Management Handbook</span></a></li><li class=" wp-block-navigation-item wp-block-navigation-link"><a class="wp-block-navigation-item__content"  href="https://oit.caes.uga.edu/accessibility/"><span class="wp-block-navigation-item__label">Digital Accessibility Handbook</span></a></li><li class=" wp-block-navigation-item wp-block-navigation-link"><a class="wp-block-navigation-item__content"  href="https://oit.caes.uga.edu/web-liaison-handbook/"><span class="wp-block-navigation-item__label">Web Liaison Handbook</span></a></li></ul></li><li data-wp-context="{ &quot;submenuOpenedBy&quot;: { &quot;click&quot;: false, &quot;hover&quot;: false, &quot;focus&quot;: false }, &quot;type&quot;: &quot;submenu&quot;, &quot;modal&quot;: null }" data-wp-interactive="core/navigation" data-wp-on--focusout="actions.handleMenuFocusout" data-wp-on--keydown="actions.handleMenuKeydown" data-wp-on-async--mouseenter="actions.openMenuOnHover" data-wp-on-async--mouseleave="actions.closeMenuOnHover" data-wp-watch="callbacks.initMenu" tabindex="-1" class="wp-block-navigation-item has-child open-on-hover-click wp-block-navigation-submenu"><a class="wp-block-navigation-item__content" href="https://oit.caes.uga.edu/about/"><span class="wp-block-navigation-item__label">About </span></a><button data-wp-bind--aria-expanded="state.isMenuOpen" data-wp-on-async--click="actions.toggleMenuOnClick" aria-label="About submenu" class="wp-block-navigation__submenu-icon wp-block-navigation-submenu__toggle" ><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true" focusable="false"><path d="M1.50002 4L6.00002 8L10.5 4" stroke-width="1.5"></path></svg></button><ul data-wp-on-async--focus="actions.openMenuOnFocus" class="wp-block-navigation__submenu-container wp-block-navigation-submenu"><li class=" wp-block-navigation-item wp-block-navigation-link"><a class="wp-block-navigation-item__content"  href="https://oit.caes.uga.edu/staff/"><span class="wp-block-navigation-item__label">Staff Directory</span></a></li></ul></li></ul>
+							</div>
+						</div>
+					</div>
+				</div></nav></div>
+</div>
+</div>
+</header>
+
+
+<main class="wp-block-group alignfull caes-fac-t-margin caes-fac-b-margin has-global-padding is-layout-constrained wp-block-group-is-layout-constrained">
+
+	
+	<div class="wp-block-group is-layout-flow wp-block-group-is-layout-flow">
+		
+		<div class="wp-block-columns caes-fac-post-cols is-layout-flex wp-container-core-columns-is-layout-c3f03267 wp-block-columns-is-layout-flex">
+			
+			<div class="wp-block-column caes-fac-post-cols-left has-global-padding is-layout-constrained wp-block-column-is-layout-constrained" style="flex-basis:75%">
+
+				
+				<div class="wp-block-query alignwide caes-fac-query-loop-one is-layout-flow wp-block-query-is-layout-flow">
+					<h1 class="wp-block-query-title">Canva</h1>
+
+					
+
+					<ul class="caes-fac-t-margin wp-block-post-template is-layout-flow wp-block-post-template-is-layout-flow"><li class="wp-block-post post-6418 post type-post status-publish format-standard has-post-thumbnail hentry category-canva category-sticky">
+					
+					<div class="wp-block-group is-vertical is-layout-flex wp-container-core-group-is-layout-98bb686d wp-block-group-is-layout-flex">
+						<h2 class="wp-block-post-title"><a href="https://oit.caes.uga.edu/canva-graphic-design-made-simple/" target="_self" >Canva for Teams &#8211; Graphic Design Made Simple</a></h2>
+
+						
+						<div class="wp-block-group has-small-font-size is-nowrap is-layout-flex wp-container-core-group-is-layout-877c468d wp-block-group-is-layout-flex">
+							<div class="wp-block-post-author"><div class="wp-block-post-author__content"><p class="wp-block-post-author__name"><a href="https://oit.caes.uga.edu/author/caesweb/" target="_self">CAES Web Team</a></p></div></div>
+
+							<div class="wp-block-post-date"><time datetime="2022-10-13T10:52:31-04:00">October 13, 2022</time></div>
+						</div>
+						
+					</div>
+					
+
+					
+					<div style="height:1rem" aria-hidden="true" class="wp-block-spacer"></div>
+					
+
+					
+					<div class="wp-block-group caes-fac-query-loop-img-exp is-layout-flex wp-container-core-group-is-layout-4a2fd98a wp-block-group-is-layout-flex">
+						<figure class="caes-fac-query-loop-img-container wp-block-post-featured-image"><img width="1200" height="900" src="https://oit.caes.uga.edu/files/2023/03/avnac.jpg" class="attachment-post-thumbnail size-post-thumbnail wp-post-image" alt="Canva logo" style="object-fit:cover;" decoding="async" fetchpriority="high" srcset="https://oit.caes.uga.edu/files/2023/03/avnac.jpg 1200w, https://oit.caes.uga.edu/files/2023/03/avnac-300x225.jpg 300w, https://oit.caes.uga.edu/files/2023/03/avnac-1024x768.jpg 1024w, https://oit.caes.uga.edu/files/2023/03/avnac-768x576.jpg 768w, https://oit.caes.uga.edu/files/2023/03/avnac-50x38.jpg 50w" sizes="(max-width: 1200px) 100vw, 1200px" /></figure>
+
+						
+						<div class="wp-block-group caes-fac-query-loop-exp is-layout-flow wp-container-core-group-is-layout-22223934 wp-block-group-is-layout-flow">
+							<div class="wp-block-post-excerpt"><p class="wp-block-post-excerpt__excerpt">Use an official CAES Canva For Teams account to quickly and easily create branded materials, share materials internally, and use built-in UGA brand toolkits complete with colors, fonts, and logos. </p></div>
+
+							<div class="taxonomy-category wp-block-post-terms has-small-font-size"><span class="wp-block-post-terms__prefix">Posted in: </span><a href="https://oit.caes.uga.edu/category/help-articles/digital-delivery/canva/" rel="tag">Canva</a></div>
+						</div>
+						
+					</div>
+					
+					</li><li class="wp-block-post post-8006 post type-post status-publish format-standard has-post-thumbnail hentry category-canva">
+					
+					<div class="wp-block-group is-vertical is-layout-flex wp-container-core-group-is-layout-98bb686d wp-block-group-is-layout-flex">
+						<h2 class="wp-block-post-title"><a href="https://oit.caes.uga.edu/add-logo-to-canva-design/" target="_self" >How do I add my logo to a Canva design</a></h2>
+
+						
+						<div class="wp-block-group has-small-font-size is-nowrap is-layout-flex wp-container-core-group-is-layout-877c468d wp-block-group-is-layout-flex">
+							<div class="wp-block-post-author"><div class="wp-block-post-author__content"><p class="wp-block-post-author__name"><a href="https://oit.caes.uga.edu/author/caesweb/" target="_self">CAES Web Team</a></p></div></div>
+
+							<div class="wp-block-post-date"><time datetime="2024-09-16T13:34:19-04:00">September 16, 2024</time></div>
+						</div>
+						
+					</div>
+					
+
+					
+					<div style="height:1rem" aria-hidden="true" class="wp-block-spacer"></div>
+					
+
+					
+					<div class="wp-block-group caes-fac-query-loop-img-exp is-layout-flex wp-container-core-group-is-layout-4a2fd98a wp-block-group-is-layout-flex">
+						<figure class="caes-fac-query-loop-img-container wp-block-post-featured-image"><img width="1200" height="900" src="https://oit.caes.uga.edu/files/2023/03/avnac.jpg" class="attachment-post-thumbnail size-post-thumbnail wp-post-image" alt="Canva logo" style="object-fit:cover;" decoding="async" loading="lazy" srcset="https://oit.caes.uga.edu/files/2023/03/avnac.jpg 1200w, https://oit.caes.uga.edu/files/2023/03/avnac-300x225.jpg 300w, https://oit.caes.uga.edu/files/2023/03/avnac-1024x768.jpg 1024w, https://oit.caes.uga.edu/files/2023/03/avnac-768x576.jpg 768w, https://oit.caes.uga.edu/files/2023/03/avnac-50x38.jpg 50w" sizes="auto, (max-width: 1200px) 100vw, 1200px" /></figure>
+
+						
+						<div class="wp-block-group caes-fac-query-loop-exp is-layout-flow wp-container-core-group-is-layout-22223934 wp-block-group-is-layout-flow">
+							<div class="wp-block-post-excerpt"><p class="wp-block-post-excerpt__excerpt">Canva has recently released several updates that change how you navigate certain aspects of their website. In this post we will cover some of those changes. </p></div>
+
+							<div class="taxonomy-category wp-block-post-terms has-small-font-size"><span class="wp-block-post-terms__prefix">Posted in: </span><a href="https://oit.caes.uga.edu/category/help-articles/digital-delivery/canva/" rel="tag">Canva</a></div>
+						</div>
+						
+					</div>
+					
+					</li><li class="wp-block-post post-9601 post type-post status-publish format-standard has-post-thumbnail hentry category-canva">
+					
+					<div class="wp-block-group is-vertical is-layout-flex wp-container-core-group-is-layout-98bb686d wp-block-group-is-layout-flex">
+						<h2 class="wp-block-post-title"><a href="https://oit.caes.uga.edu/navigating-canva-sub-folders/" target="_self" >Navigating Canva Sub-folders</a></h2>
+
+						
+						<div class="wp-block-group has-small-font-size is-nowrap is-layout-flex wp-container-core-group-is-layout-877c468d wp-block-group-is-layout-flex">
+							<div class="wp-block-post-author"><div class="wp-block-post-author__content"><p class="wp-block-post-author__name"><a href="https://oit.caes.uga.edu/author/caesweb/" target="_self">CAES Web Team</a></p></div></div>
+
+							<div class="wp-block-post-date"><time datetime="2024-03-05T12:36:15-05:00">March 5, 2024</time></div>
+						</div>
+						
+					</div>
+					
+
+					
+					<div style="height:1rem" aria-hidden="true" class="wp-block-spacer"></div>
+					
+
+					
+					<div class="wp-block-group caes-fac-query-loop-img-exp is-layout-flex wp-container-core-group-is-layout-4a2fd98a wp-block-group-is-layout-flex">
+						<figure class="caes-fac-query-loop-img-container wp-block-post-featured-image"><img width="1200" height="900" src="https://oit.caes.uga.edu/files/2022/07/canva-logo.png" class="attachment-post-thumbnail size-post-thumbnail wp-post-image" alt="canva logo" style="object-fit:cover;" decoding="async" loading="lazy" srcset="https://oit.caes.uga.edu/files/2022/07/canva-logo.png 1200w, https://oit.caes.uga.edu/files/2022/07/canva-logo-300x225.png 300w, https://oit.caes.uga.edu/files/2022/07/canva-logo-1024x768.png 1024w, https://oit.caes.uga.edu/files/2022/07/canva-logo-768x576.png 768w" sizes="auto, (max-width: 1200px) 100vw, 1200px" /></figure>
+
+						
+						<div class="wp-block-group caes-fac-query-loop-exp is-layout-flow wp-container-core-group-is-layout-22223934 wp-block-group-is-layout-flow">
+							<div class="wp-block-post-excerpt"><p class="wp-block-post-excerpt__excerpt">Having difficulty navigating Canva&#8217;s subfolders? Looking for an efficient route to look through the provided branded templates? You are at the right place! Previously, our folder structures were very disorganized and included old and misplaced templates. We have now simplified our folders into two primary options: Extension and CAES. How do I locate these folders?&hellip; </p></div>
+
+							<div class="taxonomy-category wp-block-post-terms has-small-font-size"><span class="wp-block-post-terms__prefix">Posted in: </span><a href="https://oit.caes.uga.edu/category/help-articles/digital-delivery/canva/" rel="tag">Canva</a></div>
+						</div>
+						
+					</div>
+					
+					</li><li class="wp-block-post post-8870 post type-post status-publish format-standard has-post-thumbnail hentry category-adobe-experience-manager category-best-practices category-canva category-seo category-wordpress tag-control-file-size tag-images">
+					
+					<div class="wp-block-group is-vertical is-layout-flex wp-container-core-group-is-layout-98bb686d wp-block-group-is-layout-flex">
+						<h2 class="wp-block-post-title"><a href="https://oit.caes.uga.edu/control-your-image-file-size-for-best-website-performance/" target="_self" >Control your image file size for best website performance</a></h2>
+
+						
+						<div class="wp-block-group has-small-font-size is-nowrap is-layout-flex wp-container-core-group-is-layout-877c468d wp-block-group-is-layout-flex">
+							<div class="wp-block-post-author"><div class="wp-block-post-author__content"><p class="wp-block-post-author__name"><a href="https://oit.caes.uga.edu/author/cmtucker/" target="_self">Cindy Tucker</a></p></div></div>
+
+							<div class="wp-block-post-date"><time datetime="2023-10-04T10:00:24-04:00">October 4, 2023</time></div>
+						</div>
+						
+					</div>
+					
+
+					
+					<div style="height:1rem" aria-hidden="true" class="wp-block-spacer"></div>
+					
+
+					
+					<div class="wp-block-group caes-fac-query-loop-img-exp is-layout-flex wp-container-core-group-is-layout-4a2fd98a wp-block-group-is-layout-flex">
+						<figure class="caes-fac-query-loop-img-container wp-block-post-featured-image"><img width="1200" height="900" src="https://oit.caes.uga.edu/files/2023/09/web-friendly-image-filies.jpg" class="attachment-post-thumbnail size-post-thumbnail wp-post-image" alt="" style="object-fit:cover;" decoding="async" loading="lazy" srcset="https://oit.caes.uga.edu/files/2023/09/web-friendly-image-filies.jpg 1200w, https://oit.caes.uga.edu/files/2023/09/web-friendly-image-filies-300x225.jpg 300w, https://oit.caes.uga.edu/files/2023/09/web-friendly-image-filies-1024x768.jpg 1024w, https://oit.caes.uga.edu/files/2023/09/web-friendly-image-filies-768x576.jpg 768w" sizes="auto, (max-width: 1200px) 100vw, 1200px" /></figure>
+
+						
+						<div class="wp-block-group caes-fac-query-loop-exp is-layout-flow wp-container-core-group-is-layout-22223934 wp-block-group-is-layout-flow">
+							<div class="wp-block-post-excerpt"><p class="wp-block-post-excerpt__excerpt">It&#8217;s important to find the right balance between creating visual impact and still putting together a fast and user-friendly web experience. If you care about improving your page load time, increasing your traffic, and elevating your search engine rankings, you need to control your image file sizes. </p></div>
+
+							<div class="taxonomy-category wp-block-post-terms has-small-font-size"><span class="wp-block-post-terms__prefix">Posted in: </span><a href="https://oit.caes.uga.edu/category/help-articles/web-development/adobe-experience-manager/" rel="tag">Adobe Experience Manager</a><span class="wp-block-post-terms__separator">, </span><a href="https://oit.caes.uga.edu/category/help-articles/web-development/best-practices/" rel="tag">Best Practices</a><span class="wp-block-post-terms__separator">, </span><a href="https://oit.caes.uga.edu/category/help-articles/digital-delivery/canva/" rel="tag">Canva</a><span class="wp-block-post-terms__separator">, </span><a href="https://oit.caes.uga.edu/category/help-articles/web-development/seo/" rel="tag">SEO &amp; Quality Web Content</a><span class="wp-block-post-terms__separator">, </span><a href="https://oit.caes.uga.edu/category/help-articles/web-development/wordpress/" rel="tag">WordPress</a></div>
+						</div>
+						
+					</div>
+					
+					</li><li class="wp-block-post post-8224 post type-post status-publish format-standard has-post-thumbnail hentry category-canva">
+					
+					<div class="wp-block-group is-vertical is-layout-flex wp-container-core-group-is-layout-98bb686d wp-block-group-is-layout-flex">
+						<h2 class="wp-block-post-title"><a href="https://oit.caes.uga.edu/all-about-canva-layers/" target="_self" >All about Canva layers</a></h2>
+
+						
+						<div class="wp-block-group has-small-font-size is-nowrap is-layout-flex wp-container-core-group-is-layout-877c468d wp-block-group-is-layout-flex">
+							<div class="wp-block-post-author"><div class="wp-block-post-author__content"><p class="wp-block-post-author__name"><a href="https://oit.caes.uga.edu/author/caesweb/" target="_self">CAES Web Team</a></p></div></div>
+
+							<div class="wp-block-post-date"><time datetime="2023-05-05T12:00:00-04:00">May 5, 2023</time></div>
+						</div>
+						
+					</div>
+					
+
+					
+					<div style="height:1rem" aria-hidden="true" class="wp-block-spacer"></div>
+					
+
+					
+					<div class="wp-block-group caes-fac-query-loop-img-exp is-layout-flex wp-container-core-group-is-layout-4a2fd98a wp-block-group-is-layout-flex">
+						<figure class="caes-fac-query-loop-img-container wp-block-post-featured-image"><img width="1200" height="900" src="https://oit.caes.uga.edu/files/2023/03/avnac.jpg" class="attachment-post-thumbnail size-post-thumbnail wp-post-image" alt="Canva logo" style="object-fit:cover;" decoding="async" loading="lazy" srcset="https://oit.caes.uga.edu/files/2023/03/avnac.jpg 1200w, https://oit.caes.uga.edu/files/2023/03/avnac-300x225.jpg 300w, https://oit.caes.uga.edu/files/2023/03/avnac-1024x768.jpg 1024w, https://oit.caes.uga.edu/files/2023/03/avnac-768x576.jpg 768w, https://oit.caes.uga.edu/files/2023/03/avnac-50x38.jpg 50w" sizes="auto, (max-width: 1200px) 100vw, 1200px" /></figure>
+
+						
+						<div class="wp-block-group caes-fac-query-loop-exp is-layout-flow wp-container-core-group-is-layout-22223934 wp-block-group-is-layout-flow">
+							<div class="wp-block-post-excerpt"><p class="wp-block-post-excerpt__excerpt">Canva&#8217;s new layers feature makes it easy to select and manipulate specific elements within your design. If you&#8217;re familiar with Photoshop, you&#8217;ll recognize this feature. No more endlessly trying to click the right element! Simply put, layers allows you to scroll through a list containing all of the different text boxes, elements, pictures, logo and&hellip; </p></div>
+
+							<div class="taxonomy-category wp-block-post-terms has-small-font-size"><span class="wp-block-post-terms__prefix">Posted in: </span><a href="https://oit.caes.uga.edu/category/help-articles/digital-delivery/canva/" rel="tag">Canva</a></div>
+						</div>
+						
+					</div>
+					
+					</li><li class="wp-block-post post-7024 post type-post status-publish format-standard has-post-thumbnail hentry category-canva">
+					
+					<div class="wp-block-group is-vertical is-layout-flex wp-container-core-group-is-layout-98bb686d wp-block-group-is-layout-flex">
+						<h2 class="wp-block-post-title"><a href="https://oit.caes.uga.edu/sharing-designs-in-canva/" target="_self" >Sharing Designs in Canva</a></h2>
+
+						
+						<div class="wp-block-group has-small-font-size is-nowrap is-layout-flex wp-container-core-group-is-layout-877c468d wp-block-group-is-layout-flex">
+							<div class="wp-block-post-author"><div class="wp-block-post-author__content"><p class="wp-block-post-author__name"><a href="https://oit.caes.uga.edu/author/caesweb/" target="_self">CAES Web Team</a></p></div></div>
+
+							<div class="wp-block-post-date"><time datetime="2022-10-20T12:00:00-04:00">October 20, 2022</time></div>
+						</div>
+						
+					</div>
+					
+
+					
+					<div style="height:1rem" aria-hidden="true" class="wp-block-spacer"></div>
+					
+
+					
+					<div class="wp-block-group caes-fac-query-loop-img-exp is-layout-flex wp-container-core-group-is-layout-4a2fd98a wp-block-group-is-layout-flex">
+						<figure class="caes-fac-query-loop-img-container wp-block-post-featured-image"><img width="1200" height="900" src="https://oit.caes.uga.edu/files/2023/03/avnac.jpg" class="attachment-post-thumbnail size-post-thumbnail wp-post-image" alt="Canva logo" style="object-fit:cover;" decoding="async" loading="lazy" srcset="https://oit.caes.uga.edu/files/2023/03/avnac.jpg 1200w, https://oit.caes.uga.edu/files/2023/03/avnac-300x225.jpg 300w, https://oit.caes.uga.edu/files/2023/03/avnac-1024x768.jpg 1024w, https://oit.caes.uga.edu/files/2023/03/avnac-768x576.jpg 768w, https://oit.caes.uga.edu/files/2023/03/avnac-50x38.jpg 50w" sizes="auto, (max-width: 1200px) 100vw, 1200px" /></figure>
+
+						
+						<div class="wp-block-group caes-fac-query-loop-exp is-layout-flow wp-container-core-group-is-layout-22223934 wp-block-group-is-layout-flow">
+							<div class="wp-block-post-excerpt"><p class="wp-block-post-excerpt__excerpt">So you&#8217;ve created a design in Canva and now you want to share it with others. Here&#8217;s your guide to sharing designs with success. This is a great way to collaborate on a design and to receive feedback. </p></div>
+
+							<div class="taxonomy-category wp-block-post-terms has-small-font-size"><span class="wp-block-post-terms__prefix">Posted in: </span><a href="https://oit.caes.uga.edu/category/help-articles/digital-delivery/canva/" rel="tag">Canva</a></div>
+						</div>
+						
+					</div>
+					
+					</li></ul>
+
+					
+				</div>
+				
+				
+			</div>
+			
+
+			
+			<div class="wp-block-column caes-fac-post-cols-right is-layout-flow wp-block-column-is-layout-flow" style="flex-basis:25%">
+
+				<aside class="wp-block-template-part">
+<div class="wp-block-group is-layout-flow wp-block-group-is-layout-flow"><form role="search" method="get" action="https://oit.caes.uga.edu/" class="wp-block-search__button-outside wp-block-search__icon-button wp-block-search"    ><label class="wp-block-search__label screen-reader-text" for="wp-block-search__input-2" >Search</label><div class="wp-block-search__inside-wrapper " ><input class="wp-block-search__input" id="wp-block-search__input-2" placeholder="Search..." value="" type="search" name="s" required /><button aria-label="Search" class="wp-block-search__button has-icon wp-element-button" type="submit" ><svg class="search-icon" viewBox="0 0 24 24" width="24" height="24">
+					<path d="M13 5c-3.3 0-6 2.7-6 6 0 1.4.5 2.7 1.3 3.7l-3.8 3.8 1.1 1.1 3.8-3.8c1 .8 2.3 1.3 3.7 1.3 3.3 0 6-2.7 6-6S16.3 5 13 5zm0 10.5c-2.5 0-4.5-2-4.5-4.5s2-4.5 4.5-4.5 4.5 2 4.5 4.5-2 4.5-4.5 4.5z"></path>
+				</svg></button></div></form>
+
+
+<div class="wp-block-buttons is-content-justification-left is-layout-flex wp-container-core-buttons-is-layout-6e9f73ed wp-block-buttons-is-layout-flex">
+<div class="wp-block-button has-custom-width wp-block-button__width-100 is-style-fill"><a class="wp-block-button__link wp-element-button" href="https://uga.teamdynamix.com/TDClient/3159/KB/Requests/ServiceDet?ID=55181" style="padding-top:var(--wp--preset--spacing--20);padding-right:var(--wp--preset--spacing--20);padding-bottom:var(--wp--preset--spacing--20);padding-left:var(--wp--preset--spacing--20)">Submit a help request</a></div>
+</div>
+
+
+
+<div class="wp-block-group has-global-padding is-layout-constrained wp-container-core-group-is-layout-8773bd91 wp-block-group-is-layout-constrained" style="padding-top:0;padding-right:0;padding-bottom:0;padding-left:0">
+<h2 class="wp-block-heading has-text-align-center sidebar-title-2 has-base-two-background-color has-background has-large-font-size" style="padding-top:var(--wp--preset--spacing--40);padding-right:var(--wp--preset--spacing--40);padding-bottom:var(--wp--preset--spacing--40);padding-left:var(--wp--preset--spacing--40)">Subscribe to our newsletter</h2>
+
+
+<script>(function() {
+	window.mc4wp = window.mc4wp || {
+		listeners: [],
+		forms: {
+			on: function(evt, cb) {
+				window.mc4wp.listeners.push(
+					{
+						event   : evt,
+						callback: cb
+					}
+				);
+			}
+		}
+	}
+})();
+</script><!-- Mailchimp for WordPress v4.10.5 - https://wordpress.org/plugins/mailchimp-for-wp/ --><form id="mc4wp-form-1" class="mc4wp-form mc4wp-form-860" method="post" data-id="860" data-name="Default sign-up form" ><div class="mc4wp-form-fields"><p>
+  <label for="form-email">Email Address <span class="red">*</span></label>
+    <input type="email" name="EMAIL" id="form-email" required>
+</p>
+<p>
+    <label for="form-fname">First Name</label>
+    <input type="text" name="FNAME" id="form-fname">
+</p>
+<p>
+    <label for="form-lname">Last Name</label>
+    <input type="text" name="LNAME" id="form-lname">
+</p>
+<p><span class="red">*</span> = required field</p>
+<p>
+    <input class="button" type="submit" value="Subscribe">
+</p></div><label style="display: none !important;">Leave this field empty if you&#8217;re human: <input type="text" name="_mc4wp_honeypot" value="" tabindex="-1" autocomplete="off" /></label><input type="hidden" name="_mc4wp_timestamp" value="1754505989" /><input type="hidden" name="_mc4wp_form_id" value="860" /><input type="hidden" name="_mc4wp_form_element_id" value="mc4wp-form-1" /><div class="mc4wp-response"></div></form><!-- / Mailchimp for WordPress Plugin --></div>
+
+
+
+<div class="wp-block-group has-global-padding is-layout-constrained wp-container-core-group-is-layout-adeeb09d wp-block-group-is-layout-constrained" style="padding-top:0;padding-right:0;padding-bottom:0;padding-left:0">
+<h2 class="wp-block-heading has-text-align-center sidebar-title-2 has-base-two-background-color has-background has-large-font-size" style="padding-top:var(--wp--preset--spacing--40);padding-right:var(--wp--preset--spacing--40);padding-bottom:var(--wp--preset--spacing--40);padding-left:var(--wp--preset--spacing--40)">Recent Posts</h2>
+
+
+<ul class="wp-block-latest-posts__list wp-block-latest-posts"><li><a class="wp-block-latest-posts__post-title" href="https://oit.caes.uga.edu/introducing-centralized-content-management-for-caes-websites/">Introducing Centralized Content Management for CAES Websites</a></li>
+<li><a class="wp-block-latest-posts__post-title" href="https://oit.caes.uga.edu/digital-accessibility-training-courses-and-webinars/">Digital Accessibility Training Courses and Webinars</a></li>
+<li><a class="wp-block-latest-posts__post-title" href="https://oit.caes.uga.edu/how-to-take-the-wordpress-101-self-paced-course/">Self-Paced WordPress 101 Course</a></li>
+<li><a class="wp-block-latest-posts__post-title" href="https://oit.caes.uga.edu/introducing-the-content-management-handbook/">Introducing the Content Management Handbook</a></li>
+<li><a class="wp-block-latest-posts__post-title" href="https://oit.caes.uga.edu/update-to-student-directory-information/">Update to Student Directory Information</a></li>
+</ul></div>
+
+
+
+<div class="wp-block-group has-global-padding is-content-justification-center is-layout-constrained wp-container-core-group-is-layout-f3841f10 wp-block-group-is-layout-constrained" style="padding-top:0;padding-right:0;padding-bottom:0;padding-left:0">
+<h2 class="wp-block-heading has-text-align-center sidebar-title-2 has-base-two-background-color has-background has-large-font-size" style="padding-top:var(--wp--preset--spacing--40);padding-right:var(--wp--preset--spacing--40);padding-bottom:var(--wp--preset--spacing--40);padding-left:var(--wp--preset--spacing--40)">Categories</h2>
+
+
+<div class="wp-block-categories-dropdown wp-block-categories"><label class="wp-block-categories__label" for="wp-block-categories-1">Categories</label><select  name='category_name' id='wp-block-categories-1' class='postform'>
+	<option value='-1'>Select Category</option>
+	<option class="level-0" value="general">General</option>
+	<option class="level-0" value="help-articles">Help Articles</option>
+	<option class="level-1" value="desktop-support">&nbsp;&nbsp;&nbsp;Desktop Support</option>
+	<option class="level-1" value="digital-delivery">&nbsp;&nbsp;&nbsp;Digital Delivery</option>
+	<option class="level-2" value="canva">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Canva</option>
+	<option class="level-2" value="canvas-lms">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Canvas LMS</option>
+	<option class="level-2" value="email-newsletters">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Mailchimp</option>
+	<option class="level-2" value="wevideo">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;WeVideo</option>
+	<option class="level-2" value="youtube">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;YouTube</option>
+	<option class="level-2" value="zoom">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Zoom</option>
+	<option class="level-1" value="faq">&nbsp;&nbsp;&nbsp;Frequently Asked Questions</option>
+	<option class="level-1" value="information-security">&nbsp;&nbsp;&nbsp;Information Security</option>
+	<option class="level-1" value="web-development">&nbsp;&nbsp;&nbsp;Web Content Management</option>
+	<option class="level-2" value="accessibility">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Accessibility &amp; Section 508</option>
+	<option class="level-2" value="adobe-experience-manager">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Adobe Experience Manager</option>
+	<option class="level-2" value="aem-manual">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;AEM Manual</option>
+	<option class="level-2" value="best-practices">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Best Practices</option>
+	<option class="level-2" value="dubbot">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Dubbot</option>
+	<option class="level-2" value="seo">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;SEO &amp; Quality Web Content</option>
+	<option class="level-2" value="webinar-archive">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Webinar Archive</option>
+	<option class="level-2" value="wordpress">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;WordPress</option>
+	<option class="level-0" value="news-alerts">News &amp; Alerts</option>
+	<option class="level-1" value="announcements">&nbsp;&nbsp;&nbsp;Announcements</option>
+	<option class="level-1" value="training-opportunities">&nbsp;&nbsp;&nbsp;Training Opportunities</option>
+	<option class="level-0" value="productivity-software">Productivity Software</option>
+	<option class="level-1" value="outlook">&nbsp;&nbsp;&nbsp;Email &amp; Outlook</option>
+	<option class="level-1" value="excel">&nbsp;&nbsp;&nbsp;Excel</option>
+	<option class="level-1" value="foxit-pro">&nbsp;&nbsp;&nbsp;Foxit Pro</option>
+	<option class="level-1" value="pdfs">&nbsp;&nbsp;&nbsp;PDFs</option>
+	<option class="level-1" value="powerpoint">&nbsp;&nbsp;&nbsp;PowerPoint</option>
+	<option class="level-1" value="word">&nbsp;&nbsp;&nbsp;Word</option>
+</select><script>
+	
+	( function() {
+		var dropdown = document.getElementById( 'wp-block-categories-1' );
+		function onCatChange() {
+			if ( dropdown.options[ dropdown.selectedIndex ].value !== -1 ) {
+				location.href = "https://oit.caes.uga.edu/?" + dropdown.name + '=' + dropdown.options[ dropdown.selectedIndex ].value;
+			}
+		}
+		dropdown.onchange = onCatChange;
+	})();
+	
+	
+</script>
+
+</div></div>
+</div>
+</aside>
+
+			</div>
+			
+		</div>
+		
+	</div>
+	
+
+</main>
+
+<footer class="wp-block-template-part">
+<div class="wp-block-group alignfull is-layout-flow wp-container-core-group-is-layout-a77db08e wp-block-group-is-layout-flow">
+<div class="wp-block-group alignfull caes-fac-footer has-base-two-background-color has-background has-global-padding is-layout-constrained wp-block-group-is-layout-constrained">
+<div class="wp-block-columns is-layout-flex wp-container-core-columns-is-layout-28f84493 wp-block-columns-is-layout-flex">
+<div class="wp-block-column is-layout-flow wp-block-column-is-layout-flow">
+<div class="wp-block-group has-global-padding is-layout-constrained wp-container-core-group-is-layout-346627ba wp-block-group-is-layout-constrained">
+<h2 class="wp-block-heading">Need help?</h2>
+
+
+
+<div class="wp-block-buttons is-layout-flex wp-block-buttons-is-layout-flex">
+<div class="wp-block-button"><a class="wp-block-button__link wp-element-button" href="https://uga.teamdynamix.com/TDClient/3159/KB/Requests/ServiceDet?ID=55181">Submit a help request</a></div>
+</div>
+</div>
+</div>
+
+
+
+<div class="wp-block-column is-layout-flow wp-block-column-is-layout-flow"></div>
+
+
+
+<div class="wp-block-column is-layout-flow wp-block-column-is-layout-flow"><!-- CAES or Extension footer brand -->
+<div class="wp-block-uga-caes-caes-fac-footer-brand">
+    
+            <figure class="wp-block-image aligncenter is-resized size-full">
+                <a href="https://www.caes.uga.edu">
+                    <img decoding="async" loading="lazy" src="https://oit.caes.uga.edu/wp-content/themes/caes-faculty-2023/blocks/assets/images/CAES-H-FC.png" alt="UGA College of Agricultural &amp; Environmental Sciences" />                 </a>
+            </figure>
+            <ul class="social-link-list">
+                <li class="social-link-item"><a href="https://www.facebook.com/UGACAES/" rel="noopener nofollow"><svg width="24" height="24" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+                            <path d="M12 2C6.5 2 2 6.5 2 12c0 5 3.7 9.1 8.4 9.9v-7H7.9V12h2.5V9.8c0-2.5 1.5-3.9 3.8-3.9 1.1 0 2.2.2 2.2.2v2.5h-1.3c-1.2 0-1.6.8-1.6 1.6V12h2.8l-.4 2.9h-2.3v7C18.3 21.1 22 17 22 12c0-5.5-4.5-10-10-10z"></path>
+                        </svg><span class="wp-block-social-link-label screen-reader-text">Facebook</span></a></li>
+
+                <li class="social-link-item"><a href="https://twitter.com/UGA_CollegeofAg" rel="noopener nofollow" ><svg width="24" height="24" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+                            <path d="M13.982 10.622 20.54 3h-1.554l-5.693 6.618L8.745 3H3.5l6.876 10.007L3.5 21h1.554l6.012-6.989L15.868 21h5.245l-7.131-10.378Zm-2.128 2.474-.697-.997-5.543-7.93H8l4.474 6.4.697.996 5.815 8.318h-2.387l-4.745-6.787Z"></path>
+                        </svg><span class="wp-block-social-link-label screen-reader-text">X</span></a></li>
+
+                <li class="social-link-item"><a href="https://www.instagram.com/uga_collegeofag/" rel="noopener nofollow"><svg width="24" height="24" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+                            <path d="M12,4.622c2.403,0,2.688,0.009,3.637,0.052c0.877,0.04,1.354,0.187,1.671,0.31c0.42,0.163,0.72,0.358,1.035,0.673 c0.315,0.315,0.51,0.615,0.673,1.035c0.123,0.317,0.27,0.794,0.31,1.671c0.043,0.949,0.052,1.234,0.052,3.637 s-0.009,2.688-0.052,3.637c-0.04,0.877-0.187,1.354-0.31,1.671c-0.163,0.42-0.358,0.72-0.673,1.035 c-0.315,0.315-0.615,0.51-1.035,0.673c-0.317,0.123-0.794,0.27-1.671,0.31c-0.949,0.043-1.233,0.052-3.637,0.052 s-2.688-0.009-3.637-0.052c-0.877-0.04-1.354-0.187-1.671-0.31c-0.42-0.163-0.72-0.358-1.035-0.673 c-0.315-0.315-0.51-0.615-0.673-1.035c-0.123-0.317-0.27-0.794-0.31-1.671C4.631,14.688,4.622,14.403,4.622,12 s0.009-2.688,0.052-3.637c0.04-0.877,0.187-1.354,0.31-1.671c0.163-0.42,0.358-0.72,0.673-1.035 c0.315-0.315,0.615-0.51,1.035-0.673c0.317-0.123,0.794-0.27,1.671-0.31C9.312,4.631,9.597,4.622,12,4.622 M12,3 C9.556,3,9.249,3.01,8.289,3.054C7.331,3.098,6.677,3.25,6.105,3.472C5.513,3.702,5.011,4.01,4.511,4.511 c-0.5,0.5-0.808,1.002-1.038,1.594C3.25,6.677,3.098,7.331,3.054,8.289C3.01,9.249,3,9.556,3,12c0,2.444,0.01,2.751,0.054,3.711 c0.044,0.958,0.196,1.612,0.418,2.185c0.23,0.592,0.538,1.094,1.038,1.594c0.5,0.5,1.002,0.808,1.594,1.038 c0.572,0.222,1.227,0.375,2.185,0.418C9.249,20.99,9.556,21,12,21s2.751-0.01,3.711-0.054c0.958-0.044,1.612-0.196,2.185-0.418 c0.592-0.23,1.094-0.538,1.594-1.038c0.5-0.5,0.808-1.002,1.038-1.594c0.222-0.572,0.375-1.227,0.418-2.185 C20.99,14.751,21,14.444,21,12s-0.01-2.751-0.054-3.711c-0.044-0.958-0.196-1.612-0.418-2.185c-0.23-0.592-0.538-1.094-1.038-1.594 c-0.5-0.5-1.002-0.808-1.594-1.038c-0.572-0.222-1.227-0.375-2.185-0.418C14.751,3.01,14.444,3,12,3L12,3z M12,7.378 c-2.552,0-4.622,2.069-4.622,4.622S9.448,16.622,12,16.622s4.622-2.069,4.622-4.622S14.552,7.378,12,7.378z M12,15 c-1.657,0-3-1.343-3-3s1.343-3,3-3s3,1.343,3,3S13.657,15,12,15z M16.804,6.116c-0.596,0-1.08,0.484-1.08,1.08 s0.484,1.08,1.08,1.08c0.596,0,1.08-0.484,1.08-1.08S17.401,6.116,16.804,6.116z"></path>
+                        </svg><span class="wp-block-social-link-label screen-reader-text">Instagram</span></a></li>
+
+                <li class="social-link-item"><a href="https://www.flickr.com/photos/ugacommunications/" rel="noopener nofollow"><svg width="24" height="24" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+                            <path d="M6.5,7c-2.75,0-5,2.25-5,5s2.25,5,5,5s5-2.25,5-5S9.25,7,6.5,7z M17.5,7c-2.75,0-5,2.25-5,5s2.25,5,5,5s5-2.25,5-5 S20.25,7,17.5,7z"></path>
+                        </svg><span class="wp-block-social-link-label screen-reader-text">Flickr</span></a></li>
+
+                <li class="social-link-item"><a href="https://www.youtube.com/user/UGAAgandEnvironment" rel="noopener nofollow"><svg width="24" height="24" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+                            <path d="M21.8,8.001c0,0-0.195-1.378-0.795-1.985c-0.76-0.797-1.613-0.801-2.004-0.847c-2.799-0.202-6.997-0.202-6.997-0.202 h-0.009c0,0-4.198,0-6.997,0.202C4.608,5.216,3.756,5.22,2.995,6.016C2.395,6.623,2.2,8.001,2.2,8.001S2,9.62,2,11.238v1.517 c0,1.618,0.2,3.237,0.2,3.237s0.195,1.378,0.795,1.985c0.761,0.797,1.76,0.771,2.205,0.855c1.6,0.153,6.8,0.201,6.8,0.201 s4.203-0.006,7.001-0.209c0.391-0.047,1.243-0.051,2.004-0.847c0.6-0.607,0.795-1.985,0.795-1.985s0.2-1.618,0.2-3.237v-1.517 C22,9.62,21.8,8.001,21.8,8.001z M9.935,14.594l-0.001-5.62l5.404,2.82L9.935,14.594z"></path>
+                        </svg><span class="wp-block-social-link-label screen-reader-text">YouTube</span></a></li>
+
+                <li class="social-link-item"><a href="https://www.linkedin.com/school/uga-college-of-agricultural-and-environmental-sciences/" rel="noopener nofollow"><svg width="24" height="24" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+                            <path d="M19.7,3H4.3C3.582,3,3,3.582,3,4.3v15.4C3,20.418,3.582,21,4.3,21h15.4c0.718,0,1.3-0.582,1.3-1.3V4.3 C21,3.582,20.418,3,19.7,3z M8.339,18.338H5.667v-8.59h2.672V18.338z M7.004,8.574c-0.857,0-1.549-0.694-1.549-1.548 c0-0.855,0.691-1.548,1.549-1.548c0.854,0,1.547,0.694,1.547,1.548C8.551,7.881,7.858,8.574,7.004,8.574z M18.339,18.338h-2.669 v-4.177c0-0.996-0.017-2.278-1.387-2.278c-1.389,0-1.601,1.086-1.601,2.206v4.249h-2.667v-8.59h2.559v1.174h0.037 c0.356-0.675,1.227-1.387,2.526-1.387c2.703,0,3.203,1.779,3.203,4.092V18.338z"></path>
+                        </svg><span class="wp-block-social-link-label screen-reader-text">LinkedIn</span></a></li>
+            </ul>
+
+        
+</div></div>
+</div>
+</div>
+
+
+
+<div class="wp-block-group alignfull caes-fac-sub-footer has-base-color has-contrast-background-color has-text-color has-background has-link-color wp-elements-56a5dfbd6012c9e732100b0440ff6d49 has-global-padding is-layout-constrained wp-block-group-is-layout-constrained">
+<div class="wp-block-group is-content-justification-space-between is-layout-flex wp-container-core-group-is-layout-9366075c wp-block-group-is-layout-flex">
+<div class="wp-block-group is-layout-flow wp-block-group-is-layout-flow"><div class="wp-block-uga-caes-caes-fac-footer-copyright">
+
+                <p class="has-tiny-font-size">The University of Georgia <a href="https://www.caes.uga.edu/">College of Agricultural and Environmental Sciences</a> © 2012-2025. All Rights Reserved.<br>The <a href="https://www.uga.edu">University of Georgia</a> is an Equal Opportunity, Affirmative Action, Veteran, Disability Institution.<br><a href="https://eits.uga.edu/access_and_security/infosec/pols_regs/policies/privacy/">Privacy Policy</a> | <a href="https://www.caes.uga.edu/accessibility.html">Accessibility Policy</a></p>
+        
+</div></div>
+</div>
+</div>
+</div>
+</footer></div>
+<script type="speculationrules">
+{"prefetch":[{"source":"document","where":{"and":[{"href_matches":"\/*"},{"not":{"href_matches":["\/wp-*.php","\/wp-admin\/*","\/files\/*","\/wp-content\/*","\/wp-content\/plugins\/*","\/wp-content\/themes\/caes-faculty-2023\/*","\/*\\?(.+)"]}},{"not":{"selector_matches":"a[rel~=\"nofollow\"]"}},{"not":{"selector_matches":".no-prefetch, .no-prefetch a"}}]},"eagerness":"conservative"}]}
+</script>
+<script>(function() {function maybePrefixUrlField () {
+  const value = this.value.trim()
+  if (value !== '' && value.indexOf('http') !== 0) {
+    this.value = 'http://' + value
+  }
+}
+
+const urlFields = document.querySelectorAll('.mc4wp-form input[type="url"]')
+for (let j = 0; j < urlFields.length; j++) {
+  urlFields[j].addEventListener('blur', maybePrefixUrlField)
+}
+})();</script><script id="wp-block-template-skip-link-js-after">
+	( function() {
+		var skipLinkTarget = document.querySelector( 'main' ),
+			sibling,
+			skipLinkTargetID,
+			skipLink;
+
+		// Early exit if a skip-link target can't be located.
+		if ( ! skipLinkTarget ) {
+			return;
+		}
+
+		/*
+		 * Get the site wrapper.
+		 * The skip-link will be injected in the beginning of it.
+		 */
+		sibling = document.querySelector( '.wp-site-blocks' );
+
+		// Early exit if the root element was not found.
+		if ( ! sibling ) {
+			return;
+		}
+
+		// Get the skip-link target's ID, and generate one if it doesn't exist.
+		skipLinkTargetID = skipLinkTarget.id;
+		if ( ! skipLinkTargetID ) {
+			skipLinkTargetID = 'wp--skip-link--target';
+			skipLinkTarget.id = skipLinkTargetID;
+		}
+
+		// Create the skip link.
+		skipLink = document.createElement( 'a' );
+		skipLink.classList.add( 'skip-link', 'screen-reader-text' );
+		skipLink.id = 'wp-skip-link';
+		skipLink.href = '#' + skipLinkTargetID;
+		skipLink.innerText = 'Skip to content';
+
+		// Inject the skip link.
+		sibling.parentElement.insertBefore( skipLink, sibling );
+	}() );
+	
+</script>
+<script src="https://oit.caes.uga.edu/wp-content/plugins/accordion-blocks/js/accordion-blocks.min.js?ver=1.5.0" id="pb-accordion-blocks-frontend-script-js"></script>
+<script src="https://oit.caes.uga.edu/wp-content/themes/caes-faculty-2023/assets/js/main.js?ver=1.0.0" id="uga-caes-fac-2023-script-js"></script>
+<script src="https://oit.caes.uga.edu/wp-content/themes/caes-faculty-2023/extend-core-blocks/build/table/frontend.js?ver=0.1.0" id="enqueue_frontend_scripts_table-js"></script>
+<script defer src="https://oit.caes.uga.edu/wp-content/plugins/mailchimp-for-wp/assets/js/forms.js?ver=4.10.5" id="mc4wp-forms-api-js"></script>
+		<script type="text/javascript">
+			var visualizerUserInteractionEvents = [
+				"scroll",
+				"mouseover",
+				"keydown",
+				"touchmove",
+				"touchstart"
+			];
+
+			visualizerUserInteractionEvents.forEach(function(event) {
+				window.addEventListener(event, visualizerTriggerScriptLoader, { passive: true });
+			});
+
+			function visualizerTriggerScriptLoader() {
+				visualizerLoadScripts();
+				visualizerUserInteractionEvents.forEach(function(event) {
+					window.removeEventListener(event, visualizerTriggerScriptLoader, { passive: true });
+				});
+			}
+
+			function visualizerLoadScripts() {
+				document.querySelectorAll("script[data-visualizer-script]").forEach(function(elem) {
+					jQuery.getScript( elem.getAttribute("data-visualizer-script") )
+					.done( function( script, textStatus ) {
+						elem.setAttribute("src", elem.getAttribute("data-visualizer-script"));
+						elem.removeAttribute("data-visualizer-script");
+						setTimeout( function() {
+							visualizerRefreshChart();
+						} );
+					} );
+				});
+			}
+
+			function visualizerRefreshChart() {
+				jQuery( '.visualizer-front:not(.visualizer-chart-loaded)' ).resize();
+				if ( jQuery( 'div.viz-facade-loaded:not(.visualizer-lazy):empty' ).length > 0 ) {
+					visualizerUserInteractionEvents.forEach( function( event ) {
+						window.addEventListener( event, function() {
+							jQuery( '.visualizer-front:not(.visualizer-chart-loaded)' ).resize();
+						}, { passive: true } );
+					} );
+				}
+			}
+		</script>
+			</body>
+</html>
