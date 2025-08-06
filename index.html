@@ -15,11 +15,6 @@
             <span id="cart-count">0</span>
         </div>
     </header>
-    <!-- index.html -->
-<head>
-    <!-- ... остальные мета-теги ... -->
-    <meta name="csrf-token" content="{{ csrf_token() }}">
-</head>
 
     <main>
         <!-- Главная страница с сервисами -->
@@ -41,6 +36,15 @@
                 <div class="service-card" data-service="picsart">
                     <img src="images/picsart.webp" alt="PicsArt">
                     <h3>PicsArt</h3>
+                </div>
+                <!-- Добавленные новые сервисы -->
+                <div class="service-card" data-service="canva">
+                    <img src="images/canva.webp" alt="Canva">
+                    <h3>Canva</h3>
+                </div>
+                <div class="service-card" data-service="netflix">
+                    <img src="images/netflix.webp" alt="Netflix">
+                    <h3>Netflix</h3>
                 </div>
             </div>
         </section>
@@ -116,4 +120,3 @@
     <script src="app.js"></script>
 </body>
 </html>
-
