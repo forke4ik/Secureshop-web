@@ -261,108 +261,69 @@ function removeFromCart() {
     }
 }
 
-// Функция оформления заказа через Telegram deep link
-async function checkout() {
-    console.group("🚀 Процесс оформления заказа");
+// Функция для создания и скачивания JSON-файла
+function downloadOrderJSON(orderData) {
+    const dataStr = JSON.stringify(orderData, null, 2);
+    const blob = new Blob([dataStr], { type: 'application/json' });
+    const url = URL.createObjectURL(blob);
     
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `SecureShop_Order_${Date.now()}.json`;
+    document.body.appendChild(a);
+    a.click();
+    
+    // Очистка
+    setTimeout(() => {
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+    }, 100);
+}
+
+// Функция оформления заказа через JSON-файл
+async function checkout() {
     if (cart.length === 0) {
-        console.error("❌ Ошибка: корзина пуста");
         alert('Корзина порожня!');
-        console.groupEnd();
         return;
     }
-    
-    console.log("🛒 Содержимое корзины:", cart);
     
     // Рассчитываем общую сумму
     let total = 0;
     cart.forEach(item => total += item.price);
     
-    try {
-        // Получаем CSRF-токен из мета-тега
-        const csrfToken = document.querySelector('meta[name="csrf-token"]').content;
-        
-        // Отправляем заказ на сервер
-        const response = await fetch('/api/create-order', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'X-CSRF-Token': csrfToken
-            },
-            body: JSON.stringify({
-                items: cart,
-                total: total
-            })
-        });
-        
-        // Логируем детали ответа для диагностики
-        console.log("Status:", response.status);
-        console.log("Content-Type:", response.headers.get('content-type'));
-        
-        // Клонируем ответ для безопасного чтения
-        const responseClone = response.clone();
-        const textResponse = await responseClone.text();
-        console.log("Raw response:", textResponse);
-        
-        let result;
-        const contentType = response.headers.get('content-type');
-        
-        if (contentType && contentType.includes('application/json')) {
-            try {
-                result = JSON.parse(textResponse);
-            } catch (jsonError) {
-                console.error("Ошибка парсинга JSON:", jsonError);
-                throw new Error("Неверный формат ответа от сервера");
-            }
-        } else {
-            console.error("Неожиданный формат ответа:", textResponse);
-            throw new Error(`Сервер вернул не JSON: ${textResponse.slice(0, 100)}`);
-        }
-        
-        // Проверка статуса HTTP
-        if (!response.ok) {
-            const errorMessage = result.error || `HTTP error! status: ${response.status}`;
-            throw new Error(errorMessage);
-        }
-
-        if (result.success) {
-            console.log("✅ Заказ сохранен, ID:", result.order_id);
-            
-            // Формируем ссылку для Telegram
-            const botUsername = "secureshopBot";
-            const telegramUrl = `https://t.me/${botUsername}?start=order_id=${result.order_id}`;
-            
-            console.log("🔗 Ссылка для Telegram:", telegramUrl);
-            
-            // Показываем подтверждение
-            const confirmSend = confirm("Ваше замовлення збережено! Натисніть OK, щоб відкрити Telegram та завершити оплату.");
-            
-            if (confirmSend) {
-                console.log("✅ Пользователь подтвердил отправку");
-                window.open(telegramUrl, '_blank');
-                
-                // Очищаем корзину
-                cart = [];
-                localStorage.setItem('cart', JSON.stringify(cart));
-                updateCartCount();
-                updateCartView();
-                showPage(servicesPage);
-            } else {
-                console.log("❌ Пользователь отменил отправку");
-            }
-        } else {
-            console.error("❌ Ошибка сохранения заказа:", result.error);
-            alert("Помилка збереження замовлення: " + (result.error || "Спробуйте ще раз"));
-        }
-    } catch (error) {
-        console.error("🔥 Ошибка при отправке заказа:", error);
-        alert("Сталася помилка: " + error.message);
+    // Формируем данные заказа
+    const orderData = {
+        items: cart,
+        total: total
+    };
+    
+    // Создаем и скачиваем JSON-файл
+    downloadOrderJSON(orderData);
+    
+    // Очищаем корзину
+    cart = [];
+    localStorage.setItem('cart', JSON.stringify(cart));
+    updateCartCount();
+    updateCartView();
+    
+    // Показываем инструкцию
+    const telegramBotLink = 'https://t.me/SecureShopUA_bot';
+    const confirmation = confirm(
+        'Ваше замовлення збережено у файл! Будь ласка:\n\n' +
+        '1. Перейдіть в наш Telegram-бот\n' +
+        '2. Надішліть скачаний JSON-файл\n\n' +
+        'Натисніть "OK", щоб відкрити бота'
+    );
+    
+    if (confirmation) {
+        window.open(telegramBotLink, '_blank');
     }
     
-    console.groupEnd();
+    // Возвращаем на главную
+    showPage(servicesPage);
 }
 
-// Функция оформления одного товара
+// Функция оформления одного товара через JSON-файл
 async function orderSingleItem() {
     const orderMenu = document.getElementById('order-menu');
     if (!orderMenu) return;
@@ -371,75 +332,33 @@ async function orderSingleItem() {
     if (index >= 0 && index < cart.length) {
         const item = cart[index];
         
-        try {
-            // Получаем CSRF-токен из мета-тега
-            const csrfToken = document.querySelector('meta[name="csrf-token"]').content;
-            
-            // Отправляем единичный заказ на сервер
-            const response = await fetch('/api/create-order', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'X-CSRF-Token': csrfToken
-                },
-                body: JSON.stringify({
-                    items: [item],
-                    total: item.price
-                })
-            });
-            
-            // Логируем детали ответа для диагностики
-            console.log("Status:", response.status);
-            console.log("Content-Type:", response.headers.get('content-type'));
-            
-            // Клонируем ответ для безопасного чтения
-            const responseClone = response.clone();
-            const textResponse = await responseClone.text();
-            console.log("Raw response:", textResponse);
-            
-            let result;
-            const contentType = response.headers.get('content-type');
-            
-            if (contentType && contentType.includes('application/json')) {
-                try {
-                    result = JSON.parse(textResponse);
-                } catch (jsonError) {
-                    console.error("Ошибка парсинга JSON:", jsonError);
-                    throw new Error("Неверный формат ответа от сервера");
-                }
-            } else {
-                console.error("Неожиданный формат ответа:", textResponse);
-                throw new Error(`Сервер вернул не JSON: ${textResponse.slice(0, 100)}`);
-            }
-            
-            // Проверка статуса HTTP
-            if (!response.ok) {
-                const errorMessage = result.error || `HTTP error! status: ${response.status}`;
-                throw new Error(errorMessage);
-            }
-
-            if (result.success) {
-                const botUsername = "secureshopBot";
-                const telegramUrl = `https://t.me/${botUsername}?start=order_id=${result.order_id}`;
-                
-                const confirmSend = confirm("Ваше замовлення збережено! Натисніть OK, щоб відкрити Telegram та завершити оплату.");
-                
-                if (confirmSend) {
-                    window.open(telegramUrl, '_blank');
-                }
-                
-                // Удаляем товар из корзины
-                cart.splice(index, 1);
-                localStorage.setItem('cart', JSON.stringify(cart));
-                updateCartCount();
-                updateCartView();
-                closeOrderMenu();
-            } else {
-                alert("Помилка: " + (result.error || "Спробуйте ще раз"));
-            }
-        } catch (error) {
-            console.error("Ошибка при оформлении единичного товара:", error);
-            alert("Сталася помилка: " + error.message);
+        // Формируем данные заказа
+        const orderData = {
+            items: [item],
+            total: item.price
+        };
+        
+        // Создаем и скачиваем JSON-файл
+        downloadOrderJSON(orderData);
+        
+        // Удаляем товар из корзины
+        cart.splice(index, 1);
+        localStorage.setItem('cart', JSON.stringify(cart));
+        updateCartCount();
+        updateCartView();
+        closeOrderMenu();
+        
+        // Показываем инструкцию
+        const telegramBotLink = 'https://t.me/SecureShopUA_bot';
+        const confirmation = confirm(
+            'Ваше замовлення збережено у файл! Будь ласка:\n\n' +
+            '1. Перейдіть в наш Telegram-бот\n' +
+            '2. Надішліть скачаний JSON-файл\n\n' +
+            'Натисніть "OK", щоб відкрити бота'
+        );
+        
+        if (confirmation) {
+            window.open(telegramBotLink, '_blank');
         }
     }
 }
