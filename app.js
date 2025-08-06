@@ -261,69 +261,91 @@ function removeFromCart() {
     }
 }
 
-// Функция для создания и скачивания JSON-файла
-function downloadOrderJSON(orderData) {
-    const dataStr = JSON.stringify(orderData, null, 2);
-    const blob = new Blob([dataStr], { type: 'application/json' });
-    const url = URL.createObjectURL(blob);
+// Функция генерации команды для бота
+function generateBotCommand(items) {
+    // Создаем уникальный идентификатор заказа
+    const orderId = 'O' + Date.now().toString().slice(-6);
     
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = `SecureShop_Order_${Date.now()}.json`;
-    document.body.appendChild(a);
-    a.click();
+    // Формируем команду
+    let command = `/pay ${orderId} `;
     
-    // Очистка
-    setTimeout(() => {
-        document.body.removeChild(a);
-        URL.revokeObjectURL(url);
-    }, 100);
+    // Добавляем товары в команду
+    items.forEach(item => {
+        // Сокращаем названия для экономии места
+        const serviceAbbr = item.service.substring(0, 3);
+        const planAbbr = item.plan.substring(0, 3);
+        const periodAbbr = item.period.replace('місяць', 'м').replace('місяців', 'м');
+        
+        command += `${serviceAbbr}-${planAbbr}-${periodAbbr}-${item.price} `;
+    });
+    
+    return {
+        command: command.trim(),
+        orderId: orderId
+    };
 }
 
-// Функция оформления заказа через JSON-файл
+// Функция оформления заказа через команду бота
 async function checkout() {
     if (cart.length === 0) {
         alert('Корзина порожня!');
         return;
     }
     
-    // Рассчитываем общую сумму
-    let total = 0;
-    cart.forEach(item => total += item.price);
+    // Генерируем команду для бота
+    const { command, orderId } = generateBotCommand(cart);
     
-    // Формируем данные заказа
-    const orderData = {
-        items: cart,
-        total: total
-    };
+    // Создаем Telegram deep link
+    const botUsername = "secureshopBot";
+    const telegramUrl = `https://t.me/${botUsername}`;
     
-    // Создаем и скачиваем JSON-файл
-    downloadOrderJSON(orderData);
+    // Показываем пользователю команду
+    const message = `Ваше замовлення #${orderId} готове!\n\n` +
+                   `Скопіюйте цю команду та відправте її нашому боту:\n\n` +
+                   `<code>${command}</code>\n\n` +
+                   `Натисніть "Відкрити Telegram", щоб перейти до бота.`;
+    
+    // Создаем модальное окно
+    const modal = document.createElement('div');
+    modal.className = 'order-modal';
+    modal.innerHTML = `
+        <div class="modal-content">
+            <h2>Оформлення замовлення #${orderId}</h2>
+            <div class="modal-message">${message}</div>
+            <div class="modal-actions">
+                <button class="copy-btn">Копіювати команду</button>
+                <button class="telegram-btn">Відкрити Telegram</button>
+                <button class="close-modal">Закрити</button>
+            </div>
+        </div>
+    `;
+    
+    document.body.appendChild(modal);
+    
+    // Обработчики для кнопок модального окна
+    modal.querySelector('.copy-btn').addEventListener('click', () => {
+        navigator.clipboard.writeText(command)
+            .then(() => alert('Команду скопійовано!'))
+            .catch(err => console.error('Помилка копіювання:', err));
+    });
+    
+    modal.querySelector('.telegram-btn').addEventListener('click', () => {
+        window.open(telegramUrl, '_blank');
+    });
+    
+    modal.querySelector('.close-modal').addEventListener('click', () => {
+        document.body.removeChild(modal);
+    });
     
     // Очищаем корзину
     cart = [];
     localStorage.setItem('cart', JSON.stringify(cart));
     updateCartCount();
     updateCartView();
-    
-    // Показываем инструкцию
-    const telegramBotLink = 'https://t.me/SecureShopUA_bot';
-    const confirmation = confirm(
-        'Ваше замовлення збережено у файл! Будь ласка:\n\n' +
-        '1. Перейдіть в наш Telegram-бот\n' +
-        '2. Надішліть скачаний JSON-файл\n\n' +
-        'Натисніть "OK", щоб відкрити бота'
-    );
-    
-    if (confirmation) {
-        window.open(telegramBotLink, '_blank');
-    }
-    
-    // Возвращаем на главную
     showPage(servicesPage);
 }
 
-// Функция оформления одного товара через JSON-файл
+// Функция оформления одного товара
 async function orderSingleItem() {
     const orderMenu = document.getElementById('order-menu');
     if (!orderMenu) return;
@@ -332,14 +354,50 @@ async function orderSingleItem() {
     if (index >= 0 && index < cart.length) {
         const item = cart[index];
         
-        // Формируем данные заказа
-        const orderData = {
-            items: [item],
-            total: item.price
-        };
+        // Генерируем команду для бота
+        const { command, orderId } = generateBotCommand([item]);
         
-        // Создаем и скачиваем JSON-файл
-        downloadOrderJSON(orderData);
+        // Создаем Telegram deep link
+        const botUsername = "secureshopBot";
+        const telegramUrl = `https://t.me/${botUsername}`;
+        
+        // Показываем пользователю команду
+        const message = `Ваше замовлення #${orderId} готове!\n\n` +
+                       `Скопіюйте цю команду та відправте її нашому боту:\n\n` +
+                       `<code>${command}</code>\n\n` +
+                       `Натисніть "Відкрити Telegram", щоб перейти до бота.`;
+        
+        // Создаем модальное окно
+        const modal = document.createElement('div');
+        modal.className = 'order-modal';
+        modal.innerHTML = `
+            <div class="modal-content">
+                <h2>Оформлення замовлення #${orderId}</h2>
+                <div class="modal-message">${message}</div>
+                <div class="modal-actions">
+                    <button class="copy-btn">Копіювати команду</button>
+                    <button class="telegram-btn">Відкрити Telegram</button>
+                    <button class="close-modal">Закрити</button>
+                </div>
+            </div>
+        `;
+        
+        document.body.appendChild(modal);
+        
+        // Обработчики для кнопок модального окна
+        modal.querySelector('.copy-btn').addEventListener('click', () => {
+            navigator.clipboard.writeText(command)
+                .then(() => alert('Команду скопійовано!'))
+                .catch(err => console.error('Помилка копіювання:', err));
+        });
+        
+        modal.querySelector('.telegram-btn').addEventListener('click', () => {
+            window.open(telegramUrl, '_blank');
+        });
+        
+        modal.querySelector('.close-modal').addEventListener('click', () => {
+            document.body.removeChild(modal);
+        });
         
         // Удаляем товар из корзины
         cart.splice(index, 1);
@@ -347,18 +405,5 @@ async function orderSingleItem() {
         updateCartCount();
         updateCartView();
         closeOrderMenu();
-        
-        // Показываем инструкцию
-        const telegramBotLink = 'https://t.me/SecureShopUA_bot';
-        const confirmation = confirm(
-            'Ваше замовлення збережено у файл! Будь ласка:\n\n' +
-            '1. Перейдіть в наш Telegram-бот\n' +
-            '2. Надішліть скачаний JSON-файл\n\n' +
-            'Натисніть "OK", щоб відкрити бота'
-        );
-        
-        if (confirmation) {
-            window.open(telegramBotLink, '_blank');
-        }
     }
 }
