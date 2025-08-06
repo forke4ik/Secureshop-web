@@ -53,7 +53,7 @@ const products = {
       {
         id: "duolingo_family",
         name: "Family",
-        description: "Підписка на вас та ще 3 осіб",
+        description: "Підписка на вас та ще 5 осіб",
         options: [
           { period: "12 місяців", price: 380 }
         ]
@@ -100,7 +100,7 @@ const products = {
       {
         id: "canva_family",
         name: "Family",
-        description: "Підписка на вас та ще 5 осіб",
+        description: "Підписка на вас та ще 3 осіб",
         options: [
           { period: "1 місяць", price: 850 },
           { period: "12 місяців", price: 7500 }
