@@ -7,7 +7,6 @@ const products = {
         id: "chatgpt_plus",
         name: "Plus",
         description: "Доступ до GPT-4, розширені можливості",
-        // Оставлена только ежемесячная подписка
         options: [
           { period: "1 місяць", price: 650 }
         ]
@@ -54,7 +53,6 @@ const products = {
       {
         id: "duolingo_family",
         name: "Family",
-        // Обновленное описание подписки
         description: "Підписка на вас та ще 5 осіб",
         options: [
           { period: "12 місяців", price: 380 }
@@ -82,6 +80,44 @@ const products = {
         options: [
           { period: "1 місяць", price: 180 },
           { period: "12 місяців", price: 1000 }
+        ]
+      }
+    ]
+  },
+  canva: {
+    name: "Canva",
+    logo: "images/canva.webp",
+    plans: [
+      {
+        id: "canva_individual",
+        name: "Individual",
+        description: "Преміум для одного користувача",
+        options: [
+          { period: "1 місяць", price: 350 },
+          { period: "12 місяців", price: 3000 }
+        ]
+      },
+      {
+        id: "canva_family",
+        name: "Family",
+        description: "Підписка на вас та ще 5 осіб",
+        options: [
+          { period: "1 місяць", price: 850 },
+          { period: "12 місяців", price: 7500 }
+        ]
+      }
+    ]
+  },
+  netflix: {
+    name: "Netflix",
+    logo: "images/netflix.webp",
+    plans: [
+      {
+        id: "netflix_premium",
+        name: "Premium",
+        description: "4K, 4 екрани, без реклами",
+        options: [
+          { period: "1 місяць", price: 350 }
         ]
       }
     ]
