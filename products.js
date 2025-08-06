@@ -53,7 +53,7 @@ const products = {
       {
         id: "duolingo_family",
         name: "Family",
-        description: "Підписка на вас та ще 5 осіб",
+        description: "Підписка на вас та ще 3 осіб",
         options: [
           { period: "12 місяців", price: 380 }
         ]
