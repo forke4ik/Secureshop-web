@@ -272,8 +272,25 @@ function generateBotCommand(items) {
     // Добавляем товары в команду
     items.forEach(item => {
         // Сокращаем названия для экономии места
-        const serviceAbbr = item.service.substring(0, 3);
-        const planAbbr = item.plan.substring(0, 3);
+        let serviceAbbr;
+        if (item.service.includes('ChatGPT')) serviceAbbr = "Cha";
+        else if (item.service.includes('Discord')) serviceAbbr = "Dis";
+        else if (item.service.includes('Duolingo')) serviceAbbr = "Duo";
+        else if (item.service.includes('PicsArt')) serviceAbbr = "Pic";
+        else if (item.service.includes('Canva')) serviceAbbr = "Can";
+        else if (item.service.includes('Netflix')) serviceAbbr = "Net";
+        else serviceAbbr = item.service.substring(0, 3);
+        
+        let planAbbr;
+        if (item.plan.includes('Basic')) planAbbr = "Bas";
+        else if (item.plan.includes('Full')) planAbbr = "Ful";
+        else if (item.plan.includes('Individual')) planAbbr = "Ind";
+        else if (item.plan.includes('Family')) planAbbr = "Fam";
+        else if (item.plan.includes('Plus')) planAbbr = "Plu";
+        else if (item.plan.includes('Pro')) planAbbr = "Pro";
+        else if (item.plan.includes('Premium')) planAbbr = "Pre";
+        else planAbbr = item.plan.substring(0, 3);
+        
         const periodAbbr = item.period.replace('місяць', 'м').replace('місяців', 'м');
         
         command += `${serviceAbbr}-${planAbbr}-${periodAbbr}-${item.price} `;
