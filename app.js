@@ -287,7 +287,7 @@ async function checkout() {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
-                'X-CSRF-Token': csrfToken // Добавляем CSRF-токен
+                'X-CSRF-Token': csrfToken
             },
             body: JSON.stringify({
                 items: cart,
@@ -295,14 +295,36 @@ async function checkout() {
             })
         });
         
-        // Обрабатываем HTTP-ошибки
-        if (!response.ok) {
-            const errorData = await response.json();
-            throw new Error(errorData.error || `HTTP error! status: ${response.status}`);
+        // Логируем детали ответа для диагностики
+        console.log("Status:", response.status);
+        console.log("Content-Type:", response.headers.get('content-type'));
+        
+        // Клонируем ответ для безопасного чтения
+        const responseClone = response.clone();
+        const textResponse = await responseClone.text();
+        console.log("Raw response:", textResponse);
+        
+        let result;
+        const contentType = response.headers.get('content-type');
+        
+        if (contentType && contentType.includes('application/json')) {
+            try {
+                result = JSON.parse(textResponse);
+            } catch (jsonError) {
+                console.error("Ошибка парсинга JSON:", jsonError);
+                throw new Error("Неверный формат ответа от сервера");
+            }
+        } else {
+            console.error("Неожиданный формат ответа:", textResponse);
+            throw new Error(`Сервер вернул не JSON: ${textResponse.slice(0, 100)}`);
         }
         
-        const result = await response.json();
-        
+        // Проверка статуса HTTP
+        if (!response.ok) {
+            const errorMessage = result.error || `HTTP error! status: ${response.status}`;
+            throw new Error(errorMessage);
+        }
+
         if (result.success) {
             console.log("✅ Заказ сохранен, ID:", result.order_id);
             
@@ -340,7 +362,7 @@ async function checkout() {
     console.groupEnd();
 }
 
-// Обновленная функция для оформления одного товара
+// Функция оформления одного товара
 async function orderSingleItem() {
     const orderMenu = document.getElementById('order-menu');
     if (!orderMenu) return;
@@ -358,7 +380,7 @@ async function orderSingleItem() {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
-                    'X-CSRF-Token': csrfToken // Добавляем CSRF-токен
+                    'X-CSRF-Token': csrfToken
                 },
                 body: JSON.stringify({
                     items: [item],
@@ -366,14 +388,36 @@ async function orderSingleItem() {
                 })
             });
             
-            // Обрабатываем HTTP-ошибки
-            if (!response.ok) {
-                const errorData = await response.json();
-                throw new Error(errorData.error || `HTTP error! status: ${response.status}`);
+            // Логируем детали ответа для диагностики
+            console.log("Status:", response.status);
+            console.log("Content-Type:", response.headers.get('content-type'));
+            
+            // Клонируем ответ для безопасного чтения
+            const responseClone = response.clone();
+            const textResponse = await responseClone.text();
+            console.log("Raw response:", textResponse);
+            
+            let result;
+            const contentType = response.headers.get('content-type');
+            
+            if (contentType && contentType.includes('application/json')) {
+                try {
+                    result = JSON.parse(textResponse);
+                } catch (jsonError) {
+                    console.error("Ошибка парсинга JSON:", jsonError);
+                    throw new Error("Неверный формат ответа от сервера");
+                }
+            } else {
+                console.error("Неожиданный формат ответа:", textResponse);
+                throw new Error(`Сервер вернул не JSON: ${textResponse.slice(0, 100)}`);
             }
             
-            const result = await response.json();
-            
+            // Проверка статуса HTTP
+            if (!response.ok) {
+                const errorMessage = result.error || `HTTP error! status: ${response.status}`;
+                throw new Error(errorMessage);
+            }
+
             if (result.success) {
                 const botUsername = "secureshopBot";
                 const telegramUrl = `https://t.me/${botUsername}?start=order_id=${result.order_id}`;
