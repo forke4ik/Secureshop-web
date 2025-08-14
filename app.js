@@ -1,9 +1,4 @@
-// app.js
-
-const mainPage = document.getElementById('main-page');
-const subscriptionsPage = document.getElementById('subscriptions-page');
-const digitalPage = document.getElementById('digital-page');
-const discordDecorTypePage = document.getElementById('discord-decor-type-page');
+const servicesPage = document.getElementById('services-page');
 const plansPage = document.getElementById('plans-page');
 const optionsPage = document.getElementById('options-page');
 const cartPage = document.getElementById('cart-page');
@@ -14,12 +9,9 @@ const cartIcon = document.getElementById('cart-icon');
 const mainLogo = document.getElementById('main-logo');
 
 // Элементы кнопок "Назад"
-const backToMainCategoryBtn = document.getElementById('back-to-main-category');
-const backToMainCategoryDigitalBtn = document.getElementById('back-to-main-category-digital');
 const backToServicesBtn = document.getElementById('back-to-services');
 const backToPlansBtn = document.getElementById('back-to-plans');
-const backToMainFromCartBtn = document.getElementById('back-to-main-from-cart');
-const backToDigitalBtn = document.getElementById('back-to-digital');
+const backToMainBtn = document.getElementById('back-to-main');
 
 // Текущий выбор
 let currentService = null;
@@ -35,28 +27,6 @@ const pageHistory = [];
 document.addEventListener('DOMContentLoaded', () => {
     updateCartCount();
     setupEventListeners();
-
-    // Добавляем обработчики для кнопок островка Discord украшений
-    const tabWithoutNitro = document.getElementById('tab-without-nitro');
-    const tabWithNitro = document.getElementById('tab-with-nitro');
-
-    if (tabWithoutNitro) {
-        tabWithoutNitro.addEventListener('click', () => {
-            currentService = discordDecorProducts;
-            document.querySelectorAll('.tab-button').forEach(btn => btn.classList.remove('active'));
-            tabWithoutNitro.classList.add('active');
-            showDiscordDecorOptions('discord_decor_without_nitro');
-        });
-    }
-
-    if (tabWithNitro) {
-        tabWithNitro.addEventListener('click', () => {
-            currentService = discordDecorProducts;
-            document.querySelectorAll('.tab-button').forEach(btn => btn.classList.remove('active'));
-            tabWithNitro.classList.add('active');
-            showDiscordDecorOptions('discord_decor_with_nitro');
-        });
-    }
 });
 
 function addToCart(item) {
@@ -74,24 +44,13 @@ function showPage(page) {
     document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
     page.classList.add('active');
     
-    if (page !== mainPage) {
+    // Сохраняем историю только для основных страниц
+    if (page !== servicesPage) {
         pageHistory.push(page);
     }
 }
 
 function setupEventListeners() {
-    // Обработчики для категорий (новые)
-    document.querySelectorAll('.category-card').forEach(card => {
-        card.addEventListener('click', () => {
-            const category = card.dataset.category;
-            if (category === 'subscriptions') {
-                showPage(subscriptionsPage);
-            } else if (category === 'digital') {
-                showPage(digitalPage);
-            }
-        });
-    });
-    
     // Обработчики для сервисов
     document.querySelectorAll('.service-card').forEach(card => {
         card.addEventListener('click', () => {
@@ -100,29 +59,20 @@ function setupEventListeners() {
         });
     });
     
+    // Обработчик для иконки корзины
     if (cartIcon) cartIcon.addEventListener('click', showCart);
     
-    if (backToMainCategoryBtn) backToMainCategoryBtn.addEventListener('click', () => showPage(mainPage));
-    if (backToMainCategoryDigitalBtn) backToMainCategoryDigitalBtn.addEventListener('click', () => showPage(mainPage));
-    if (backToServicesBtn) backToServicesBtn.addEventListener('click', goBackToServices);
+    // Обработчики для кнопок "Назад"
+    if (backToServicesBtn) backToServicesBtn.addEventListener('click', () => showPage(servicesPage));
     if (backToPlansBtn) backToPlansBtn.addEventListener('click', () => showPage(plansPage));
-    if (backToMainFromCartBtn) backToMainFromCartBtn.addEventListener('click', goToHome);
-    if (backToDigitalBtn) backToDigitalBtn.addEventListener('click', () => {
-        showPage(digitalPage);
-        document.querySelectorAll('.tab-button').forEach(btn => btn.classList.remove('active'));
-        if (document.getElementById('tab-without-nitro')) {
-            document.getElementById('tab-without-nitro').classList.add('active');
-        }
-        const optionsContainer = document.getElementById('options-container');
-        if (optionsContainer) {
-            optionsContainer.innerHTML = '';
-        }
-        currentService = null;
-        currentPlan = null;
-    });
     
+    // Кнопка "Назад" в корзине ведет на главную
+    if (backToMainBtn) backToMainBtn.addEventListener('click', goToHome);
+    
+    // Обработчик для логотипа
     if (mainLogo) mainLogo.addEventListener('click', goToHome);
     
+    // Обработчик для закрытия меню по клику вне контента
     const orderMenu = document.getElementById('order-menu');
     if (orderMenu) {
         orderMenu.addEventListener('click', (e) => {
@@ -134,84 +84,53 @@ function setupEventListeners() {
 }
 
 function goToHome() {
+    // Очищаем историю и показываем главную страницу
     pageHistory.length = 0;
-    showPage(mainPage);
-    document.querySelectorAll('.tab-button').forEach(btn => btn.classList.remove('active'));
-    if (document.getElementById('tab-without-nitro')) {
-        document.getElementById('tab-without-nitro').classList.add('active');
-    }
-    const optionsContainer = document.getElementById('options-container');
-    if (optionsContainer) {
-        optionsContainer.innerHTML = '';
-    }
-    currentService = null;
-    currentPlan = null;
-}
-
-function goBackToServices() {
-    if (currentService === discordDecorProducts) {
-        showPage(digitalPage);
-        document.querySelectorAll('.tab-button').forEach(btn => btn.classList.remove('active'));
-        if (document.getElementById('tab-without-nitro')) {
-            document.getElementById('tab-without-nitro').classList.add('active');
-        }
-        const optionsContainer = document.getElementById('options-container');
-        if (optionsContainer) {
-            optionsContainer.innerHTML = '';
-        }
-        currentService = null;
-        currentPlan = null;
-    } else {
-        showPage(subscriptionsPage);
-    }
+    showPage(servicesPage);
 }
 
 function selectService(serviceId) {
-    if (serviceId === 'discord_decor') {
-        showPage(discordDecorTypePage);
-        currentService = discordDecorProducts;
-        showDiscordDecorOptions('discord_decor_without_nitro');
-        return;
-    }
-
     currentService = products[serviceId];
     document.getElementById('service-name').textContent = currentService.name;
-
+    
     const plansContainer = document.getElementById('plans-container');
     if (plansContainer) {
         plansContainer.innerHTML = '';
-
+        
         currentService.plans.forEach(plan => {
             const planCard = document.createElement('div');
             planCard.className = 'plan-card';
             planCard.innerHTML = `
                 <h2>${plan.name}</h2>
                 <p>${plan.description}</p>
-                <button class="add-to-cart select-plan-btn" data-plan-id="${plan.id}">Обрати</button>
+                <button class="add-to-cart">Обрати</button>
             `;
             plansContainer.appendChild(planCard);
-
-            planCard.querySelector('.select-plan-btn').addEventListener('click', (e) => {
-                const planId = e.target.dataset.planId;
-                selectPlan(planId);
+            
+            // Добавляем обработчик для кнопки
+            planCard.querySelector('button').addEventListener('click', () => {
+                selectPlan(plan.id);
             });
         });
     }
+    
     showPage(plansPage);
 }
 
-function showDiscordDecorOptions(planId) {
-    if (!currentService || currentService !== discordDecorProducts) return;
-
+function selectPlan(planId) {
+    if (!currentService) return;
+    
     const plan = currentService.plans.find(p => p.id === planId);
     if (!plan) return;
-
+    
     currentPlan = plan;
-
+    document.getElementById('plan-name').textContent = `${currentService.name} ${currentPlan.name}`;
+    document.getElementById('plan-description').textContent = currentPlan.description;
+    
     const optionsContainer = document.getElementById('options-container');
     if (optionsContainer) {
         optionsContainer.innerHTML = '';
-
+        
         currentPlan.options.forEach(option => {
             const optionCard = document.createElement('div');
             optionCard.className = 'option-card';
@@ -221,118 +140,15 @@ function showDiscordDecorOptions(planId) {
                 <button class="add-to-cart">Додати в корзину</button>
             `;
             optionsContainer.appendChild(optionCard);
-
+            
+            // Добавляем обработчик для кнопки
             optionCard.querySelector('button').addEventListener('click', () => {
                 addItemToCart(option.period, option.price);
             });
         });
     }
-}
-
-// УПРОЩЕННАЯ И ОТЛАЖЕННАЯ ФУНКЦИЯ selectPlan
-function selectPlan(planId) {
-    console.log("=== selectPlan called ===");
-    console.log("planId:", planId);
-    console.log("currentService:", currentService);
     
-    if (!currentService) {
-        console.error("❌ ERROR: currentService is null or undefined");
-        return;
-    }
-
-    // Специальная логика для Discord украшений
-    if (currentService === discordDecorProducts) {
-        console.log("📦 Handling discord decor products - this should not happen here");
-        return;
-    } else {
-        // Логика для обычных подписок
-        console.log("📋 Handling regular subscription products");
-        
-        // Найдем план
-        const plan = currentService.plans.find(p => p.id === planId);
-        console.log("🔍 Found plan:", plan);
-        
-        if (!plan) {
-            console.error("❌ ERROR: Plan not found for id:", planId);
-            return;
-        }
-
-        // Установим текущий план
-        currentPlan = plan;
-        console.log("✅ Current plan set:", currentPlan);
-
-        // Обновим заголовки на странице
-        const planNameElement = document.getElementById('plan-name');
-        const planDescriptionElement = document.getElementById('plan-description');
-        
-        if (planNameElement) {
-            planNameElement.textContent = `${currentService.name} ${currentPlan.name}`;
-            console.log("✅ Plan name updated");
-        } else {
-            console.error("❌ ERROR: plan-name element not found");
-        }
-        
-        if (planDescriptionElement) {
-            planDescriptionElement.textContent = currentPlan.description;
-            console.log("✅ Plan description updated");
-        } else {
-            console.error("❌ ERROR: plan-description element not found");
-        }
-
-        // Найдем контейнер для опций
-        const optionsContainer = document.getElementById('options-container');
-        console.log("📦 optionsContainer element:", optionsContainer);
-        
-        if (optionsContainer) {
-            // Очистим контейнер
-            optionsContainer.innerHTML = '';
-            console.log("🧹 optionsContainer cleared");
-            
-            // Проверим наличие опций
-            console.log("📋 Plan options:", plan.options);
-            
-            if (plan.options && plan.options.length > 0) {
-                console.log(`📊 Found ${plan.options.length} options, creating cards...`);
-                
-                plan.options.forEach((option, index) => {
-                    console.log(`   📦 Creating option card ${index}:`, option);
-                    
-                    const optionCard = document.createElement('div');
-                    optionCard.className = 'option-card';
-                    optionCard.innerHTML = `
-                        <div class="period">${option.period}</div>
-                        <div class="price">${option.price} UAH</div>
-                        <button class="add-to-cart" data-option-index="${index}">Додати в корзину</button>
-                    `;
-                    optionsContainer.appendChild(optionCard);
-
-                    // Добавим обработчик события
-                    const button = optionCard.querySelector('button');
-                    if (button) {
-                        button.addEventListener('click', () => {
-                            console.log("🖱️ Add to cart button clicked for option:", option);
-                            addItemToCart(option.period, option.price);
-                        });
-                        console.log(`   ✅ Event listener added for option ${index}`);
-                    } else {
-                        console.error(`   ❌ ERROR: Button not found for option ${index}`);
-                    }
-                });
-                console.log("✅ All option cards created");
-            } else {
-                // Если опций нет
-                optionsContainer.innerHTML = '<p class="empty-cart">Опції для цього тарифу відсутні</p>';
-                console.log("⚠️ No options found, showing message");
-            }
-        } else {
-            console.error("❌ ERROR: optionsContainer element not found in DOM");
-        }
-        
-        // Покажем страницу с опциями
-        console.log("➡️ Showing options page");
-        showPage(optionsPage);
-        console.log("=== selectPlan finished ===");
-    }
+    showPage(optionsPage);
 }
 
 function addItemToCart(period, price) {
@@ -388,6 +204,7 @@ function updateCartView() {
     
     if (totalPrice) totalPrice.textContent = total;
     
+    // Обработчик для кнопки оформления заказа
     const checkoutBtn = document.querySelector('.checkout-btn');
     if (checkoutBtn) {
         checkoutBtn.addEventListener('click', checkout);
@@ -399,7 +216,7 @@ function goBack() {
         const prevPage = pageHistory.pop();
         showPage(prevPage);
     } else {
-        showPage(mainPage);
+        showPage(servicesPage);
     }
 }
 
@@ -418,6 +235,7 @@ function showOrderMenu(index) {
         orderMenu.dataset.index = index;
         orderMenu.classList.add('active');
         
+        // Обработчики для кнопок в меню
         document.querySelector('.remove-btn')?.addEventListener('click', removeFromCart);
         document.querySelector('.order-btn')?.addEventListener('click', orderSingleItem);
         document.querySelector('.close-btn')?.addEventListener('click', closeOrderMenu);
@@ -443,15 +261,19 @@ function removeFromCart() {
     }
 }
 
+// Функция генерации команды для бота
 function generateBotCommand(items) {
+    // Создаем уникальный идентификатор заказа
     const orderId = 'O' + Date.now().toString().slice(-6);
     
+    // Формируем команду
     let command = `/pay ${orderId} `;
     
+    // Добавляем товары в команду
     items.forEach(item => {
+        // Сокращаем названия для экономии места
         let serviceAbbr;
         if (item.service.includes('ChatGPT')) serviceAbbr = "Cha";
-        else if (item.service.includes('Discord Украшення')) serviceAbbr = "DisU";
         else if (item.service.includes('Discord')) serviceAbbr = "Dis";
         else if (item.service.includes('Duolingo')) serviceAbbr = "Duo";
         else if (item.service.includes('PicsArt')) serviceAbbr = "Pic";
@@ -467,8 +289,6 @@ function generateBotCommand(items) {
         else if (item.plan.includes('Plus')) planAbbr = "Plu";
         else if (item.plan.includes('Pro')) planAbbr = "Pro";
         else if (item.plan.includes('Premium')) planAbbr = "Pre";
-        else if (item.plan.includes('Без Nitro')) planAbbr = "BzN";
-        else if (item.plan.includes('З Nitro')) planAbbr = "ZN";
         else planAbbr = item.plan.substring(0, 3);
         
         const periodAbbr = item.period.replace('місяць', 'м').replace('місяців', 'м');
@@ -482,22 +302,28 @@ function generateBotCommand(items) {
     };
 }
 
+// Функция оформления заказа через команду бота
 async function checkout() {
     if (cart.length === 0) {
         alert('Корзина порожня!');
         return;
     }
     
+    // Генерируем команду для бота
     const { command, orderId } = generateBotCommand(cart);
     
+    // Создаем Telegram deep link
     const botUsername = "secureshopBot";
-    const telegramUrl = `https://t.me/${botUsername}`;
+    const telegramUrl = `https://t.me/
+  ${botUsername}`;
     
+    // Показываем пользователю команду
     const message = `Ваше замовлення #${orderId} готове!\n\n` +
                    `Скопіюйте цю команду та відправте її нашому боту:\n\n` +
                    `<code>${command}</code>\n\n` +
                    `Натисніть "Відкрити Telegram", щоб перейти до бота.`;
     
+    // Создаем модальное окно
     const modal = document.createElement('div');
     modal.className = 'order-modal';
     modal.innerHTML = `
@@ -514,6 +340,7 @@ async function checkout() {
     
     document.body.appendChild(modal);
     
+    // Обработчики для кнопок модального окна
     modal.querySelector('.copy-btn').addEventListener('click', () => {
         navigator.clipboard.writeText(command)
             .then(() => alert('Команду скопійовано!'))
@@ -528,23 +355,15 @@ async function checkout() {
         document.body.removeChild(modal);
     });
     
+    // Очищаем корзину
     cart = [];
     localStorage.setItem('cart', JSON.stringify(cart));
     updateCartCount();
     updateCartView();
-    showPage(mainPage);
-    document.querySelectorAll('.tab-button').forEach(btn => btn.classList.remove('active'));
-    if (document.getElementById('tab-without-nitro')) {
-        document.getElementById('tab-without-nitro').classList.add('active');
-    }
-    const optionsContainer = document.getElementById('options-container');
-    if (optionsContainer) {
-        optionsContainer.innerHTML = '';
-    }
-    currentService = null;
-    currentPlan = null;
+    showPage(servicesPage);
 }
 
+// Функция оформления одного товара
 async function orderSingleItem() {
     const orderMenu = document.getElementById('order-menu');
     if (!orderMenu) return;
@@ -553,16 +372,21 @@ async function orderSingleItem() {
     if (index >= 0 && index < cart.length) {
         const item = cart[index];
         
+        // Генерируем команду для бота
         const { command, orderId } = generateBotCommand([item]);
         
+        // Создаем Telegram deep link
         const botUsername = "secureshopBot";
-        const telegramUrl = `https://t.me/${botUsername}`;
+        const telegramUrl = `https://t.me/
+  ${botUsername}`;
         
+        // Показываем пользователю команду
         const message = `Ваше замовлення #${orderId} готове!\n\n` +
                        `Скопіюйте цю команду та відправте її нашому боту:\n\n` +
                        `<code>${command}</code>\n\n` +
                        `Натисніть "Відкрити Telegram", щоб перейти до бота.`;
         
+        // Создаем модальное окно
         const modal = document.createElement('div');
         modal.className = 'order-modal';
         modal.innerHTML = `
@@ -579,6 +403,7 @@ async function orderSingleItem() {
         
         document.body.appendChild(modal);
         
+        // Обработчики для кнопок модального окна
         modal.querySelector('.copy-btn').addEventListener('click', () => {
             navigator.clipboard.writeText(command)
                 .then(() => alert('Команду скопійовано!'))
@@ -593,6 +418,7 @@ async function orderSingleItem() {
             document.body.removeChild(modal);
         });
         
+        // Удаляем товар из корзины
         cart.splice(index, 1);
         localStorage.setItem('cart', JSON.stringify(cart));
         updateCartCount();
