@@ -229,39 +229,109 @@ function showDiscordDecorOptions(planId) {
     }
 }
 
+// УПРОЩЕННАЯ И ОТЛАЖЕННАЯ ФУНКЦИЯ selectPlan
 function selectPlan(planId) {
-    if (!currentService) return;
+    console.log("=== selectPlan called ===");
+    console.log("planId:", planId);
+    console.log("currentService:", currentService);
+    
+    if (!currentService) {
+        console.error("❌ ERROR: currentService is null or undefined");
+        return;
+    }
 
+    // Специальная логика для Discord украшений
     if (currentService === discordDecorProducts) {
+        console.log("📦 Handling discord decor products - this should not happen here");
         return;
     } else {
+        // Логика для обычных подписок
+        console.log("📋 Handling regular subscription products");
+        
+        // Найдем план
         const plan = currentService.plans.find(p => p.id === planId);
-        if (!plan) return;
-
-        currentPlan = plan;
-        document.getElementById('plan-name').textContent = `${currentService.name} ${currentPlan.name}`;
-        document.getElementById('plan-description').textContent = currentPlan.description;
-
-        const optionsContainer = document.getElementById('options-container');
-        if (optionsContainer) {
-            optionsContainer.innerHTML = '';
-
-            currentPlan.options.forEach(option => {
-                const optionCard = document.createElement('div');
-                optionCard.className = 'option-card';
-                optionCard.innerHTML = `
-                    <div class="period">${option.period}</div>
-                    <div class="price">${option.price} UAH</div>
-                    <button class="add-to-cart">Додати в корзину</button>
-                `;
-                optionsContainer.appendChild(optionCard);
-
-                optionCard.querySelector('button').addEventListener('click', () => {
-                    addItemToCart(option.period, option.price);
-                });
-            });
+        console.log("🔍 Found plan:", plan);
+        
+        if (!plan) {
+            console.error("❌ ERROR: Plan not found for id:", planId);
+            return;
         }
+
+        // Установим текущий план
+        currentPlan = plan;
+        console.log("✅ Current plan set:", currentPlan);
+
+        // Обновим заголовки на странице
+        const planNameElement = document.getElementById('plan-name');
+        const planDescriptionElement = document.getElementById('plan-description');
+        
+        if (planNameElement) {
+            planNameElement.textContent = `${currentService.name} ${currentPlan.name}`;
+            console.log("✅ Plan name updated");
+        } else {
+            console.error("❌ ERROR: plan-name element not found");
+        }
+        
+        if (planDescriptionElement) {
+            planDescriptionElement.textContent = currentPlan.description;
+            console.log("✅ Plan description updated");
+        } else {
+            console.error("❌ ERROR: plan-description element not found");
+        }
+
+        // Найдем контейнер для опций
+        const optionsContainer = document.getElementById('options-container');
+        console.log("📦 optionsContainer element:", optionsContainer);
+        
+        if (optionsContainer) {
+            // Очистим контейнер
+            optionsContainer.innerHTML = '';
+            console.log("🧹 optionsContainer cleared");
+            
+            // Проверим наличие опций
+            console.log("📋 Plan options:", plan.options);
+            
+            if (plan.options && plan.options.length > 0) {
+                console.log(`📊 Found ${plan.options.length} options, creating cards...`);
+                
+                plan.options.forEach((option, index) => {
+                    console.log(`   📦 Creating option card ${index}:`, option);
+                    
+                    const optionCard = document.createElement('div');
+                    optionCard.className = 'option-card';
+                    optionCard.innerHTML = `
+                        <div class="period">${option.period}</div>
+                        <div class="price">${option.price} UAH</div>
+                        <button class="add-to-cart" data-option-index="${index}">Додати в корзину</button>
+                    `;
+                    optionsContainer.appendChild(optionCard);
+
+                    // Добавим обработчик события
+                    const button = optionCard.querySelector('button');
+                    if (button) {
+                        button.addEventListener('click', () => {
+                            console.log("🖱️ Add to cart button clicked for option:", option);
+                            addItemToCart(option.period, option.price);
+                        });
+                        console.log(`   ✅ Event listener added for option ${index}`);
+                    } else {
+                        console.error(`   ❌ ERROR: Button not found for option ${index}`);
+                    }
+                });
+                console.log("✅ All option cards created");
+            } else {
+                // Если опций нет
+                optionsContainer.innerHTML = '<p class="empty-cart">Опції для цього тарифу відсутні</p>';
+                console.log("⚠️ No options found, showing message");
+            }
+        } else {
+            console.error("❌ ERROR: optionsContainer element not found in DOM");
+        }
+        
+        // Покажем страницу с опциями
+        console.log("➡️ Showing options page");
         showPage(optionsPage);
+        console.log("=== selectPlan finished ===");
     }
 }
 
