@@ -29,6 +29,11 @@
                     <img src="images/discord.webp" alt="Discord">
                     <h3>Discord</h3>
                 </div>
+                 <!-- Добавленная новая карточка -->
+                 <div class="service-card" data-service="discord_decor">
+                    <img src="images/discord.webp" alt="Discord Украшення">
+                    <h3>Discord Украшення</h3>
+                </div>
                 <div class="service-card" data-service="duolingo">
                     <img src="images/duolingo.webp" alt="Duolingo">
                     <h3>Duolingo</h3>
@@ -55,6 +60,11 @@
                 <i class="fas fa-arrow-left"></i> Назад
             </div>
             <h1 id="service-name"></h1>
+             <!-- Додаємо контейнер для островка -->
+             <div id="discord-decor-tabs" class="discord-decor-tabs" style="display: none;">
+                <button id="tab-without-nitro" class="tab-button active">Без Nitro</button>
+                <button id="tab-with-nitro" class="tab-button">З Nitro</button>
+            </div>
             <div id="plans-container" class="plans-grid"></div>
         </section>
 
