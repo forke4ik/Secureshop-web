@@ -149,6 +149,72 @@ h1::after {
     color: var(--primary);
 }
 
+/* ===== КАРТОЧКИ КАТЕГОРИЙ ===== */
+.main-categories {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+    margin-top: 30px;
+}
+
+.category-card {
+    background: white;
+    border-radius: var(--radius-xl);
+    overflow: hidden;
+    box-shadow: var(--card-shadow);
+    transition: var(--transition);
+    cursor: pointer;
+    text-align: center;
+    padding: 40px 20px;
+    position: relative;
+    z-index: 1;
+    border: 2px solid transparent;
+}
+
+.category-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 5px;
+    background: linear-gradient(90deg, var(--primary), var(--accent));
+    z-index: -1;
+    opacity: 0;
+    transition: var(--transition);
+}
+
+.category-card:hover {
+    transform: translateY(-10px);
+    box-shadow: var(--hover-shadow);
+    border-color: var(--secondary);
+}
+
+.category-card:hover::before {
+    opacity: 1;
+}
+
+.category-icon {
+    font-size: 60px;
+    margin-bottom: 20px;
+    background: linear-gradient(45deg, var(--primary), var(--accent));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+
+.category-card h2 {
+    font-size: 24px;
+    color: var(--dark);
+    font-weight: 700;
+    margin-bottom: 15px;
+}
+
+.category-card p {
+    color: var(--gray);
+    font-size: 16px;
+}
+
 /* ===== КАРТОЧКИ СЕРВИСОВ ===== */
 .services-grid {
     display: grid;
@@ -614,7 +680,7 @@ footer {
 
 /* ===== АДАПТИВНОСТЬ ===== */
 @media (max-width: 768px) {
-    .services-grid, .plans-grid, .options-grid {
+    .services-grid, .plans-grid, .options-grid, .main-categories {
         grid-template-columns: 1fr;
     }
     
@@ -635,6 +701,10 @@ footer {
     
     .order-actions {
         flex-direction: column;
+    }
+    
+    .category-card {
+        padding: 30px 15px;
     }
 }
 
@@ -668,6 +738,10 @@ footer {
         width: 40px;
         height: 40px;
         font-size: 16px;
+    }
+    
+    .category-icon {
+        font-size: 50px;
     }
 }
 
