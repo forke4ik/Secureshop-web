@@ -37,7 +37,6 @@ document.addEventListener('DOMContentLoaded', () => {
     setupEventListeners();
 
     // Добавляем обработчики для кнопок островка Discord украшений
-    // Они будут активны, когда страница discordDecorTypePage станет видимой
     const tabWithoutNitro = document.getElementById('tab-without-nitro');
     const tabWithNitro = document.getElementById('tab-with-nitro');
 
@@ -45,7 +44,11 @@ document.addEventListener('DOMContentLoaded', () => {
         tabWithoutNitro.addEventListener('click', () => {
             // Устанавливаем текущий сервис перед переходом
             currentService = discordDecorProducts;
-            selectPlan('discord_decor_without_nitro');
+            // Обновляем состояние кнопок
+            document.querySelectorAll('.tab-button').forEach(btn => btn.classList.remove('active'));
+            tabWithoutNitro.classList.add('active');
+            // Показываем опции для "Без Nitro"
+            showDiscordDecorOptions('discord_decor_without_nitro');
         });
     }
 
@@ -53,7 +56,11 @@ document.addEventListener('DOMContentLoaded', () => {
         tabWithNitro.addEventListener('click', () => {
             // Устанавливаем текущий сервис перед переходом
             currentService = discordDecorProducts;
-            selectPlan('discord_decor_with_nitro');
+            // Обновляем состояние кнопок
+            document.querySelectorAll('.tab-button').forEach(btn => btn.classList.remove('active'));
+            tabWithNitro.classList.add('active');
+            // Показываем опции для "З Nitro"
+            showDiscordDecorOptions('discord_decor_with_nitro');
         });
     }
 });
@@ -109,7 +116,21 @@ function setupEventListeners() {
     if (backToServicesBtn) backToServicesBtn.addEventListener('click', goBackToServices);
     if (backToPlansBtn) backToPlansBtn.addEventListener('click', () => showPage(plansPage));
     if (backToMainFromCartBtn) backToMainFromCartBtn.addEventListener('click', goToHome);
-    if (backToDigitalBtn) backToDigitalBtn.addEventListener('click', () => showPage(digitalPage)); // Обработчик для новой кнопки
+    if (backToDigitalBtn) backToDigitalBtn.addEventListener('click', () => {
+        showPage(digitalPage);
+        // Сбрасываем состояние вкладок при возврате
+        document.querySelectorAll('.tab-button').forEach(btn => btn.classList.remove('active'));
+        if (document.getElementById('tab-without-nitro')) {
+            document.getElementById('tab-without-nitro').classList.add('active');
+        }
+        // Очищаем контейнер с опциями
+        const optionsContainer = document.getElementById('options-container');
+        if (optionsContainer) {
+            optionsContainer.innerHTML = '';
+        }
+        currentService = null;
+        currentPlan = null;
+    }); // Обработчик для новой кнопки
     
     // Обработчик для логотипа
     if (mainLogo) mainLogo.addEventListener('click', goToHome);
@@ -129,12 +150,36 @@ function goToHome() {
     // Очищаем историю и показываем главную страницу
     pageHistory.length = 0;
     showPage(mainPage);
+    // Сбрасываем состояние вкладок
+    document.querySelectorAll('.tab-button').forEach(btn => btn.classList.remove('active'));
+    if (document.getElementById('tab-without-nitro')) {
+        document.getElementById('tab-without-nitro').classList.add('active');
+    }
+    // Очищаем контейнер с опциями
+    const optionsContainer = document.getElementById('options-container');
+    if (optionsContainer) {
+        optionsContainer.innerHTML = '';
+    }
+    currentService = null;
+    currentPlan = null;
 }
 
 function goBackToServices() {
     // Если текущий сервис - украшения Discord, возвращаемся на страницу цифровых товаров
     if (currentService === discordDecorProducts) {
         showPage(digitalPage);
+        // Сбрасываем состояние вкладок при возврате
+        document.querySelectorAll('.tab-button').forEach(btn => btn.classList.remove('active'));
+        if (document.getElementById('tab-without-nitro')) {
+            document.getElementById('tab-without-nitro').classList.add('active');
+        }
+        // Очищаем контейнер с опциями
+        const optionsContainer = document.getElementById('options-container');
+        if (optionsContainer) {
+            optionsContainer.innerHTML = '';
+        }
+        currentService = null;
+        currentPlan = null;
     } else {
         showPage(subscriptionsPage);
     }
@@ -143,8 +188,11 @@ function goBackToServices() {
 function selectService(serviceId) {
     // Якщо обрано украшення Discord, переходимо на страницу выбора типа украшений
     if (serviceId === 'discord_decor') {
-        showPage(discordDecorTypePage); // Показываем страницу с вкладками
-        return; // Прерываем выполнение, так как логика выбора плана будет на другой странице
+        showPage(discordDecorTypePage);
+        // Показываем опции для "Без Nitro" по умолчанию
+        currentService = discordDecorProducts;
+        showDiscordDecorOptions('discord_decor_without_nitro');
+        return; // Прерываем выполнение
     }
 
     // Звичайна логіка для інших сервісів
@@ -173,10 +221,42 @@ function selectService(serviceId) {
     showPage(plansPage);
 }
 
+// Новая функция для отображения опций Discord украшений
+function showDiscordDecorOptions(planId) {
+    if (!currentService || currentService !== discordDecorProducts) return;
+
+    const plan = currentService.plans.find(p => p.id === planId);
+    if (!plan) return;
+
+    currentPlan = plan;
+
+    const optionsContainer = document.getElementById('options-container');
+    if (optionsContainer) {
+        optionsContainer.innerHTML = '';
+
+        currentPlan.options.forEach(option => {
+            const optionCard = document.createElement('div');
+            optionCard.className = 'option-card';
+            // У цьому випадку period - це номінал, а price - ціна в гривнях
+            optionCard.innerHTML = `
+                <div class="period">${option.period}</div>
+                <div class="price">${option.price} UAH</div>
+                <button class="add-to-cart">Додати в корзину</button>
+            `;
+            optionsContainer.appendChild(optionCard);
+
+            optionCard.querySelector('button').addEventListener('click', () => {
+                // Тут передаємо номінал як "period" і ціну як "price"
+                addItemToCart(option.period, option.price);
+            });
+        });
+    }
+}
+
 function selectPlan(planId) {
     if (!currentService) return;
 
-    // Якщо поточний сервіс - украшення Discord
+    // Якщо поточний сервіс - украшення Discord (на всякий случай, хотя это обрабатывается в selectService)
     if (currentService === discordDecorProducts) {
         const plan = currentService.plans.find(p => p.id === planId);
         if (!plan) return;
@@ -456,6 +536,18 @@ async function checkout() {
     updateCartCount();
     updateCartView();
     showPage(mainPage);
+    // Сбрасываем состояние вкладок
+    document.querySelectorAll('.tab-button').forEach(btn => btn.classList.remove('active'));
+    if (document.getElementById('tab-without-nitro')) {
+        document.getElementById('tab-without-nitro').classList.add('active');
+    }
+    // Очищаем контейнер с опциями
+    const optionsContainer = document.getElementById('options-container');
+    if (optionsContainer) {
+        optionsContainer.innerHTML = '';
+    }
+    currentService = null;
+    currentPlan = null;
 }
 
 // Функция оформления одного товара
