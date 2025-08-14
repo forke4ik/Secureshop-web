@@ -1,13 +1,69 @@
-вот код products.js: const products = {
+// products.js
+
+// Додамо новий об'єкт для украшень Discord
+// Це спеціальний об'єкт, який не входить в основний products
+// Він має структуру, схожу на звичайний сервіс, але з двома "планами" - це вкладки "Без Nitro" і "З Nitro"
+const discordDecorProducts = {
+  name: "Discord Украшення", // Назва сервісу
+  logo: "images/discord.webp", // Шлях до логотипу
+  // Плани для украшень - це вкладки "Без Nitro" і "З Nitro"
+  plans: [
+    {
+      id: "discord_decor_without_nitro", // Унікальний ідентифікатор плану
+      name: "Без Nitro", // Назва плану (вкладки)
+      description: "Украшення для користувачів без Nitro", // Опис плану
+      // Опції для цього плану - це конкретні товари з ціною
+      options: [
+        // Кожен об'єкт в options - це один товар
+        // period - номінал товару (відображається в картці)
+        // price - ціна в гривнях (відображається в картці)
+        { period: "6€", price: 180 },
+        { period: "8€", price: 235 },
+        { period: "10€", price: 295 },
+        { period: "11€", price: 325 },
+        { period: "12€", price: 355 },
+        { period: "13€", price: 385 },
+        { period: "15€", price: 440 },
+        { period: "16€", price: 470 },
+        { period: "18€", price: 530 },
+        { period: "24€", price: 705 },
+        { period: "29€", price: 855 }
+      ]
+    },
+    {
+      id: "discord_decor_with_nitro", // Унікальний ідентифікатор плану
+      name: "З Nitro", // Назва плану (вкладки)
+      description: "Украшення для користувачів з Nitro", // Опис плану
+      // Опції для цього плану - це конкретні товари з ціною
+      options: [
+        { period: "5€", price: 145 },
+        { period: "7€", price: 205 },
+        { period: "8.5€", price: 250 },
+        { period: "9€", price: 265 },
+        { period: "14€", price: 410 },
+        { period: "22€", price: 650 }
+      ]
+    }
+  ]
+};
+
+// Основний об'єкт з усіма сервісами (підписками)
+const products = {
+  // Кожен ключ об'єкта - це ID сервісу (використовується в data-service)
   chatgpt: {
-    name: "ChatGPT",
-    logo: "images/chatgpt.webp",
+    name: "ChatGPT", // Назва сервісу
+    logo: "images/chatgpt.webp", // Шлях до логотипу
+    // Плани для сервісу - це різні типи підписок
     plans: [
       {
-        id: "chatgpt_plus",
-        name: "Plus",
-        description: "Доступ до GPT-4, розширені можливості",
+        id: "chatgpt_plus", // Унікальний ідентифікатор плану
+        name: "Plus", // Назва плану
+        description: "Доступ до GPT-4, розширені можливості", // Опис плану
+        // Опції для цього плану - це періоди підписки з цінами
         options: [
+          // Кожен об'єкт в options - це один період підписки
+          // period - період підписки (відображається в картці)
+          // price - ціна в гривнях (відображається в картці)
           { period: "1 місяць", price: 650 }
         ]
       }
