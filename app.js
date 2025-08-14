@@ -27,6 +27,26 @@ const pageHistory = [];
 document.addEventListener('DOMContentLoaded', () => {
     updateCartCount();
     setupEventListeners();
+
+    // Додаємо обробники для кнопок островка
+    const tabWithoutNitro = document.getElementById('tab-without-nitro');
+    const tabWithNitro = document.getElementById('tab-with-nitro');
+
+    if (tabWithoutNitro) {
+        tabWithoutNitro.addEventListener('click', () => {
+            if (currentService === discordDecorProducts) {
+                selectPlan('discord_decor_without_nitro');
+            }
+        });
+    }
+
+    if (tabWithNitro) {
+        tabWithNitro.addEventListener('click', () => {
+            if (currentService === discordDecorProducts) {
+                selectPlan('discord_decor_with_nitro');
+            }
+        });
+    }
 });
 
 function addToCart(item) {
@@ -90,65 +110,121 @@ function goToHome() {
 }
 
 function selectService(serviceId) {
-    currentService = products[serviceId];
-    document.getElementById('service-name').textContent = currentService.name;
-    
-    const plansContainer = document.getElementById('plans-container');
-    if (plansContainer) {
-        plansContainer.innerHTML = '';
-        
-        currentService.plans.forEach(plan => {
-            const planCard = document.createElement('div');
-            planCard.className = 'plan-card';
-            planCard.innerHTML = `
-                <h2>${plan.name}</h2>
-                <p>${plan.description}</p>
-                <button class="add-to-cart">Обрати</button>
-            `;
-            plansContainer.appendChild(planCard);
-            
-            // Добавляем обработчик для кнопки
-            planCard.querySelector('button').addEventListener('click', () => {
-                selectPlan(plan.id);
+    // Якщо обрано украшення Discord, використовуємо спеціальний об'єкт
+    if (serviceId === 'discord_decor') {
+        currentService = discordDecorProducts;
+        // Показуємо островок
+        document.getElementById('discord-decor-tabs').style.display = 'flex';
+        // За замовчуванням показуємо перший план (Без Nitro)
+        selectPlan(discordDecorProducts.plans[0].id);
+    } else {
+        // Звичайна логіка для інших сервісів
+        currentService = products[serviceId];
+        // Приховуємо островок для інших сервісів
+        document.getElementById('discord-decor-tabs').style.display = 'none';
+        document.getElementById('service-name').textContent = currentService.name;
+
+        const plansContainer = document.getElementById('plans-container');
+        if (plansContainer) {
+            plansContainer.innerHTML = '';
+
+            currentService.plans.forEach(plan => {
+                const planCard = document.createElement('div');
+                planCard.className = 'plan-card';
+                planCard.innerHTML = `
+                    <h2>${plan.name}</h2>
+                    <p>${plan.description}</p>
+                    <button class="add-to-cart">Обрати</button>
+                `;
+                plansContainer.appendChild(planCard);
+
+                planCard.querySelector('button').addEventListener('click', () => {
+                    selectPlan(plan.id);
+                });
             });
-        });
+        }
+        showPage(plansPage);
     }
-    
-    showPage(plansPage);
 }
 
 function selectPlan(planId) {
     if (!currentService) return;
-    
-    const plan = currentService.plans.find(p => p.id === planId);
-    if (!plan) return;
-    
-    currentPlan = plan;
-    document.getElementById('plan-name').textContent = `${currentService.name} ${currentPlan.name}`;
-    document.getElementById('plan-description').textContent = currentPlan.description;
-    
-    const optionsContainer = document.getElementById('options-container');
-    if (optionsContainer) {
-        optionsContainer.innerHTML = '';
-        
-        currentPlan.options.forEach(option => {
-            const optionCard = document.createElement('div');
-            optionCard.className = 'option-card';
-            optionCard.innerHTML = `
-                <div class="period">${option.period}</div>
-                <div class="price">${option.price} UAH</div>
-                <button class="add-to-cart">Додати в корзину</button>
-            `;
-            optionsContainer.appendChild(optionCard);
-            
-            // Добавляем обработчик для кнопки
-            optionCard.querySelector('button').addEventListener('click', () => {
-                addItemToCart(option.period, option.price);
+
+    // Якщо поточний сервіс - украшення Discord
+    if (currentService === discordDecorProducts) {
+        const plan = currentService.plans.find(p => p.id === planId);
+        if (!plan) return;
+
+        currentPlan = plan;
+        // Оновлюємо заголовок сторінки
+        document.getElementById('service-name').textContent = `${currentService.name} - ${currentPlan.name}`;
+        // Оновлюємо опис (не обов'язково, можна приховати)
+        document.getElementById('plan-description').textContent = currentPlan.description;
+
+        // Оновлюємо стан кнопок островка
+        document.querySelectorAll('.tab-button').forEach(btn => btn.classList.remove('active'));
+        if (planId === 'discord_decor_without_nitro') {
+            document.getElementById('tab-without-nitro').classList.add('active');
+        } else if (planId === 'discord_decor_with_nitro') {
+            document.getElementById('tab-with-nitro').classList.add('active');
+        }
+
+        // Відображаємо опції
+        const optionsContainer = document.getElementById('options-container');
+        if (optionsContainer) {
+            optionsContainer.innerHTML = '';
+
+            currentPlan.options.forEach(option => {
+                const optionCard = document.createElement('div');
+                optionCard.className = 'option-card';
+                // У цьому випадку period - це номінал, а price - ціна в гривнях
+                optionCard.innerHTML = `
+                    <div class="period">${option.period}</div>
+                    <div class="price">${option.price} UAH</div>
+                    <button class="add-to-cart">Додати в корзину</button>
+                `;
+                optionsContainer.appendChild(optionCard);
+
+                optionCard.querySelector('button').addEventListener('click', () => {
+                    // Тут передаємо номінал як "period" і ціну як "price"
+                    addItemToCart(option.period, option.price);
+                });
             });
-        });
+        }
+        // Показуємо сторінку опцій (вибір конкретного товару)
+        showPage(optionsPage);
+
+    } else {
+        // Звичайна логіка для інших сервісів
+        const plan = currentService.plans.find(p => p.id === planId);
+        if (!plan) return;
+
+        currentPlan = plan;
+        document.getElementById('service-name').textContent = `${currentService.name} ${currentPlan.name}`;
+        document.getElementById('plan-description').textContent = currentPlan.description;
+
+        const optionsContainer = document.getElementById('options-container');
+        if (optionsContainer) {
+            optionsContainer.innerHTML = '';
+
+            currentPlan.options.forEach(option => {
+                const optionCard = document.createElement('div');
+                optionCard.className = 'option-card';
+                optionCard.innerHTML = `
+                    <div class="period">${option.period}</div>
+                    <div class="price">${option.price} UAH</div>
+                    <button class="add-to-cart">Додати в корзину</button>
+            `;
+                optionsContainer.appendChild(optionCard);
+
+                optionCard.querySelector('button').addEventListener('click', () => {
+                    addItemToCart(option.period, option.price);
+                });
+            });
+        }
+        showPage(optionsPage);
     }
-    
-    showPage(optionsPage);
+
 }
 
 function addItemToCart(period, price) {
@@ -274,6 +350,7 @@ function generateBotCommand(items) {
         // Сокращаем названия для экономии места
         let serviceAbbr;
         if (item.service.includes('ChatGPT')) serviceAbbr = "Cha";
+        else if (item.service.includes('Discord Украшення')) serviceAbbr = "DisU"; // Абревіатура для украшень
         else if (item.service.includes('Discord')) serviceAbbr = "Dis";
         else if (item.service.includes('Duolingo')) serviceAbbr = "Duo";
         else if (item.service.includes('PicsArt')) serviceAbbr = "Pic";
@@ -289,6 +366,8 @@ function generateBotCommand(items) {
         else if (item.plan.includes('Plus')) planAbbr = "Plu";
         else if (item.plan.includes('Pro')) planAbbr = "Pro";
         else if (item.plan.includes('Premium')) planAbbr = "Pre";
+        else if (item.plan.includes('Без Nitro')) planAbbr = "BzN"; // Абревіатура для Без Nitro
+        else if (item.plan.includes('З Nitro')) planAbbr = "ZN";   // Абревіатура для З Nitro
         else planAbbr = item.plan.substring(0, 3);
         
         const periodAbbr = item.period.replace('місяць', 'м').replace('місяців', 'м');
