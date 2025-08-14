@@ -17,17 +17,17 @@ const discordDecorProducts = {
         // Кожен об'єкт в options - це один товар
         // period - номінал товару (відображається в картці)
         // price - ціна в гривнях (відображається в картці)
-        { period: "6€", price: 180 },
-        { period: "8€", price: 235 },
-        { period: "10€", price: 295 },
-        { period: "11€", price: 325 },
-        { period: "12€", price: 355 },
-        { period: "13€", price: 385 },
-        { period: "15€", price: 440 },
-        { period: "16€", price: 470 },
-        { period: "18€", price: 530 },
-        { period: "24€", price: 705 },
-        { period: "29€", price: 855 }
+        { period: "6$", price: 180 },
+        { period: "8$", price: 235 },
+        { period: "10$", price: 295 },
+        { period: "11$", price: 325 },
+        { period: "12$", price: 355 },
+        { period: "13$", price: 385 },
+        { period: "15$", price: 440 },
+        { period: "16$", price: 470 },
+        { period: "18$", price: 530 },
+        { period: "24$", price: 705 },
+        { period: "29$", price: 855 }
       ]
     },
     {
@@ -36,12 +36,12 @@ const discordDecorProducts = {
       description: "Украшення для користувачів з Nitro", // Опис плану
       // Опції для цього плану - це конкретні товари з ціною
       options: [
-        { period: "5€", price: 145 },
-        { period: "7€", price: 205 },
-        { period: "8.5€", price: 250 },
-        { period: "9€", price: 265 },
-        { period: "14€", price: 410 },
-        { period: "22€", price: 650 }
+        { period: "5$", price: 145 },
+        { period: "7$", price: 205 },
+        { period: "8.5$", price: 250 },
+        { period: "9$", price: 265 },
+        { period: "14$", price: 410 },
+        { period: "22$", price: 650 }
       ]
     }
   ]
