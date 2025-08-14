@@ -5,8 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SecureShop - Магазин підписок</title>
     <link rel="stylesheet" href="styles.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css
-  ">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
     <header>
@@ -18,9 +17,29 @@
     </header>
 
     <main>
-        <!-- Главная страница с сервисами -->
-        <section id="services-page" class="page active">
-            <h1>Оберіть сервіс</h1>
+        <!-- Главная страница выбора типа товаров -->
+        <section id="main-page" class="page active">
+            <h1>Оберіть тип товару</h1>
+            <div class="main-categories">
+                <div class="category-card" data-category="subscriptions">
+                    <i class="fas fa-crown category-icon"></i>
+                    <h2>Підписки</h2>
+                    <p>Преміум підписки на популярні сервіси</p>
+                </div>
+                <div class="category-card" data-category="digital">
+                    <i class="fas fa-gem category-icon"></i>
+                    <h2>Цифрові товари</h2>
+                    <p>Унікальні цифрові товари та подарунки</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Страница выбора подписок -->
+        <section id="subscriptions-page" class="page">
+            <div class="back-button" id="back-to-main-category">
+                <i class="fas fa-arrow-left"></i> Назад
+            </div>
+            <h1>Підписки</h1>
             <div class="services-grid">
                 <div class="service-card" data-service="chatgpt">
                     <img src="images/chatgpt.webp" alt="ChatGPT">
@@ -38,7 +57,6 @@
                     <img src="images/picsart.webp" alt="PicsArt">
                     <h3>PicsArt</h3>
                 </div>
-                <!-- Добавленные новые сервисы -->
                 <div class="service-card" data-service="canva">
                     <img src="images/canva.webp" alt="Canva">
                     <h3>Canva</h3>
@@ -50,6 +68,35 @@
             </div>
         </section>
 
+        <!-- Страница выбора цифровых товаров -->
+        <section id="digital-page" class="page">
+            <div class="back-button" id="back-to-main-category-digital">
+                <i class="fas fa-arrow-left"></i> Назад
+            </div>
+            <h1>Цифрові товари</h1>
+            <div class="services-grid">
+                <div class="service-card" data-service="discord_decor">
+                    <img src="images/discord.webp" alt="Discord Украшення">
+                    <h3>Discord Украшення</h3>
+                </div>
+                <!-- Добавить другие цифровые товары здесь -->
+            </div>
+        </section>
+
+        <!-- Страница выбора типа украшений Discord -->
+        <section id="discord-decor-type-page" class="page">
+            <div class="back-button" id="back-to-digital">
+                <i class="fas fa-arrow-left"></i> Назад
+            </div>
+            <h1>Discord Украшення</h1>
+            <div id="discord-decor-tabs" class="discord-decor-tabs">
+                <button id="tab-without-nitro" class="tab-button active">Без Nitro</button>
+                <button id="tab-with-nitro" class="tab-button">З Nitro</button>
+            </div>
+            <!-- Контейнер для опций -->
+            <div id="options-container" class="options-grid"></div>
+        </section>
+
         <!-- Страница выбора тарифов -->
         <section id="plans-page" class="page">
             <div class="back-button" id="back-to-services">
@@ -59,7 +106,7 @@
             <div id="plans-container" class="plans-grid"></div>
         </section>
 
-        <!-- Страница выбора периода -->
+        <!-- Страница выбора периода/товара -->
         <section id="options-page" class="page">
             <div class="back-button" id="back-to-plans">
                 <i class="fas fa-arrow-left"></i> Назад
@@ -71,7 +118,7 @@
 
         <!-- Корзина -->
         <section id="cart-page" class="page">
-            <div class="back-button" id="back-to-main">
+            <div class="back-button" id="back-to-main-from-cart">
                 <i class="fas fa-arrow-left"></i> Назад
             </div>
             <h1>Ваше замовлення</h1>
@@ -112,10 +159,8 @@
     <footer>
         <p>Підтримка: @SecureShopBot</p>
         <div class="social">
-            <a href="https://t.me/SecureShopUA
-  " target="_blank"><i class="fab fa-telegram"></i></a>
-            <a href="https://www.tiktok.com/@secureshop_official
-  " target="_blank"><i class="fab fa-tiktok"></i></a>
+            <a href="https://t.me/SecureShopUA" target="_blank"><i class="fab fa-telegram"></i></a>
+            <a href="https://www.tiktok.com/@secureshop_official" target="_blank"><i class="fab fa-tiktok"></i></a>
         </div>
     </footer>
 
