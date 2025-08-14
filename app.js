@@ -1,4 +1,6 @@
-const servicesPage = document.getElementById('services-page');
+const mainPage = document.getElementById('main-page');
+const subscriptionsPage = document.getElementById('subscriptions-page');
+const digitalPage = document.getElementById('digital-page');
 const plansPage = document.getElementById('plans-page');
 const optionsPage = document.getElementById('options-page');
 const cartPage = document.getElementById('cart-page');
@@ -9,9 +11,11 @@ const cartIcon = document.getElementById('cart-icon');
 const mainLogo = document.getElementById('main-logo');
 
 // Элементы кнопок "Назад"
+const backToMainCategoryBtn = document.getElementById('back-to-main-category');
+const backToMainCategoryDigitalBtn = document.getElementById('back-to-main-category-digital');
 const backToServicesBtn = document.getElementById('back-to-services');
 const backToPlansBtn = document.getElementById('back-to-plans');
-const backToMainBtn = document.getElementById('back-to-main');
+const backToMainFromCartBtn = document.getElementById('back-to-main-from-cart');
 
 // Текущий выбор
 let currentService = null;
@@ -65,12 +69,24 @@ function showPage(page) {
     page.classList.add('active');
     
     // Сохраняем историю только для основных страниц
-    if (page !== servicesPage) {
+    if (page !== mainPage) {
         pageHistory.push(page);
     }
 }
 
 function setupEventListeners() {
+    // Обработчики для категорий
+    document.querySelectorAll('.category-card').forEach(card => {
+        card.addEventListener('click', () => {
+            const category = card.dataset.category;
+            if (category === 'subscriptions') {
+                showPage(subscriptionsPage);
+            } else if (category === 'digital') {
+                showPage(digitalPage);
+            }
+        });
+    });
+    
     // Обработчики для сервисов
     document.querySelectorAll('.service-card').forEach(card => {
         card.addEventListener('click', () => {
@@ -83,11 +99,13 @@ function setupEventListeners() {
     if (cartIcon) cartIcon.addEventListener('click', showCart);
     
     // Обработчики для кнопок "Назад"
-    if (backToServicesBtn) backToServicesBtn.addEventListener('click', () => showPage(servicesPage));
+    if (backToMainCategoryBtn) backToMainCategoryBtn.addEventListener('click', () => showPage(mainPage));
+    if (backToMainCategoryDigitalBtn) backToMainCategoryDigitalBtn.addEventListener('click', () => showPage(mainPage));
+    if (backToServicesBtn) backToServicesBtn.addEventListener('click', goBackToServices);
     if (backToPlansBtn) backToPlansBtn.addEventListener('click', () => showPage(plansPage));
     
     // Кнопка "Назад" в корзине ведет на главную
-    if (backToMainBtn) backToMainBtn.addEventListener('click', goToHome);
+    if (backToMainFromCartBtn) backToMainFromCartBtn.addEventListener('click', goToHome);
     
     // Обработчик для логотипа
     if (mainLogo) mainLogo.addEventListener('click', goToHome);
@@ -106,7 +124,16 @@ function setupEventListeners() {
 function goToHome() {
     // Очищаем историю и показываем главную страницу
     pageHistory.length = 0;
-    showPage(servicesPage);
+    showPage(mainPage);
+}
+
+function goBackToServices() {
+    // Если текущий сервис - украшения Discord, возвращаемся на страницу цифровых товаров
+    if (currentService === discordDecorProducts) {
+        showPage(digitalPage);
+    } else {
+        showPage(subscriptionsPage);
+    }
 }
 
 function selectService(serviceId) {
@@ -292,7 +319,7 @@ function goBack() {
         const prevPage = pageHistory.pop();
         showPage(prevPage);
     } else {
-        showPage(servicesPage);
+        showPage(mainPage);
     }
 }
 
@@ -438,7 +465,7 @@ async function checkout() {
     localStorage.setItem('cart', JSON.stringify(cart));
     updateCartCount();
     updateCartView();
-    showPage(servicesPage);
+    showPage(mainPage);
 }
 
 // Функция оформления одного товара
