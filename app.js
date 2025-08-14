@@ -209,12 +209,14 @@ function selectService(serviceId) {
             planCard.innerHTML = `
                 <h2>${plan.name}</h2>
                 <p>${plan.description}</p>
-                <button class="add-to-cart">Обрати</button>
+                <button class="select-plan-btn" data-plan-id="${plan.id}">Обрати</button>
             `;
             plansContainer.appendChild(planCard);
 
-            planCard.querySelector('button').addEventListener('click', () => {
-                selectPlan(plan.id);
+            // Добавляем обработчик для кнопки "Обрати"
+            planCard.querySelector('.select-plan-btn').addEventListener('click', (e) => {
+                const planId = e.target.dataset.planId;
+                selectPlan(planId);
             });
         });
     }
@@ -256,42 +258,10 @@ function showDiscordDecorOptions(planId) {
 function selectPlan(planId) {
     if (!currentService) return;
 
-    // Якщо поточний сервіс - украшення Discord (на всякий случай, хотя это обрабатывается в selectService)
+    // Якщо поточний сервіс - украшення Discord (на всякий случай)
     if (currentService === discordDecorProducts) {
-        const plan = currentService.plans.find(p => p.id === planId);
-        if (!plan) return;
-
-        currentPlan = plan;
-        // Оновлюємо заголовок сторінки
-        document.getElementById('plan-name').textContent = `${currentService.name} - ${currentPlan.name}`;
-        // Оновлюємо опис (не обов'язково, можна приховати)
-        document.getElementById('plan-description').textContent = currentPlan.description;
-
-        // Відображаємо опції
-        const optionsContainer = document.getElementById('options-container');
-        if (optionsContainer) {
-            optionsContainer.innerHTML = '';
-
-            currentPlan.options.forEach(option => {
-                const optionCard = document.createElement('div');
-                optionCard.className = 'option-card';
-                // У цьому випадку period - це номінал, а price - ціна в гривнях
-                optionCard.innerHTML = `
-                    <div class="period">${option.period}</div>
-                    <div class="price">${option.price} UAH</div>
-                    <button class="add-to-cart">Додати в корзину</button>
-                `;
-                optionsContainer.appendChild(optionCard);
-
-                optionCard.querySelector('button').addEventListener('click', () => {
-                    // Тут передаємо номінал як "period" і ціну як "price"
-                    addItemToCart(option.period, option.price);
-                });
-            });
-        }
-        // Показуємо сторінку опцій (вибір конкретного товару)
-        showPage(optionsPage);
-
+        // Это не должно происходить, так как для украшений есть отдельная логика
+        return;
     } else {
         // Звичайна логіка для інших сервісів
         const plan = currentService.plans.find(p => p.id === planId);
