@@ -16,6 +16,7 @@ const backToMainCategoryDigitalBtn = document.getElementById('back-to-main-categ
 const backToServicesBtn = document.getElementById('back-to-services');
 const backToPlansBtn = document.getElementById('back-to-plans');
 const backToMainFromCartBtn = document.getElementById('back-to-main-from-cart');
+const backToDigitalBtn = document.getElementById('back-to-digital'); // Новая кнопка для возврата из Discord украшений
 
 // Текущий выбор
 let currentService = null;
@@ -32,7 +33,7 @@ document.addEventListener('DOMContentLoaded', () => {
     updateCartCount();
     setupEventListeners();
 
-    // Додаємо обробники для кнопок островка
+    // Додаємо обробники для кнопків островка
     const tabWithoutNitro = document.getElementById('tab-without-nitro');
     const tabWithNitro = document.getElementById('tab-with-nitro');
 
@@ -98,14 +99,13 @@ function setupEventListeners() {
     // Обработчик для иконки корзины
     if (cartIcon) cartIcon.addEventListener('click', showCart);
     
-    // Обработчики для кнопок "Назад"
+    // Обработчики для кнопків "Назад"
     if (backToMainCategoryBtn) backToMainCategoryBtn.addEventListener('click', () => showPage(mainPage));
     if (backToMainCategoryDigitalBtn) backToMainCategoryDigitalBtn.addEventListener('click', () => showPage(mainPage));
     if (backToServicesBtn) backToServicesBtn.addEventListener('click', goBackToServices);
     if (backToPlansBtn) backToPlansBtn.addEventListener('click', () => showPage(plansPage));
-    
-    // Кнопка "Назад" в корзине ведет на главную
     if (backToMainFromCartBtn) backToMainFromCartBtn.addEventListener('click', goToHome);
+    if (backToDigitalBtn) backToDigitalBtn.addEventListener('click', () => showPage(digitalPage)); // Новый обработчик
     
     // Обработчик для логотипа
     if (mainLogo) mainLogo.addEventListener('click', goToHome);
@@ -137,41 +137,38 @@ function goBackToServices() {
 }
 
 function selectService(serviceId) {
-    // Якщо обрано украшення Discord, використовуємо спеціальний об'єкт
+    // Якщо обрано украшення Discord, переходимо на страницу выбора типа украшений
     if (serviceId === 'discord_decor') {
-        currentService = discordDecorProducts;
-        // Показуємо островок
-        document.getElementById('discord-decor-tabs').style.display = 'flex';
-        // За замовчуванням показуємо перший план (Без Nitro)
-        selectPlan(discordDecorProducts.plans[0].id);
-    } else {
-        // Звичайна логіка для інших сервісів
-        currentService = products[serviceId];
-        // Приховуємо островок для інших сервісів
-        document.getElementById('discord-decor-tabs').style.display = 'none';
-        document.getElementById('service-name').textContent = currentService.name;
-
-        const plansContainer = document.getElementById('plans-container');
-        if (plansContainer) {
-            plansContainer.innerHTML = '';
-
-            currentService.plans.forEach(plan => {
-                const planCard = document.createElement('div');
-                planCard.className = 'plan-card';
-                planCard.innerHTML = `
-                    <h2>${plan.name}</h2>
-                    <p>${plan.description}</p>
-                    <button class="add-to-cart">Обрати</button>
-                `;
-                plansContainer.appendChild(planCard);
-
-                planCard.querySelector('button').addEventListener('click', () => {
-                    selectPlan(plan.id);
-                });
-            });
-        }
-        showPage(plansPage);
+        showPage(discordDecorTypePage);
+        return;
     }
+
+    // Звичайна логіка для інших сервісів
+    currentService = products[serviceId];
+    // Приховуємо островок для інших сервісів
+    document.getElementById('discord-decor-tabs').style.display = 'none';
+    document.getElementById('service-name').textContent = currentService.name;
+
+    const plansContainer = document.getElementById('plans-container');
+    if (plansContainer) {
+        plansContainer.innerHTML = '';
+
+        currentService.plans.forEach(plan => {
+            const planCard = document.createElement('div');
+            planCard.className = 'plan-card';
+            planCard.innerHTML = `
+                <h2>${plan.name}</h2>
+                <p>${plan.description}</p>
+                <button class="add-to-cart">Обрати</button>
+            `;
+            plansContainer.appendChild(planCard);
+
+            planCard.querySelector('button').addEventListener('click', () => {
+                selectPlan(plan.id);
+            });
+        });
+    }
+    showPage(plansPage);
 }
 
 function selectPlan(planId) {
@@ -184,17 +181,9 @@ function selectPlan(planId) {
 
         currentPlan = plan;
         // Оновлюємо заголовок сторінки
-        document.getElementById('service-name').textContent = `${currentService.name} - ${currentPlan.name}`;
+        document.getElementById('plan-name').textContent = `${currentService.name} - ${currentPlan.name}`;
         // Оновлюємо опис (не обов'язково, можна приховати)
         document.getElementById('plan-description').textContent = currentPlan.description;
-
-        // Оновлюємо стан кнопок островка
-        document.querySelectorAll('.tab-button').forEach(btn => btn.classList.remove('active'));
-        if (planId === 'discord_decor_without_nitro') {
-            document.getElementById('tab-without-nitro').classList.add('active');
-        } else if (planId === 'discord_decor_with_nitro') {
-            document.getElementById('tab-with-nitro').classList.add('active');
-        }
 
         // Відображаємо опції
         const optionsContainer = document.getElementById('options-container');
@@ -227,7 +216,7 @@ function selectPlan(planId) {
         if (!plan) return;
 
         currentPlan = plan;
-        document.getElementById('service-name').textContent = `${currentService.name} ${currentPlan.name}`;
+        document.getElementById('plan-name').textContent = `${currentService.name} ${currentPlan.name}`;
         document.getElementById('plan-description').textContent = currentPlan.description;
 
         const optionsContainer = document.getElementById('options-container');
