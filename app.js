@@ -259,7 +259,7 @@ function selectPlan(planId) {
                 });
             });
         }
-        showPage(optionsPage);
+        showPage(optionsPage); // Отображаем страницу с опциями
     }
 }
 
