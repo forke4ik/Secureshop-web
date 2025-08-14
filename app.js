@@ -1,4 +1,4 @@
-// app.js - Исправленная и упрощенная версия
+// app.js - Полная версия с исправлениями
 
 // --- ГЛОБАЛЬНЫЕ ПЕРЕМЕННЫЕ ---
 let currentService = null;
@@ -22,10 +22,10 @@ const serviceNameEl = document.getElementById('service-name');
 const planNameEl = document.getElementById('plan-name');
 const planDescriptionEl = document.getElementById('plan-description');
 const plansContainer = document.getElementById('plans-container');
-// --- ИСПРАВЛЕНИЕ 1: Уникальные ID для контейнеров опций ---
+// --- ИСПРАВЛЕНИЕ: Уникальные ID для контейнеров опций ---
 const subscriptionOptionsContainer = document.getElementById('subscription-options-container'); // Для обычных подписок
 const discordOptionsContainer = document.getElementById('discord-options-container');       // Для Discord Decor
-// --- КОНЕЦ ИСПРАВЛЕНИЯ 1 ---
+// --- КОНЕЦ ИСПРАВЛЕНИЯ ---
 
 // --- ИНИЦИАЛИЗАЦИЯ ---
 document.addEventListener('DOMContentLoaded', function() {
@@ -78,11 +78,11 @@ function resetSelection() {
     currentService = null;
     currentPlan = null;
     resetDiscordDecorUI();
-    // --- ИСПРАВЛЕНИЕ 2: Очистка правильных контейнеров ---
+    // --- ИСПРАВЛЕНИЕ: Очистка правильных контейнеров ---
     if (subscriptionOptionsContainer) subscriptionOptionsContainer.innerHTML = '';
     if (discordOptionsContainer) discordOptionsContainer.innerHTML = '';
     if (plansContainer) plansContainer.innerHTML = '';
-    // --- КОНЕЦ ИСПРАВЛЕНИЯ 2 ---
+    // --- КОНЕЦ ИСПРАВЛЕНИЯ ---
 }
 
 function resetDiscordDecorUI() {
@@ -91,9 +91,9 @@ function resetDiscordDecorUI() {
     if (document.getElementById('tab-without-nitro')) {
         document.getElementById('tab-without-nitro').classList.add('active');
     }
-    // --- ИСПРАВЛЕНИЕ 3: Очистка правильного контейнера ---
+    // --- ИСПРАВЛЕНИЕ: Очистка правильного контейнера ---
     if (discordOptionsContainer) discordOptionsContainer.innerHTML = '';
-    // --- КОНЕЦ ИСПРАВЛЕНИЯ 3 ---
+    // --- КОНЕЦ ИСПРАВЛЕНИЯ ---
 }
 
 // --- ОБРАБОТЧИКИ СОБЫТИЙ ---
@@ -175,6 +175,12 @@ function setupEventListeners() {
             currentService = discordDecorProducts;
             showDiscordDecorOptions('discord_decor_with_nitro');
         });
+    }
+    
+    // --- Кнопка оформления заказа в корзине ---
+    const checkoutBtn = document.querySelector('.checkout-btn');
+    if (checkoutBtn) {
+        checkoutBtn.addEventListener('click', checkout);
     }
 }
 
@@ -270,9 +276,9 @@ function selectPlan(planId) {
 
     if (planNameEl) planNameEl.textContent = `${currentService.name} ${currentPlan.name}`;
     if (planDescriptionEl) planDescriptionEl.textContent = currentPlan.description || '';
-    // --- ИСПРАВЛЕНИЕ 4: Используем правильный контейнер ---
+    // --- ИСПРАВЛЕНИЕ: Используем правильный контейнер ---
     if (subscriptionOptionsContainer) subscriptionOptionsContainer.innerHTML = '';
-    // --- КОНЕЦ ИСПРАВЛЕНИЯ 4 ---
+    // --- КОНЕЦ ИСПРАВЛЕНИЯ ---
 
     // Создаем карточки опций (периодов)
     if (plan.options && plan.options.length > 0) {
@@ -302,14 +308,14 @@ function selectPlan(planId) {
             optionCard.appendChild(priceEl);
             optionCard.appendChild(addToCartBtn);
             
-            // --- ИСПРАВЛЕНИЕ 5: Добавляем в правильный контейнер ---
+            // --- ИСПРАВЛЕНИЕ: Добавляем в правильный контейнер ---
             if (subscriptionOptionsContainer) subscriptionOptionsContainer.appendChild(optionCard);
-            // --- КОНЕЦ ИСПРАВЛЕНИЯ 5 ---
+            // --- КОНЕЦ ИСПРАВЛЕНИЯ ---
         });
     } else {
-        // --- ИСПРАВЛЕНИЕ 6: Добавляем сообщение в правильный контейнер ---
+        // --- ИСПРАВЛЕНИЕ: Добавляем сообщение в правильный контейнер ---
         if (subscriptionOptionsContainer) subscriptionOptionsContainer.innerHTML = '<p>Опції відсутні</p>';
-        // --- КОНЕЦ ИСПРАВЛЕНИЯ 6 ---
+        // --- КОНЕЦ ИСПРАВЛЕНИЯ ---
     }
 
     showPage(optionsPage);
@@ -333,34 +339,13 @@ function showDiscordDecorOptions(planId) {
     currentPlan = plan;
     console.log("Текущий план Discord Decor установлен:", currentPlan.name);
 
-    // Устанавливаем заголовок и описание (они общие для options-page)
-    // Но для Discord Decor мы используем другую страницу/контейнер
-    // В данном случае заголовки будут браться со страницы options-page, если она активна,
-    // или мы можем установить их напрямую, если discord-decor-type-page активна.
-    // Для простоты оставим как есть, предполагая, что plan-name и plan-description
-    // находятся на options-page, которая будет показана.
-    // Более точный способ - обновлять их на discord-decor-type-page, если она активна.
-    // Но для начала попробуем текущий подход.
-    
-    // Предполагаем, что planNameEl и planDescriptionEl находятся на options-page
-    // Но опции рендерятся в discordOptionsContainer на discord-decor-type-page
-    // Это может быть путаница. Лучше бы разделить.
-    // Для начала просто убедимся, что рендер идет в правильное место.
-    
-    // Проверим, на какой странице мы находимся
-    const isOnDiscordDecorPage = discordDecorTypePage.classList.contains('active');
-    console.log("На странице Discord Decor?", isOnDiscordDecorPage);
-    
-    // Если мы на странице выбора типа decor, обновляем заголовки там
-    // (предполагая, что они есть - их нет в HTML, нужно добавить)
-    // Пока оставим, фокус на контейнере опций.
-    
+    // Устанавливаем заголовок и описание
     if (planNameEl) planNameEl.textContent = `${currentService.name} ${currentPlan.name}`;
     if (planDescriptionEl) planDescriptionEl.textContent = currentPlan.description || '';
     
-    // --- ИСПРАВЛЕНИЕ 7: Используем правильный контейнер для Discord Decor ---
+    // --- ИСПРАВЛЕНИЕ: Используем правильный контейнер для Discord Decor ---
     if (discordOptionsContainer) discordOptionsContainer.innerHTML = '';
-    // --- КОНЕЦ ИСПРАВЛЕНИЯ 7 ---
+    // --- КОНЕЦ ИСПРАВЛЕНИЯ ---
 
     // Создаем карточки опций (номиналов)
     if (plan.options && plan.options.length > 0) {
@@ -390,33 +375,17 @@ function showDiscordDecorOptions(planId) {
             optionCard.appendChild(priceEl);
             optionCard.appendChild(addToCartBtn);
             
-            // --- ИСПРАВЛЕНИЕ 8: Добавляем в правильный контейнер для Discord Decor ---
+            // --- ИСПРАВЛЕНИЕ: Добавляем в правильный контейнер для Discord Decor ---
             if (discordOptionsContainer) discordOptionsContainer.appendChild(optionCard);
-            // --- КОНЕЦ ИСПРАВЛЕНИЯ 8 ---
+            // --- КОНЕЦ ИСПРАВЛЕНИЯ ---
         });
-        
-        // Для Discord Decor показываем страницу типа decor, если мы на ней не находимся
-        if (!isOnDiscordDecorPage) {
-             showPage(discordDecorTypePage);
-        }
+        showPage(discordDecorTypePage);
     } else {
-        // --- ИСПРАВЛЕНИЕ 9: Добавляем сообщение в правильный контейнер для Discord Decor ---
+        // --- ИСПРАВЛЕНИЕ: Добавляем сообщение в правильный контейнер для Discord Decor ---
         if (discordOptionsContainer) discordOptionsContainer.innerHTML = '<p>Опції відсутні</p>';
-        // --- КОНЕЦ ИСПРАВЛЕНИЯ 9 ---
-        if (!isOnDiscordDecorPage) {
-             showPage(discordDecorTypePage);
-        }
+        // --- КОНЕЦ ИСПРАВЛЕНИЯ ---
+        showPage(discordDecorTypePage);
     }
-
-    // Если мы вызвали эту функцию из selectPlan (например, для Discord Decor),
-    // и страница options-page активна, то нужно переключиться на discord-decor-type-page
-    // Но если мы вызвали из вкладки, то страница уже должна быть активна.
-    // Упростим: если мы на options-page, переключаемся.
-    // if (optionsPage.classList.contains('active')) {
-    //     showPage(discordDecorTypePage);
-    // }
-    // Лучше явно показывать страницу, если это необходимо.
-    // showPage(discordDecorTypePage); // Показываем страницу с опциями Discord Decor
 }
 
 
@@ -474,10 +443,237 @@ function updateCartView() {
                 <i class="fas fa-chevron-right"></i>
             </div>
         `;
-        // Можно добавить обработчик клика для деталей заказа, если нужно
+        // Добавляем обработчик клика для деталей заказа
+        cartItem.addEventListener('click', () => showOrderMenu(index));
         
         cartItems.appendChild(cartItem);
     });
     
     if (totalPrice) totalPrice.textContent = total;
+    
+    // --- Добавляем обработчик для кнопки "Замовити через Telegram" ---
+    const checkoutBtn = document.querySelector('.checkout-btn');
+    if (checkoutBtn && !checkoutBtn.hasEventListener) {
+        checkoutBtn.addEventListener('click', checkout);
+        checkoutBtn.hasEventListener = true; // Флаг, чтобы не добавлять обработчик дважды
+    }
+}
+
+// --- МЕНЮ ЗАКАЗА ---
+function showOrderMenu(index) {
+    if (index >= cart.length) return;
+    
+    const item = cart[index];
+    const orderMenu = document.getElementById('order-menu');
+    if (!orderMenu) return;
+    
+    document.getElementById('order-item-title').textContent = `${item.service} ${item.plan}`;
+    document.getElementById('order-service').textContent = item.service;
+    document.getElementById('order-plan').textContent = item.plan;
+    document.getElementById('order-period').textContent = item.period;
+    document.getElementById('order-price').textContent = item.price;
+    
+    orderMenu.dataset.index = index;
+    orderMenu.classList.add('active');
+    
+    // Добавляем обработчики для кнопок в меню
+    document.querySelector('.remove-btn')?.addEventListener('click', removeFromCart);
+    document.querySelector('.order-btn')?.addEventListener('click', function() { orderSingleItem(index); });
+    document.querySelector('.close-btn')?.addEventListener('click', closeOrderMenu);
+}
+
+function closeOrderMenu() {
+    const orderMenu = document.getElementById('order-menu');
+    if (orderMenu) orderMenu.classList.remove('active');
+}
+
+function removeFromCart() {
+    const orderMenu = document.getElementById('order-menu');
+    if (!orderMenu) return;
+    
+    const index = parseInt(orderMenu.dataset.index);
+    if (index >= 0 && index < cart.length) {
+        cart.splice(index, 1);
+        updateCartCount();
+        updateCartView();
+        closeOrderMenu();
+    }
+}
+
+// --- ГЕНЕРАЦИЯ КОМАНДЫ ДЛЯ БОТА ---
+function generateBotCommand(items) {
+    const orderId = 'O' + Date.now().toString().slice(-6);
+    
+    let command = `/pay ${orderId} `;
+    
+    items.forEach(item => {
+        let serviceAbbr;
+        if (item.service.includes('ChatGPT')) serviceAbbr = "Cha";
+        else if (item.service.includes('Discord Украшення')) serviceAbbr = "DisU";
+        else if (item.service.includes('Discord')) serviceAbbr = "Dis";
+        else if (item.service.includes('Duolingo')) serviceAbbr = "Duo";
+        else if (item.service.includes('PicsArt')) serviceAbbr = "Pic";
+        else if (item.service.includes('Canva')) serviceAbbr = "Can";
+        else if (item.service.includes('Netflix')) serviceAbbr = "Net";
+        else serviceAbbr = item.service.substring(0, 3);
+        
+        let planAbbr;
+        if (item.plan.includes('Basic')) planAbbr = "Bas";
+        else if (item.plan.includes('Full')) planAbbr = "Ful";
+        else if (item.plan.includes('Individual')) planAbbr = "Ind";
+        else if (item.plan.includes('Family')) planAbbr = "Fam";
+        else if (item.plan.includes('Plus')) planAbbr = "Plu";
+        else if (item.plan.includes('Pro')) planAbbr = "Pro";
+        else if (item.plan.includes('Premium')) planAbbr = "Pre";
+        else if (item.plan.includes('Без Nitro')) planAbbr = "BzN";
+        else if (item.plan.includes('З Nitro')) planAbbr = "ZN";
+        else planAbbr = item.plan.substring(0, 3);
+        
+        // Для Discord Decor используем номинал как период
+        const periodAbbr = item.period.includes('€') ? item.period : item.period.replace('місяць', 'м').replace('місяців', 'м');
+        
+        command += `${serviceAbbr}-${planAbbr}-${periodAbbr}-${item.price} `;
+    });
+    
+    return {
+        command: command.trim(),
+        orderId: orderId
+    };
+}
+
+// --- ОФОРМЛЕНИЕ ЗАКАЗА ---
+function checkout() {
+    if (cart.length === 0) {
+        alert('Корзина порожня!');
+        return;
+    }
+    
+    const { command, orderId } = generateBotCommand(cart);
+    
+    const botUsername = "SecureShopBot"; // Исправлено имя бота
+    const telegramUrl = `https://t.me/${botUsername}`;
+    
+    const message = `Ваше замовлення #${orderId} готове!\n\n` +
+                   `Скопіюйте цю команду та відправте її нашому боту:\n\n` +
+                   `<code>${command}</code>\n\n` +
+                   `Натисніть "Відкрити Telegram", щоб перейти до бота.`;
+    
+    // Создаем модальное окно
+    const modal = document.createElement('div');
+    modal.className = 'order-modal';
+    modal.innerHTML = `
+        <div class="modal-content">
+            <h2>Оформлення замовлення #${orderId}</h2>
+            <div class="modal-message">${message}</div>
+            <div class="modal-actions">
+                <button class="copy-btn">Копіювати команду</button>
+                <button class="telegram-btn">Відкрити Telegram</button>
+                <button class="close-modal">Закрити</button>
+            </div>
+        </div>
+    `;
+    
+    document.body.appendChild(modal);
+    
+    // Добавляем обработчики для кнопок модального окна
+    modal.querySelector('.copy-btn').addEventListener('click', () => {
+        navigator.clipboard.writeText(command)
+            .then(() => {
+                alert('Команду скопійовано!');
+                // Закрываем модальное окно после копирования
+                document.body.removeChild(modal);
+                // Очищаем корзину
+                cart = [];
+                updateCartCount();
+                updateCartView();
+                goToHome();
+            })
+            .catch(err => {
+                console.error('Помилка копіювання:', err);
+                alert('Не вдалося скопіювати команду. Спробуйте ще раз.');
+            });
+    });
+    
+    modal.querySelector('.telegram-btn').addEventListener('click', () => {
+        window.open(telegramUrl, '_blank');
+        // Закрываем модальное окно после открытия Telegram
+        document.body.removeChild(modal);
+        // Очищаем корзину
+        cart = [];
+        updateCartCount();
+        updateCartView();
+        goToHome();
+    });
+    
+    modal.querySelector('.close-modal').addEventListener('click', () => {
+        document.body.removeChild(modal);
+    });
+}
+
+// --- ОФОРМЛЕНИЕ ОДНОГО ТОВАРА ---
+function orderSingleItem(index) {
+    if (index >= cart.length) return;
+    
+    const item = cart[index];
+    
+    const { command, orderId } = generateBotCommand([item]);
+    
+    const botUsername = "SecureShopBot"; // Исправлено имя бота
+    const telegramUrl = `https://t.me/${botUsername}`;
+    
+    const message = `Ваше замовлення #${orderId} готове!\n\n` +
+                   `Скопіюйте цю команду та відправте її нашому боту:\n\n` +
+                   `<code>${command}</code>\n\n` +
+                   `Натисніть "Відкрити Telegram", щоб перейти до бота.`;
+    
+    // Создаем модальное окно
+    const modal = document.createElement('div');
+    modal.className = 'order-modal';
+    modal.innerHTML = `
+        <div class="modal-content">
+            <h2>Оформлення замовлення #${orderId}</h2>
+            <div class="modal-message">${message}</div>
+            <div class="modal-actions">
+                <button class="copy-btn">Копіювати команду</button>
+                <button class="telegram-btn">Відкрити Telegram</button>
+                <button class="close-modal">Закрити</button>
+            </div>
+        </div>
+    `;
+    
+    document.body.appendChild(modal);
+    
+    // Добавляем обработчики для кнопок модального окна
+    modal.querySelector('.copy-btn').addEventListener('click', () => {
+        navigator.clipboard.writeText(command)
+            .then(() => {
+                alert('Команду скопійовано!');
+                // Закрываем модальное окно после копирования
+                document.body.removeChild(modal);
+                // Удаляем товар из корзины
+                cart.splice(index, 1);
+                updateCartCount();
+                updateCartView();
+                closeOrderMenu();
+            })
+            .catch(err => {
+                console.error('Помилка копіювання:', err);
+                alert('Не вдалося скопіювати команду. Спробуйте ще раз.');
+            });
+    });
+    
+    modal.querySelector('.telegram-btn').addEventListener('click', () => {
+        window.open(telegramUrl, '_blank');
+        // Закрываем модальное окно после открытия Telegram
+        document.body.removeChild(modal);
+        // Удаляем товар из корзины
+        cart.splice(index, 1);
+        updateCartCount();
+        updateCartView();
+        closeOrderMenu();
+    });
+    
+    modal.querySelector('.close-modal').addEventListener('click', () => {
+        document.body.removeChild(modal);
+    });
 }
