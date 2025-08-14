@@ -1,6 +1,9 @@
+// app.js
+
 const mainPage = document.getElementById('main-page');
 const subscriptionsPage = document.getElementById('subscriptions-page');
 const digitalPage = document.getElementById('digital-page');
+const discordDecorTypePage = document.getElementById('discord-decor-type-page'); // Новая страница
 const plansPage = document.getElementById('plans-page');
 const optionsPage = document.getElementById('options-page');
 const cartPage = document.getElementById('cart-page');
@@ -16,7 +19,7 @@ const backToMainCategoryDigitalBtn = document.getElementById('back-to-main-categ
 const backToServicesBtn = document.getElementById('back-to-services');
 const backToPlansBtn = document.getElementById('back-to-plans');
 const backToMainFromCartBtn = document.getElementById('back-to-main-from-cart');
-const backToDigitalBtn = document.getElementById('back-to-digital'); // Новая кнопка для возврата из Discord украшений
+const backToDigitalBtn = document.getElementById('back-to-digital'); // Новая кнопка
 
 // Текущий выбор
 let currentService = null;
@@ -33,23 +36,24 @@ document.addEventListener('DOMContentLoaded', () => {
     updateCartCount();
     setupEventListeners();
 
-    // Додаємо обробники для кнопків островка
+    // Добавляем обработчики для кнопок островка Discord украшений
+    // Они будут активны, когда страница discordDecorTypePage станет видимой
     const tabWithoutNitro = document.getElementById('tab-without-nitro');
     const tabWithNitro = document.getElementById('tab-with-nitro');
 
     if (tabWithoutNitro) {
         tabWithoutNitro.addEventListener('click', () => {
-            if (currentService === discordDecorProducts) {
-                selectPlan('discord_decor_without_nitro');
-            }
+            // Устанавливаем текущий сервис перед переходом
+            currentService = discordDecorProducts;
+            selectPlan('discord_decor_without_nitro');
         });
     }
 
     if (tabWithNitro) {
         tabWithNitro.addEventListener('click', () => {
-            if (currentService === discordDecorProducts) {
-                selectPlan('discord_decor_with_nitro');
-            }
+            // Устанавливаем текущий сервис перед переходом
+            currentService = discordDecorProducts;
+            selectPlan('discord_decor_with_nitro');
         });
     }
 });
@@ -99,13 +103,13 @@ function setupEventListeners() {
     // Обработчик для иконки корзины
     if (cartIcon) cartIcon.addEventListener('click', showCart);
     
-    // Обработчики для кнопків "Назад"
+    // Обработчики для кнопок "Назад"
     if (backToMainCategoryBtn) backToMainCategoryBtn.addEventListener('click', () => showPage(mainPage));
     if (backToMainCategoryDigitalBtn) backToMainCategoryDigitalBtn.addEventListener('click', () => showPage(mainPage));
     if (backToServicesBtn) backToServicesBtn.addEventListener('click', goBackToServices);
     if (backToPlansBtn) backToPlansBtn.addEventListener('click', () => showPage(plansPage));
     if (backToMainFromCartBtn) backToMainFromCartBtn.addEventListener('click', goToHome);
-    if (backToDigitalBtn) backToDigitalBtn.addEventListener('click', () => showPage(digitalPage)); // Новый обработчик
+    if (backToDigitalBtn) backToDigitalBtn.addEventListener('click', () => showPage(digitalPage)); // Обработчик для новой кнопки
     
     // Обработчик для логотипа
     if (mainLogo) mainLogo.addEventListener('click', goToHome);
@@ -139,14 +143,12 @@ function goBackToServices() {
 function selectService(serviceId) {
     // Якщо обрано украшення Discord, переходимо на страницу выбора типа украшений
     if (serviceId === 'discord_decor') {
-        showPage(discordDecorTypePage);
-        return;
+        showPage(discordDecorTypePage); // Показываем страницу с вкладками
+        return; // Прерываем выполнение, так как логика выбора плана будет на другой странице
     }
 
     // Звичайна логіка для інших сервісів
     currentService = products[serviceId];
-    // Приховуємо островок для інших сервісів
-    document.getElementById('discord-decor-tabs').style.display = 'none';
     document.getElementById('service-name').textContent = currentService.name;
 
     const plansContainer = document.getElementById('plans-container');
@@ -230,7 +232,7 @@ function selectPlan(planId) {
                     <div class="period">${option.period}</div>
                     <div class="price">${option.price} UAH</div>
                     <button class="add-to-cart">Додати в корзину</button>
-            `;
+                `;
                 optionsContainer.appendChild(optionCard);
 
                 optionCard.querySelector('button').addEventListener('click', () => {
@@ -240,7 +242,6 @@ function selectPlan(planId) {
         }
         showPage(optionsPage);
     }
-
 }
 
 function addItemToCart(period, price) {
