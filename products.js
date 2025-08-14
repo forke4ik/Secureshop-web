@@ -1,8 +1,6 @@
-// products.js (оновлений фрагмент на початку)
-
 // Додамо новий об'єкт для украшень Discord
 const discordDecorProducts = {
-  name: "Discord Украшения",
+  name: "Discord Украшення",
   logo: "images/discord.webp", // Можна використовувати той самий логотип
   // Ці плани відповідають підвкладкам
   plans: [
@@ -39,6 +37,7 @@ const discordDecorProducts = {
     }
   ]
 };
+
 const products = {
   chatgpt: {
     name: "ChatGPT",
