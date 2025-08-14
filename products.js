@@ -1,3 +1,44 @@
+// products.js (оновлений фрагмент на початку)
+
+// Додамо новий об'єкт для украшень Discord
+const discordDecorProducts = {
+  name: "Discord Украшения",
+  logo: "images/discord.webp", // Можна використовувати той самий логотип
+  // Ці плани відповідають підвкладкам
+  plans: [
+    {
+      id: "discord_decor_without_nitro",
+      name: "Без Nitro",
+      description: "Украшення для користувачів без Nitro",
+      options: [
+        { period: "6€", price: 180 },
+        { period: "8€", price: 235 },
+        { period: "10€", price: 295 },
+        { period: "11€", price: 325 },
+        { period: "12€", price: 355 },
+        { period: "13€", price: 385 },
+        { period: "15€", price: 440 },
+        { period: "16€", price: 470 },
+        { period: "18€", price: 530 },
+        { period: "24€", price: 705 },
+        { period: "29€", price: 855 }
+      ]
+    },
+    {
+      id: "discord_decor_with_nitro",
+      name: "З Nitro",
+      description: "Украшення для користувачів з Nitro",
+      options: [
+        { period: "5€", price: 145 },
+        { period: "7€", price: 205 },
+        { period: "8.5€", price: 250 },
+        { period: "9€", price: 265 },
+        { period: "14€", price: 410 },
+        { period: "22€", price: 650 }
+      ]
+    }
+  ]
+};
 const products = {
   chatgpt: {
     name: "ChatGPT",
