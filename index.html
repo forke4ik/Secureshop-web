@@ -3,184 +3,180 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SecureShop - Ваш надійний сервіс</title>
+    <title>SecureShop - Магазин цифрових товарів</title>
     <link rel="stylesheet" href="styles.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link rel="icon" href="images/logo.png" type="image/png"> <!-- Замените на путь к вашей иконке -->
 </head>
 <body>
-    <!-- Шапка сайта -->
-    <header>
-        <div class="logo" id="main-logo">Secure<span>Shop</span></div>
-        <div class="cart-icon" id="cart-icon">
-            <i class="fas fa-shopping-cart"></i>
-            <span id="cart-count">0</span>
-        </div>
-    </header>
+    <!-- Глобальная кнопка "Назад" -->
+    <button id="back-button" class="back-button" style="display: none;">
+        ← Назад
+    </button>
 
-    <!-- Главная страница -->
+    <!-- Индикатор корзины -->
+    <div class="cart-indicator">
+        <button id="cart-btn">
+            🛒 Кошик (<span id="cart-count">0</span>)
+        </button>
+    </div>
+
+    <!-- ГЛАВНАЯ СТРАНИЦА -->
     <div id="main-page" class="page active">
-        <h1>Ласкаво просимо до SecureShop!</h1>
-        <div class="main-categories">
-            <div class="category-card" data-category="subscriptions">
-                <div class="category-icon">
-                    <i class="fas fa-crown"></i>
-                </div>
-                <h2>Підписки</h2>
-                <p>Преміум доступ до популярних сервісів</p>
+        <header>
+            <h1>Ласкаво просимо до SecureShop!</h1>
+            <p>Оберіть категорію товарів нижче.</p>
+        </header>
+        <main>
+            <div class="category-buttons">
+                <button class="category-btn" data-category="subscriptions">
+                    <img src="images/subscriptions.png" alt="Підписки"> <!-- Замените на путь к вашей иконке -->
+                    <span>Підписки</span>
+                </button>
+                <button class="category-btn" data-category="digital">
+                    <img src="images/digital.png" alt="Цифрові товари"> <!-- Замените на путь к вашей иконке -->
+                    <span>Цифрові товари</span>
+                </button>
             </div>
-            <div class="category-card" data-category="digital">
-                <div class="category-icon">
-                    <i class="fas fa-gamepad"></i>
-                </div>
-                <h2>Цифрові товари</h2>
-                <p>Ігрові карти, подарункові сертифікати</p>
-            </div>
-        </div>
+        </main>
     </div>
 
-    <!-- Страница выбора подписок -->
+    <!-- СТРАНИЦА ПОДПИСОК -->
     <div id="subscriptions-page" class="page">
-        <div class="back-button" id="back-to-main-category">
-            <i class="fas fa-arrow-left"></i> Назад
-        </div>
-        <h1>Підписки</h1>
-        <div class="services-grid">
-            <div class="service-card" data-service="chatgpt">
-                <img src="images/chatgpt.webp" alt="ChatGPT">
-                <h3>ChatGPT</h3>
+        <header>
+            <h1>Підписки</h1>
+            <p>Оберіть сервіс для покупки підписки.</p>
+        </header>
+        <main>
+            <div class="services-grid" id="subscriptions-services-grid">
+                <!-- Сервисы будут добавлены сюда через JavaScript -->
+                <!-- Пример кнопки сервиса -->
+                <!--
+                <button class="service-card" data-service-id="chatgpt">
+                    <img src="images/chatgpt.png" alt="ChatGPT">
+                    <span>ChatGPT Plus</span>
+                </button>
+                -->
             </div>
-            <div class="service-card" data-service="discord">
-                <img src="images/discord.webp" alt="Discord">
-                <h3>Discord</h3>
-            </div>
-            <div class="service-card" data-service="duolingo">
-                <img src="images/duolingo.webp" alt="Duolingo">
-                <h3>Duolingo</h3>
-            </div>
-            <div class="service-card" data-service="picsart">
-                <img src="images/picsart.webp" alt="PicsArt">
-                <h3>PicsArt</h3>
-            </div>
-            <div class="service-card" data-service="canva">
-                <img src="images/canva.webp" alt="Canva">
-                <h3>Canva</h3>
-            </div>
-            <div class="service-card" data-service="netflix">
-                <img src="images/netflix.webp" alt="Netflix">
-                <h3>Netflix</h3>
-            </div>
-        </div>
+        </main>
     </div>
 
-    <!-- Страница выбора цифровых товаров -->
+    <!-- СТРАНИЦА ЦИФРОВЫХ ТОВАРОВ -->
     <div id="digital-page" class="page">
-        <div class="back-button" id="back-to-main-category-digital">
-            <i class="fas fa-arrow-left"></i> Назад
-        </div>
-        <h1>Цифрові товари</h1>
-        <div class="services-grid">
-            <div class="service-card" data-service="roblox">
-                <img src="images/roblox.webp" alt="Roblox">
-                <h3>Roblox</h3>
+        <header>
+            <h1>Цифрові товари</h1>
+            <p>Оберіть цифровий товар.</p>
+        </header>
+        <main>
+            <div class="services-grid" id="digital-services-grid">
+                <!-- Сервисы будут добавлены сюда через JavaScript -->
+                <button class="service-card" data-service-id="discord_decor">
+                    <img src="images/discord.png" alt="Discord"> <!-- Замените на путь к вашей иконке -->
+                    <span>Discord Прикраси</span>
+                </button>
+                <!-- Добавьте другие цифровые товары аналогично -->
             </div>
-            <div class="service-card" data-service="psn_tru">
-                <img src="images/psn.webp" alt="PSN TRY">
-                <h3>PSN (TRY)</h3>
-            </div>
-            <div class="service-card" data-service="psn_inr">
-                <img src="images/psn.webp" alt="PSN INR">
-                <h3>PSN (INR)</h3>
-            </div>
-            <div class="service-card" data-service="discord_decor">
-                <img src="images/discord.webp" alt="Discord Украшення">
-                <h3>Discord Украшення</h3>
-            </div>
-        </div>
+        </main>
     </div>
 
-    <!-- Страница выбора плана (для подписок) -->
-    <div id="plans-page" class="page">
-        <div class="back-button" id="back-to-services">
-            <i class="fas fa-arrow-left"></i> Назад
-        </div>
-        <h1 id="service-name">Назва сервісу</h1>
-        <div id="plans-container" class="plans-grid">
-            <!-- Планы будут добавлены сюда динамически -->
-        </div>
-    </div>
-
-    <!-- Страница выбора опций (для подписок) -->
-    <div id="options-page" class="page">
-        <div class="back-button" id="back-to-plans">
-            <i class="fas fa-arrow-left"></i> Назад
-        </div>
-        <h1 id="plan-name">Назва сервісу та плану</h1>
-        <p id="plan-description">Опис плану</p>
-        <div id="subscription-options-container" class="options-grid">
-            <!-- Опции будут добавлены сюда динамически -->
-        </div>
-    </div>
-
-    <!-- Страница выбора опций (для Discord украшений) -->
+    <!-- СТРАНИЦА ТИПОВ DISCORD ПРИКРАС -->
     <div id="discord-decor-type-page" class="page">
-        <div class="back-button" id="back-to-digital">
-            <i class="fas fa-arrow-left"></i> Назад
-        </div>
-        <h1 id="plan-name">Назва сервісу та плану</h1>
-        <p id="plan-description">Опис плану</p>
-        
-        <!-- Вкладки для Discord украшений -->
-        <div class="discord-decor-tabs">
-            <button class="tab-button active" id="tab-without-nitro">Без Nitro</button>
-            <button class="tab-button" id="tab-with-nitro">З Nitro</button>
-        </div>
-
-        <div id="discord-options-container" class="options-grid">
-            <!-- Опции Discord украшений будут добавлены сюда динамически -->
-        </div>
+        <header>
+            <h1>Discord Прикраси</h1>
+            <p>Оберіть тип прикраси.</p>
+        </header>
+        <main>
+            <div class="decor-types-grid">
+                <button class="decor-type-btn" data-plan-id="bzn">
+                    <span>BZN (Без імені)</span>
+                </button>
+                <button class="decor-type-btn" data-plan-id="zn">
+                    <span>ZN (З іменем)</span>
+                </button>
+            </div>
+        </main>
     </div>
 
-    <!-- Страница корзины -->
+    <!-- СТРАНИЦА ПЛАНОВ -->
+    <div id="plans-page" class="page">
+        <header>
+            <h1 id="plans-service-name">Назва Сервісу</h1>
+            <p id="plans-service-description">Опис сервісу.</p>
+        </header>
+        <main>
+            <div id="plans-container" class="plans-grid">
+                <!-- Планы будут добавлены сюда через JavaScript -->
+            </div>
+        </main>
+    </div>
+
+    <!-- СТРАНИЦА ОПЦИЙ ПОДПИСОК -->
+    <div id="subscription-options-page" class="page">
+        <header>
+            <h1 id="subscription-plan-name">Назва Плану</h1>
+            <p id="subscription-plan-description">Опис плану.</p>
+        </header>
+        <main>
+            <div id="subscription-options-container" class="options-grid">
+                <!-- Опции (периоды) будут добавлены сюда через JavaScript -->
+            </div>
+            <div class="add-to-cart-section">
+                <button id="add-subscription-to-cart" class="btn-primary">Додати до кошика</button>
+            </div>
+        </main>
+    </div>
+
+    <!-- СТРАНИЦА ОПЦИЙ DISCORD ПРИКРАС -->
+    <div id="discord-options-page" class="page">
+        <header>
+            <h1 id="discord-plan-name">Назва Типу Прикрас</h1>
+            <p id="discord-plan-description">Опис типу прикрас.</p>
+        </header>
+        <main>
+            <div id="discord-options-container" class="options-grid">
+                <!-- Опции (номиналы) будут добавлены сюда через JavaScript -->
+            </div>
+            <div class="add-to-cart-section">
+                <button id="add-discord-to-cart" class="btn-primary">Додати до кошика</button>
+            </div>
+        </main>
+    </div>
+
+    <!-- СТРАНИЦА КОРЗИНЫ -->
     <div id="cart-page" class="page">
-        <div class="back-button" id="back-to-main-from-cart">
-            <i class="fas fa-arrow-left"></i> Назад
-        </div>
-        <h1>Ваша корзина</h1>
-        <div id="cart-items" class="cart-items">
-            <!-- Товары в корзине будут добавлены сюда динамически -->
-        </div>
-        <div class="cart-total">
-            <h3>Всього: <span id="total-price">0</span> UAH</h3>
-            <button class="checkout-btn">
-                <i class="fas fa-paper-plane"></i> Замовити через Telegram
-            </button>
+        <header>
+            <h1>Ваш кошик</h1>
+        </header>
+        <main>
+            <div id="cart-items" class="cart-items">
+                <!-- Товары в корзине будут добавлены сюда через JavaScript -->
+                <p>Кошик порожній</p>
+            </div>
+            <div class="cart-total">
+                <strong>Всього: <span id="cart-total">0 грн</span></strong>
+            </div>
+            <div class="cart-actions">
+                <button id="close-cart" class="btn-secondary">Продовжити покупки</button>
+                <button id="proceed-to-checkout" class="btn-primary">Оформити замовлення</button>
+            </div>
+        </main>
+    </div>
+
+    <!-- МОДАЛЬНОЕ МЕНЮ ЗАКАЗА -->
+    <div id="order-menu" class="order-menu" style="display: none;">
+        <div class="order-menu-content">
+            <span id="close-order-menu" class="close">&times;</span>
+            <h2>Ваше замовлення</h2>
+            <div id="order-items">
+                <!-- Детали заказа будут добавлены сюда через JavaScript -->
+            </div>
+            <div class="order-total">
+                <strong>До оплати: <span id="order-total">0 грн</span></strong>
+            </div>
+            <button id="place-order" class="btn-primary">Підтвердити замовлення</button>
         </div>
     </div>
 
-    <!-- Меню деталей заказа -->
-    <div id="order-menu" class="order-menu">
-        <div class="order-content">
-            <button class="close-btn">
-                <i class="fas fa-times"></i>
-            </button>
-            <h2 id="order-item-title">Деталі замовлення</h2>
-            <div class="order-details">
-                <p><strong>Сервіс:</strong> <span id="order-service"></span></p>
-                <p><strong>Тариф:</strong> <span id="order-plan"></span></p>
-                <p><strong>Період:</strong> <span id="order-period"></span></p>
-                <p><strong>Ціна:</strong> <span id="order-price"></span> UAH</p>
-            </div>
-            <div class="order-actions">
-                <button class="remove-btn">
-                    <i class="fas fa-trash"></i> Видалити
-                </button>
-                <button class="order-btn">
-                    <i class="fas fa-paper-plane"></i> Замовити
-                </button>
-            </div>
-        </div>
-    </div>
-
+    <!-- Подключение скриптов в правильном порядке -->
     <script src="products.js"></script>
     <script src="app.js"></script>
 </body>
