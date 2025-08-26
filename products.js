@@ -1,22 +1,12 @@
-// products.js
-
-// Додамо новий об'єкт для прикрас Discord
-// Це спеціальний об'єкт, який не входить в основний products
-// Він має структуру, схожу на звичайний сервіс, але з двома "планами" - це вкладки "Без Nitro" і "З Nitro"
 const discordDecorProducts = {
-  name: "Discord Прикраси", // Назва сервісу
-  logo: "images/discord.webp", // Шлях до логотипу
-  // Плани для прикрас - це вкладки "Без Nitro" і "З Nitro"
+  name: "Discord Прикраси",
+  logo: "images/discord.webp",
   plans: [
     {
-      id: "discord_decor_without_nitro", // Унікальний ідентифікатор плану
-      name: "Без Nitro", // Назва плану (вкладки)
-      description: "Прикраси для користувачів без Nitro", // Опис плану
-      // Опції для цього плану - це конкретні товари з ціною
+      id: "discord_decor_without_nitro",
+      name: "Без Nitro",
+      description: "Прикраси для користувачів без Nitro",
       options: [
-        // Кожен об'єкт в options - це один товар
-        // period - номінал товару (відображається в картці)
-        // price - ціна в гривнях (відображається в картці)
         { period: "6$", price: 180 },
         { period: "8$", price: 235 },
         { period: "10$", price: 295 },
@@ -31,10 +21,9 @@ const discordDecorProducts = {
       ]
     },
     {
-      id: "discord_decor_with_nitro", // Унікальний ідентифікатор плану
-      name: "З Nitro", // Назва плану (вкладки)
-      description: "Прикраси для користувачів з Nitro", // Опис плану
-      // Опції для цього плану - це конкретні товари з ціною
+      id: "discord_decor_with_nitro",
+      name: "З Nitro",
+      description: "Прикраси для користувачів з Nitro",
       options: [
         { period: "5$", price: 145 },
         { period: "7$", price: 205 },
@@ -47,23 +36,16 @@ const discordDecorProducts = {
   ]
 };
 
-// Основний об'єкт з усіма сервісами (підписками)
 const products = {
-  // Кожен ключ об'єкта - це ID сервісу (використовується в data-service)
   chatgpt: {
-    name: "ChatGPT", // Назва сервісу
-    logo: "images/chatgpt.webp", // Шлях до логотипу
-    // Плани для сервісу - це різні типи підписок
+    name: "ChatGPT",
+    logo: "images/chatgpt.webp",
     plans: [
       {
-        id: "chatgpt_plus", // Унікальний ідентифікатор плану
-        name: "Plus", // Назва плану
-        description: "Доступ до GPT-4, розширені можливості", // Опис плану
-        // Опції для цього плану - це періоди підписки з цінами
+        id: "chatgpt_plus",
+        name: "Plus",
+        description: "Доступ до GPT-4, розширені можливості",
         options: [
-          // Кожен об'єкт в options - це один період підписки
-          // period - період підписки (відображається в картці)
-          // price - ціна в гривнях (відображається в картці)
           { period: "1 місяць", price: 650 }
         ]
       }
@@ -174,6 +156,24 @@ const products = {
         description: "4K, 4 екрани, без реклами",
         options: [
           { period: "1 місяць", price: 350 }
+        ]
+      }
+    ]
+  },
+  psn: {
+    name: "PSN Gift Card",
+    logo: "images/psn.webp",
+    plans: [
+      {
+        id: "psn_gift_cards",
+        name: "Gift Cards",
+        description: "Поповнення рахунку PlayStation Network",
+        options: [
+          { period: "1000INR", price: 725 },
+          { period: "2000INR", price: 1400 },
+          { period: "3000INR", price: 2100 },
+          { period: "4000INR", price: 2750 },
+          { period: "5000INR", price: 3400 }
         ]
       }
     ]
