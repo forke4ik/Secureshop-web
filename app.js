@@ -45,7 +45,9 @@ function goBackToMainCategory() {
 }
 
 function goBackToServices() {
-    if (currentService === discordDecorProducts) {
+    if (currentService && 
+        (currentService === discordDecorProducts || 
+         ['discord_decor', 'psn'].includes(getServiceIdByObject(currentService)))) {
         showPage(digitalPage);
         resetDiscordDecorUI();
     } else {
@@ -113,7 +115,6 @@ function setupEventListeners() {
     }
 
     if (mainLogo) mainLogo.addEventListener('click', goToHome);
-
     if (cartIcon) cartIcon.addEventListener('click', function() {
         updateCartView();
         showPage(cartPage);
@@ -146,11 +147,22 @@ function setupEventListeners() {
     }
 }
 
+function getServiceIdByObject(serviceObj) {
+    for (const [id, service] of Object.entries(products)) {
+        if (service === serviceObj) {
+            return id;
+        }
+    }
+    return null;
+}
+
 function selectService(serviceId) {
     if (serviceId === 'discord_decor') {
         currentService = discordDecorProducts;
         if (discordOptionsContainer) discordOptionsContainer.innerHTML = '';
         showPage(discordDecorTypePage);
+        // Автоматически показываем содержимое вкладки "Без Nitro"
+        showDiscordDecorOptions('discord_decor_without_nitro');
         return;
     }
 
@@ -158,7 +170,7 @@ function selectService(serviceId) {
     if (!currentService) {
         return;
     }
-    
+
     if (serviceNameEl) serviceNameEl.textContent = currentService.name;
     if (plansContainer) plansContainer.innerHTML = '';
 
@@ -174,11 +186,9 @@ function selectService(serviceId) {
             selectBtn.className = 'add-to-cart select-plan-btn';
             selectBtn.textContent = 'Обрати';
             selectBtn.dataset.planId = plan.id;
-            
             selectBtn.addEventListener('click', function() {
                 selectPlan(plan.id);
             });
-            
             planCard.appendChild(nameEl);
             planCard.appendChild(descEl);
             planCard.appendChild(selectBtn);
@@ -187,6 +197,7 @@ function selectService(serviceId) {
     } else {
         if (plansContainer) plansContainer.innerHTML = '<p>Плани відсутні</p>';
     }
+
     showPage(plansPage);
 }
 
@@ -204,7 +215,7 @@ function selectPlan(planId) {
     if (!plan) {
         return;
     }
-    
+
     currentPlan = plan;
     if (planNameEl) planNameEl.textContent = `${currentService.name} ${currentPlan.name}`;
     if (planDescriptionEl) planDescriptionEl.textContent = currentPlan.description || '';
@@ -223,11 +234,9 @@ function selectPlan(planId) {
             const addToCartBtn = document.createElement('button');
             addToCartBtn.className = 'add-to-cart';
             addToCartBtn.textContent = 'Додати в корзину';
-            
             addToCartBtn.addEventListener('click', function() {
                 addItemToCart(option.period, option.price);
             });
-            
             optionCard.appendChild(periodEl);
             optionCard.appendChild(priceEl);
             optionCard.appendChild(addToCartBtn);
@@ -236,6 +245,7 @@ function selectPlan(planId) {
     } else {
         if (subscriptionOptionsContainer) subscriptionOptionsContainer.innerHTML = '<p>Опції відсутні</p>';
     }
+
     showPage(optionsPage);
 }
 
@@ -243,12 +253,12 @@ function showDiscordDecorOptions(planId) {
     if (!currentService || currentService !== discordDecorProducts) {
         return;
     }
-    
+
     const plan = currentService.plans.find(p => p.id === planId);
     if (!plan) {
         return;
     }
-    
+
     currentPlan = plan;
     if (planNameEl) planNameEl.textContent = `${currentService.name} ${currentPlan.name}`;
     if (planDescriptionEl) planDescriptionEl.textContent = currentPlan.description || '';
@@ -267,11 +277,9 @@ function showDiscordDecorOptions(planId) {
             const addToCartBtn = document.createElement('button');
             addToCartBtn.className = 'add-to-cart';
             addToCartBtn.textContent = 'Додати в корзину';
-            
             addToCartBtn.addEventListener('click', function() {
                 addItemToCart(option.period, option.price);
             });
-            
             optionCard.appendChild(periodEl);
             optionCard.appendChild(priceEl);
             optionCard.appendChild(addToCartBtn);
@@ -289,14 +297,14 @@ function addItemToCart(period, price) {
         alert('Спочатку оберіть сервіс і тариф!');
         return;
     }
-    
+
     const item = {
         service: currentService.name,
         plan: currentPlan.name,
         period: period,
         price: price
     };
-    
+
     cart.push(item);
     updateCartCount();
     alert('Товар додано до корзини!');
@@ -309,13 +317,13 @@ function updateCartCount() {
 function updateCartView() {
     if (!cartItems) return;
     cartItems.innerHTML = '';
-    
+
     if (cart.length === 0) {
         cartItems.innerHTML = '<p class="empty-cart">Ваша корзина порожня</p>';
         if (totalPrice) totalPrice.textContent = '0';
         return;
     }
-    
+
     let total = 0;
     cart.forEach((item, index) => {
         total += item.price;
@@ -331,13 +339,12 @@ function updateCartView() {
                 <i class="fas fa-chevron-right"></i>
             </div>
         `;
-        
         cartItem.addEventListener('click', () => showOrderMenu(index));
         cartItems.appendChild(cartItem);
     });
-    
+
     if (totalPrice) totalPrice.textContent = total;
-    
+
     const checkoutBtn = document.querySelector('.checkout-btn');
     if (checkoutBtn && !checkoutBtn.hasEventListener) {
         checkoutBtn.addEventListener('click', checkout);
@@ -350,15 +357,16 @@ function showOrderMenu(index) {
     const item = cart[index];
     const orderMenu = document.getElementById('order-menu');
     if (!orderMenu) return;
-    
+
     document.getElementById('order-item-title').textContent = `${item.service} ${item.plan}`;
     document.getElementById('order-service').textContent = item.service;
     document.getElementById('order-plan').textContent = item.plan;
     document.getElementById('order-period').textContent = item.period;
     document.getElementById('order-price').textContent = item.price;
+
     orderMenu.dataset.index = index;
     orderMenu.classList.add('active');
-    
+
     document.querySelector('.remove-btn')?.addEventListener('click', removeFromCart);
     document.querySelector('.order-btn')?.addEventListener('click', function() { orderSingleItem(index); });
     document.querySelector('.close-btn')?.addEventListener('click', closeOrderMenu);
@@ -384,6 +392,7 @@ function removeFromCart() {
 function generateBotCommand(items) {
     const orderId = 'O' + Date.now().toString().slice(-6);
     let command = `/pay ${orderId} `;
+    
     items.forEach(item => {
         let serviceAbbr;
         if (item.service.includes('ChatGPT')) serviceAbbr = "Cha";
@@ -393,8 +402,9 @@ function generateBotCommand(items) {
         else if (item.service.includes('PicsArt')) serviceAbbr = "Pic";
         else if (item.service.includes('Canva')) serviceAbbr = "Can";
         else if (item.service.includes('Netflix')) serviceAbbr = "Net";
+        else if (item.service.includes('PSN')) serviceAbbr = "PSN";
         else serviceAbbr = item.service.substring(0, 3);
-        
+
         let planAbbr;
         if (item.plan.includes('Basic')) planAbbr = "Bas";
         else if (item.plan.includes('Full')) planAbbr = "Ful";
@@ -406,10 +416,11 @@ function generateBotCommand(items) {
         else if (item.plan.includes('Без Nitro')) planAbbr = "BzN";
         else if (item.plan.includes('З Nitro')) planAbbr = "ZN";
         else planAbbr = item.plan.substring(0, 3);
-        
+
         const periodAbbr = item.period.includes('€') ? item.period : item.period.replace('місяць', 'м').replace('місяців', 'м');
         command += `${serviceAbbr}-${planAbbr}-${periodAbbr}-${item.price} `;
     });
+
     return {
         command: command.trim(),
         orderId: orderId
@@ -421,10 +432,11 @@ function checkout() {
         alert('Корзина порожня!');
         return;
     }
-    
+
     const { command, orderId } = generateBotCommand(cart);
     const botUsername = "SecureShopBot";
     const telegramUrl = `https://t.me/${botUsername}`;
+    
     const message = `Ваше замовлення #${orderId} готове!
 Скопіюйте цю команду та відправте її нашому боту:
 <code>${command}</code>
@@ -443,7 +455,7 @@ function checkout() {
             </div>
         </div>
     `;
-    
+
     document.body.appendChild(modal);
 
     modal.querySelector('.copy-btn').addEventListener('click', () => {
@@ -488,6 +500,7 @@ function orderSingleItem(index) {
     const { command, orderId } = generateBotCommand([item]);
     const botUsername = "SecureShopBot";
     const telegramUrl = `https://t.me/${botUsername}`;
+    
     const message = `Ваше замовлення #${orderId} готове!
 Скопіюйте цю команду та відправте її нашому боту:
 <code>${command}</code>
@@ -506,7 +519,7 @@ function orderSingleItem(index) {
             </div>
         </div>
     `;
-    
+
     document.body.appendChild(modal);
 
     modal.querySelector('.copy-btn').addEventListener('click', () => {
