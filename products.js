@@ -46,7 +46,7 @@ const products = {
         name: "Plus",
         description: "Доступ до GPT-4, розширені можливості",
         options: [
-          { period: "1 місяць", price: 650 }
+          { period: "1 місяць", price: 600 }
         ]
       }
     ]
