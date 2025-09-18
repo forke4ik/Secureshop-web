@@ -44,13 +44,13 @@ const products = {
       {
         id: "chatgpt_plus",
         name: "Plus",
-        description: "Доступ до GPT-4, розширені можливості",
+        description: "Доступ до GPT-4, розширені можливості(готовий акаунт)",
         options: [
-          { period: "1 місяць", price: 600 }
-        ]
-      }
-    ]
-  },
+          { period: "1 місяць", price: 600 },
+                { period: "3 місяці", price: 600 } 
+            ]
+        }]
+    },
   discord: {
     name: "Discord",
     logo: "images/discord.webp",
