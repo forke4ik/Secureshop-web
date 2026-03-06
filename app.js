@@ -454,8 +454,9 @@ function generateBotCommand(items) {
     let command = `/pay ${orderId} `;
     
     items.forEach(item => {
-        let serviceAbbr;
+       let serviceAbbr;
         if (item.service.includes('ChatGPT')) serviceAbbr = "Cha";
+        else if (item.service.includes('Claude')) serviceAbbr = "Cla";
         else if (item.service.includes('Discord Украшення')) serviceAbbr = "DisU";
         else if (item.service.includes('Discord')) serviceAbbr = "Dis";
         else if (item.service.includes('Duolingo')) serviceAbbr = "Duo";
