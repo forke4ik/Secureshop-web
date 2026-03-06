@@ -168,3 +168,174 @@
     <script src="app.js"></script>
 </body>
 </html>
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="description" content="SecureShop — магазин цифрових товарів та преміум підписок. ChatGPT, Discord Nitro, Netflix, Canva та багато іншого.">
+    <meta name="theme-color" content="#6c5ce7">
+    <title>SecureShop - Магазин цифрових товарів</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <header>
+        <div class="logo" id="main-logo">SecureShop</div>
+        <div class="cart-icon" id="cart-icon">
+            <i class="fas fa-shopping-cart"></i>
+            <span id="cart-count">0</span>
+        </div>
+    </header>
+    <div class="page active" id="main-page">
+        <h1>Ласкаво просимо до SecureShop</h1>
+        <div class="main-categories">
+            <div class="category-card" data-category="subscriptions">
+                <div class="category-icon">
+                    <i class="fas fa-crown"></i>
+                </div>
+                <h2>Підписки</h2>
+                <p>Преміум підписки на популярні сервіси</p>
+            </div>
+            <div class="category-card" data-category="digital">
+                <div class="category-icon">
+                    <i class="fas fa-gamepad"></i>
+                </div>
+                <h2>Цифрові товари</h2>
+                <p>Ігрові валюти, подарункові картки та інше</p>
+            </div>
+        </div>
+    </div>
+    <div class="page" id="subscriptions-page">
+        <div class="back-button" id="back-to-main-category">
+            <i class="fas fa-arrow-left"></i> Назад
+        </div>
+        <h1>Підписки</h1>
+        <div class="services-grid">
+            <div class="service-card" data-service="chatgpt">
+                <img src="images/chatgpt.webp" alt="ChatGPT Logo">
+                <h3>ChatGPT</h3>
+            </div>
+            <div class="service-card" data-service="discord">
+                <img src="images/discord.webp" alt="Discord Logo">
+                <h3>Discord</h3>
+            </div>
+            <div class="service-card" data-service="duolingo">
+                <img src="images/duolingo.webp" alt="Duolingo Logo">
+                <h3>Duolingo</h3>
+            </div>
+            <div class="service-card" data-service="picsart">
+                <img src="images/picsart.webp" alt="PicsArt Logo">
+                <h3>PicsArt</h3>
+            </div>
+            <div class="service-card" data-service="canva">
+                <img src="images/canva.webp" alt="Canva Logo">
+                <h3>Canva</h3>
+            </div>
+            <div class="service-card" data-service="netflix">
+                <img src="images/netflix.webp" alt="Netflix Logo">
+                <h3>Netflix</h3>
+            </div>
+        </div>
+    </div>
+    <div class="page" id="digital-page">
+        <div class="back-button" id="back-to-main-category-digital">
+            <i class="fas fa-arrow-left"></i> Назад
+        </div>
+        <h1>Цифрові товари</h1>
+        <div class="services-grid">
+            <div class="service-card" data-service="discord_decor">
+                <img src="images/discord.webp" alt="Discord Decor Logo">
+                <h3>Discord Прикраси</h3>
+            </div>
+            <div class="service-card" data-service="psn">
+                <img src="images/psn.webp" alt="PSN Logo">
+                <h3>PSN Gift Card</h3>
+            </div>
+        </div>
+    </div>
+    <div class="page" id="discord-decor-type-page">
+        <div class="back-button" id="back-to-digital">
+            <i class="fas fa-arrow-left"></i> Назад
+        </div>
+        <h1 id="service-name">Discord Прикраси</h1>
+        <div class="discord-decor-tabs">
+            <button class="tab-button active" id="tab-without-nitro">Без Nitro</button>
+            <button class="tab-button" id="tab-with-nitro">З Nitro</button>
+        </div>
+        <h2 id="plan-name">Discord Прикраси Без Nitro</h2>
+        <p id="plan-description">Прикраси для користувачів без Nitro</p>
+        <div class="options-grid" id="discord-options-container">
+        </div>
+    </div>
+    <div class="page" id="plans-page">
+        <div class="back-button" id="back-to-services">
+            <i class="fas fa-arrow-left"></i> Назад
+        </div>
+        <h1 id="service-name">Назва сервісу</h1>
+        <div class="plans-grid" id="plans-container">
+        </div>
+    </div>
+    <div class="page" id="options-page">
+        <div class="back-button" id="back-to-plans">
+            <i class="fas fa-arrow-left"></i> Назад
+        </div>
+        <h1 id="plan-name">Назва тарифу</h1>
+        <p id="plan-description">Опис тарифу</p>
+        <div class="options-grid" id="subscription-options-container">
+        </div>
+    </div>
+    <div class="page" id="cart-page">
+        <div class="back-button" id="back-to-main-from-cart">
+            <i class="fas fa-arrow-left"></i> Назад
+        </div>
+        <h1>Кошик</h1>
+        <div class="cart-items" id="cart-items">
+            <p class="empty-cart">Ваша корзина порожня</p>
+        </div>
+        <div class="cart-total">
+            <h3>Всього: <span id="total-price">0</span> UAH</h3>
+            <button class="checkout-btn">
+                <i class="fas fa-shopping-bag"></i> Оформити замовлення
+            </button>
+        </div>
+    </div>
+    <div class="order-menu" id="order-menu">
+        <div class="order-content">
+            <button class="close-btn">
+                <i class="fas fa-times"></i>
+            </button>
+            <h2 id="order-item-title">Назва товару</h2>
+            <div class="order-details">
+                <p><strong>Сервіс:</strong> <span id="order-service">Сервіс</span></p>
+                <p><strong>Тариф:</strong> <span id="order-plan">Тариф</span></p>
+                <p><strong>Період:</strong> <span id="order-period">Період</span></p>
+                <p><strong>Ціна:</strong> <span id="order-price">Ціна</span> UAH</p>
+            </div>
+            <div class="order-actions">
+                <button class="remove-btn">
+                    <i class="fas fa-trash"></i> Видалити
+                </button>
+                <button class="order-btn">
+                    <i class="fas fa-credit-card"></i> Замовити
+                </button>
+            </div>
+        </div>
+    </div>
+    <footer>
+        <p>&copy; 2025 SecureShop. Всі права захищені.</p>
+        <div class="social">
+            <a href="https://t.me/SecureShopUA" target="_blank"><i class="fab fa-telegram"></i></a>
+            <a href="https://www.instagram.com/secureshopua?igsh=MWtpZTZzb2R2ZW9pZA%3D%3D&utm_source=qr" target="_blank"><i class="fab fa-instagram"></i></a>
+            <a href="https://www.tiktok.com/@secureshop_official?_t=ZM-8zfKzDyHeha&_r=1" target="_blank"><i class="fab fa-tiktok"></i></a>
+        </div>
+    </footer>
+    <div id="toast-container"></div>
+    <script src="products.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
+
