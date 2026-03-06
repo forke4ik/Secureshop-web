@@ -107,7 +107,8 @@ function goBackToMainCategory() {
 function goBackToServices() {
     if (currentService && 
         (currentService === discordDecorProducts || 
-         ['discord_decor', 'psn'].includes(getServiceIdByObject(currentService)))) {
+         currentService === discordBoostsProducts || 
+         ['discord_decor', 'discord_boosts', 'psn'].includes(getServiceIdByObject(currentService)))) {
         showPage(digitalPage);
         resetDiscordDecorUI();
     } else {
@@ -208,6 +209,8 @@ function setupEventListeners() {
 }
 
 function getServiceIdByObject(serviceObj) {
+    if (serviceObj === discordDecorProducts) return 'discord_decor';
+    if (serviceObj === discordBoostsProducts) return 'discord_boosts';
     for (const [id, service] of Object.entries(products)) {
         if (service === serviceObj) {
             return id;
@@ -221,12 +224,16 @@ function selectService(serviceId) {
         currentService = discordDecorProducts;
         if (discordOptionsContainer) discordOptionsContainer.innerHTML = '';
         showPage(discordDecorTypePage);
-        // Автоматически показываем содержимое вкладки "Без Nitro"
         showDiscordDecorOptions('discord_decor_without_nitro');
         return;
     }
 
-    currentService = products[serviceId];
+    if (serviceId === 'discord_boosts') {
+        currentService = discordBoostsProducts;
+    } else {
+        currentService = products[serviceId];
+    }
+
     if (!currentService) {
         return;
     }
@@ -474,7 +481,7 @@ function generateBotCommand(items) {
 
         // 2. Абревіатури планів та періодів
         if (serviceAbbr === "DisB") {
-            const count = item.period.replace(/\D/g, ''); // витягує число з "2 шт"
+            const count = item.period.replace(/\D/g, '');
             planAbbr = `B${count}`;
             periodAbbr = "1шт";
         } else if (serviceAbbr === "PSN") {
@@ -498,7 +505,9 @@ function generateBotCommand(items) {
             else if (item.plan.includes('GO')) planAbbr = "Go";
             else planAbbr = item.plan.substring(0, 3).toUpperCase();
 
-        const periodAbbr = item.period.includes('€') ? item.period : item.period.replace('місяць', 'м').replace('місяців', 'м');
+            periodAbbr = item.period.includes('€') ? item.period : item.period.replace('місяць', 'м').replace('місяців', 'м');
+        }
+
         command += `${serviceAbbr}-${planAbbr}-${periodAbbr}-${item.price} `;
     });
 
@@ -539,7 +548,6 @@ function checkout() {
 
     document.body.appendChild(modal);
 
-    // Close on backdrop click
     modal.addEventListener('click', function(e) {
         if (e.target === modal) {
             document.body.removeChild(modal);
@@ -610,12 +618,12 @@ function orderSingleItem(index) {
 
     document.body.appendChild(modal);
 
-    // Close on backdrop click
     modal.addEventListener('click', function(e) {
         if (e.target === modal) {
             document.body.removeChild(modal);
         }
     });
+    
     modal.querySelector('.copy-btn').addEventListener('click', () => {
         navigator.clipboard.writeText(command)
             .then(() => {
