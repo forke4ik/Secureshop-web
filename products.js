@@ -36,6 +36,27 @@ const discordDecorProducts = {
   ]
 };
 
+const discordBoostsProducts = {
+  name: "Discord Boosts",
+  logo: "images/discord.webp",
+  plans: [
+    {
+      id: "discord_boosts_pack",
+      name: "Boost пакети",
+      description: "Boost'и для підвищення рівня вашого сервера",
+      options: [
+        { period: "2 шт", price: 80 },
+        { period: "4 шт", price: 160 },
+        { period: "6 шт", price: 240 },
+        { period: "8 шт", price: 320 },
+        { period: "10 шт", price: 400 },
+        { period: "12 шт", price: 480 },
+        { period: "14 шт", price: 560 }
+      ]
+    }
+  ]
+};
+
 const products = {
   chatgpt: {
     name: "ChatGPT",
@@ -44,13 +65,56 @@ const products = {
       {
         id: "chatgpt_plus",
         name: "Plus",
-        description: "Доступ до GPT-4, розширені можливості(готовий акаунт)",
+        description: "Plus план",
         options: [
-          { period: "1 місяць", price: 600 },
-                { period: "3 місяці", price: 600 } 
-            ]
-        }]
-    },
+          { period: "1 місяць", price: 400 },
+          { period: "1 рік (ваш акаунт)", price: 2000 },
+          { period: "1 рік (наш акаунт)", price: 1500 }
+        ]
+      },
+      {
+        id: "chatgpt_business",
+        name: "Business",
+        description: "Business план для ChatGPT",
+        options: [
+          { period: "1 місяць", price: 100 }
+        ]
+      },
+      {
+        id: "chatgpt_go",
+        name: "GO",
+        description: "GO план на 1 рік",
+        options: [
+          { period: "1 рік", price: 500 }
+        ]
+      },
+      {
+        id: "chatgpt_pro",
+        name: "Pro",
+        description: "Pro план",
+        options: [
+          { period: "1 місяць", price: 6500 }
+        ]
+      }
+    ]
+  },
+  claude: {
+    name: "Claude AI",
+    logo: "images/claude.webp", 
+    plans: [
+      {
+        id: "claude_pro",
+        name: "Pro",
+        description: "Pro план для Claude AI",
+        options: [
+          { period: "1 місяць", price: 700 },
+          { period: "3 місяці", price: 1900 },
+          { period: "6 місяців", price: 3900 },
+          { period: "12 місяців", price: 7800 }
+        ]
+      }
+    ]
+  },
   discord: {
     name: "Discord",
     logo: "images/discord.webp",
@@ -60,40 +124,26 @@ const products = {
         name: "Nitro Basic",
         description: "Базові можливості Nitro",
         options: [
-          { period: "1 місяць", price: 100 },
-          { period: "12 місяців", price: 900 }
+          { period: "1 місяць", price: 120 },
+          { period: "12 місяців", price: 1200 }
         ]
       },
       {
         id: "discord_full",
         name: "Nitro Full",
-        description: "Повна версія з усіма функціями",
-        options: [
-          { period: "1 місяць", price: 170 },
-          { period: "12 місяців", price: 1700 }
-        ]
-      }
-    ]
-  },
-  duolingo: {
-    name: "Duolingo",
-    logo: "images/duolingo.webp",
-    plans: [
-      {
-        id: "duolingo_individual",
-        name: "Individual",
-        description: "Преміум для одного користувача",
+        description: "Повний доступ до всіх можливостей Nitro",
         options: [
           { period: "1 місяць", price: 200 },
-          { period: "12 місяців", price: 1500 }
+          { period: "12 місяців", price: 2000 }
         ]
       },
       {
-        id: "duolingo_family",
-        name: "Family",
-        description: "Підписка на вас та ще 5 осіб",
+        id: "discord_full_3m_special",
+        name: "Nitro Full — 3 місяці (особливі умови)",
+        description: "Увага! Якщо ви вибрали nitro full на ваш акаунт (промокодом), то він повинен бути старший 31 днів, і на ньому не було підписки останній рік",
         options: [
-          { period: "12 місяців", price: 380 }
+          { period: "На ваш акаунт (промокод)", price: 200 },
+          { period: "Наш акаунт (готовий)", price: 250 }
         ]
       }
     ]
@@ -156,6 +206,62 @@ const products = {
         description: "4K, 4 екрани, без реклами",
         options: [
           { period: "1 місяць", price: 350 }
+        ]
+      }
+    ]
+  },
+  gemini: {
+    name: "Gemini",
+    logo: "images/gemini.webp",
+    plans: [
+      {
+        id: "gemini_pro",
+        name: "Gemini AI Pro",
+        description: "Підписка на Gemini AI Pro",
+        options: [
+          { period: "1 рік", price: 300 }
+        ]
+      }
+    ]
+  },
+  linear: {
+    name: "Linear",
+    logo: "images/linear.webp", 
+    plans: [
+      {
+        id: "linear_business",
+        name: "Business",
+        description: "Business план для Linear",
+        options: [
+          { period: "3 місяці", price: 500 }
+        ]
+      }
+    ]
+  },
+  capcut: {
+    name: "CapCut",
+    logo: "images/capcut.webp", 
+    plans: [
+      {
+        id: "capcut_teams",
+        name: "Teams",
+        description: "Teams план для CapCut",
+        options: [
+          { period: "6 місяців", price: 700 }
+        ]
+      }
+    ]
+  },
+  adobe: {
+    name: "Adobe",
+    logo: "images/adobe.webp", 
+    plans: [
+      {
+        id: "adobe_cc",
+        name: "Creative Cloud",
+        description: "Повний пакет Adobe Creative Cloud",
+        options: [
+          { period: "4 місяці", price: 400 }
         ]
       }
     ]
