@@ -454,29 +454,49 @@ function generateBotCommand(items) {
     let command = `/pay ${orderId} `;
     
     items.forEach(item => {
-       let serviceAbbr;
+        let serviceAbbr, planAbbr, periodAbbr;
+        
+        // 1. Абревіатури сервісів
         if (item.service.includes('ChatGPT')) serviceAbbr = "Cha";
         else if (item.service.includes('Claude')) serviceAbbr = "Cla";
-        else if (item.service.includes('Discord Украшення')) serviceAbbr = "DisU";
+        else if (item.service.includes('Discord Прикраси')) serviceAbbr = "DisU";
+        else if (item.service.includes('Discord Boosts')) serviceAbbr = "DisB";
         else if (item.service.includes('Discord')) serviceAbbr = "Dis";
-        else if (item.service.includes('Duolingo')) serviceAbbr = "Duo";
         else if (item.service.includes('PicsArt')) serviceAbbr = "Pic";
         else if (item.service.includes('Canva')) serviceAbbr = "Can";
         else if (item.service.includes('Netflix')) serviceAbbr = "Net";
         else if (item.service.includes('PSN')) serviceAbbr = "PSN";
+        else if (item.service.includes('Gemini')) serviceAbbr = "Gem";
+        else if (item.service.includes('Linear')) serviceAbbr = "Lin";
+        else if (item.service.includes('CapCut')) serviceAbbr = "Cap";
+        else if (item.service.includes('Adobe')) serviceAbbr = "Ado";
         else serviceAbbr = item.service.substring(0, 3);
 
-        let planAbbr;
-        if (item.plan.includes('Basic')) planAbbr = "Bas";
-        else if (item.plan.includes('Full')) planAbbr = "Ful";
-        else if (item.plan.includes('Individual')) planAbbr = "Ind";
-        else if (item.plan.includes('Family')) planAbbr = "Fam";
-        else if (item.plan.includes('Plus')) planAbbr = "Plu";
-        else if (item.plan.includes('Pro')) planAbbr = "Pro";
-        else if (item.plan.includes('Premium')) planAbbr = "Pre";
-        else if (item.plan.includes('Без Nitro')) planAbbr = "BzN";
-        else if (item.plan.includes('З Nitro')) planAbbr = "ZN";
-        else planAbbr = item.plan.substring(0, 3);
+        // 2. Абревіатури планів та періодів
+        if (serviceAbbr === "DisB") {
+            const count = item.period.replace(/\D/g, ''); // витягує число з "2 шт"
+            planAbbr = `B${count}`;
+            periodAbbr = "1шт";
+        } else if (serviceAbbr === "PSN") {
+            planAbbr = "INR";
+            periodAbbr = "1шт";
+        } else if (serviceAbbr === "DisU") {
+            planAbbr = "Dec";
+            periodAbbr = "1шт";
+        } else {
+            // Звичайні підписки
+            if (item.plan.includes('Basic')) planAbbr = "Bas";
+            else if (item.plan.includes('Full')) planAbbr = "Ful";
+            else if (item.plan.includes('Individual')) planAbbr = "Ind";
+            else if (item.plan.includes('Family')) planAbbr = "Fam";
+            else if (item.plan.includes('Plus')) planAbbr = "Plu";
+            else if (item.plan.includes('Pro')) planAbbr = "Pro";
+            else if (item.plan.includes('Premium')) planAbbr = "Pre";
+            else if (item.plan.includes('Teams')) planAbbr = "Tea";
+            else if (item.plan.includes('Creative Cloud')) planAbbr = "CC";
+            else if (item.plan.includes('Business')) planAbbr = "Bus";
+            else if (item.plan.includes('GO')) planAbbr = "Go";
+            else planAbbr = item.plan.substring(0, 3).toUpperCase();
 
         const periodAbbr = item.period.includes('€') ? item.period : item.period.replace('місяць', 'м').replace('місяців', 'м');
         command += `${serviceAbbr}-${planAbbr}-${periodAbbr}-${item.price} `;
