@@ -24,7 +24,65 @@ document.addEventListener('DOMContentLoaded', function() {
     setupEventListeners();
     showPage(mainPage);
     updateCartCount();
+    setupHeaderScroll();
+    setupKeyboardSupport();
 });
+
+// === Toast Notification System ===
+function showToast(message, type = 'success') {
+    const container = document.getElementById('toast-container');
+    if (!container) return;
+
+    const toast = document.createElement('div');
+    toast.className = `toast toast-${type}`;
+
+    let icon = '✅';
+    if (type === 'error') icon = '❌';
+    else if (type === 'info') icon = 'ℹ️';
+
+    toast.innerHTML = `<span class="toast-icon">${icon}</span><span>${message}</span>`;
+    container.appendChild(toast);
+
+    setTimeout(() => {
+        toast.classList.add('hiding');
+        toast.addEventListener('animationend', () => toast.remove());
+    }, 2800);
+}
+
+// === Header scroll effect ===
+function setupHeaderScroll() {
+    const header = document.querySelector('header');
+    if (!header) return;
+    let ticking = false;
+    window.addEventListener('scroll', () => {
+        if (!ticking) {
+            window.requestAnimationFrame(() => {
+                header.classList.toggle('scrolled', window.scrollY > 10);
+                ticking = false;
+            });
+            ticking = true;
+        }
+    }, { passive: true });
+}
+
+// === Keyboard support ===
+function setupKeyboardSupport() {
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') {
+            // Close order menu
+            const orderMenu = document.getElementById('order-menu');
+            if (orderMenu && orderMenu.classList.contains('active')) {
+                closeOrderMenu();
+                return;
+            }
+            // Close checkout modals
+            const modal = document.querySelector('.order-modal');
+            if (modal) {
+                modal.remove();
+            }
+        }
+    });
+}
 
 function showPage(pageToShow) {
     document.querySelectorAll('.page').forEach(page => {
@@ -32,6 +90,8 @@ function showPage(pageToShow) {
     });
     if (pageToShow) {
         pageToShow.classList.add('active');
+        // Smooth scroll to top on page change
+        window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 }
 
@@ -294,7 +354,7 @@ function showDiscordDecorOptions(planId) {
 
 function addItemToCart(period, price) {
     if (!currentService || !currentPlan) {
-        alert('Спочатку оберіть сервіс і тариф!');
+        showToast('Спочатку оберіть сервіс і тариф!', 'error');
         return;
     }
 
@@ -307,7 +367,7 @@ function addItemToCart(period, price) {
 
     cart.push(item);
     updateCartCount();
-    alert('Товар додано до корзини!');
+    showToast('Товар додано до кошика! 🎉');
 }
 
 function updateCartCount() {
@@ -429,7 +489,7 @@ function generateBotCommand(items) {
 
 function checkout() {
     if (cart.length === 0) {
-        alert('Корзина порожня!');
+        showToast('Кошик порожній!', 'info');
         return;
     }
 
@@ -457,6 +517,13 @@ function checkout() {
     `;
 
     document.body.appendChild(modal);
+
+    // Close on backdrop click
+    modal.addEventListener('click', function(e) {
+        if (e.target === modal) {
+            document.body.removeChild(modal);
+        }
+    });
 
     modal.querySelector('.copy-btn').addEventListener('click', () => {
         navigator.clipboard.writeText(command)
@@ -522,6 +589,12 @@ function orderSingleItem(index) {
 
     document.body.appendChild(modal);
 
+    // Close on backdrop click
+    modal.addEventListener('click', function(e) {
+        if (e.target === modal) {
+            document.body.removeChild(modal);
+        }
+    });
     modal.querySelector('.copy-btn').addEventListener('click', () => {
         navigator.clipboard.writeText(command)
             .then(() => {
