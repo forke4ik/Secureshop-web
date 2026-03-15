@@ -67,8 +67,8 @@ const products = {
         name: "Plus",
         description: "Plus план",
         options: [
-          { period: "1 місяць", price: 400 },
-          { period: "1 рік (ваш акаунт)", price: 2000 }
+          { period: "1 місяць (ваш акаунт)", price: 400 },
+          { period: "1 рік (ваш акаунт)", price: 2500 }
         ]
       },
       {
@@ -76,7 +76,7 @@ const products = {
         name: "GO",
         description: "GO план на 1 рік",
         options: [
-          { period: "1 рік", price: 500 }
+          { period: "1 рік (ваш акаунт)", price: 500 }
         ]
       },
       {
@@ -84,7 +84,7 @@ const products = {
         name: "Pro",
         description: "Pro план",
         options: [
-          { period: "1 місяць", price: 6500 }
+          { period: "1 місяць (ваш акаунт)", price: 6500 }
         ]
       }
     ]
