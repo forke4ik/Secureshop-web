@@ -68,16 +68,7 @@ const products = {
         description: "Plus план",
         options: [
           { period: "1 місяць", price: 400 },
-          { period: "1 рік (ваш акаунт)", price: 2000 },
-          { period: "1 рік (наш акаунт)", price: 1500 }
-        ]
-      },
-      {
-        id: "chatgpt_business",
-        name: "Business",
-        description: "Business план для ChatGPT",
-        options: [
-          { period: "1 місяць", price: 100 }
+          { period: "1 рік (ваш акаунт)", price: 2000 }
         ]
       },
       {
