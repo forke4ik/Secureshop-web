@@ -474,7 +474,6 @@ function generateBotCommand(items) {
         else if (item.service.includes('Netflix')) serviceAbbr = "Net";
         else if (item.service.includes('PSN')) serviceAbbr = "PSN";
         else if (item.service.includes('Gemini')) serviceAbbr = "Gem";
-        else if (item.service.includes('Linear')) serviceAbbr = "Lin";
         else if (item.service.includes('CapCut')) serviceAbbr = "Cap";
         else if (item.service.includes('Adobe')) serviceAbbr = "Ado";
         else serviceAbbr = item.service.substring(0, 3);
@@ -501,7 +500,6 @@ function generateBotCommand(items) {
             else if (item.plan.includes('Premium')) planAbbr = "Pre";
             else if (item.plan.includes('Teams')) planAbbr = "Tea";
             else if (item.plan.includes('Creative Cloud')) planAbbr = "CC";
-            else if (item.plan.includes('Business')) planAbbr = "Bus";
             else if (item.plan.includes('GO')) planAbbr = "Go";
             else planAbbr = item.plan.substring(0, 3).toUpperCase();
 
