@@ -210,7 +210,7 @@ const products = {
         name: "Gemini AI Pro",
         description: "Підписка на Gemini AI Pro",
         options: [
-          { period: "1 рік", price: 300 }
+          { period: "1 рік(готовий акаунт)", price: 350 }
         ]
       }
     ]
