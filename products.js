@@ -88,23 +88,6 @@ const products = {
       }
     ]
   },
-  claude: {
-    name: "Claude AI",
-    logo: "images/claude.webp", 
-    plans: [
-      {
-        id: "claude_pro",
-        name: "Pro",
-        description: "Pro план для Claude AI",
-        options: [
-          { period: "1 місяць", price: 700 },
-          { period: "3 місяці", price: 1900 },
-          { period: "6 місяців", price: 3900 },
-          { period: "12 місяців", price: 7800 }
-        ]
-      }
-    ]
-  },
   discord: {
     name: "Discord",
     logo: "images/discord.webp",
@@ -210,6 +193,28 @@ const products = {
         description: "Підписка на Gemini AI Pro",
         options: [
           { period: "1 рік(готовий акаунт)", price: 350 }
+        ]
+      },
+      {
+        id: "gemini_ultra",
+        name: "AI Ultra",
+        description: "Підписка на Gemini AI Ultra",
+        options: [
+          { period: "1 місяць", price: 500 }
+        ]
+      }
+    ]
+  },
+  duolingo: {
+    name: "Duolingo",
+    logo: "images/duolingo.webp",
+    plans: [
+      {
+        id: "duolingo_family",
+        name: "Family",
+        description: "Сімейний план Duolingo",
+        options: [
+          { period: "12 місяців", price: 400 }
         ]
       }
     ]
