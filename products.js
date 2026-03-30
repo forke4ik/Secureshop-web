@@ -219,20 +219,6 @@ const products = {
       }
     ]
   },
-  linear: {
-    name: "Linear",
-    logo: "images/linear.webp", 
-    plans: [
-      {
-        id: "linear_business",
-        name: "Business",
-        description: "Business план для Linear",
-        options: [
-          { period: "3 місяці", price: 500 }
-        ]
-      }
-    ]
-  },
   capcut: {
     name: "CapCut",
     logo: "images/capcut.webp", 
