@@ -68,7 +68,7 @@ const products = {
         description: "Plus план",
         options: [
           { period: "1 місяць (ваш акаунт)", price: 400 },
-          { period: "12 місяців (ваш акаунт)", price: 2000 },
+          { period: "12 місяців (ваш акаунт)", price: 2500 },
         ]
       },
       {
