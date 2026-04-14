@@ -195,15 +195,15 @@ const products = {
         options: [
           { period: "1 рік(готовий акаунт)", price: 350 }
         ]
-      },
-      {
-        id: "gemini_ultra",
-        name: "AI Ultra",
-        description: "Підписка на Gemini AI Ultra",
-        options: [
-          { period: "1 місяць", price: 500 }
-        ]
       }
+      // {
+      //   id: "gemini_ultra",
+      //   name: "AI Ultra",
+      //   description: "Підписка на Gemini AI Ultra",
+      //   options: [
+      //     { period: "1 місяць", price: 500 }
+      //   ]
+      // }
     ]
   },
   duolingo: {
