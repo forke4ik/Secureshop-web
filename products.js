@@ -193,7 +193,8 @@ const products = {
         name: "Gemini AI Pro",
         description: "Підписка на Gemini AI Pro",
         options: [
-          { period: "1 рік(готовий акаунт)", price: 350 }
+          { period: "1 рік(готовий акаунт)", price: 350 },
+          { period: "18 місяців(промокод на ваш акаунт)", price: 600 }
         ]
       }
       // {
