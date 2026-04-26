@@ -80,11 +80,19 @@ const products = {
       //   ]
       // },
       {
-        id: "chatgpt_pro",
-        name: "Pro",
-        description: "Pro план",
+        id: "chatgpt_pro_x5",
+        name: "Pro x5",
+        description: "Pro x5 план",
         options: [
-          { period: "1 місяць (ваш акаунт)", price: 6500 }
+          { period: "1 місяць (ваш акаунт)", price: 2500 }
+        ]
+      },
+      {
+        id: "chatgpt_pro_x20",
+        name: "Pro x20",
+        description: "Pro x20 план",
+        options: [
+          { period: "1 місяць (ваш акаунт)", price: 5000 }
         ]
       }
     ]
@@ -122,30 +130,7 @@ const products = {
       }
     ]
   },
-  picsart: {
-    name: "PicsArt",
-    logo: "images/picsart.webp",
-    plans: [
-      {
-        id: "picsart_plus",
-        name: "Plus",
-        description: "Розширені інструменти",
-        options: [
-          { period: "1 місяць", price: 130 },
-          { period: "12 місяців", price: 800 }
-        ]
-      },
-      {
-        id: "picsart_pro",
-        name: "Pro",
-        description: "Професійні можливості",
-        options: [
-          { period: "1 місяць", price: 180 },
-          { period: "12 місяців", price: 1000 }
-        ]
-      }
-    ]
-  },
+
   canva: {
     name: "Canva",
     logo: "images/canva.webp",
