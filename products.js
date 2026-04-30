@@ -58,45 +58,45 @@ const discordBoostsProducts = {
 };
 
 const products = {
-  chatgpt: {
-    name: "ChatGPT",
-    logo: "images/chatgpt.webp",
-    plans: [
-      {
-        id: "chatgpt_plus",
-        name: "Plus",
-        description: "Plus план",
-        options: [
-          { period: "1 місяць (ваш акаунт)", price: 650 },
-          // { period: "12 місяців (ваш акаунт)", price: 2500 },
-        ]
-      },
-      // {
-      //   id: "chatgpt_go",
-      //   name: "GO",
-      //   description: "GO план на 1 рік",
-      //   options: [
-      //     { period: "1 рік (ваш акаунт)", price: 500 }
-      //   ]
-      // },
-      {
-        id: "chatgpt_pro_x5",
-        name: "Pro x5",
-        description: "Pro x5 план",
-        options: [
-          { period: "1 місяць (ваш акаунт)", price: 2500 }
-        ]
-      },
-      {
-        id: "chatgpt_pro_x20",
-        name: "Pro x20",
-        description: "Pro x20 план",
-        options: [
-          { period: "1 місяць (ваш акаунт)", price: 5000 }
-        ]
-      }
-    ]
-  },
+  // chatgpt: {
+  //   name: "ChatGPT",
+  //   logo: "images/chatgpt.webp",
+  //   plans: [
+  //     {
+  //       id: "chatgpt_plus",
+  //       name: "Plus",
+  //       description: "Plus план",
+  //       options: [
+  //         { period: "1 місяць (ваш акаунт)", price: 650 },
+  //         // { period: "12 місяців (ваш акаунт)", price: 2500 },
+  //       ]
+  //     },
+  //     // {
+  //     //   id: "chatgpt_go",
+  //     //   name: "GO",
+  //     //   description: "GO план на 1 рік",
+  //     //   options: [
+  //     //     { period: "1 рік (ваш акаунт)", price: 500 }
+  //     //   ]
+  //     // },
+  //     {
+  //       id: "chatgpt_pro_x5",
+  //       name: "Pro x5",
+  //       description: "Pro x5 план",
+  //       options: [
+  //         { period: "1 місяць (ваш акаунт)", price: 2500 }
+  //       ]
+  //     },
+  //     {
+  //       id: "chatgpt_pro_x20",
+  //       name: "Pro x20",
+  //       description: "Pro x20 план",
+  //       options: [
+  //         { period: "1 місяць (ваш акаунт)", price: 5000 }
+  //       ]
+  //     }
+  //   ]
+  // },
   discord: {
     name: "Discord",
     logo: "images/discord.webp",
