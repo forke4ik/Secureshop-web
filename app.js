@@ -464,8 +464,8 @@ function generateBotCommand(items) {
         let serviceAbbr, planAbbr, periodAbbr;
         
         // 1. Абревіатури сервісів
-        if (item.service.includes('ChatGPT')) serviceAbbr = "Cha";
-        else if (item.service.includes('Discord Прикраси')) serviceAbbr = "DisU";
+        // if (item.service.includes('ChatGPT')) serviceAbbr = "Cha";
+        if (item.service.includes('Discord Прикраси')) serviceAbbr = "DisU";
         else if (item.service.includes('Discord Boosts')) serviceAbbr = "DisB";
         else if (item.service.includes('Discord')) serviceAbbr = "Dis";
         else if (item.service.includes('PicsArt')) serviceAbbr = "Pic";
