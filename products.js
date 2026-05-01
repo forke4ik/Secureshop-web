@@ -192,6 +192,21 @@ const products = {
       // }
     ]
   },
+  youtube: {
+    name: "YouTube Premium",
+    logo: "images/youtube.webp",
+    plans: [
+      {
+        id: "youtube_premium",
+        name: "Premium",
+        description: "YouTube Premium (Гарантія 3 місяці на всі плани)",
+        options: [
+          { period: "3 місяці (ваш акаунт, гіфт)", price: 650 },
+          { period: "12 місяців (ваш акаунт, гіфт)", price: 2300 }
+        ]
+      }
+    ]
+  },
   duolingo: {
     name: "Duolingo",
     logo: "images/duolingo.webp",
