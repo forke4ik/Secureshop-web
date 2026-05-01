@@ -194,7 +194,7 @@ const products = {
   },
   youtube: {
     name: "YouTube Premium",
-    logo: "images/youtube.webp",
+    logo: "images/youtube.svg",
     plans: [
       {
         id: "youtube_premium",
