@@ -100,6 +100,7 @@ const products = {
   discord: {
     name: "Discord",
     logo: "images/discord.webp",
+    warranty: "Весь термін підписки",
     plans: [
       {
         id: "discord_basic",
@@ -134,23 +135,15 @@ const products = {
   canva: {
     name: "Canva",
     logo: "images/canva.webp",
+    warranty: "Весь термін підписки",
     plans: [
-      {
-        id: "canva_individual",
-        name: "Individual",
-        description: "Преміум для одного користувача",
-        options: [
-          { period: "1 місяць", price: 350 },
-          { period: "12 місяців", price: 3000 }
-        ]
-      },
       {
         id: "canva_family",
         name: "Family",
         description: "Підписка на вас та ще 3 осіб",
         options: [
-          { period: "1 місяць", price: 850 },
-          { period: "12 місяців", price: 7500 }
+          { period: "1 місяць", price: 250 },
+          { period: "12 місяців", price: 800 }
         ]
       }
     ]
@@ -158,13 +151,17 @@ const products = {
   netflix: {
     name: "Netflix",
     logo: "images/netflix.webp",
+    warranty: "Весь термін підписки",
     plans: [
       {
         id: "netflix_premium",
         name: "Premium",
         description: "4K, 4 екрани, без реклами",
         options: [
-          { period: "1 місяць", price: 350 }
+          { period: "1 місяць", price: 200 },
+          { period: "3 місяці", price: 600 },
+          { period: "6 місяців", price: 1000 },
+          { period: "12 місяців", price: 1800 }
         ]
       }
     ]
@@ -172,6 +169,7 @@ const products = {
   gemini: {
     name: "Gemini",
     logo: "images/gemini.webp",
+    warranty: "1 місяць",
     plans: [
       {
         id: "gemini_pro",
@@ -195,6 +193,7 @@ const products = {
   youtube: {
     name: "YouTube Premium",
     logo: "images/youtube.svg",
+    warranty: "3 місяці",
     plans: [
       {
         id: "youtube_premium",
@@ -210,6 +209,7 @@ const products = {
   duolingo: {
     name: "Duolingo",
     logo: "images/duolingo.webp",
+    warranty: "3 місяці",
     plans: [
       {
         id: "duolingo_family",
@@ -223,7 +223,8 @@ const products = {
   },
   capcut: {
     name: "CapCut",
-    logo: "images/capcut.webp", 
+    logo: "images/capcut.webp",
+    warranty: "Весь термін підписки",
     plans: [
       {
         id: "capcut_teams",
@@ -237,7 +238,8 @@ const products = {
   },
   adobe: {
     name: "Adobe",
-    logo: "images/adobe.webp", 
+    logo: "images/adobe.webp",
+    warranty: "2 місяці",
     plans: [
       {
         id: "adobe_cc",
