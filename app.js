@@ -369,7 +369,8 @@ function addItemToCart(period, price) {
         service: currentService.name,
         plan: currentPlan.name,
         period: period,
-        price: price
+        price: price,
+        warranty: currentService.warranty || null
     };
 
     cart.push(item);
@@ -433,6 +434,16 @@ function showOrderMenu(index) {
 
     orderMenu.dataset.index = index;
     orderMenu.classList.add('active');
+
+    // Show/hide warranty row
+    const warrantyRow = document.getElementById('order-warranty-row');
+    const warrantyEl = document.getElementById('order-warranty');
+    if (item.warranty) {
+        warrantyEl.textContent = item.warranty;
+        warrantyRow.style.display = '';
+    } else {
+        warrantyRow.style.display = 'none';
+    }
 
     document.querySelector('.remove-btn')?.addEventListener('click', removeFromCart);
     document.querySelector('.order-btn')?.addEventListener('click', function() { orderSingleItem(index); });
