@@ -97,6 +97,29 @@ const products = {
   //     }
   //   ]
   // },
+  claude: {
+    name: "Claude",
+    logo: "images/claude.webp",
+    warranty: "1 місяць",
+    plans: [
+      {
+        id: "claude_pro_team",
+        name: "Pro (Team)",
+        description: "Claude Pro (Team) план",
+        options: [
+          { period: "1 місяць", price: 750 }
+        ]
+      },
+      {
+        id: "claude_x5_team",
+        name: "x5 (Team)",
+        description: "Claude x5 (Team) план",
+        options: [
+          { period: "1 місяць", price: 3700 }
+        ]
+      }
+    ]
+  },
   discord: {
     name: "Discord",
     logo: "images/discord.webp",
@@ -239,14 +262,14 @@ const products = {
   adobe: {
     name: "Adobe",
     logo: "images/adobe.webp",
-    warranty: "2 місяці",
+    warranty: "1 місяць",
     plans: [
       {
         id: "adobe_cc",
         name: "Creative Cloud",
         description: "Повний пакет Adobe Creative Cloud",
         options: [
-          { period: "4 місяці", price: 400 }
+          { period: "1 місяць", price: 400 }
         ]
       }
     ]
