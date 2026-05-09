@@ -488,6 +488,7 @@ function generateBotCommand(items) {
         else if (item.service.includes('Adobe')) serviceAbbr = "Ado";
         else if (item.service.includes('Duolingo')) serviceAbbr = "Duo";
         else if (item.service.includes('YouTube')) serviceAbbr = "You";
+        else if (item.service.includes('Claude')) serviceAbbr = "Cla";
         else serviceAbbr = item.service.substring(0, 3);
 
         // 2. Абревіатури планів та періодів
@@ -509,6 +510,7 @@ function generateBotCommand(items) {
             else if (item.plan.includes('Family')) planAbbr = "Fam";
             else if (item.plan.includes('Plus')) planAbbr = "Plu";
             else if (item.plan.includes('Pro')) planAbbr = "Pro";
+            else if (item.plan.includes('x5')) planAbbr = "X5";
             else if (item.plan.includes('Premium')) planAbbr = "Pre";
             else if (item.plan.includes('Teams')) planAbbr = "Tea";
             else if (item.plan.includes('Creative Cloud')) planAbbr = "CC";
