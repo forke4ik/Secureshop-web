@@ -103,7 +103,7 @@ const products = {
     warranty: "1 місяць",
     plans: [
       {
-        id: "claude_pro_team",
+        id: "claude_pro",
         name: "Pro (Team)",
         description: "Claude Pro (Team) план",
         options: [
@@ -111,7 +111,7 @@ const products = {
         ]
       },
       {
-        id: "claude_x5_team",
+        id: "claude_x5",
         name: "x5 (Team)",
         description: "Claude x5 (Team) план",
         options: [
