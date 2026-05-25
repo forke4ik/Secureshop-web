@@ -484,7 +484,7 @@ function generateBotCommand(items) {
         else if (item.service.includes('Netflix')) serviceAbbr = "Net";
         else if (item.service.includes('PSN')) serviceAbbr = "PSN";
         else if (item.service.includes('Gemini')) serviceAbbr = "Gem";
-        else if (item.service.includes('CapCut')) serviceAbbr = "Cap";
+        // else if (item.service.includes('CapCut')) serviceAbbr = "Cap";
         else if (item.service.includes('Adobe')) serviceAbbr = "Ado";
         else if (item.service.includes('Duolingo')) serviceAbbr = "Duo";
         else if (item.service.includes('YouTube')) serviceAbbr = "You";
