@@ -244,21 +244,21 @@ const products = {
       }
     ]
   },
-  capcut: {
-    name: "CapCut",
-    logo: "images/capcut.webp",
-    warranty: "Весь термін підписки",
-    plans: [
-      {
-        id: "capcut_teams",
-        name: "Teams",
-        description: "Teams план для CapCut",
-        options: [
-          { period: "6 місяців", price: 700 }
-        ]
-      }
-    ]
-  },
+  // capcut: {
+  //   name: "CapCut",
+  //   logo: "images/capcut.webp",
+  //   warranty: "Весь термін підписки",
+  //   plans: [
+  //     {
+  //       id: "capcut_teams",
+  //       name: "Teams",
+  //       description: "Teams план для CapCut",
+  //       options: [
+  //         { period: "6 місяців", price: 700 }
+  //       ]
+  //     }
+  //   ]
+  // },
   adobe: {
     name: "Adobe",
     logo: "images/adobe.webp",
