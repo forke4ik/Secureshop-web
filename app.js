@@ -488,7 +488,7 @@ function generateBotCommand(items) {
         else if (item.service.includes('Adobe')) serviceAbbr = "Ado";
         else if (item.service.includes('Duolingo')) serviceAbbr = "Duo";
         else if (item.service.includes('YouTube')) serviceAbbr = "You";
-        else if (item.service.includes('Claude')) serviceAbbr = "Cla";
+        // else if (item.service.includes('Claude')) serviceAbbr = "Cla";
         else serviceAbbr = item.service.substring(0, 3);
 
         // 2. Абревіатури планів та періодів
