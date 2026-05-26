@@ -97,29 +97,29 @@ const products = {
   //     }
   //   ]
   // },
-  claude: {
-    name: "Claude",
-    logo: "images/claude.webp",
-    warranty: "1 місяць",
-    plans: [
-      {
-        id: "claude_pro",
-        name: "Pro (Team)",
-        description: "Claude Pro (Team) план",
-        options: [
-          { period: "1 місяць", price: 750 }
-        ]
-      },
-      {
-        id: "claude_x5",
-        name: "x5 (Team)",
-        description: "Claude x5 (Team) план",
-        options: [
-          { period: "1 місяць", price: 3700 }
-        ]
-      }
-    ]
-  },
+  // claude: {
+  //   name: "Claude",
+  //   logo: "images/claude.webp",
+  //   warranty: "1 місяць",
+  //   plans: [
+  //     {
+  //       id: "claude_pro",
+  //       name: "Pro (Team)",
+  //       description: "Claude Pro (Team) план",
+  //       options: [
+  //         { period: "1 місяць", price: 750 }
+  //       ]
+  //     },
+  //     {
+  //       id: "claude_x5",
+  //       name: "x5 (Team)",
+  //       description: "Claude x5 (Team) план",
+  //       options: [
+  //         { period: "1 місяць", price: 3700 }
+  //       ]
+  //     }
+  //   ]
+  // },
   discord: {
     name: "Discord",
     logo: "images/discord.webp",
