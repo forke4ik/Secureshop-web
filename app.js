@@ -21,12 +21,24 @@ const subscriptionOptionsContainer = document.getElementById('subscription-optio
 const discordOptionsContainer = document.getElementById('discord-options-container');
 
 document.addEventListener('DOMContentLoaded', function() {
+    renderServiceCards();
     setupEventListeners();
     showPage(mainPage);
     updateCartCount();
     setupHeaderScroll();
     setupKeyboardSupport();
 });
+
+// Re-render cards when API data loads
+const _origLoadProducts = window.loadProductsFromAPI;
+if (typeof loadProductsFromAPI === 'function') {
+    const _origFn = loadProductsFromAPI;
+    window.loadProductsFromAPI = async function() {
+        await _origFn();
+        renderServiceCards();
+    };
+    window.loadProductsFromAPI();
+}
 
 // === Toast Notification System ===
 function showToast(message, type = 'success') {
@@ -137,6 +149,60 @@ function resetDiscordDecorUI() {
     if (discordOptionsContainer) discordOptionsContainer.innerHTML = '';
 }
 
+// === Dynamic service card rendering ===
+function createServiceCard(serviceId, name, logoSrc) {
+    const card = document.createElement('div');
+    card.className = 'service-card';
+    card.dataset.service = serviceId;
+
+    const img = document.createElement('img');
+    img.src = logoSrc;
+    img.alt = name + ' Logo';
+    img.onerror = function() {
+        // Replace broken img with gradient letter placeholder
+        const placeholder = document.createElement('div');
+        placeholder.className = 'service-logo-placeholder';
+        placeholder.textContent = name.charAt(0);
+        this.replaceWith(placeholder);
+    };
+    card.appendChild(img);
+
+    const h3 = document.createElement('h3');
+    h3.textContent = name;
+    card.appendChild(h3);
+
+    card.addEventListener('click', () => selectService(serviceId));
+    return card;
+}
+
+function renderServiceCards() {
+    // Subscriptions grid
+    const subsGrid = document.getElementById('subscriptions-grid');
+    if (subsGrid) {
+        subsGrid.innerHTML = '';
+        for (const [key, service] of Object.entries(products)) {
+            // Skip PSN here — it goes to digital page
+            if (key === 'psn') continue;
+            const card = createServiceCard(key, service.name, service.logo || guessLogo(key, service.name));
+            subsGrid.appendChild(card);
+        }
+    }
+
+    // Digital grid
+    const digGrid = document.getElementById('digital-grid');
+    if (digGrid) {
+        digGrid.innerHTML = '';
+        // Discord Прикраси
+        digGrid.appendChild(createServiceCard('discord_decor', discordDecorProducts.name, discordDecorProducts.logo || 'images/discord.webp'));
+        // Discord Boosts
+        digGrid.appendChild(createServiceCard('discord_boosts', discordBoostsProducts.name, discordBoostsProducts.logo || 'images/discord.webp'));
+        // PSN (if exists in products or as digital)
+        if (products['psn']) {
+            digGrid.appendChild(createServiceCard('psn', products['psn'].name, products['psn'].logo || 'images/psn.webp'));
+        }
+    }
+}
+
 function setupEventListeners() {
     document.querySelectorAll('.category-card').forEach(card => {
         card.addEventListener('click', function() {
@@ -146,13 +212,6 @@ function setupEventListeners() {
             } else if (category === 'digital') {
                 showPage(digitalPage);
             }
-        });
-    });
-
-    document.querySelectorAll('.service-card').forEach(card => {
-        card.addEventListener('click', function() {
-            const serviceId = this.dataset.service;
-            selectService(serviceId);
         });
     });
 
