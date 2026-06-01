@@ -420,6 +420,29 @@ h1::after {
     color: var(--primary);
 }
 
+/* Fallback placeholder when product image is missing */
+.service-logo-placeholder {
+    width: 56px;
+    height: 56px;
+    border-radius: 14px;
+    background: linear-gradient(135deg, var(--primary), var(--accent));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 14px;
+    font-size: 24px;
+    font-weight: 800;
+    color: white;
+    text-transform: uppercase;
+    transition: var(--transition);
+    box-shadow: 0 4px 12px rgba(108, 92, 231, 0.25);
+}
+
+.service-card:hover .service-logo-placeholder {
+    transform: scale(1.1);
+    box-shadow: 0 6px 18px rgba(108, 92, 231, 0.35);
+}
+
 /* ===== Plans & Options Grid ===== */
 .plans-grid,
 .options-grid {
