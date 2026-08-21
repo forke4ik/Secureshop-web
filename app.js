@@ -67,6 +67,7 @@ document.addEventListener('DOMContentLoaded', function() {
     updateCartCount();
     setupHeaderScroll();
     setupKeyboardSupport();
+    setupGestures();
 });
 
 // Re-render cards when API data loads
@@ -78,6 +79,39 @@ if (typeof loadProductsFromAPI === 'function') {
         renderServiceCards();
     };
     window.loadProductsFromAPI();
+}
+
+// ═══════════════ Gestures (Swipe Back) ═══════════════
+function setupGestures() {
+    let touchStartX = 0;
+    let touchEndX = 0;
+    
+    document.addEventListener('touchstart', e => {
+        touchStartX = e.changedTouches[0].screenX;
+    }, { passive: true });
+    
+    document.addEventListener('touchend', e => {
+        touchEndX = e.changedTouches[0].screenX;
+        handleSwipe();
+    }, { passive: true });
+    
+    function handleSwipe() {
+        // Swipe right (Back gesture)
+        // Start from left edge (x < 50) and swipe distance > 80
+        if (touchStartX < 50 && (touchEndX - touchStartX > 80)) {
+            goBackAutomatically();
+        }
+    }
+}
+
+function goBackAutomatically() {
+    if (discordDecorTypePage.classList.contains('active') || plansPage.classList.contains('active')) {
+        goBackToServices();
+    } else if (optionsPage.classList.contains('active')) {
+        goBackToPlans();
+    } else if (subscriptionsPage.classList.contains('active') || digitalPage.classList.contains('active') || cartPage.classList.contains('active')) {
+        goToHome();
+    }
 }
 
 // ═══════════════ Toast Notification System ═══════════════
