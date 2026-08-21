@@ -11,6 +11,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
 </head>
 <body>
     <header>
@@ -20,6 +21,8 @@
             <span id="cart-count">0</span>
         </div>
     </header>
+
+    <!-- ===== MAIN PAGE (Shop) ===== -->
     <div class="page active" id="main-page">
         <h1>Ласкаво просимо до SecureShop</h1>
         <div class="main-categories">
@@ -39,6 +42,8 @@
             </div>
         </div>
     </div>
+
+    <!-- ===== SUBSCRIPTIONS PAGE ===== -->
     <div class="page" id="subscriptions-page">
         <div class="back-button" id="back-to-main-category">
             <i class="fas fa-arrow-left"></i> Назад
@@ -48,6 +53,7 @@
         </div>
     </div>
     
+    <!-- ===== DIGITAL PAGE ===== -->
     <div class="page" id="digital-page">
         <div class="back-button" id="back-to-main-category-digital">
             <i class="fas fa-arrow-left"></i> Назад
@@ -56,6 +62,8 @@
         <div class="services-grid" id="digital-grid">
         </div>
     </div>
+
+    <!-- ===== DISCORD DECOR TYPE PAGE ===== -->
     <div class="page" id="discord-decor-type-page">
         <div class="back-button" id="back-to-digital">
             <i class="fas fa-arrow-left"></i> Назад
@@ -70,6 +78,8 @@
         <div class="options-grid" id="discord-options-container">
         </div>
     </div>
+
+    <!-- ===== PLANS PAGE ===== -->
     <div class="page" id="plans-page">
         <div class="back-button" id="back-to-services">
             <i class="fas fa-arrow-left"></i> Назад
@@ -78,6 +88,8 @@
         <div class="plans-grid" id="plans-container">
         </div>
     </div>
+
+    <!-- ===== OPTIONS PAGE ===== -->
     <div class="page" id="options-page">
         <div class="back-button" id="back-to-plans">
             <i class="fas fa-arrow-left"></i> Назад
@@ -87,6 +99,8 @@
         <div class="options-grid" id="subscription-options-container">
         </div>
     </div>
+
+    <!-- ===== CART PAGE ===== -->
     <div class="page" id="cart-page">
         <div class="back-button" id="back-to-main-from-cart">
             <i class="fas fa-arrow-left"></i> Назад
@@ -102,6 +116,94 @@
             </button>
         </div>
     </div>
+
+    <!-- ===== PROFILE PAGE ===== -->
+    <div class="page" id="profile-page">
+        <h1>Мій профіль</h1>
+        <div class="profile-container" id="profile-container">
+            <div class="profile-loading">
+                <i class="fas fa-spinner fa-spin"></i>
+                <p>Завантаження...</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== ORDERS PAGE ===== -->
+    <div class="page" id="orders-page">
+        <h1>Мої замовлення</h1>
+        <div class="orders-container" id="orders-container">
+            <div class="profile-loading">
+                <i class="fas fa-spinner fa-spin"></i>
+                <p>Завантаження...</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== ACCOUNTS (STUB) PAGE ===== -->
+    <div class="page" id="accounts-page">
+        <h1>Номери та акаунти</h1>
+        <div class="accounts-stub">
+            <div class="stub-icon">
+                <i class="fas fa-mobile-alt"></i>
+            </div>
+            <h2>Simka Store</h2>
+            <p>Номерами та акаунтами займаються наші партнери з Simka Store!</p>
+            <p class="stub-description">Ви можете придбати номери телефонів та акаунти у нашому партнерському боті.</p>
+            <a href="https://t.me/SimkaStoreBot" target="_blank" class="stub-button">
+                <i class="fab fa-telegram"></i> Перейти до @SimkaStoreBot
+            </a>
+        </div>
+    </div>
+
+    <!-- ===== SUPPORT PAGE ===== -->
+    <div class="page" id="support-page">
+        <h1>Підтримка</h1>
+        <div class="support-container">
+            <div class="support-card">
+                <div class="support-icon">
+                    <i class="fas fa-headset"></i>
+                </div>
+                <h2>Потрібна допомога?</h2>
+                <p>Наш менеджер готовий відповісти на будь-які запитання цілодобово. Натисніть кнопку нижче, щоб зв'язатися з нами.</p>
+                <a href="https://t.me/SecureSuppor" target="_blank" class="support-button">
+                    <i class="fab fa-telegram"></i> Написати в підтримку
+                </a>
+            </div>
+            <div class="support-info-cards">
+                <div class="info-card">
+                    <i class="fas fa-clock"></i>
+                    <h3>Графік роботи</h3>
+                    <p>Цілодобово, 7 днів на тиждень</p>
+                </div>
+                <div class="info-card">
+                    <i class="fas fa-bolt"></i>
+                    <h3>Час відповіді</h3>
+                    <p>Зазвичай до 30 хвилин</p>
+                </div>
+                <div class="info-card">
+                    <i class="fas fa-shield-alt"></i>
+                    <h3>Правила</h3>
+                    <a href="https://drive.google.com/file/d/1t5jQWCCJeimM8lJ132M7oTRKRG7t3dug/view?usp=drivesdk" target="_blank">Переглянути правила</a>
+                </div>
+            </div>
+            <div class="support-channels">
+                <h3>Наші канали</h3>
+                <div class="channels-grid">
+                    <a href="https://t.me/SecureShopUA" target="_blank" class="channel-link">
+                        <i class="fab fa-telegram"></i> Telegram канал
+                    </a>
+                    <a href="https://www.instagram.com/secureshopua?igsh=MWtpZTZzb2R2ZW9pZA%3D%3D&utm_source=qr" target="_blank" class="channel-link">
+                        <i class="fab fa-instagram"></i> Instagram
+                    </a>
+                    <a href="https://www.tiktok.com/@secureshop_official?_t=ZM-8zfKzDyHeha&_r=1" target="_blank" class="channel-link">
+                        <i class="fab fa-tiktok"></i> TikTok
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== ORDER MENU (bottom sheet) ===== -->
     <div class="order-menu" id="order-menu">
         <div class="order-content">
             <button class="close-btn">
@@ -125,6 +227,8 @@
             </div>
         </div>
     </div>
+
+    <!-- ===== FOOTER ===== -->
     <footer>
         <p>&copy; 2026 SecureShop. Всі права захищені.</p>
         <div class="social">
@@ -133,14 +237,33 @@
             <a href="https://www.tiktok.com/@secureshop_official?_t=ZM-8zfKzDyHeha&_r=1" target="_blank"><i class="fab fa-tiktok"></i></a>
         </div>
     </footer>
+
+    <!-- ===== BOTTOM NAVIGATION ===== -->
+    <nav class="bottom-nav" id="bottom-nav">
+        <button class="nav-item active" data-page="shop">
+            <i class="fas fa-store"></i>
+            <span>Магазин</span>
+        </button>
+        <button class="nav-item" data-page="profile">
+            <i class="fas fa-user"></i>
+            <span>Профіль</span>
+        </button>
+        <button class="nav-item" data-page="orders">
+            <i class="fas fa-box"></i>
+            <span>Замовлення</span>
+        </button>
+        <button class="nav-item" data-page="accounts">
+            <i class="fas fa-mobile-alt"></i>
+            <span>Номери</span>
+        </button>
+        <button class="nav-item" data-page="support">
+            <i class="fas fa-headset"></i>
+            <span>Підтримка</span>
+        </button>
+    </nav>
+
     <div id="toast-container"></div>
     <script src="products.js"></script>
     <script src="app.js"></script>
 </body>
 </html>
-
-
-
-
-
-

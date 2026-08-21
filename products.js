@@ -225,6 +225,4 @@ async function loadProductsFromAPI() {
     console.warn('⚠️ Could not load products from API, using fallback data:', err.message);
   }
 }
-
-// Load products when the page opens
-loadProductsFromAPI();
+// loadProductsFromAPI() is called from app.js after DOM init

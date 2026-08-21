@@ -1,6 +1,41 @@
+// ═══════════════ Configuration ═══════════════
+const BOT_API_URL = 'https://secureshop-hzqd.onrender.com';
+
+// ═══════════════ Telegram WebApp ═══════════════
+const tg = window.Telegram && window.Telegram.WebApp;
+let tgUser = null;
+
+if (tg) {
+    tg.ready();
+    tg.expand();
+    if (tg.initDataUnsafe && tg.initDataUnsafe.user) {
+        tgUser = tg.initDataUnsafe.user;
+    }
+    // Apply Telegram theme colors if available
+    if (tg.themeParams) {
+        document.documentElement.style.setProperty('--tg-bg', tg.themeParams.bg_color || '#f0edff');
+    }
+}
+
+function getTgUserId() {
+    return tgUser ? tgUser.id : null;
+}
+
+function getTgUsername() {
+    return tgUser ? (tgUser.username || '') : '';
+}
+
+function getTgFirstName() {
+    return tgUser ? (tgUser.first_name || '') : '';
+}
+
+// ═══════════════ State ═══════════════
 let currentService = null;
 let currentPlan = null;
 let cart = [];
+let currentNavPage = 'shop';
+
+// ═══════════════ DOM Elements ═══════════════
 const mainPage = document.getElementById('main-page');
 const subscriptionsPage = document.getElementById('subscriptions-page');
 const digitalPage = document.getElementById('digital-page');
@@ -8,6 +43,10 @@ const discordDecorTypePage = document.getElementById('discord-decor-type-page');
 const plansPage = document.getElementById('plans-page');
 const optionsPage = document.getElementById('options-page');
 const cartPage = document.getElementById('cart-page');
+const profilePage = document.getElementById('profile-page');
+const ordersPage = document.getElementById('orders-page');
+const accountsPage = document.getElementById('accounts-page');
+const supportPage = document.getElementById('support-page');
 const cartCount = document.getElementById('cart-count');
 const cartItems = document.getElementById('cart-items');
 const totalPrice = document.getElementById('total-price');
@@ -23,6 +62,7 @@ const discordOptionsContainer = document.getElementById('discord-options-contain
 document.addEventListener('DOMContentLoaded', function() {
     renderServiceCards();
     setupEventListeners();
+    setupBottomNav();
     showPage(mainPage);
     updateCartCount();
     setupHeaderScroll();
@@ -40,7 +80,7 @@ if (typeof loadProductsFromAPI === 'function') {
     window.loadProductsFromAPI();
 }
 
-// === Toast Notification System ===
+// ═══════════════ Toast Notification System ═══════════════
 function showToast(message, type = 'success') {
     const container = document.getElementById('toast-container');
     if (!container) return;
@@ -61,7 +101,7 @@ function showToast(message, type = 'success') {
     }, 2800);
 }
 
-// === Header scroll effect ===
+// ═══════════════ Header scroll effect ═══════════════
 function setupHeaderScroll() {
     const header = document.querySelector('header');
     if (!header) return;
@@ -77,17 +117,15 @@ function setupHeaderScroll() {
     }, { passive: true });
 }
 
-// === Keyboard support ===
+// ═══════════════ Keyboard support ═══════════════
 function setupKeyboardSupport() {
     document.addEventListener('keydown', function(e) {
         if (e.key === 'Escape') {
-            // Close order menu
             const orderMenu = document.getElementById('order-menu');
             if (orderMenu && orderMenu.classList.contains('active')) {
                 closeOrderMenu();
                 return;
             }
-            // Close checkout modals
             const modal = document.querySelector('.order-modal');
             if (modal) {
                 modal.remove();
@@ -96,13 +134,13 @@ function setupKeyboardSupport() {
     });
 }
 
+// ═══════════════ Page Navigation ═══════════════
 function showPage(pageToShow) {
     document.querySelectorAll('.page').forEach(page => {
         page.classList.remove('active');
     });
     if (pageToShow) {
         pageToShow.classList.add('active');
-        // Smooth scroll to top on page change
         window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 }
@@ -110,10 +148,12 @@ function showPage(pageToShow) {
 function goToHome() {
     showPage(mainPage);
     resetSelection();
+    setActiveNav('shop');
 }
 
 function goBackToMainCategory() {
     showPage(mainPage);
+    setActiveNav('shop');
 }
 
 function goBackToServices() {
@@ -149,7 +189,50 @@ function resetDiscordDecorUI() {
     if (discordOptionsContainer) discordOptionsContainer.innerHTML = '';
 }
 
-// === Dynamic service card rendering ===
+// ═══════════════ Bottom Navigation ═══════════════
+function setupBottomNav() {
+    const navItems = document.querySelectorAll('.nav-item');
+    navItems.forEach(item => {
+        item.addEventListener('click', function() {
+            const page = this.dataset.page;
+            navigateToSection(page);
+        });
+    });
+}
+
+function setActiveNav(pageName) {
+    currentNavPage = pageName;
+    document.querySelectorAll('.nav-item').forEach(item => {
+        item.classList.toggle('active', item.dataset.page === pageName);
+    });
+}
+
+function navigateToSection(section) {
+    setActiveNav(section);
+    resetSelection();
+
+    switch (section) {
+        case 'shop':
+            showPage(mainPage);
+            break;
+        case 'profile':
+            showPage(profilePage);
+            loadProfile();
+            break;
+        case 'orders':
+            showPage(ordersPage);
+            loadOrders();
+            break;
+        case 'accounts':
+            showPage(accountsPage);
+            break;
+        case 'support':
+            showPage(supportPage);
+            break;
+    }
+}
+
+// ═══════════════ Dynamic service card rendering ═══════════════
 function createServiceCard(serviceId, name, logoSrc) {
     const card = document.createElement('div');
     card.className = 'service-card';
@@ -159,7 +242,6 @@ function createServiceCard(serviceId, name, logoSrc) {
     img.src = logoSrc;
     img.alt = name + ' Logo';
     img.onerror = function() {
-        // Replace broken img with gradient letter placeholder
         const placeholder = document.createElement('div');
         placeholder.className = 'service-logo-placeholder';
         placeholder.textContent = name.charAt(0);
@@ -176,27 +258,21 @@ function createServiceCard(serviceId, name, logoSrc) {
 }
 
 function renderServiceCards() {
-    // Subscriptions grid
     const subsGrid = document.getElementById('subscriptions-grid');
     if (subsGrid) {
         subsGrid.innerHTML = '';
         for (const [key, service] of Object.entries(products)) {
-            // Skip PSN here — it goes to digital page
             if (key === 'psn') continue;
             const card = createServiceCard(key, service.name, service.logo || guessLogo(key, service.name));
             subsGrid.appendChild(card);
         }
     }
 
-    // Digital grid
     const digGrid = document.getElementById('digital-grid');
     if (digGrid) {
         digGrid.innerHTML = '';
-        // Discord Прикраси
         digGrid.appendChild(createServiceCard('discord_decor', discordDecorProducts.name, discordDecorProducts.logo || 'images/discord.webp'));
-        // Discord Boosts
         digGrid.appendChild(createServiceCard('discord_boosts', discordBoostsProducts.name, discordBoostsProducts.logo || 'images/discord.webp'));
-        // PSN (if exists in products or as digital)
         if (products['psn']) {
             digGrid.appendChild(createServiceCard('psn', products['psn'].name, products['psn'].logo || 'images/psn.webp'));
         }
@@ -238,6 +314,7 @@ function setupEventListeners() {
     if (cartIcon) cartIcon.addEventListener('click', function() {
         updateCartView();
         showPage(cartPage);
+        setActiveNav('shop');
     });
 
     const tabWithoutNitro = document.getElementById('tab-without-nitro');
@@ -471,12 +548,6 @@ function updateCartView() {
     });
 
     if (totalPrice) totalPrice.textContent = total;
-
-    const checkoutBtn = document.querySelector('.checkout-btn');
-    if (checkoutBtn && !checkoutBtn.hasEventListener) {
-        checkoutBtn.addEventListener('click', checkout);
-        checkoutBtn.hasEventListener = true;
-    }
 }
 
 function showOrderMenu(index) {
@@ -494,7 +565,6 @@ function showOrderMenu(index) {
     orderMenu.dataset.index = index;
     orderMenu.classList.add('active');
 
-    // Show/hide warranty row
     const warrantyRow = document.getElementById('order-warranty-row');
     const warrantyEl = document.getElementById('order-warranty');
     if (item.warranty) {
@@ -526,15 +596,109 @@ function removeFromCart() {
     }
 }
 
-function generateBotCommand(items) {
+// ═══════════════ Order Submission (Direct API) ═══════════════
+
+async function submitOrder(items) {
+    const userId = getTgUserId();
+
+    // If not inside Telegram — fallback to old copy-command flow
+    if (!userId) {
+        showFallbackOrderModal(items);
+        return;
+    }
+
+    const totalUah = items.reduce((sum, item) => sum + item.price, 0);
+
+    const body = {
+        user_id: userId,
+        username: getTgUsername(),
+        first_name: getTgFirstName(),
+        items: items.map(item => ({
+            service: item.service,
+            plan: item.plan,
+            period: item.period,
+            price: item.price,
+        })),
+        total_uah: totalUah,
+    };
+
+    // Show loading
+    const modal = document.createElement('div');
+    modal.className = 'order-modal';
+    modal.innerHTML = `
+        <div class="modal-content">
+            <h2>⏳ Оформлення замовлення...</h2>
+            <div class="modal-message">
+                <p style="text-align:center;"><i class="fas fa-spinner fa-spin" style="font-size:32px;color:var(--primary);"></i></p>
+                <p style="text-align:center;margin-top:12px;">Зачекайте, ваше замовлення обробляється...</p>
+            </div>
+        </div>
+    `;
+    document.body.appendChild(modal);
+
+    try {
+        const res = await fetch(`${BOT_API_URL}/api/public/create-order`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(body),
+        });
+
+        const data = await res.json();
+
+        if (res.ok && data.success) {
+            modal.querySelector('.modal-content').innerHTML = `
+                <h2>✅ Замовлення оформлено!</h2>
+                <div class="modal-message">
+                    <p><strong>Замовлення #${data.order_id}</strong> успішно створено!</p>
+                    <p>Наш менеджер вже отримав сповіщення та зв'яжеться з вами найближчим часом.</p>
+                    <p>Ви також отримали підтвердження в Telegram.</p>
+                </div>
+                <div class="modal-actions">
+                    <a href="https://t.me/SecureSuppor" target="_blank" class="telegram-btn" style="text-decoration:none;text-align:center;">
+                        <i class="fab fa-telegram"></i> Зв'язатися з підтримкою
+                    </a>
+                    <button class="close-modal">Закрити</button>
+                </div>
+            `;
+            modal.querySelector('.close-modal').addEventListener('click', () => {
+                modal.remove();
+                goToHome();
+            });
+            modal.addEventListener('click', (e) => { if (e.target === modal) { modal.remove(); goToHome(); }});
+
+            // Clear cart
+            cart = [];
+            updateCartCount();
+            updateCartView();
+            closeOrderMenu();
+        } else {
+            throw new Error(data.error || 'Помилка сервера');
+        }
+    } catch (err) {
+        console.error('Order submit error:', err);
+        modal.querySelector('.modal-content').innerHTML = `
+            <h2>❌ Помилка</h2>
+            <div class="modal-message">
+                <p>На жаль, не вдалося оформити замовлення: ${err.message}</p>
+                <p>Спробуйте ще раз або зв'яжіться з підтримкою.</p>
+            </div>
+            <div class="modal-actions">
+                <a href="https://t.me/SecureSuppor" target="_blank" class="telegram-btn" style="text-decoration:none;text-align:center;">
+                    <i class="fab fa-telegram"></i> Підтримка
+                </a>
+                <button class="close-modal">Закрити</button>
+            </div>
+        `;
+        modal.querySelector('.close-modal').addEventListener('click', () => modal.remove());
+        modal.addEventListener('click', (e) => { if (e.target === modal) modal.remove(); });
+    }
+}
+
+function showFallbackOrderModal(items) {
     const orderId = 'O' + Date.now().toString().slice(-6);
-    let command = `/pay ${orderId} `;
-    
+    let commandParts = [];
     items.forEach(item => {
-        let serviceAbbr, planAbbr, periodAbbr;
-        
-        // 1. Абревіатури сервісів
-        // if (item.service.includes('ChatGPT')) serviceAbbr = "Cha";
+        let serviceAbbr;
         if (item.service.includes('Discord Прикраси')) serviceAbbr = "DisU";
         else if (item.service.includes('Discord Boosts')) serviceAbbr = "DisB";
         else if (item.service.includes('Discord')) serviceAbbr = "Dis";
@@ -543,14 +707,12 @@ function generateBotCommand(items) {
         else if (item.service.includes('Netflix')) serviceAbbr = "Net";
         else if (item.service.includes('PSN')) serviceAbbr = "PSN";
         else if (item.service.includes('Gemini')) serviceAbbr = "Gem";
-        // else if (item.service.includes('CapCut')) serviceAbbr = "Cap";
         else if (item.service.includes('Adobe')) serviceAbbr = "Ado";
         else if (item.service.includes('Duolingo')) serviceAbbr = "Duo";
         else if (item.service.includes('YouTube')) serviceAbbr = "You";
-        // else if (item.service.includes('Claude')) serviceAbbr = "Cla";
         else serviceAbbr = item.service.substring(0, 3);
 
-        // 2. Абревіатури планів та періодів
+        let planAbbr, periodAbbr;
         if (serviceAbbr === "DisB") {
             const count = item.period.replace(/\D/g, '');
             planAbbr = `B${count}`;
@@ -562,7 +724,6 @@ function generateBotCommand(items) {
             planAbbr = "Dec";
             periodAbbr = "1шт";
         } else {
-            // Звичайні підписки
             if (item.plan.includes('Basic')) planAbbr = "Bas";
             else if (item.plan.includes('Full')) planAbbr = "Ful";
             else if (item.plan.includes('Individual')) planAbbr = "Ind";
@@ -575,17 +736,51 @@ function generateBotCommand(items) {
             else if (item.plan.includes('Creative Cloud')) planAbbr = "CC";
             else if (item.plan.includes('GO')) planAbbr = "Go";
             else planAbbr = item.plan.substring(0, 3).toUpperCase();
-
             periodAbbr = item.period.includes('€') ? item.period : item.period.replace('місяць', 'м').replace('місяців', 'м').replace('місяці', 'м');
         }
-
-        command += `${serviceAbbr}-${planAbbr}-${periodAbbr}-${item.price} `;
+        commandParts.push(`${serviceAbbr}-${planAbbr}-${periodAbbr}-${item.price}`);
     });
 
-    return {
-        command: command.trim(),
-        orderId: orderId
-    };
+    const command = `/pay ${orderId} ${commandParts.join(' ')}`;
+    const botUsername = "SecureShopBot";
+    const telegramUrl = `https://t.me/${botUsername}`;
+
+    const modal = document.createElement('div');
+    modal.className = 'order-modal';
+    modal.innerHTML = `
+        <div class="modal-content">
+            <h2>Оформлення замовлення #${orderId}</h2>
+            <div class="modal-message">
+                <p>⚠️ Відкрийте міні-додаток через Telegram для автоматичного оформлення.</p>
+                <p>Або скопіюйте команду та відправте її нашому боту:</p>
+                <code>${command}</code>
+            </div>
+            <div class="modal-actions">
+                <button class="copy-btn">Копіювати команду</button>
+                <a href="${telegramUrl}" target="_blank" class="telegram-btn" style="text-decoration:none;text-align:center;">
+                    <i class="fab fa-telegram"></i> Відкрити Telegram
+                </a>
+                <button class="close-modal">Закрити</button>
+            </div>
+        </div>
+    `;
+
+    document.body.appendChild(modal);
+
+    modal.addEventListener('click', (e) => { if (e.target === modal) modal.remove(); });
+
+    modal.querySelector('.copy-btn').addEventListener('click', () => {
+        navigator.clipboard.writeText(command).then(() => {
+            const btn = modal.querySelector('.copy-btn');
+            btn.textContent = 'Скопійовано!';
+            btn.disabled = true;
+            btn.style.opacity = '0.7';
+        }).catch(() => {
+            showToast('Помилка копіювання', 'error');
+        });
+    });
+
+    modal.querySelector('.close-modal').addEventListener('click', () => modal.remove());
 }
 
 function checkout() {
@@ -593,140 +788,189 @@ function checkout() {
         showToast('Кошик порожній!', 'info');
         return;
     }
-
-    const { command, orderId } = generateBotCommand(cart);
-    const botUsername = "SecureShopBot";
-    const telegramUrl = `https://t.me/${botUsername}`;
-    
-    const message = `Ваше замовлення #${orderId} готове!
-Скопіюйте цю команду та відправте її нашому боту:
-<code>${command}</code>
-Натисніть "Відкрити Telegram", щоб перейти до бота.`;
-
-    const modal = document.createElement('div');
-    modal.className = 'order-modal';
-    modal.innerHTML = `
-        <div class="modal-content">
-            <h2>Оформлення замовлення #${orderId}</h2>
-            <div class="modal-message">${message}</div>
-            <div class="modal-actions">
-                <button class="copy-btn">Копіювати команду</button>
-                <button class="telegram-btn">Відкрити Telegram</button>
-                <button class="close-modal">Закрити</button>
-            </div>
-        </div>
-    `;
-
-    document.body.appendChild(modal);
-
-    modal.addEventListener('click', function(e) {
-        if (e.target === modal) {
-            document.body.removeChild(modal);
-        }
-    });
-
-    modal.querySelector('.copy-btn').addEventListener('click', () => {
-        navigator.clipboard.writeText(command)
-            .then(() => {
-                const messageEl = modal.querySelector('.modal-message');
-                if (messageEl) {
-                    messageEl.innerHTML = `<span style="color: var(--success); font-weight: bold;">Команду успішно скопійовано! Ви можете її відправити боту.</span>`;
-                }
-                const copyBtn = modal.querySelector('.copy-btn');
-                if (copyBtn) {
-                    copyBtn.textContent = 'Скопійовано!';
-                    copyBtn.disabled = true;
-                    copyBtn.style.opacity = '0.7';
-                }
-            })
-            .catch(err => {
-                const messageEl = modal.querySelector('.modal-message');
-                if (messageEl) {
-                    messageEl.innerHTML = `<span style="color: var(--danger); font-weight: bold;">Помилка копіювання: ${err.message || 'Спробуйте ще раз.'}</span>`;
-                }
-            });
-    });
-
-    modal.querySelector('.telegram-btn').addEventListener('click', () => {
-        window.open(telegramUrl, '_blank');
-        document.body.removeChild(modal);
-        cart = [];
-        updateCartCount();
-        updateCartView();
-        goToHome();
-    });
-
-    modal.querySelector('.close-modal').addEventListener('click', () => {
-        document.body.removeChild(modal);
-    });
+    submitOrder([...cart]);
 }
 
 function orderSingleItem(index) {
     if (index >= cart.length) return;
     const item = cart[index];
-    const { command, orderId } = generateBotCommand([item]);
-    const botUsername = "SecureShopBot";
-    const telegramUrl = `https://t.me/${botUsername}`;
-    
-    const message = `Ваше замовлення #${orderId} готове!
-Скопіюйте цю команду та відправте її нашому боту:
-<code>${command}</code>
-Натисніть "Відкрити Telegram", щоб перейти до бота.`;
+    closeOrderMenu();
+    submitOrder([item]).then(() => {
+        // Item removed inside submitOrder on success
+    });
+}
 
-    const modal = document.createElement('div');
-    modal.className = 'order-modal';
-    modal.innerHTML = `
-        <div class="modal-content">
-            <h2>Оформлення замовлення #${orderId}</h2>
-            <div class="modal-message">${message}</div>
-            <div class="modal-actions">
-                <button class="copy-btn">Копіювати команду</button>
-                <button class="telegram-btn">Відкрити Telegram</button>
-                <button class="close-modal">Закрити</button>
+// ═══════════════ Profile Page ═══════════════
+
+async function loadProfile() {
+    const container = document.getElementById('profile-container');
+    if (!container) return;
+
+    const userId = getTgUserId();
+
+    if (!userId) {
+        container.innerHTML = `
+            <div class="profile-card">
+                <div class="profile-avatar">
+                    <i class="fas fa-user-circle"></i>
+                </div>
+                <h2>Гість</h2>
+                <p class="profile-hint">Відкрийте міні-додаток через Telegram, щоб побачити свій профіль.</p>
+                <a href="https://t.me/SecureShopBot" target="_blank" class="stub-button">
+                    <i class="fab fa-telegram"></i> Відкрити в Telegram
+                </a>
             </div>
+        `;
+        return;
+    }
+
+    container.innerHTML = `
+        <div class="profile-loading">
+            <i class="fas fa-spinner fa-spin"></i>
+            <p>Завантаження...</p>
         </div>
     `;
 
-    document.body.appendChild(modal);
+    try {
+        const res = await fetch(`${BOT_API_URL}/api/public/profile?user_id=${userId}`);
+        const data = await res.json();
 
-    modal.addEventListener('click', function(e) {
-        if (e.target === modal) {
-            document.body.removeChild(modal);
+        if (!res.ok) {
+            throw new Error(data.error || 'Помилка');
         }
-    });
-    
-    modal.querySelector('.copy-btn').addEventListener('click', () => {
-        navigator.clipboard.writeText(command)
-            .then(() => {
-                const messageEl = modal.querySelector('.modal-message');
-                if (messageEl) {
-                    messageEl.innerHTML = `<span style="color: var(--success); font-weight: bold;">Команду успішно скопійовано! Ви можете її відправити боту.</span>`;
-                }
-                const copyBtn = modal.querySelector('.copy-btn');
-                if (copyBtn) {
-                    copyBtn.textContent = 'Скопійовано!';
-                    copyBtn.disabled = true;
-                    copyBtn.style.opacity = '0.7';
-                }
-            })
-            .catch(err => {
-                const messageEl = modal.querySelector('.modal-message');
-                if (messageEl) {
-                    messageEl.innerHTML = `<span style="color: var(--danger); font-weight: bold;">Помилка копіювання: ${err.message || 'Спробуйте ще раз.'}</span>`;
-                }
-            });
-    });
 
-    modal.querySelector('.telegram-btn').addEventListener('click', () => {
-        window.open(telegramUrl, '_blank');
-        document.body.removeChild(modal);
-        cart.splice(index, 1);
-        updateCartCount();
-        updateCartView();
-        closeOrderMenu();
-    });
+        const user = data.user;
+        const createdDate = user.created_at ? new Date(user.created_at).toLocaleDateString('uk-UA', {
+            day: 'numeric', month: 'long', year: 'numeric'
+        }) : '—';
 
-    modal.querySelector('.close-modal').addEventListener('click', () => {
-        document.body.removeChild(modal);
-    });
+        container.innerHTML = `
+            <div class="profile-card">
+                <div class="profile-avatar">
+                    <span>${(user.first_name || '?').charAt(0).toUpperCase()}</span>
+                </div>
+                <h2>${user.first_name || ''} ${user.last_name || ''}</h2>
+                ${user.username ? `<p class="profile-username">@${user.username}</p>` : ''}
+                <p class="profile-date"><i class="fas fa-calendar-alt"></i> Клієнт з ${createdDate}</p>
+            </div>
+            <div class="profile-stats">
+                <div class="stat-card">
+                    <div class="stat-value">${data.orders_count}</div>
+                    <div class="stat-label">Замовлень</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value">${data.total_spent} ₴</div>
+                    <div class="stat-label">Витрачено</div>
+                </div>
+            </div>
+            <button class="profile-orders-btn" onclick="navigateToSection('orders')">
+                <i class="fas fa-box"></i> Мої замовлення
+                <i class="fas fa-chevron-right" style="margin-left:auto;"></i>
+            </button>
+        `;
+    } catch (err) {
+        console.error('Profile load error:', err);
+        container.innerHTML = `
+            <div class="profile-card">
+                <div class="profile-avatar">
+                    <span>${getTgFirstName().charAt(0).toUpperCase() || '?'}</span>
+                </div>
+                <h2>${getTgFirstName() || 'Користувач'}</h2>
+                ${getTgUsername() ? `<p class="profile-username">@${getTgUsername()}</p>` : ''}
+                <p class="profile-hint">Не вдалося завантажити дані профілю. Спробуйте пізніше.</p>
+            </div>
+        `;
+    }
+}
+
+// ═══════════════ Orders Page ═══════════════
+
+async function loadOrders() {
+    const container = document.getElementById('orders-container');
+    if (!container) return;
+
+    const userId = getTgUserId();
+
+    if (!userId) {
+        container.innerHTML = `
+            <div class="orders-empty">
+                <i class="fas fa-lock"></i>
+                <p>Відкрийте міні-додаток через Telegram, щоб побачити свої замовлення.</p>
+                <a href="https://t.me/SecureShopBot" target="_blank" class="stub-button">
+                    <i class="fab fa-telegram"></i> Відкрити в Telegram
+                </a>
+            </div>
+        `;
+        return;
+    }
+
+    container.innerHTML = `
+        <div class="profile-loading">
+            <i class="fas fa-spinner fa-spin"></i>
+            <p>Завантаження...</p>
+        </div>
+    `;
+
+    try {
+        const res = await fetch(`${BOT_API_URL}/api/public/orders?user_id=${userId}`);
+        const data = await res.json();
+
+        if (!res.ok) throw new Error(data.error || 'Помилка');
+
+        if (!data.orders || data.orders.length === 0) {
+            container.innerHTML = `
+                <div class="orders-empty">
+                    <i class="fas fa-box-open"></i>
+                    <p>У вас ще немає замовлень</p>
+                    <button class="stub-button" onclick="navigateToSection('shop')">
+                        <i class="fas fa-store"></i> Перейти до магазину
+                    </button>
+                </div>
+            `;
+            return;
+        }
+
+        let html = '';
+        for (const order of data.orders) {
+            const date = order.created_at ? new Date(order.created_at).toLocaleDateString('uk-UA', {
+                day: 'numeric', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit'
+            }) : '—';
+
+            const statusMap = {
+                'created': { text: 'Створено', class: 'status-created', icon: 'fas fa-clock' },
+                'paid': { text: 'Оплачено', class: 'status-paid', icon: 'fas fa-check-circle' },
+                'completed': { text: 'Виконано', class: 'status-completed', icon: 'fas fa-check-double' },
+                'cancelled': { text: 'Скасовано', class: 'status-cancelled', icon: 'fas fa-times-circle' },
+            };
+            const status = statusMap[order.status] || statusMap['created'];
+
+            const itemsHtml = (order.items || '').split('\n').filter(l => l.trim()).map(l => `<div class="order-item-line">${l}</div>`).join('');
+
+            html += `
+                <div class="order-card">
+                    <div class="order-card-header">
+                        <span class="order-id">#${order.order_id || order.id}</span>
+                        <span class="order-status ${status.class}"><i class="${status.icon}"></i> ${status.text}</span>
+                    </div>
+                    <div class="order-card-body">
+                        ${itemsHtml}
+                    </div>
+                    <div class="order-card-footer">
+                        <span class="order-date"><i class="fas fa-calendar-alt"></i> ${date}</span>
+                        <span class="order-total">${order.total_uah || 0} UAH</span>
+                    </div>
+                </div>
+            `;
+        }
+
+        container.innerHTML = html;
+    } catch (err) {
+        console.error('Orders load error:', err);
+        container.innerHTML = `
+            <div class="orders-empty">
+                <i class="fas fa-exclamation-triangle"></i>
+                <p>Не вдалося завантажити замовлення. Спробуйте пізніше.</p>
+            </div>
+        `;
+    }
 }
