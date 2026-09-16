@@ -41,6 +41,15 @@
                 <p>Ігрові валюти, подарункові картки та інше</p>
             </div>
         </div>
+        <div class="latest-reviews-section">
+            <h2><i class="fas fa-star"></i> Останні відгуки</h2>
+            <div class="latest-reviews-list" id="latest-reviews-list">
+                <div class="profile-loading">
+                    <i class="fas fa-spinner fa-spin"></i>
+                    <p>Завантаження...</p>
+                </div>
+            </div>
+        </div>
     </div>
 
     <!-- ===== SUBSCRIPTIONS PAGE ===== -->
@@ -97,6 +106,70 @@
         <h1 id="plan-name">Назва тарифу</h1>
         <p id="plan-description">Опис тарифу</p>
         <div class="options-grid" id="subscription-options-container">
+        </div>
+    </div>
+
+    <!-- ===== PRODUCT DETAIL PAGE ===== -->
+    <div class="page" id="product-page">
+        <div class="back-button" id="back-from-product">
+            <i class="fas fa-arrow-left"></i> Назад
+        </div>
+        <div class="product-hero" id="product-hero">
+            <div class="product-hero-bg"></div>
+            <div class="product-hero-content">
+                <div class="product-logo" id="product-logo"></div>
+                <h1 class="product-title" id="product-title">Назва товару</h1>
+                <div class="product-subtitle" id="product-subtitle">Тариф</div>
+                <div class="product-price-badge" id="product-price-badge">0 UAH</div>
+            </div>
+        </div>
+        <div class="product-details">
+            <div class="product-section">
+                <h3><i class="fas fa-info-circle"></i> Опис</h3>
+                <p id="product-description">—</p>
+            </div>
+            <div class="product-section">
+                <h3><i class="fas fa-list-ul"></i> Характеристики</h3>
+                <div class="product-specs" id="product-specs"></div>
+            </div>
+            <div class="product-section" id="product-warranty-section">
+                <h3><i class="fas fa-shield-alt"></i> Гарантія</h3>
+                <div class="product-warranty-info" id="product-warranty-info">
+                    <i class="fas fa-check-circle"></i>
+                    <span id="product-warranty-text">—</span>
+                </div>
+            </div>
+            <div class="product-section">
+                <h3><i class="fas fa-info"></i> Додаткова інформація</h3>
+                <div class="product-extra-info">
+                    <div class="extra-info-item">
+                        <i class="fas fa-bolt"></i>
+                        <span>Миттєва доставка після оплати</span>
+                    </div>
+                    <div class="extra-info-item">
+                        <i class="fas fa-headset"></i>
+                        <span>Підтримка 24/7</span>
+                    </div>
+                    <div class="extra-info-item">
+                        <i class="fas fa-undo"></i>
+                        <span>Повернення при проблемах з активацією</span>
+                    </div>
+                </div>
+            </div>
+            <div class="product-section">
+                <h3><i class="fas fa-star"></i> Відгуки про товар</h3>
+                <div class="product-reviews-list" id="product-reviews-list">
+                    <div class="profile-loading">
+                        <i class="fas fa-spinner fa-spin"></i>
+                        <p>Завантаження відгуків...</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="product-sticky-footer">
+            <button class="product-add-to-cart-btn" id="product-add-to-cart-btn">
+                <i class="fas fa-cart-plus"></i> Додати в кошик
+            </button>
         </div>
     </div>
 
@@ -183,7 +256,7 @@
                 <div class="info-card">
                     <i class="fas fa-shield-alt"></i>
                     <h3>Правила</h3>
-                    <a href="https://secureshop.gitbook.io/secureshop" target="_blank">Переглянути правила</a>
+                    <a href="https://drive.google.com/file/d/1t5jQWCCJeimM8lJ132M7oTRKRG7t3dug/view?usp=drivesdk" target="_blank">Переглянути правила</a>
                 </div>
             </div>
             <div class="support-channels">
@@ -192,9 +265,7 @@
                     <a href="https://t.me/SecureShopUA" target="_blank" class="channel-link">
                         <i class="fab fa-telegram"></i> Telegram канал
                     </a>
-                    <a href="https://www.instagram.com/secureshopua?igsh=MWtpZTZzb2R2ZW9pZA%3D%3D&utm_source=qr" target="_blank" class="channel-link">
-                        <i class="fab fa-instagram"></i> Instagram
-                    </a>
+
                     <a href="https://www.tiktok.com/@secureshop_official?_t=ZM-8zfKzDyHeha&_r=1" target="_blank" class="channel-link">
                         <i class="fab fa-tiktok"></i> TikTok
                     </a>
@@ -233,7 +304,7 @@
         <p>&copy; 2026 SecureShop. Всі права захищені.</p>
         <div class="social">
             <a href="https://t.me/SecureShopUA" target="_blank"><i class="fab fa-telegram"></i></a>
-            <a href="https://www.instagram.com/secureshopua?igsh=MWtpZTZzb2R2ZW9pZA%3D%3D&utm_source=qr" target="_blank"><i class="fab fa-instagram"></i></a>
+
             <a href="https://www.tiktok.com/@secureshop_official?_t=ZM-8zfKzDyHeha&_r=1" target="_blank"><i class="fab fa-tiktok"></i></a>
         </div>
     </footer>
@@ -263,10 +334,35 @@
     </nav>
 
     <div id="toast-container"></div>
+
+    <!-- ===== REVIEW MODAL ===== -->
+    <div class="review-modal-overlay" id="review-modal-overlay">
+        <div class="review-modal">
+            <button class="review-modal-close" id="review-modal-close">
+                <i class="fas fa-times"></i>
+            </button>
+            <h2><i class="fas fa-star"></i> Залишити відгук</h2>
+            <div class="review-modal-service" id="review-modal-service">Сервіс</div>
+            <div class="review-stars-input" id="review-stars-input">
+                <span class="review-star" data-rating="1"><i class="fas fa-star"></i></span>
+                <span class="review-star" data-rating="2"><i class="fas fa-star"></i></span>
+                <span class="review-star" data-rating="3"><i class="fas fa-star"></i></span>
+                <span class="review-star" data-rating="4"><i class="fas fa-star"></i></span>
+                <span class="review-star" data-rating="5"><i class="fas fa-star"></i></span>
+            </div>
+            <div class="review-rating-label" id="review-rating-label">Оберіть оцінку</div>
+            <textarea class="review-text-input" id="review-text-input" placeholder="Напишіть ваш відгук..." maxlength="500"></textarea>
+            <div class="review-warning">
+                <i class="fas fa-exclamation-triangle"></i>
+                <span>Необґрунтовані негативні відгуки будуть видалені. Будь ласка, залишайте чесні та конструктивні відгуки.</span>
+            </div>
+            <button class="review-submit-btn" id="review-submit-btn">
+                <i class="fas fa-paper-plane"></i> Надіслати відгук
+            </button>
+        </div>
+    </div>
+
     <script src="products.js"></script>
     <script src="app.js"></script>
 </body>
 </html>
-
-
-

@@ -135,7 +135,8 @@ async function loadProductsFromAPI() {
           id: `${sub.key}_${p.key}`,
           name: p.name,
           description: p.description || '',
-          options: (p.options || []).map(o => ({ period: o.period, price: o.price })),
+          warranty: p.warranty || '',
+          options: (p.options || []).map(o => ({ period: o.period, price: o.price, warranty: o.warranty || '' })),
         };
         // Extended options → separate plans with flat options
         if (p.extended_options && p.extended_options.length > 0) {
@@ -143,7 +144,7 @@ async function loadProductsFromAPI() {
           const groups = {};
           for (const eo of p.extended_options) {
             if (!groups[eo.period_group]) groups[eo.period_group] = [];
-            groups[eo.period_group].push({ period: eo.name, price: eo.price });
+            groups[eo.period_group].push({ period: eo.name, price: eo.price, warranty: '' });
           }
           // Add extended as extra plan entries
           for (const [group, opts] of Object.entries(groups)) {

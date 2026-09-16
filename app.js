@@ -35,6 +35,16 @@ let currentPlan = null;
 let cart = [];
 let currentNavPage = 'shop';
 
+function getServiceIdByObject(serviceObj) {
+    if (!serviceObj) return '';
+    if (serviceObj === discordDecorProducts) return 'discord_decor';
+    if (serviceObj === discordBoostsProducts) return 'discord_boosts';
+    for (const [key, val] of Object.entries(products)) {
+        if (val === serviceObj) return key;
+    }
+    return '';
+}
+
 // ═══════════════ DOM Elements ═══════════════
 const mainPage = document.getElementById('main-page');
 const subscriptionsPage = document.getElementById('subscriptions-page');
@@ -42,6 +52,7 @@ const digitalPage = document.getElementById('digital-page');
 const discordDecorTypePage = document.getElementById('discord-decor-type-page');
 const plansPage = document.getElementById('plans-page');
 const optionsPage = document.getElementById('options-page');
+const productPage = document.getElementById('product-page');
 const cartPage = document.getElementById('cart-page');
 const profilePage = document.getElementById('profile-page');
 const ordersPage = document.getElementById('orders-page');
@@ -59,15 +70,21 @@ const plansContainer = document.getElementById('plans-container');
 const subscriptionOptionsContainer = document.getElementById('subscription-options-container');
 const discordOptionsContainer = document.getElementById('discord-options-container');
 
+// Product page state
+let _productPageData = null;
+let _productPagePrevPage = null;
+
 document.addEventListener('DOMContentLoaded', function() {
     renderServiceCards();
     setupEventListeners();
     setupBottomNav();
+    setupReviewModal();
     showPage(mainPage);
     updateCartCount();
     setupHeaderScroll();
     setupKeyboardSupport();
     setupGestures();
+    loadLatestReviews();
 });
 
 // Re-render cards when API data loads
@@ -105,7 +122,9 @@ function setupGestures() {
 }
 
 function goBackAutomatically() {
-    if (discordDecorTypePage.classList.contains('active') || plansPage.classList.contains('active')) {
+    if (productPage && productPage.classList.contains('active')) {
+        goBackFromProduct();
+    } else if (discordDecorTypePage.classList.contains('active') || plansPage.classList.contains('active')) {
         goBackToServices();
     } else if (optionsPage.classList.contains('active')) {
         goBackToPlans();
@@ -176,6 +195,11 @@ function showPage(pageToShow) {
     if (pageToShow) {
         pageToShow.classList.add('active');
         window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+    // Toggle product sticky footer
+    const stickyFooter = document.querySelector('.product-sticky-footer');
+    if (stickyFooter) {
+        stickyFooter.style.display = (pageToShow === productPage) ? 'block' : 'none';
     }
 }
 
@@ -331,6 +355,7 @@ function setupEventListeners() {
         'back-to-services': goBackToServices,
         'back-to-plans': goBackToPlans,
         'back-to-main-from-cart': goToHome,
+        'back-from-product': goBackFromProduct,
         'back-to-digital': function() {
             showPage(digitalPage);
             resetDiscordDecorUI();
@@ -470,9 +495,11 @@ function selectPlan(planId) {
             priceEl.textContent = `${option.price} UAH`;
             const addToCartBtn = document.createElement('button');
             addToCartBtn.className = 'add-to-cart';
-            addToCartBtn.textContent = 'Додати в корзину';
+            addToCartBtn.textContent = 'Детальніше';
             addToCartBtn.addEventListener('click', function() {
-                addItemToCart(option.period, option.price);
+                const serviceKey = getServiceIdByObject(currentService);
+                const warranty = option.warranty || plan.warranty || currentService.warranty || null;
+                showProductPage(currentService.name, currentPlan.name, option, warranty, serviceKey, currentService.logo, plan.description);
             });
             optionCard.appendChild(periodEl);
             optionCard.appendChild(priceEl);
@@ -513,9 +540,11 @@ function showDiscordDecorOptions(planId) {
             priceEl.textContent = `${option.price} UAH`;
             const addToCartBtn = document.createElement('button');
             addToCartBtn.className = 'add-to-cart';
-            addToCartBtn.textContent = 'Додати в корзину';
+            addToCartBtn.textContent = 'Детальніше';
             addToCartBtn.addEventListener('click', function() {
-                addItemToCart(option.period, option.price);
+                const serviceKey = 'discord_decor';
+                const warranty = option.warranty || plan.warranty || currentService.warranty || null;
+                showProductPage(currentService.name, currentPlan.name, option, warranty, serviceKey, currentService.logo, plan.description);
             });
             optionCard.appendChild(periodEl);
             optionCard.appendChild(priceEl);
@@ -529,7 +558,7 @@ function showDiscordDecorOptions(planId) {
     }
 }
 
-function addItemToCart(period, price) {
+function addItemToCart(period, price, warranty) {
     if (!currentService || !currentPlan) {
         showToast('Спочатку оберіть сервіс і тариф!', 'error');
         return;
@@ -540,12 +569,132 @@ function addItemToCart(period, price) {
         plan: currentPlan.name,
         period: period,
         price: price,
-        warranty: currentService.warranty || null
+        warranty: warranty || currentService.warranty || null
     };
 
     cart.push(item);
     updateCartCount();
     showToast('Товар додано до кошика! 🎉');
+}
+
+function addItemToCartDirect(serviceName, planName, period, price, warranty) {
+    const item = {
+        service: serviceName,
+        plan: planName,
+        period: period,
+        price: price,
+        warranty: warranty || null
+    };
+    cart.push(item);
+    updateCartCount();
+    showToast('Товар додано до кошика! 🎉');
+}
+
+// ═══════════════ Product Page ═══════════════
+
+function showProductPage(serviceName, planName, option, warranty, serviceKey, logo, description) {
+    _productPageData = { serviceName, planName, option, warranty, serviceKey };
+    // Remember which page we came from
+    _productPagePrevPage = document.querySelector('.page.active');
+
+    // Fill hero
+    const logoEl = document.getElementById('product-logo');
+    if (logoEl) {
+        if (logo) {
+            logoEl.innerHTML = `<img src="${logo}" alt="${serviceName}" onerror="this.replaceWith(Object.assign(document.createElement('span'),{className:'logo-letter',textContent:'${serviceName.charAt(0)}'}))"/>`;
+        } else {
+            logoEl.innerHTML = `<span class="logo-letter">${serviceName.charAt(0)}</span>`;
+        }
+    }
+    const titleEl = document.getElementById('product-title');
+    if (titleEl) titleEl.textContent = `${serviceName} — ${planName}`;
+    const subtitleEl = document.getElementById('product-subtitle');
+    if (subtitleEl) subtitleEl.textContent = option.period;
+    const priceEl = document.getElementById('product-price-badge');
+    if (priceEl) priceEl.textContent = `${option.price} UAH`;
+
+    // Description
+    const descEl = document.getElementById('product-description');
+    if (descEl) descEl.textContent = description || `${serviceName} — ${planName}. Преміум доступ до сервісу.`;
+
+    // Specs
+    const specsEl = document.getElementById('product-specs');
+    if (specsEl) {
+        let productType = 'Цифрова підписка';
+        if (serviceKey === 'discord_decor' || serviceKey === 'discord_boosts') productType = 'Цифровий товар';
+        if (serviceKey === 'psn') productType = 'Подарункова картка';
+
+        let deliveryMethod = 'Промокод / Запрошення';
+        if (serviceKey === 'psn') deliveryMethod = 'Код активації';
+        if (serviceKey === 'discord_decor') deliveryMethod = 'Активація оператором';
+        if (serviceKey === 'discord_boosts') deliveryMethod = 'Активація на сервер';
+
+        specsEl.innerHTML = `
+            <div class="spec-row">
+                <span class="spec-label"><i class="fas fa-tag"></i> Тип</span>
+                <span class="spec-value">${productType}</span>
+            </div>
+            <div class="spec-row">
+                <span class="spec-label"><i class="fas fa-clock"></i> Період</span>
+                <span class="spec-value">${option.period}</span>
+            </div>
+            <div class="spec-row">
+                <span class="spec-label"><i class="fas fa-coins"></i> Ціна</span>
+                <span class="spec-value">${option.price} UAH</span>
+            </div>
+            <div class="spec-row">
+                <span class="spec-label"><i class="fas fa-truck"></i> Доставка</span>
+                <span class="spec-value">${deliveryMethod}</span>
+            </div>
+            <div class="spec-row">
+                <span class="spec-label"><i class="fas fa-bolt"></i> Швидкість</span>
+                <span class="spec-value">5-30 хв</span>
+            </div>
+        `;
+    }
+
+    // Warranty
+    const warrantySection = document.getElementById('product-warranty-section');
+    const warrantyText = document.getElementById('product-warranty-text');
+    if (warranty) {
+        if (warrantySection) warrantySection.style.display = '';
+        if (warrantyText) warrantyText.textContent = warranty;
+    } else {
+        if (warrantySection) warrantySection.style.display = 'none';
+    }
+
+    // Add to cart button
+    const addBtn = document.getElementById('product-add-to-cart-btn');
+    if (addBtn) {
+        addBtn.classList.remove('added');
+        addBtn.innerHTML = '<i class="fas fa-cart-plus"></i> Додати в кошик';
+        // Remove old listeners by cloning
+        const newBtn = addBtn.cloneNode(true);
+        addBtn.parentNode.replaceChild(newBtn, addBtn);
+        newBtn.addEventListener('click', function() {
+            addItemToCartDirect(serviceName, planName, option.period, option.price, warranty);
+            newBtn.classList.add('added');
+            newBtn.innerHTML = '<i class="fas fa-check"></i> Додано!';
+            setTimeout(() => {
+                newBtn.classList.remove('added');
+                newBtn.innerHTML = '<i class="fas fa-cart-plus"></i> Додати в кошик';
+            }, 1500);
+        });
+    }
+
+    // Load product reviews
+    loadProductReviews(serviceName);
+
+    showPage(productPage);
+}
+
+function goBackFromProduct() {
+    if (_productPagePrevPage) {
+        showPage(_productPagePrevPage);
+    } else {
+        goToHome();
+    }
+    _productPageData = null;
 }
 
 function updateCartCount() {
@@ -964,6 +1113,15 @@ async function loadOrders() {
             return;
         }
 
+        // Load user's existing reviews to check which orders have been reviewed
+        let userReviews = [];
+        try {
+            const revRes = await fetch(`${BOT_API_URL}/api/public/reviews?limit=50`);
+            const revData = await revRes.json();
+            userReviews = (revData.reviews || []).filter(r => r.user_id == userId);
+        } catch (e) { /* ignore */ }
+        const reviewedOrderIds = new Set(userReviews.map(r => r.order_id));
+
         let html = '';
         for (const order of data.orders) {
             const date = order.created_at ? new Date(order.created_at).toLocaleDateString('uk-UA', {
@@ -980,10 +1138,35 @@ async function loadOrders() {
 
             const itemsHtml = (order.items || '').split('\n').filter(l => l.trim()).map(l => `<div class="order-item-line">${l}</div>`).join('');
 
+            // Parse service name from items for review
+            const itemLines = (order.items || '').split('\n').filter(l => l.trim());
+            let serviceName = '';
+            let planName = '';
+            if (itemLines.length > 0) {
+                const match = itemLines[0].match(/▫️\s*(.+?)\s+(.+?)\s*\(/);
+                if (match) {
+                    serviceName = match[1].trim();
+                    planName = match[2].trim();
+                }
+            }
+
+            const orderId = order.order_id || String(order.id);
+            const canReview = ['paid', 'completed'].includes(order.status);
+            const alreadyReviewed = reviewedOrderIds.has(orderId);
+
+            let reviewBtnHtml = '';
+            if (canReview && alreadyReviewed) {
+                reviewBtnHtml = `<button class="order-review-btn reviewed" disabled><i class="fas fa-check"></i> Відгук залишено</button>`;
+            } else if (canReview) {
+                reviewBtnHtml = `<button class="order-review-btn" onclick="openReviewModal('${orderId}','${serviceName.replace(/'/g,"\\'")}','${planName.replace(/'/g,"\\'")}')">
+                    <i class="fas fa-star"></i> Залишити відгук
+                </button>`;
+            }
+
             html += `
                 <div class="order-card">
                     <div class="order-card-header">
-                        <span class="order-id">#${order.order_id || order.id}</span>
+                        <span class="order-id">#${orderId}</span>
                         <span class="order-status ${status.class}"><i class="${status.icon}"></i> ${status.text}</span>
                     </div>
                     <div class="order-card-body">
@@ -993,6 +1176,7 @@ async function loadOrders() {
                         <span class="order-date"><i class="fas fa-calendar-alt"></i> ${date}</span>
                         <span class="order-total">${order.total_uah || 0} UAH</span>
                     </div>
+                    ${reviewBtnHtml}
                 </div>
             `;
         }
@@ -1006,5 +1190,187 @@ async function loadOrders() {
                 <p>Не вдалося завантажити замовлення. Спробуйте пізніше.</p>
             </div>
         `;
+    }
+}
+
+// ═══════════════ Reviews System ═══════════════
+
+let _reviewModalRating = 0;
+let _reviewModalOrderId = '';
+let _reviewModalServiceName = '';
+let _reviewModalPlanName = '';
+
+function setupReviewModal() {
+    const stars = document.querySelectorAll('#review-stars-input .review-star');
+    stars.forEach(star => {
+        star.addEventListener('click', function() {
+            _reviewModalRating = parseInt(this.dataset.rating);
+            updateReviewStars();
+        });
+    });
+
+    const closeBtn = document.getElementById('review-modal-close');
+    if (closeBtn) closeBtn.addEventListener('click', closeReviewModal);
+
+    const overlay = document.getElementById('review-modal-overlay');
+    if (overlay) overlay.addEventListener('click', function(e) {
+        if (e.target === this) closeReviewModal();
+    });
+
+    const submitBtn = document.getElementById('review-submit-btn');
+    if (submitBtn) submitBtn.addEventListener('click', submitReview);
+}
+
+function updateReviewStars() {
+    const stars = document.querySelectorAll('#review-stars-input .review-star');
+    const ratingLabels = ['', 'Жахливо', 'Погано', 'Нормально', 'Добре', 'Чудово'];
+    stars.forEach(star => {
+        const r = parseInt(star.dataset.rating);
+        star.classList.toggle('active', r <= _reviewModalRating);
+    });
+    const label = document.getElementById('review-rating-label');
+    if (label) label.textContent = _reviewModalRating > 0 ? ratingLabels[_reviewModalRating] : 'Оберіть оцінку';
+}
+
+function openReviewModal(orderId, serviceName, planName) {
+    _reviewModalOrderId = orderId;
+    _reviewModalServiceName = serviceName;
+    _reviewModalPlanName = planName;
+    _reviewModalRating = 0;
+    updateReviewStars();
+
+    const serviceEl = document.getElementById('review-modal-service');
+    if (serviceEl) serviceEl.textContent = `${serviceName} ${planName}`;
+
+    const textInput = document.getElementById('review-text-input');
+    if (textInput) textInput.value = '';
+
+    const overlay = document.getElementById('review-modal-overlay');
+    if (overlay) overlay.classList.add('active');
+}
+
+function closeReviewModal() {
+    const overlay = document.getElementById('review-modal-overlay');
+    if (overlay) overlay.classList.remove('active');
+}
+
+async function submitReview() {
+    const userId = getTgUserId();
+    if (!userId) {
+        showToast('Відкрийте через Telegram', 'error');
+        return;
+    }
+    if (_reviewModalRating === 0) {
+        showToast('Оберіть оцінку (зірочки)', 'error');
+        return;
+    }
+    const textInput = document.getElementById('review-text-input');
+    const text = textInput ? textInput.value.trim() : '';
+    if (!text) {
+        showToast('Напишіть текст відгуку', 'error');
+        return;
+    }
+
+    const submitBtn = document.getElementById('review-submit-btn');
+    if (submitBtn) {
+        submitBtn.disabled = true;
+        submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Надсилання...';
+    }
+
+    try {
+        const res = await fetch(`${BOT_API_URL}/api/public/reviews`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                user_id: userId,
+                username: getTgUsername(),
+                first_name: getTgFirstName(),
+                order_id: _reviewModalOrderId,
+                service_name: _reviewModalServiceName,
+                plan_name: _reviewModalPlanName,
+                rating: _reviewModalRating,
+                text: text,
+            }),
+        });
+        const data = await res.json();
+        if (!res.ok) throw new Error(data.error || 'Помилка');
+
+        showToast('Дякуємо за відгук! ⭐');
+        closeReviewModal();
+        loadOrders(); // Refresh to show "reviewed" badge
+        loadLatestReviews();
+    } catch (err) {
+        showToast(err.message, 'error');
+    } finally {
+        if (submitBtn) {
+            submitBtn.disabled = false;
+            submitBtn.innerHTML = '<i class="fas fa-paper-plane"></i> Надіслати відгук';
+        }
+    }
+}
+
+function renderReviewStars(rating) {
+    let html = '<div class="review-stars">';
+    for (let i = 1; i <= 5; i++) {
+        html += `<i class="fas fa-star ${i <= rating ? 'active' : ''}"></i>`;
+    }
+    html += '</div>';
+    return html;
+}
+
+function renderReviewCard(review) {
+    const name = review.first_name || review.username || 'Користувач';
+    const initial = name.charAt(0).toUpperCase();
+    const date = review.created_at ? new Date(review.created_at).toLocaleDateString('uk-UA', {
+        day: 'numeric', month: 'short', year: 'numeric'
+    }) : '';
+    return `
+        <div class="review-card">
+            <div class="review-card-header">
+                <div class="review-avatar">${initial}</div>
+                <div class="review-meta">
+                    <div class="review-name">${name}</div>
+                    <div class="review-service-label">${review.service_name || ''} ${review.plan_name || ''}</div>
+                </div>
+                <div class="review-date">${date}</div>
+            </div>
+            ${renderReviewStars(review.rating)}
+            <div class="review-text">${review.text || ''}</div>
+        </div>
+    `;
+}
+
+async function loadLatestReviews() {
+    const container = document.getElementById('latest-reviews-list');
+    if (!container) return;
+    try {
+        const res = await fetch(`${BOT_API_URL}/api/public/reviews?limit=5`);
+        const data = await res.json();
+        const reviews = data.reviews || [];
+        if (reviews.length === 0) {
+            container.innerHTML = '<div class="reviews-empty"><i class="fas fa-comment-slash"></i><p>Відгуків поки немає</p></div>';
+        } else {
+            container.innerHTML = reviews.map(r => renderReviewCard(r)).join('');
+        }
+    } catch (err) {
+        container.innerHTML = '<div class="reviews-empty"><p>Не вдалося завантажити відгуки</p></div>';
+    }
+}
+
+async function loadProductReviews(serviceName) {
+    const container = document.getElementById('product-reviews-list');
+    if (!container) return;
+    container.innerHTML = '<div class="profile-loading"><i class="fas fa-spinner fa-spin"></i><p>Завантаження відгуків...</p></div>';
+    try {
+        const res = await fetch(`${BOT_API_URL}/api/public/reviews?service_name=${encodeURIComponent(serviceName)}&limit=10`);
+        const data = await res.json();
+        const reviews = data.reviews || [];
+        if (reviews.length === 0) {
+            container.innerHTML = '<div class="reviews-empty"><i class="fas fa-comment-slash"></i><p>Відгуків для цього товару ще немає</p></div>';
+        } else {
+            container.innerHTML = reviews.map(r => renderReviewCard(r)).join('');
+        }
+    } catch (err) {
+        container.innerHTML = '<div class="reviews-empty"><p>Не вдалося завантажити відгуки</p></div>';
     }
 }
