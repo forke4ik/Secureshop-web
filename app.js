@@ -624,10 +624,12 @@ function showProductPage(serviceName, planName, option, warranty, serviceKey, lo
         if (serviceKey === 'discord_decor' || serviceKey === 'discord_boosts') productType = 'Цифровий товар';
         if (serviceKey === 'psn') productType = 'Подарункова картка';
 
-        let deliveryMethod = 'Промокод / Запрошення';
-        if (serviceKey === 'psn') deliveryMethod = 'Код активації';
-        if (serviceKey === 'discord_decor') deliveryMethod = 'Активація оператором';
-        if (serviceKey === 'discord_boosts') deliveryMethod = 'Активація на сервер';
+        let defaultDelivery = 'Промокод / Запрошення';
+        if (serviceKey === 'psn') defaultDelivery = 'Код активації';
+        if (serviceKey === 'discord_decor') defaultDelivery = 'Активація оператором';
+        if (serviceKey === 'discord_boosts') defaultDelivery = 'Активація на сервер';
+
+        let deliveryMethod = option.delivery || plan.delivery || defaultDelivery;
 
         specsEl.innerHTML = `
             <div class="spec-row">
