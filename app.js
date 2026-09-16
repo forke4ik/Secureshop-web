@@ -499,7 +499,7 @@ function selectPlan(planId) {
             addToCartBtn.addEventListener('click', function() {
                 const serviceKey = getServiceIdByObject(currentService);
                 const warranty = option.warranty || plan.warranty || currentService.warranty || null;
-                showProductPage(currentService.name, currentPlan.name, option, warranty, serviceKey, currentService.logo, plan.description);
+                showProductPage(currentService.name, currentPlan.name, option, warranty, serviceKey, currentService.logo, plan.description, plan);
             });
             optionCard.appendChild(periodEl);
             optionCard.appendChild(priceEl);
@@ -544,7 +544,7 @@ function showDiscordDecorOptions(planId) {
             addToCartBtn.addEventListener('click', function() {
                 const serviceKey = 'discord_decor';
                 const warranty = option.warranty || plan.warranty || currentService.warranty || null;
-                showProductPage(currentService.name, currentPlan.name, option, warranty, serviceKey, currentService.logo, plan.description);
+                showProductPage(currentService.name, currentPlan.name, option, warranty, serviceKey, currentService.logo, plan.description, plan);
             });
             optionCard.appendChild(periodEl);
             optionCard.appendChild(priceEl);
@@ -592,7 +592,7 @@ function addItemToCartDirect(serviceName, planName, period, price, warranty) {
 
 // ═══════════════ Product Page ═══════════════
 
-function showProductPage(serviceName, planName, option, warranty, serviceKey, logo, description) {
+function showProductPage(serviceName, planName, option, warranty, serviceKey, logo, description, plan) {
     _productPageData = { serviceName, planName, option, warranty, serviceKey };
     // Remember which page we came from
     _productPagePrevPage = document.querySelector('.page.active');
@@ -629,7 +629,7 @@ function showProductPage(serviceName, planName, option, warranty, serviceKey, lo
         if (serviceKey === 'discord_decor') defaultDelivery = 'Активація оператором';
         if (serviceKey === 'discord_boosts') defaultDelivery = 'Активація на сервер';
 
-        let deliveryMethod = option.delivery || plan.delivery || defaultDelivery;
+        let deliveryMethod = option.delivery || (plan && plan.delivery) || defaultDelivery;
 
         specsEl.innerHTML = `
             <div class="spec-row">
