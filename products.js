@@ -136,7 +136,8 @@ async function loadProductsFromAPI() {
           name: p.name,
           description: p.description || '',
           warranty: p.warranty || '',
-          options: (p.options || []).map(o => ({ period: o.period, price: o.price, warranty: o.warranty || '' })),
+          delivery: p.delivery || '',
+          options: (p.options || []).map(o => ({ period: o.period, price: o.price, warranty: o.warranty || '', delivery: o.delivery || '' })),
         };
         // Extended options → separate plans with flat options
         if (p.extended_options && p.extended_options.length > 0) {
